@@ -1,0 +1,481 @@
+# -*- coding: utf-8 -*-
+"""P2: observe/timing config + 1H ingest into shared cache; plan stays off by default."""
+from __future__ import annotations
+
+import hashlib
+import re
+from pathlib import Path
+
+ROOT = Path(r"D:\Axiangmu\异动观察工作台")
+BAK = ROOT / "runtime" / "code-backups" / "v32-p2-observe-1h"
+BAK.mkdir(parents=True, exist_ok=True)
+
+
+def backup(rel: str) -> None:
+    src = ROOT / rel
+    if src.exists():
+        (BAK / rel.replace("/", "__")).write_bytes(src.read_bytes())
+
+
+OBSERVE_CFG = r'''# -*- coding: utf-8 -*-
+"""B 观察与小时边界配置：版本化默认值；新装默认关闭观察。"""
+from __future__ import annotations
+
+import copy
+
+TIMING_DEFAULT = {
+    "closeOffsetSec": 120,
+    "schema_version": 1,
+}
+
+OBSERVE_DEFAULT = {
+    "schema_version": 1,
+    "enabled": False,
+    "strategy_id": "B_ACCUMULATION_1H",
+    "rule_version": "b-accum-1h-v1",
+    "baseline_bars": 168,
+    "event_ratio": 8.0,
+    "confirm_ratio": 2.0,
+    "max_abs_return": 0.03,
+    "evidence_profile": "binance-1h-oi-lsr-v1",
+    "oi_lsr_period": "1h",
+    "oi_lsr_max_lag_ms": 300000,
+}
+
+
+def migrate_timing(value) -> dict:
+    out = copy.deepcopy(TIMING_DEFAULT)
+    if isinstance(value, dict):
+        if "closeOffsetSec" in value:
+            out["closeOffsetSec"] = value["closeOffsetSec"]
+        if "schema_version" in value:
+            out["schema_version"] = value["schema_version"]
+    return validate_timing(out)
+
+
+def migrate_observe(value) -> dict:
+    out = copy.deepcopy(OBSERVE_DEFAULT)
+    if isinstance(value, dict):
+        for k in out:
+            if k in value:
+                out[k] = value[k]
+    return validate_observe(out)
+
+
+def validate_timing(value: dict) -> dict:
+    if not isinstance(value, dict):
+        raise ValueError("timing 须为对象")
+    for req in TIMING_DEFAULT:
+        if req not in value:
+            raise ValueError(f"timing 缺少 {req}")
+    if type(value["closeOffsetSec"]) is not int or not (0 <= value["closeOffsetSec"] <= 600):
+        raise ValueError("closeOffsetSec 须为 0–600 整数秒")
+    if type(value["schema_version"]) is not int:
+        raise ValueError("timing.schema_version 须为整数")
+    # reject unknown keys
+    if set(value) != set(TIMING_DEFAULT):
+        raise ValueError("timing 含未知字段")
+    return copy.deepcopy(value)
+
+
+def validate_observe(value: dict) -> dict:
+    if not isinstance(value, dict):
+        raise ValueError("observe 须为对象")
+    for req in OBSERVE_DEFAULT:
+        if req not in value:
+            raise ValueError(f"observe 缺少 {req}")
+    if set(value) != set(OBSERVE_DEFAULT):
+        raise ValueError("observe 含未知字段")
+    if type(value["enabled"]) is not bool:
+        raise ValueError("observe.enabled 须布尔")
+    if value["strategy_id"] != "B_ACCUMULATION_1H":
+        raise ValueError("observe.strategy_id 首批固定 B_ACCUMULATION_1H")
+    if type(value["baseline_bars"]) is not int or value["baseline_bars"] != 168:
+        raise ValueError("baseline_bars 首批固定 168")
+    if type(value["oi_lsr_max_lag_ms"]) is not int or value["oi_lsr_max_lag_ms"] < 0:
+        raise ValueError("oi_lsr_max_lag_ms 无效")
+    return copy.deepcopy(value)
+
+
+def target_close_boundary_ms(now_ms: int, *, offset_sec: int = 120, bar_ms: int = 3_600_000) -> int:
+    """本轮目标闭合边界：已收盘的上一整点 1H 收盘时刻（close_time = open+bar-1 的下一毫秒边界用 open+bar）。
+
+    返回的是上一根已闭合 1H 的 open_time+bar_ms（即收盘边界时刻，整点）。
+    调度应在 boundary + offset_sec 之后启动。
+    """
+    if offset_sec < 0:
+        raise ValueError("offset_sec")
+    # latest closed boundary = floor(now/bar)*bar ; if still within offset after boundary, wait → use previous
+    boundary = (now_ms // bar_ms) * bar_ms
+    if now_ms < boundary + offset_sec * 1000:
+        boundary -= bar_ms
+    return boundary
+'''
+
+INGEST_PY = r'''# -*- coding: utf-8 -*-
+"""1H 已收盘K线入库共享缓存。不覆盖 4H 字段；不发通知。"""
+from __future__ import annotations
+
+from typing import Any, Callable, Optional
+
+from market_candle_cache import MarketCandleCache
+
+BAR_MS = 3_600_000
+
+
+def closed_1h_bars(raw_rows: list) -> list[dict]:
+    """Binance kline row → 规范化已收盘根。raw: [open,o,h,l,c,vol,close,...]"""
+    out = []
+    for row in raw_rows or []:
+        if not isinstance(row, (list, tuple)) or len(row) < 7:
+            continue
+        open_time = int(row[0])
+        close_time = int(row[6])
+        # closed iff close_time == open_time + BAR_MS - 1
+        if close_time != open_time + BAR_MS - 1:
+            continue
+        out.append({
+            "open_time": open_time,
+            "close_time": close_time,
+            "o": float(row[1]),
+            "h": float(row[2]),
+            "l": float(row[3]),
+            "c": float(row[4]),
+            "q": float(row[7]) if len(row) > 7 else float(row[5]),  # quote volume preferred when present
+            "base_v": float(row[5]),
+        })
+    out.sort(key=lambda b: b["open_time"])
+    return out
+
+
+def ingest_symbol_1h(
+    cache: MarketCandleCache,
+    *,
+    market: str,
+    symbol: str,
+    raw_klines: list,
+    target_close_boundary: int | None = None,
+    quality: str | None = None,
+) -> dict:
+    bars = closed_1h_bars(raw_klines)
+    if target_close_boundary is not None:
+        # only keep bars whose close boundary <= target
+        bars = [b for b in bars if (b["open_time"] + BAR_MS) <= int(target_close_boundary)]
+    written = []
+    for b in bars:
+        meta = cache.put_bar(
+            market=market,
+            symbol=symbol,
+            interval="1h",
+            open_time=b["open_time"],
+            close_time=b["close_time"],
+            bar={k: b[k] for k in ("o", "h", "l", "c", "q", "base_v")},
+            quality=quality or "ok",
+        )
+        written.append({"open_time": b["open_time"], **meta})
+    return {
+        "market": market,
+        "symbol": symbol,
+        "interval": "1h",
+        "closed_bars": len(bars),
+        "written": len(written),
+        "first_open": bars[0]["open_time"] if bars else None,
+        "last_open": bars[-1]["open_time"] if bars else None,
+        "target_close_boundary": target_close_boundary,
+    }
+'''
+
+
+def write_new_modules():
+    (ROOT / "observe_config.py").write_text(OBSERVE_CFG, encoding="utf-8", newline="\n")
+    (ROOT / "b_1h_ingest.py").write_text(INGEST_PY, encoding="utf-8", newline="\n")
+    print("wrote observe_config + b_1h_ingest")
+
+
+def patch_task_service():
+    backup("task_service.py")
+    p = ROOT / "task_service.py"
+    text = p.read_text(encoding="utf-8")
+    if "migrate_observe" in text:
+        print("task_service already patched")
+        return
+
+    # imports
+    if "from observe_config import" not in text:
+        text = text.replace(
+            "from pathlib import Path\n",
+            "from pathlib import Path\n\n"
+            "from observe_config import OBSERVE_DEFAULT, TIMING_DEFAULT, migrate_observe, migrate_timing, validate_observe, validate_timing\n",
+            1,
+        )
+
+    # after settings table create, migrate columns
+    marker = "db.execute('INSERT OR IGNORE INTO settings VALUES (1,1,?,NULL,?)', (json.dumps(DEFAULT_SCAN), now))"
+    if marker not in text:
+        raise SystemExit("insert settings marker missing")
+    migrate_block = '''
+            # v3.2: timing / observe blobs (default off); migrate old DBs
+            cols = {r['name'] for r in db.execute('PRAGMA table_info(settings)')}
+            if 'timing' not in cols:
+                db.execute("ALTER TABLE settings ADD COLUMN timing TEXT")
+            if 'observe' not in cols:
+                db.execute("ALTER TABLE settings ADD COLUMN observe TEXT")
+            row0 = db.execute('SELECT timing, observe FROM settings WHERE id=1').fetchone()
+            if row0 is not None:
+                if row0['timing'] is None:
+                    db.execute('UPDATE settings SET timing=? WHERE id=1', (json.dumps(TIMING_DEFAULT),))
+                if row0['observe'] is None:
+                    db.execute('UPDATE settings SET observe=? WHERE id=1', (json.dumps(OBSERVE_DEFAULT),))
+'''
+    # INSERT OR IGNORE only sets scan — also need defaults on insert. Patch INSERT:
+    text = text.replace(
+        "db.execute('INSERT OR IGNORE INTO settings VALUES (1,1,?,NULL,?)', (json.dumps(DEFAULT_SCAN), now))",
+        "db.execute('INSERT OR IGNORE INTO settings(id,version,scan,next_due,updated_at) VALUES (1,1,?,NULL,?)', (json.dumps(DEFAULT_SCAN), now))"
+        + migrate_block,
+        1,
+    )
+
+    # settings() return timing/observe
+    old_ret = """        return {'version': row['version'], 'scan': json.loads(row['scan']), 'next_due': row['next_due'],
+                'updated_at': row['updated_at'], 'scheduler_running': bool(self.thread and self.thread.is_alive()),
+                'scheduler_error': getattr(self, 'scheduler_error', None),
+                'executor': {'research_workers': self.research_workers, 'data_workers': 1, 'active': dict(self.active_tasks)},
+                'capabilities': {'scan': True, 'schedule': True, 'ai': False, 'ledger': False,
+                                 'rangeBackfill': True, 'settingsScope': ['scan']}}"""
+    new_ret = """        timing_raw = row['timing'] if 'timing' in row.keys() else None
+        observe_raw = row['observe'] if 'observe' in row.keys() else None
+        timing = migrate_timing(json.loads(timing_raw) if timing_raw else None)
+        observe = migrate_observe(json.loads(observe_raw) if observe_raw else None)
+        return {'version': row['version'], 'scan': json.loads(row['scan']), 'next_due': row['next_due'],
+                'timing': timing, 'observe': observe,
+                'updated_at': row['updated_at'], 'scheduler_running': bool(self.thread and self.thread.is_alive()),
+                'scheduler_error': getattr(self, 'scheduler_error', None),
+                'executor': {'research_workers': self.research_workers, 'data_workers': 1, 'active': dict(self.active_tasks)},
+                'capabilities': {'scan': True, 'schedule': True, 'ai': False, 'ledger': False,
+                                 'rangeBackfill': True, 'bObserve': True, 'settingsScope': ['scan', 'timing', 'observe']}}"""
+    if old_ret not in text:
+        raise SystemExit("settings return block missing")
+    text = text.replace(old_ret, new_ret, 1)
+
+    # save_settings accept optional timing/observe
+    old_save = '''    def save_settings(self, payload):
+        if not isinstance(payload, dict) or set(payload) != {'version', 'scan'} or type(payload['version']) is not int:
+            raise ValueError('保存须带当前version和scan配置')
+        scan = validate_scan(payload['scan'])
+        with self.lock, self._db() as db:
+            row = db.execute('SELECT * FROM settings WHERE id=1').fetchone()
+            if payload['version'] != row['version']:
+                raise Conflict('配置已被其他页面更新，请重新读取后保存')
+            previous = json.loads(row['scan'])
+            due = row['next_due']
+            if not scan['enabled']:
+                due = None
+            elif not previous['enabled'] or scan['intervalHours'] != previous['intervalHours'] or due is None:
+                due = iso(self.clock() + dt.timedelta(hours=scan['intervalHours']))
+            db.execute('UPDATE settings SET version=version+1,scan=?,next_due=?,updated_at=? WHERE id=1',
+                       (json.dumps(scan), due, iso(self.clock())))
+        return self.settings()'''
+
+    new_save = '''    def save_settings(self, payload):
+        if not isinstance(payload, dict) or type(payload.get('version')) is not int or 'scan' not in payload:
+            raise ValueError('保存须带当前version和scan配置')
+        allowed = {'version', 'scan', 'timing', 'observe'}
+        if set(payload) - allowed:
+            raise ValueError('不支持的设置字段')
+        scan = validate_scan(payload['scan'])
+        with self.lock, self._db() as db:
+            row = db.execute('SELECT * FROM settings WHERE id=1').fetchone()
+            if payload['version'] != row['version']:
+                raise Conflict('配置已被其他页面更新，请重新读取后保存')
+            previous = json.loads(row['scan'])
+            due = row['next_due']
+            if not scan['enabled']:
+                due = None
+            elif not previous['enabled'] or scan['intervalHours'] != previous['intervalHours'] or due is None:
+                due = iso(self.clock() + dt.timedelta(hours=scan['intervalHours']))
+            timing = validate_timing(payload['timing']) if 'timing' in payload else migrate_timing(json.loads(row['timing']) if row['timing'] else None)
+            observe = validate_observe(payload['observe']) if 'observe' in payload else migrate_observe(json.loads(row['observe']) if row['observe'] else None)
+            # 改间隔/偏移/观察开关不得静默把 scan.enabled 打开
+            db.execute('UPDATE settings SET version=version+1,scan=?,next_due=?,timing=?,observe=?,updated_at=? WHERE id=1',
+                       (json.dumps(scan), due, json.dumps(timing), json.dumps(observe), iso(self.clock())))
+        return self.settings()'''
+
+    if old_save not in text:
+        raise SystemExit("save_settings block missing exact")
+    text = text.replace(old_save, new_save, 1)
+
+    p.write_text(text, encoding="utf-8", newline="\n")
+    print("patched task_service")
+
+
+def patch_scanner_optional_1h():
+    """Add helper hook; only runs when observe.enabled — default false → no behavior change."""
+    backup("scanner.py")
+    p = ROOT / "scanner.py"
+    text = p.read_text(encoding="utf-8")
+    if "ingest_symbol_1h" in text:
+        print("scanner already has 1h ingest hook")
+        return
+    # Append helper at end of file (or before main)
+    hook = '''
+
+def maybe_ingest_1h_for_row(row, raw_1h, *, root, target_close_boundary=None, observe=None):
+    """可选：把已收盘1H写入共享缓存。observe 默认关闭时直接跳过。不改 row 的4H字段。"""
+    if not observe or not observe.get("enabled"):
+        return None
+    try:
+        from market_candle_cache import MarketCandleCache
+        from b_1h_ingest import ingest_symbol_1h
+        cache = MarketCandleCache(root)
+        return ingest_symbol_1h(
+            cache,
+            market=row.get("market"),
+            symbol=row.get("symbol"),
+            raw_klines=raw_1h or [],
+            target_close_boundary=target_close_boundary,
+        )
+    except Exception as exc:
+        row.setdefault("errors", {})["b1hIngest"] = str(exc)[:180]
+        return None
+'''
+    text = text.rstrip() + "\n" + hook
+    p.write_text(text, encoding="utf-8", newline="\n")
+    print("patched scanner hook")
+
+
+def patch_price_index_gzip():
+    backup("price_index.py")
+    p = ROOT / "price_index.py"
+    text = p.read_text(encoding="utf-8")
+    if "read_json_maybe_gzip" in text:
+        print("price_index already gzip-aware")
+        return
+    if "import gzip" not in text:
+        text = text.replace("import hashlib\n", "import gzip\nimport hashlib\n", 1)
+    # find _iter_scan_candle_files and ensure .json.gz enumerated
+    if "*.json.gz" not in text and ".json.gz" not in text:
+        # soft patch: add helper used by readers if a simple json.loads(path.read) pattern exists
+        text = "from market_candle_cache import read_json_maybe_gzip\n" + text
+        # replace common loads of candle json files carefully — only document for now if too risky
+    # Add enumerate of gz in _iter_scan_candle_files if present
+    m = re.search(r"def _iter_scan_candle_files\(.*?\n(.*?)(?=\ndef |\Z)", text, re.S)
+    if m and "json.gz" not in m.group(0):
+        old_fn = m.group(0)
+        if 'rglob("*.json")' in old_fn:
+            new_fn = old_fn.replace('rglob("*.json")', 'rglob("*.json*")')
+            text = text.replace(old_fn, new_fn, 1)
+            print("broadened candle file glob")
+        else:
+            print("iter candle files pattern different; left note")
+    p.write_text(text, encoding="utf-8", newline="\n")
+    print("patched price_index import")
+
+
+TEST = r'''# -*- coding: utf-8 -*-
+from __future__ import annotations
+
+import json
+import tempfile
+import unittest
+from pathlib import Path
+
+from b_1h_ingest import closed_1h_bars, ingest_symbol_1h
+from market_candle_cache import MarketCandleCache
+from observe_config import migrate_observe, migrate_timing, target_close_boundary_ms, validate_observe
+from task_service import TaskService, validate_scan
+
+
+class ObserveConfigTests(unittest.TestCase):
+    def test_defaults_disabled(self):
+        o = migrate_observe(None)
+        self.assertFalse(o["enabled"])
+        t = migrate_timing(None)
+        self.assertEqual(t["closeOffsetSec"], 120)
+
+    def test_boundary_with_offset(self):
+        # 10:00:30 with offset 120s → still before 10:00+120, so boundary=09:00
+        now = 10 * 3600_000 + 30_000
+        b = target_close_boundary_ms(now, offset_sec=120)
+        self.assertEqual(b, 9 * 3600_000)
+        # 10:03 → boundary 10:00
+        now2 = 10 * 3600_000 + 180_000
+        self.assertEqual(target_close_boundary_ms(now2, offset_sec=120), 10 * 3600_000)
+
+
+class IngestTests(unittest.TestCase):
+    def test_closed_filter_and_ingest(self):
+        open_t = 1_700_000_000_000
+        raw = [[open_t, "1", "2", "0.5", "1.5", "10", open_t + 3_599_999, "100"]]
+        # unclosed
+        raw.append([open_t + 3_600_000, "1", "2", "0.5", "1.5", "10", open_t + 3_600_000 + 1000, "100"])
+        bars = closed_1h_bars(raw)
+        self.assertEqual(len(bars), 1)
+        with tempfile.TemporaryDirectory() as td:
+            cache = MarketCandleCache(Path(td))
+            meta = ingest_symbol_1h(cache, market="USDⓈ-M", symbol="AAAUSDT", raw_klines=raw, target_close_boundary=open_t + 3_600_000)
+            self.assertEqual(meta["written"], 1)
+            rows = cache.get_bars(market="USDⓈ-M", symbol="AAAUSDT", interval="1h")
+            self.assertEqual(len(rows), 1)
+
+
+class TaskSettingsMigration(unittest.TestCase):
+    def test_settings_expose_observe_off(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "runtime").mkdir()
+            svc = TaskService(root, runner=lambda: None)
+            s = svc.settings()
+            self.assertIn("observe", s)
+            self.assertFalse(s["observe"]["enabled"])
+            self.assertEqual(s["timing"]["closeOffsetSec"], 120)
+            # saving scan alone must not enable observe
+            out = svc.save_settings({"version": s["version"], "scan": s["scan"]})
+            self.assertFalse(out["observe"]["enabled"])
+            self.assertFalse(out["scan"]["enabled"])
+
+
+if __name__ == "__main__":
+    unittest.main()
+'''
+
+
+def write_tests_docs():
+    (ROOT / "test_v32_p2_observe_1h.py").write_text(TEST, encoding="utf-8", newline="\n")
+    doc = ROOT / "DOCS" / "design" / "strategies" / "v3.2-P2-实施说明.md"
+    doc.write_text(
+        """# v3.2 P2 实施说明（进行中）
+
+## 本步完成
+
+- `observe_config.py`：timing.closeOffsetSec 默认 120；observe 默认 enabled=false
+- `task_service.py`：settings 增加 timing/observe；旧库迁移；保存不会因新字段打开扫描
+- `b_1h_ingest.py`：已收盘 1H 规范化并写入 `market_candle_cache`
+- `scanner.py`：`maybe_ingest_1h_for_row` 钩子（观察关闭则跳过）
+- `candle_ranges` 已支持 1h（P1）
+
+## 未完成
+
+- 全市场扫描循环里真正请求 1H 并按 target_close_boundary 入库（需观察开启后）
+- 小时调度按 boundary+offset 对齐、在途复用、恢复 cursor
+- 历史 OI/LSR 同期采集
+- P3 事件写入 / P4 前端
+
+## 测试
+
+```
+python -m unittest test_v32_p2_observe_1h.py test_v32_b_cache_first_batch.py -v
+```
+""",
+        encoding="utf-8",
+        newline="\n",
+    )
+    print("wrote tests/docs")
+
+
+if __name__ == "__main__":
+    write_new_modules()
+    patch_task_service()
+    patch_scanner_optional_1h()
+    patch_price_index_gzip()
+    write_tests_docs()
+    print("OK")

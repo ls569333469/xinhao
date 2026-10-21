@@ -1,0 +1,38 @@
+'use strict';
+const assert=require('node:assert/strict');
+const C=require('./design/unified-core.js');
+const {COMBO_GUIDES,COMBO_VERSION}=require('./design/unified-combos.js');
+const t={tOi:30,tLsr:.8,tApr:-50,tVol:3,tQuiet:2};
+const state=()=>({signals:new Set(),mode:'and',minimum:1,market:'all',search:'',cap:'all',minCap:'',maxCap:'',trusted:false,listing:'current',history:'all',context:'latest',aStage:'strongmedium',bStage:'complete',cStage:'confirm',result:'pass',sort:'symbol',desc:false});
+function row(extra={}){return C.adapt({market:'USDⓈ-M',symbol:'TESTUSDT',quote:'USDT',legacySixStates:[true,true,true,true,null,true],oiCapPct:40,accountRatio:.6,fundingAprPct:-80,fundingHours:8,fundingIntervalStatus:'configured',volumeRatio:4,priceChangeWindowPct:-1,ignitionGrade:'none',...extra});}
+let checks=0;function check(fn){fn();checks++;}
+check(()=>assert.equal(C.and([null,false]),false));
+check(()=>assert.equal(C.or([null,true]),true));
+check(()=>assert.equal(C.combine([true,null,false],'n',2),null));
+check(()=>assert.equal(C.combine([true,false,false],'n',2),false));
+check(()=>assert.equal(C.combine([true,true,null],'n',2),true));
+check(()=>assert.equal(C.combine([],'and',1),true));
+check(()=>assert.equal(C.validate(state(),t),''));
+check(()=>{const s=state();s.signals.add('i1');s.signals.add('c');s.mode='or';assert.equal(C.evaluate(row(),s,t),true);s.mode='and';assert.equal(C.evaluate(row(),s,t),null);});
+check(()=>{const s=state();s.signals.add('i4');assert.equal(C.evaluate(row({ignitionGrade:'unknown'}),s,t),null);assert.equal(C.evaluate(row({ignitionGrade:'strong'}),s,t),true);});
+check(()=>{const s=state();s.cap='custom';s.minCap='1000';s.maxCap='5000';assert.equal(C.scope(row({capUsd:1e7}),s),true);assert.equal(C.scope(row({capUsd:5e7}),s),false);assert.equal(C.scope(row({capUsd:null}),s),null);});
+check(()=>{const s=state();s.signals.add('i1');s.mode='n';for(const n of [0,2,1.5,NaN]){s.minimum=n;assert.ok(C.validate(s,t));}});
+check(()=>{const r=row({fundingIntervalStatus:'unknown'});assert.equal(C.signals(r,state(),t).i3,null);});
+check(()=>{const r=row({priceChangeWindowPct:-4});assert.equal(C.signals(r,state(),t).i6,false);});
+const old={event_id:'old',schema_version:2,trigger_open_time:1,technical_event:'pass',technical_confirmation:'pass',structure_gate:'pass',event_revision:1};
+const pending={...old,event_id:'new',trigger_open_time:2,technical_confirmation:'pending'};
+check(()=>{const r=row({bEvents:[pending,old]});assert.equal(r.b,'pending');assert.equal(r.prior,true);const s=state();s.signals.add('b');assert.equal(C.evaluate(r,s,t),false);s.bStage='pending';assert.equal(C.evaluate(r,s,t),true);assert.equal(r.b,'pending');});
+check(()=>{const raw=row({bEvents:[{...pending,historical:true},{...old,historical:false}]}).raw;const scoped=C.adapt(raw,'forward');assert.equal(scoped.event.event_id,'old');assert.equal(scoped.b,'complete');});
+check(()=>{const r=row({bEvents:[{...old,structure_gate:'unknown'}]});const s=state();s.signals.add('b');s.bStage='unknown';assert.equal(C.evaluate(r,s,t),true);assert.equal(r.event.structure_gate,'unknown');});
+check(()=>{const r=row({bEvents:[{...old,structure_gate:'fail'}]});assert.equal(r.b,'fail');});
+check(()=>{const r=row({bEvents:[{...pending,structure_gate:'fail'}]});assert.equal(r.b,'fail');const s=state();s.signals.add('b');s.bStage='unknown';assert.equal(C.evaluate(r,s,t),false);});
+check(()=>{const r=row({bEvents:[{...old,technical_confirmation:'fail'}]});assert.equal(r.b,'confirmation_failed');const s=state();s.signals.add('b');s.bStage='fail';assert.equal(C.evaluate(r,s,t),true);});
+check(()=>{const r=row({bEvents:[{...old,schema_version:1}]});assert.equal(r.b,'legacy');assert.equal(C.signals(r,state(),t).b,null);});
+check(()=>{const a=row(),b=row({market:'COIN-M',symbol:'TESTUSD_PERP',quote:'USD'});assert.notEqual(a.key,b.key);});
+check(()=>{const s=state();s.sort='cap';for(const desc of [true,false]){s.desc=desc;assert.equal(C.sort([row({symbol:'B',capUsd:null}),row({symbol:'A',capUsd:1})],s,t).at(-1).symbol,'B');}});
+check(()=>{const s=state();const p={generation:'g',snapshot:{registryHash:'f'}};s.signals.add('c');const r=row(),e=C.evidence(r,s,t,p);assert.equal(e.selected_signal_count,1);assert.equal(e.legacy_six_states.length,6);assert.equal(e.query_state,null);assert.deepEqual(e.C_state,{status:'connected_disabled',check:null});assert.equal(e.raw.smartMoneyNetInflowUsd,undefined);assert.ok(C.csv([e]).includes('connected_disabled'));});
+check(()=>{const r=row(),s=state(),p={generation:'g',snapshot:{}};r.raw.unifiedEvidence=C.evidence(r,s,t,p);assert.doesNotThrow(()=>JSON.stringify(C.evidence(r,s,t,p)));});
+check(()=>{const s=state();s.search='AAA';s.selected=new Set(['secret']);const out=C.snapshot(s,t);assert.equal(out.selected,undefined);assert.equal(out.schema,C.VERSION);});
+check(()=>{assert.equal(COMBO_GUIDES.filter(x=>x.available).length,15);assert.equal(new Set(COMBO_GUIDES.map(x=>x.id)).size,16);assert.ok(COMBO_VERSION.includes('v33r5'));assert.equal(COMBO_GUIDES.find(x=>x.id==='s2_history').available,false);});
+check(()=>{const start=performance.now(),s=state();s.signals=new Set(['i1','b']);s.mode='or';const rows=Array.from({length:650},(_,i)=>row({symbol:'T'+i}));const passed=rows.filter(r=>C.evaluate(r,s,t)===true);assert.equal(passed.length,650);const csv=C.csv(passed.map(r=>C.evidence(r,s,t,{generation:'g',snapshot:{}})));assert.ok(csv.includes('T649'));console.log('650-row filter+export ms:',(performance.now()-start).toFixed(2));});
+console.log('unified core:',checks,'checks passed');

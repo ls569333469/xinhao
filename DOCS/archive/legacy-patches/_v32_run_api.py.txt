@@ -1,0 +1,34 @@
+﻿# -*- coding: utf-8 -*-
+from pathlib import Path
+
+ROOT = Path(r"D:\Axiangmu\异动观察工作台")
+srv = ROOT / "server.py"
+text = srv.read_text(encoding="utf-8")
+if "/api/b-observe/run" in text:
+    print("already")
+else:
+    needle = "                if self.command == 'PUT' and path == '/api/settings':"
+    if needle not in text:
+        raise SystemExit("still miss")
+    block = """                if self.command == 'POST' and path == '/api/b-observe/run':
+                    st = service.settings()
+                    if not st.get('observe', {}).get('enabled'):
+                        return self.fail(409, 'B观察未启用')
+                    from observe_config import target_close_boundary_ms
+                    now = service.clock()
+                    now_ms = int(now.timestamp() * 1000)
+                    offset = int(st.get('timing', {}).get('closeOffsetSec', 120))
+                    boundary = target_close_boundary_ms(now_ms, offset_sec=offset)
+                    with service.lock, service._db() as db:
+                        tid, reused = service._enqueue_b_observe(db, 'manual_b_observe', st['version'], boundary)
+                    service.tick()
+                    task = service.task(tid)
+                    return self.send_body(200, {'task': task, 'reused': reused, 'target_close_boundary': boundary})
+"""
+    text = text.replace(needle, block + needle, 1)
+    old_mark = "'emaImplementation': 'd10-20261016-observation-v1.1-event-v2'"
+    new_mark = "'emaImplementation': 'v32-b-observe-20261016-p5'"
+    if old_mark in text:
+        text = text.replace(old_mark, new_mark, 1)
+    srv.write_text(text, encoding="utf-8", newline="\n")
+    print("patched")

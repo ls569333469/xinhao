@@ -1,0 +1,716 @@
+{
+  "schema": "tracking-event-schema-v1",
+  "schema_version": "tracking-event-schema-v1.1.0",
+  "supersedes_version": "tracking-event-schema-v1.0.0 (grok-submissions/S1-20261018T004919Z)",
+  "frozen_at_utc": "2026-10-18T01:27:44Z",
+  "dialect_note": "JSON-Schema subset (type/required/properties/additionalProperties/enum/const/pattern/minimum/items/minItems/$ref) interpreted by tests/s1_contract_judge.py, plus x-cross-field-rules implemented in the same judge. No SQLite is created in S1.",
+  "x-time-contract": {
+    "bar_times": "UTC epoch milliseconds (integer >= 1e11). trigger_bar_open_ms % tf_ms == 0.",
+    "tf_ms": {
+      "4h": 14400000,
+      "1h": 3600000
+    },
+    "source_close_time_ms": "Binance close_time = open + tf_ms - 1 (kept for traceability only)",
+    "decision_boundary": "trigger_bar_close_ms = open + tf_ms = the instant the bar is closed and may be judged; occurred_at_ms == trigger_bar_close_ms (发生时间); decision_bar_close_ms = close of the bar that decided the status of THIS revision (A T or T+1 close, B h or h+1 close, C a bar close within T+1..T+10); every source_versions.effective_at_ms <= decision_bar_close_ms",
+    "system_times": "ISO-8601 UTC strings with Z or +00:00, microsecond precision allowed: first_seen_at (首次发现, never refreshed by rescans/backfill/revisions), available_at (all inputs available to the system = max(source_versions.available_at)), revision_recorded_at (when this revision was written), first_confirmed_seen_at (首次确认发现)",
+    "ordering": "available_at >= trigger_bar_close_ms; revision 1: first_seen_at >= available_at and revision_recorded_at == first_seen_at; later revisions: revision_recorded_at >= first_seen_at and >= available_at; first_confirmed_seen_at >= confirm_bar_close_ms, >= first_seen_at and <= revision_recorded_at",
+    "legacy_A_confirm_time": "old A confirm_time (ema_event_timing.py:48 confirm_time=now_s) is SYSTEM DISCOVERY time. It may be carried only as confirm.legacy_confirm_time with legacy_confirm_time_semantics='system_discovery_time' and must be >= confirm_bar_close_ms; it is never used as candle close. The candle is confirm_bar_open_ms/confirm_bar_close_ms (legacy confirm_bar_time = close_time = open + 4h - 1).",
+    "display": "pages show Asia/Shanghai; storage is UTC"
+  },
+  "x-identity-contract": {
+    "A_and_C_event_id": "{strategy}|{event_kind}|{market}|{symbol}|{timeframe}|{rule_version}|{trigger_bar_open_ms}  (strategy and event_kind are REQUIRED fields and part of the id)",
+    "A_technical_identity": "independent of the candidate cycle: event_id never contains candidate_cycle_id; candidate_cycle_id is a separate nullable link to the real ema_squeeze_store cycle",
+    "A_legacy_refs": {
+      "ema_observations.bind_identity": "{market}|{symbol}|4h|ema-squeeze-v4|{open+4h-1}|{full_cross_path_a|medium_ema7_25_cross}",
+      "ema_event_timing.event_id": "{market}|{symbol}|4h|ema-squeeze-v4|{candidate_cycle_id}|{open+4h-1}|{strong|medium}  (only when a candidate cycle exists)"
+    },
+    "B_event_id": "B KEEPS its original id: 'bev-' + uuid5(NAMESPACE_URL, 'B_ACCUMULATION_1H|b-accum-1h-v1|{market}|{symbol}|1h|{trigger_bar_open_ms}|tech_h').hex (b_accumulation_store.stable_event_id). strategy and event_kind are still required fields (B / b_tech_h) and are inside the uuid5 name. Tracking profile identity is stored separately on the session (tracking_profile_id + tracking_profile_version), never folded into the B event_id.",
+    "C_event_id": "new: C|c_cycle|{market}|{symbol}|4h|c-1015-v1.1|{t0_open_ms}; a corrected T0 creates a new id with supersedes link (never silent primary-key rewrite)",
+    "session_id": "{event_id}|{tracking_profile_id}|{tracking_profile_version}",
+    "transition_id": "{session_id}|{at_bar_close_ms}|{to_state}|r{revision}  (idempotency key)",
+    "event_kind_enum": {
+      "A": [
+        "a_full_cross",
+        "a_medium_cross"
+      ],
+      "B": [
+        "b_tech_h"
+      ],
+      "C": [
+        "c_cycle"
+      ]
+    },
+    "legacy_kind_map": {
+      "full_cross_path_a": "a_full_cross",
+      "medium_ema7_25_cross": "a_medium_cross",
+      "weak_ema99_cross": "out_of_v1_tracking_scope"
+    }
+  },
+  "x-revision-contract": {
+    "revision_id": "{event_id}:r{revision}",
+    "first_revision": "revision 1: prior_revision_id null, revision_reason null",
+    "later_revision": "revision n>1: prior_revision_id = {event_id}:r{n-1}; revision_reason in state_progression|late_backfill|source_revision|replay_correction",
+    "state_progression": "every state change of the event (A pending->confirmed/void, B pending->confirmed/confirm_failed, C waiting->confirmed/invalidated/expired) is appended as a NEW revision with revision_reason state_progression; revision_recorded_at of the first revision that carries status confirmed == confirm.first_confirmed_seen_at (首次确认发现时间). An event that is already decided at its trigger close (A confirmed on T) may be revision 1 directly.",
+    "late_backfill": "evidence that arrives after a decision (e.g. a missing C bar after expiry) appends a revision with discovery late_backfill; it never rewrites earlier revisions and never extends the C lifetime",
+    "retention": "append-only; every revision and its source_versions are retained; never delete or overwrite; old notifications retained (1015 §7.3)",
+    "first_seen_preserved": "first_seen_at is the identity's first discovery and is identical across revisions",
+    "transitions": "corrections are new transitions with revision>1 and corrects_transition_id"
+  },
+  "x-evidence-contract": {
+    "source_versions": "array of {source, ref, version, effective_at_ms, available_at, payload_sha256}; effective_at_ms <= max(trigger_bar_close_ms, confirm_bar_close_ms)",
+    "evidence_hash": "sha256 hex of canonical JSON (sort_keys, separators (',',':'), ensure_ascii=False, UTF-8) of source_versions sorted by (source, ref, version)",
+    "available_at": "max(source_versions[].available_at)",
+    "aggregation": "one event revision aggregates every input that decided it (candles, OI, LSR, cap, background); a changed input = a new revision with a new evidence_hash; the old revision keeps its own list"
+  },
+  "x-cross-field-rules": [
+    {
+      "id": "E01",
+      "rule": "event_id composition (A/C new format; B legacy bev- uuid5) and rule_version per strategy"
+    },
+    {
+      "id": "E02",
+      "rule": "A event_id never contains candidate_cycle_id; candidate_cycle_id only for A (null for B/C)"
+    },
+    {
+      "id": "E03",
+      "rule": "timeframe per strategy (A 4h, B 1h, C 4h); open on grid; close = open + tf; source_close_time = open + tf - 1"
+    },
+    {
+      "id": "E04",
+      "rule": "occurred_at_ms == trigger_bar_close_ms; decision_bar_close_ms (close of the bar that decided this revision status) is a bar close >= trigger close, inside the rule window (A <= T+1 close, B <= h+1 close, C <= T+10 close = T0 open + 11x4H, so a late backfill can never move a C decision past the real lifetime) and == confirm_bar_close_ms when confirmed"
+    },
+    {
+      "id": "E05",
+      "rule": "system times are UTC ISO; available_at >= candle close; revision1 first_seen_at >= available_at; revision_recorded_at >= available_at"
+    },
+    {
+      "id": "E06",
+      "rule": "confirm block: grid/close/offset consistency; offset window A 0..1, B 1, C 1..10; first_confirmed_seen_at >= confirm close, >= first_seen_at, <= revision_recorded_at; legacy_confirm_time (A only) is discovery time >= confirm close; confirmed <=> confirm block; FIRST CONFIRMATION CAUSALITY (S1-R1-P2-03, validated together with earlier revisions): on the first revision carrying a confirm block revision_recorded_at == first_confirmed_seen_at and every source_versions.available_at (and event available_at) <= first_confirmed_seen_at; on any later revision first_confirmed_seen_at is preserved from the first confirmed revision (a legitimate source_revision may carry newer available_at / revision_recorded_at); revision>1 with a confirm block needs its earlier revisions to be validated"
+    },
+    {
+      "id": "E07",
+      "rule": "revision_id / prior_revision_id / revision_reason / revision_recorded_at linkage"
+    },
+    {
+      "id": "E08",
+      "rule": "evidence_hash recomputed from source_versions; available_at = max(source available_at); no source effective after the decision boundary"
+    },
+    {
+      "id": "E09",
+      "rule": "legacy_refs recomputed (A bind_identity / cycle-bound id; B stable_event_id == event_id)"
+    },
+    {
+      "id": "E10",
+      "rule": "event_kind belongs to strategy"
+    },
+    {
+      "id": "S01",
+      "rule": "session_id composition"
+    },
+    {
+      "id": "S02",
+      "rule": "tracking profile allowed per strategy (no weak profile); original_cycle_state in strategy enum; A reference kind none"
+    },
+    {
+      "id": "S03",
+      "rule": "C state mapping: invalidated -> ended/cycle_invalidated; expired -> C_expired_technical_observation + t0_low; confirmed -> C_confirmed_observation + cycle_low; waiting -> C_waiting_observation"
+    },
+    {
+      "id": "S04",
+      "rule": "ended <=> ended_at_bar_close_ms and end_reason; human_stop <=> human_stopped and ended"
+    },
+    {
+      "id": "S05",
+      "rule": "B session uses the original bev- event_id; B reference s0_risk_line or none"
+    },
+    {
+      "id": "S06",
+      "rule": "last_evaluated >= started; ended_at <= last_evaluated"
+    },
+    {
+      "id": "T01",
+      "rule": "transition_id composition"
+    },
+    {
+      "id": "T02",
+      "rule": "allowed transitions and reasons; nothing leaves 'ended'; paused -> ended only by human_stop/delisted_verified (never structure across a gap)"
+    },
+    {
+      "id": "T03",
+      "rule": "at_bar_close = at_bar_open + tf; recorded_at >= at_bar_close"
+    },
+    {
+      "id": "T04",
+      "rule": "revision>1 transitions need corrects_transition_id; revision 1 must not have it"
+    }
+  ],
+  "$defs": {
+    "source_version": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "ref",
+        "version",
+        "effective_at_ms",
+        "available_at",
+        "payload_sha256"
+      ],
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": [
+            "candles_1h",
+            "candles_4h",
+            "oi",
+            "lsr",
+            "cap",
+            "background_4h",
+            "candidate_store"
+          ]
+        },
+        "ref": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "effective_at_ms": {
+          "type": "integer",
+          "minimum": 100000000000
+        },
+        "available_at": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?(Z|\\+00:00)$"
+        },
+        "payload_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "legacy_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "id"
+      ],
+      "properties": {
+        "system": {
+          "type": "string",
+          "enum": [
+            "ema_observations.bind_identity",
+            "ema_event_timing.event_id",
+            "b_accumulation_store.stable_event_id"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "candidate_cycle_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "confirm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "confirm_bar_open_ms",
+        "confirm_bar_close_ms",
+        "confirm_offset",
+        "first_confirmed_seen_at",
+        "legacy_confirm_time",
+        "legacy_confirm_time_semantics"
+      ],
+      "properties": {
+        "confirm_bar_open_ms": {
+          "type": "integer",
+          "minimum": 100000000000
+        },
+        "confirm_bar_close_ms": {
+          "type": "integer",
+          "minimum": 100000000000
+        },
+        "confirm_offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "first_confirmed_seen_at": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?(Z|\\+00:00)$"
+        },
+        "legacy_confirm_time": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?(Z|\\+00:00)$"
+        },
+        "legacy_confirm_time_semantics": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "system_discovery_time",
+            null
+          ]
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "event_id",
+        "strategy",
+        "event_kind",
+        "market",
+        "symbol",
+        "timeframe",
+        "rule_version",
+        "trigger_bar_open_ms",
+        "trigger_bar_close_ms",
+        "source_close_time_ms",
+        "occurred_at_ms",
+        "decision_bar_close_ms",
+        "first_seen_at",
+        "available_at",
+        "revision_recorded_at",
+        "discovery",
+        "technical_status",
+        "qualification_status",
+        "confirm",
+        "candidate_cycle_id",
+        "revision",
+        "revision_id",
+        "prior_revision_id",
+        "revision_reason",
+        "source_versions",
+        "evidence_hash",
+        "legacy_refs",
+        "missing_data_flags"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "const": "tracking-event-schema-v1.1.0"
+        },
+        "event_id": {
+          "type": "string"
+        },
+        "strategy": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "event_kind": {
+          "type": "string",
+          "enum": [
+            "a_full_cross",
+            "a_medium_cross",
+            "b_tech_h",
+            "c_cycle"
+          ]
+        },
+        "market": {
+          "type": "string",
+          "enum": [
+            "USDT-M",
+            "COIN-M"
+          ]
+        },
+        "symbol": {
+          "type": "string",
+          "pattern": "^[A-Z0-9_]+$"
+        },
+        "timeframe": {
+          "type": "string",
+          "enum": [
+            "4h",
+            "1h"
+          ]
+        },
+        "rule_version": {
+          "type": "string"
+        },
+        "trigger_bar_open_ms": {
+          "type": "integer",
+          "minimum": 100000000000
+        },
+        "trigger_bar_close_ms": {
+          "type": "integer",
+          "minimum": 100000000000
+        },
+        "source_close_time_ms": {
+          "type": "integer",
+          "minimum": 100000000000
+        },
+        "occurred_at_ms": {
+          "type": "integer",
+          "minimum": 100000000000
+        },
+        "decision_bar_close_ms": {
+          "type": "integer",
+          "minimum": 100000000000
+        },
+        "first_seen_at": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?(Z|\\+00:00)$"
+        },
+        "available_at": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?(Z|\\+00:00)$"
+        },
+        "revision_recorded_at": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?(Z|\\+00:00)$"
+        },
+        "discovery": {
+          "type": "string",
+          "enum": [
+            "live",
+            "historical_replay",
+            "late_backfill",
+            "import"
+          ]
+        },
+        "technical_status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "confirmed",
+            "void",
+            "blocked",
+            "technical_only",
+            "confirm_failed",
+            "unknown",
+            "waiting",
+            "invalidated",
+            "expired"
+          ]
+        },
+        "qualification_status": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "unknown"
+          ]
+        },
+        "confirm": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "$ref": "#/$defs/confirm"
+        },
+        "candidate_cycle_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "revision_id": {
+          "type": "string"
+        },
+        "prior_revision_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "revision_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "state_progression",
+            "late_backfill",
+            "source_revision",
+            "replay_correction",
+            null
+          ]
+        },
+        "source_versions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/source_version"
+          }
+        },
+        "evidence_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "legacy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/legacy_ref"
+          }
+        },
+        "missing_data_flags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "missing_candles",
+              "missing_oi",
+              "missing_lsr",
+              "missing_cap",
+              "missing_volume_baseline",
+              "gap_blocks_continuity"
+            ]
+          }
+        }
+      }
+    },
+    "session": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "session_id",
+        "event_id",
+        "strategy",
+        "tracking_profile_id",
+        "tracking_profile_version",
+        "original_cycle_state",
+        "observation_status",
+        "started_at_bar_close_ms",
+        "last_evaluated_bar_close_ms",
+        "ended_at_bar_close_ms",
+        "end_reason",
+        "human_stopped",
+        "reference",
+        "gap_refs"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "const": "tracking-event-schema-v1.1.0"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "event_id": {
+          "type": "string"
+        },
+        "strategy": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "tracking_profile_id": {
+          "type": "string"
+        },
+        "tracking_profile_version": {
+          "type": "string",
+          "const": "tracking-observation-v1.1.0"
+        },
+        "original_cycle_state": {
+          "type": "string"
+        },
+        "observation_status": {
+          "type": "string",
+          "enum": [
+            "observing",
+            "paused_awaiting_data",
+            "ended"
+          ]
+        },
+        "started_at_bar_close_ms": {
+          "type": "integer",
+          "minimum": 100000000000
+        },
+        "last_evaluated_bar_close_ms": {
+          "type": "integer",
+          "minimum": 100000000000
+        },
+        "ended_at_bar_close_ms": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 100000000000
+        },
+        "end_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "structure_invalid",
+            "human_stop",
+            "cycle_invalidated",
+            "delisted_verified",
+            null
+          ]
+        },
+        "human_stopped": {
+          "type": "boolean"
+        },
+        "reference": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "value",
+            "from_open_ms",
+            "to_open_ms"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "none",
+                "cycle_low",
+                "t0_low",
+                "s0_risk_line"
+              ]
+            },
+            "value": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "from_open_ms": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 100000000000
+            },
+            "to_open_ms": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 100000000000
+            }
+          }
+        },
+        "gap_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "transition_id",
+        "session_id",
+        "timeframe",
+        "from_state",
+        "to_state",
+        "at_bar_open_ms",
+        "at_bar_close_ms",
+        "reason",
+        "recorded_at",
+        "evidence_hash",
+        "source_version",
+        "revision",
+        "corrects_transition_id"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "const": "tracking-event-schema-v1.1.0"
+        },
+        "transition_id": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "timeframe": {
+          "type": "string",
+          "enum": [
+            "4h",
+            "1h"
+          ]
+        },
+        "from_state": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "observing",
+            "paused_awaiting_data",
+            "ended",
+            null
+          ]
+        },
+        "to_state": {
+          "type": "string",
+          "enum": [
+            "observing",
+            "paused_awaiting_data",
+            "ended"
+          ]
+        },
+        "at_bar_open_ms": {
+          "type": "integer",
+          "minimum": 100000000000
+        },
+        "at_bar_close_ms": {
+          "type": "integer",
+          "minimum": 100000000000
+        },
+        "reason": {
+          "type": "string"
+        },
+        "recorded_at": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?(Z|\\+00:00)$"
+        },
+        "evidence_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_version": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "corrects_transition_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "non_goals_s1": [
+    "no runtime/signal-tracking.sqlite3",
+    "no wiring into task_service/server",
+    "no production enablement"
+  ]
+}

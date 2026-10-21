@@ -1,0 +1,299 @@
+# -*- coding: utf-8 -*-
+"""P3: evaluate cached 1H bars → B events store; wire into observe runner."""
+from __future__ import annotations
+
+from pathlib import Path
+
+ROOT = Path(r"D:\Axiangmu\异动观察工作台")
+
+EVAL = r'''# -*- coding: utf-8 -*-
+"""从共享缓存评估 B 事件并写入 store。不发网络。"""
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+from typing import Any
+
+from b_accumulation_rules import BAR_MS, BASELINE_BARS, evaluate_h_event, evaluate_h1_confirm
+from b_accumulation_store import BAccumulationStore
+from market_candle_cache import MarketCandleCache
+
+
+def bars_from_cache(cache: MarketCandleCache, *, market: str, symbol: str, interval: str = "1h") -> list[dict]:
+    rows = cache.get_bars(market=market, symbol=symbol, interval=interval)
+    out = []
+    for r in rows:
+        payload = r.get("payload") or {}
+        bar = payload.get("bar") or {}
+        ot = int(payload.get("open_time") or r.get("open_time"))
+        ct = payload.get("close_time")
+        if ct is None:
+            ct = r.get("close_time")
+        item = {
+            "open_time": ot,
+            "close_time": ct,
+            "o": bar.get("o"),
+            "h": bar.get("h"),
+            "l": bar.get("l"),
+            "c": bar.get("c"),
+            "q": bar.get("q"),
+        }
+        out.append(item)
+    out.sort(key=lambda b: b["open_time"])
+    return out
+
+
+def _fingerprint(obj: dict) -> str:
+    blob = json.dumps(obj, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(blob).hexdigest()
+
+
+def evaluate_symbol_from_cache(
+    root: Path,
+    *,
+    market: str,
+    symbol: str,
+    target_close_boundary: int | None = None,
+    bg4h: dict | None = None,
+    bg4h_h1: dict | None = None,
+) -> dict:
+    cache = MarketCandleCache(root)
+    store = BAccumulationStore(root)
+    store.ensure_observation_start()
+    bars = bars_from_cache(cache, market=market, symbol=symbol)
+    if target_close_boundary is not None:
+        # 事件根 h 的 close boundary = open + BAR_MS；只评估边界等于 target 的那根
+        h_open = int(target_close_boundary) - BAR_MS
+        bars_use = [b for b in bars if b["open_time"] <= h_open + BAR_MS]  # include h+1 if present
+    else:
+        if not bars:
+            return {"market": market, "symbol": symbol, "evaluated": False, "reason": "no_bars"}
+        h_open = bars[-1]["open_time"]
+        bars_use = bars
+
+    try:
+        h_index = next(i for i, b in enumerate(bars_use) if int(b["open_time"]) == int(h_open))
+    except StopIteration:
+        return {"market": market, "symbol": symbol, "evaluated": False, "reason": "h_not_in_cache", "h_open": h_open}
+
+    if h_index < BASELINE_BARS:
+        return {"market": market, "symbol": symbol, "evaluated": False, "reason": "warmup_short", "h_open": h_open}
+
+    ev = evaluate_h_event(bars_use, h_index, bg4h=bg4h)
+    h1_open = int(h_open) + BAR_MS
+    h1_present = any(int(b["open_time"]) == h1_open for b in bars_use)
+    conf = evaluate_h1_confirm(bars_use, h_open, bg4h_h1=bg4h_h1, h1_closed=h1_present)
+
+    fp_src = {
+        "h_open": h_open,
+        "technical_event": ev.get("technical_event"),
+        "ratio": ev.get("ratio"),
+        "abs_return_ok": ev.get("abs_return_ok"),
+        "confirm": conf.get("technical_confirmation"),
+        "confirm_ratio": conf.get("ratio"),
+        "bars_n": len(bars_use),
+    }
+    payload = {
+        "technical_event": ev.get("technical_event"),
+        "technical_confirmation": conf.get("technical_confirmation"),
+        "pending_confirm": conf.get("pending"),
+        "event_ratio": ev.get("ratio"),
+        "confirm_ratio": conf.get("ratio"),
+        "abs_return_ok": ev.get("abs_return_ok"),
+        "reasons": list(ev.get("reasons") or []) + list(conf.get("reasons") or []),
+        "input_fingerprint": _fingerprint(fp_src),
+        "expected_confirmation_open_time": ev.get("expected_confirmation_open_time"),
+        "target_close_boundary": target_close_boundary,
+    }
+    rec = store.upsert_event(market=market, symbol=symbol, trigger_open_time=h_open, payload=payload)
+    return {
+        "market": market,
+        "symbol": symbol,
+        "evaluated": True,
+        "event_id": rec.get("event_id"),
+        "technical_event": rec.get("technical_event"),
+        "technical_confirmation": rec.get("technical_confirmation"),
+        "event_revision": rec.get("event_revision"),
+    }
+'''
+
+# write eval module
+(ROOT / "b_observe_evaluate.py").write_text(EVAL, encoding="utf-8", newline="\n")
+
+# patch runner to call evaluate after ingest when bars exist
+runner = ROOT / "b_observe_runner.py"
+rt = runner.read_text(encoding="utf-8")
+if "evaluate_symbol_from_cache" not in rt:
+    rt = rt.replace(
+        "from b_1h_ingest import ingest_symbol_1h\nfrom market_candle_cache import MarketCandleCache\nfrom observe_config import target_close_boundary_ms\n",
+        "from b_1h_ingest import ingest_symbol_1h\nfrom b_observe_evaluate import evaluate_symbol_from_cache\nfrom market_candle_cache import MarketCandleCache\nfrom observe_config import target_close_boundary_ms\n",
+        1,
+    )
+    # after ingest loop, add evaluate pass
+    old = '''        meta = ingest_symbol_1h(
+            cache,
+            market=market,
+            symbol=symbol,
+            raw_klines=raw,
+            target_close_boundary=boundary,
+        )
+        written += int(meta.get("written") or 0)
+        details.append(meta)
+    return {
+        "skipped": False,
+        "target_close_boundary": boundary,
+        "symbols": len(symbols or []),
+        "written": written,
+        "errors": errors[:20],
+        "strategy_id": observe.get("strategy_id"),
+        "rule_version": observe.get("rule_version"),
+        "details_sample": details[:5],
+    }
+'''
+    new = '''        meta = ingest_symbol_1h(
+            cache,
+            market=market,
+            symbol=symbol,
+            raw_klines=raw,
+            target_close_boundary=boundary,
+        )
+        written += int(meta.get("written") or 0)
+        try:
+            ev = evaluate_symbol_from_cache(
+                root,
+                market=market,
+                symbol=symbol,
+                target_close_boundary=boundary,
+                bg4h=item.get("bg4h"),
+                bg4h_h1=item.get("bg4h_h1"),
+            )
+            meta["evaluate"] = ev
+            if ev.get("evaluated"):
+                evaluated += 1
+        except Exception as exc:  # noqa: BLE001
+            errors.append({"symbol": symbol, "eval_error": str(exc)[:180]})
+        details.append(meta)
+    # 无 fetch 时仍可对缓存中已有标的做评估（universe 项可带 evaluate_only）
+    for item in symbols or []:
+        if fetch_1h is not None:
+            break
+        market = item.get("market")
+        symbol = item.get("symbol")
+        if not market or not symbol:
+            continue
+        try:
+            ev = evaluate_symbol_from_cache(
+                root,
+                market=market,
+                symbol=symbol,
+                target_close_boundary=boundary,
+                bg4h=item.get("bg4h"),
+                bg4h_h1=item.get("bg4h_h1"),
+            )
+            details.append({"symbol": symbol, "evaluate": ev})
+            if ev.get("evaluated"):
+                evaluated += 1
+        except Exception as exc:  # noqa: BLE001
+            errors.append({"symbol": symbol, "eval_error": str(exc)[:180]})
+    return {
+        "skipped": False,
+        "target_close_boundary": boundary,
+        "symbols": len(symbols or []),
+        "written": written,
+        "evaluated": evaluated,
+        "errors": errors[:20],
+        "strategy_id": observe.get("strategy_id"),
+        "rule_version": observe.get("rule_version"),
+        "details_sample": details[:5],
+    }
+'''
+    if "evaluated = 0" not in rt:
+        rt = rt.replace("written = 0\n    errors = []\n    details = []", "written = 0\n    evaluated = 0\n    errors = []\n    details = []", 1)
+    if old not in rt:
+        raise SystemExit("runner block miss")
+    rt = rt.replace(old, new, 1)
+    runner.write_text(rt, encoding="utf-8", newline="\n")
+    print("runner patched")
+else:
+    print("runner already has evaluate")
+
+# tests for P3
+TEST = r'''# -*- coding: utf-8 -*-
+from __future__ import annotations
+
+import tempfile
+import unittest
+from pathlib import Path
+
+from b_1h_ingest import ingest_symbol_1h
+from b_observe_evaluate import evaluate_symbol_from_cache
+from market_candle_cache import MarketCandleCache
+
+
+def _bar(open_t, q, o=100.0, c=100.5):
+    # closed 1h
+    return [open_t, str(o), str(o + 1), str(o - 1), str(c), "1", open_t + 3_599_999, str(q)]
+
+
+class P3EvaluateStore(unittest.TestCase):
+    def test_warmup_and_event_write(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            cache = MarketCandleCache(root)
+            base = 1_700_000_000_000
+            raw = []
+            # 170 bars: 168 baseline + h + h1
+            for i in range(170):
+                q = 10.0 if i < 168 else (80.0 if i == 168 else 25.0)
+                # keep abs return < 3%
+                raw.append(_bar(base + i * 3_600_000, q, o=100.0, c=101.0))
+            ingest_symbol_1h(cache, market="USDⓈ-M", symbol="BBBUSDT", raw_klines=raw)
+            h_open = base + 168 * 3_600_000
+            boundary = h_open + 3_600_000
+            # bg4h pass ema7>ema25
+            out = evaluate_symbol_from_cache(
+                root,
+                market="USDⓈ-M",
+                symbol="BBBUSDT",
+                target_close_boundary=boundary,
+                bg4h={"ema7": 2.0, "ema25": 1.0},
+                bg4h_h1={"ema7": 2.0, "ema25": 1.0},
+            )
+            self.assertTrue(out["evaluated"])
+            self.assertEqual(out["technical_event"], "pass")
+            store_path = root / "runtime" / "b-accumulation-events.json"
+            self.assertTrue(store_path.exists())
+
+
+if __name__ == "__main__":
+    unittest.main()
+'''
+(ROOT / "test_v32_p3_b_events.py").write_text(TEST, encoding="utf-8", newline="\n")
+
+doc = ROOT / "DOCS" / "design" / "strategies" / "v3.2-P3-实施说明.md"
+doc.write_text(
+    """# v3.2 P3 实施说明
+
+## 完成
+
+- `b_observe_evaluate.py`：从共享 1H 缓存评估 h / h+1，写入 `runtime/b-accumulation-events.json`
+- `b_observe_runner.py`：入库后评估；无 fetch 时也可对 universe 做缓存评估
+- 观察起点 `observation_started_at` 首次写入
+
+## 未完成
+
+- 结构层 OI/LSR 同期字段接入（现为 bg4h 可选；缺省 → unknown）
+- 独立 B 展示 / CSV（P4）
+- 全市场 1H 真拉取
+
+## 测试
+
+```
+python -m unittest test_v32_p3_b_events.py test_v32_p2_observe_1h.py -v
+```
+""",
+    encoding="utf-8",
+    newline="\n",
+)
+print("P3 files ready")

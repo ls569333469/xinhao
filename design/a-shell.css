@@ -1,0 +1,563 @@
+/* A布局外壳：扫描页收紧大统计卡/六指标大卡，首屏直达专业表。不替换其它模块。 */
+.a-shell-ready .layout{grid-template-columns:174px minmax(0,1fr)}
+.a-shell-ready .sidebar{padding:22px 14px;gap:18px;background:#16343a;color:#dce9e9;border-right:0}
+.a-shell-ready .sidebar .brand{color:#fff}
+.a-shell-ready .sidebar .brand .eyebrow{color:#91acb2;letter-spacing:1.5px}
+.a-shell-ready .sidebar .brand strong{color:#fff}
+.a-shell-ready .sidebar nav button{background:transparent;color:#b8ced2;border:0;border-radius:8px}
+.a-shell-ready .sidebar nav button:hover{background:#ffffff0c;color:#fff}
+.a-shell-ready .sidebar nav button.active{background:#ffffff15;color:#fff}
+.a-shell-ready main{
+  max-width:none;
+  width:auto;
+  margin:0;
+  padding:24px 18px 120px;
+  background:#f2f5f5;
+  box-sizing:border-box;
+}
+
+/* 扫描顶栏 */
+.a-shell-market > .page-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.a-shell-market > .page-heading .lead h1{font-size:24px;letter-spacing:-.4px;margin:0}
+.a-shell-market > .page-heading .lead p{margin:4px 0 0;color:var(--muted,#647d84);font-size:13px}
+.a-shell-market .a-shell-top-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+/* 大统计卡 → 一行 snapshot-line */
+.a-shell-market .snapshot-line,
+.a-shell-market .stats.snapshot-line{
+  display:flex!important;
+  grid-template-columns:none!important;
+  gap:16px;
+  flex-wrap:wrap;
+  align-items:center;
+  border-top:1px solid var(--line,#dde6e7);
+  border-bottom:1px solid var(--line,#dde6e7);
+  border-left:0;border-right:0;border-radius:0;
+  padding:10px 0;
+  margin:0 0 22px;
+  background:transparent;
+  font-size:12px;
+  color:var(--muted,#647d84);
+}
+.a-shell-market .snapshot-line .stat,
+.a-shell-market .stats.snapshot-line .stat{
+  display:inline-flex;
+  align-items:baseline;
+  gap:6px;
+  padding:0;
+  border:0;
+  background:transparent;
+  border-radius:0;
+  margin:0;
+}
+.a-shell-market .snapshot-line .stat label{display:inline;font-size:12px;color:var(--muted,#647d84);margin:0}
+.a-shell-market .snapshot-line .stat strong{display:inline;font-size:13px;font-weight:600;color:var(--ink,#1d343b);margin:0}
+.a-shell-market .snapshot-line .stat small{display:none}
+.a-shell-market .snapshot-line .stat button{
+  margin-left:4px;padding:2px 8px;font-size:11px;border-radius:999px;
+}
+.a-shell-market .snapshot-line .stat:last-child strong{font-size:13px!important}
+
+/* scanlayout：左筛选 + 右结果 */
+.a-shell-market .scanlayout,
+.a-shell-market .a-pro-workbench.scanlayout{
+  display:grid;
+  grid-template-columns:minmax(260px,280px) minmax(0,1fr);
+  gap:20px;
+  align-items:start;
+}
+.a-shell-market .filterbox,
+.a-shell-market .a-pro-filter-rail.filterbox{
+  background:#fff;
+  border:1px solid var(--line,#dde6e7);
+  border-radius:11px;
+  padding:18px 18px 14px;
+  position:sticky;
+  top:14px;
+  max-height:calc(100vh - 300px);
+  overflow:auto;
+  scrollbar-width:thin;
+  margin:0;
+}
+.a-shell-market .filterbox .query-title{margin-bottom:10px;gap:8px}
+.a-shell-market .filterbox .query-title h2{font-size:14px}
+.a-shell-market .filterbox .query-title small{display:none}
+.a-shell-market .filterbox .query-title #toggleFilters{padding:4px 8px;font-size:12px}
+
+/* 筛选控件竖排，不再横向五列 */
+.a-shell-market .filterbox .query-controls{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+.a-shell-market .filterbox .query-controls .field{margin:0}
+.a-shell-market .filterbox .query-controls input,
+.a-shell-market .filterbox .query-controls select{padding:9px 10px;font-size:13px;min-height:38px;box-sizing:border-box}
+.a-shell-market .filterbox .inline-fields{display:grid;gap:6px;grid-template-columns:1fr}
+.a-shell-market .filterbox .combo-explanation,
+.a-shell-market .filterbox #comboExplanation{font-size:11px;color:var(--muted,#647d84);margin:6px 0;line-height:1.4}
+
+/* 六指标：侧栏竖排三行，避免标题/条件/命中叠字 */
+.a-shell-market #indicators.grid3,
+.a-shell-market #indicators.indicator-list,
+.a-shell-market .filterbox #indicators{
+  display:flex!important;
+  flex-direction:column;
+  gap:0;
+  grid-template-columns:none!important;
+}
+.a-shell-market #indicators .indicator{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch;
+  gap:4px;
+  padding:10px 0;
+  border:0;
+  border-bottom:1px solid var(--line,#dde6e7);
+  border-radius:0;
+  background:transparent!important;
+  text-align:left;
+  min-width:0;
+  position:relative;
+}
+.a-shell-market #indicators .indicator:last-child{border-bottom:0}
+.a-shell-market #indicators .indicator:has(input:checked){background:transparent!important;border-color:var(--line,#dde6e7)}
+.a-shell-market #indicators .indicator label{
+  display:flex;
+  gap:8px;
+  align-items:flex-start;
+  font-size:13px;
+  line-height:1.45;
+  width:auto;
+  max-width:100%;
+  min-width:0;
+  font-weight:600;
+  color:var(--ink,#1b2b30);
+}
+.a-shell-market #indicators .indicator input{margin-top:3px;flex-shrink:0}
+.a-shell-market #indicators .indicator p,
+.a-shell-market #indicators .indicator .formula{
+  font-size:11px;
+  color:var(--muted,#647d84);
+  margin:0 0 0 22px;
+  line-height:1.35;
+  white-space:normal;
+  word-break:break-word;
+  font-weight:400;
+}
+.a-shell-market #indicators .indicator .count{
+  display:block;
+  font-size:11px;
+  color:var(--accent,#11786f);
+  margin:0 0 0 22px;
+  line-height:1.3;
+  white-space:nowrap;
+  font-weight:500;
+  position:static;
+  float:none;
+}
+.a-shell-market #indicators .indicator .count .unknown,
+.a-shell-market #indicators .indicator .count .warn{color:#93621a}
+
+/* 工具条挪到结果区视觉：筛选栏内隐藏大操作行，结果区展示 */
+.a-shell-market .filterbox .query-toolbar{
+  display:none;
+}
+.a-shell-market .results .a-shell-results-toolbar,
+.a-shell-market .results-panel .a-shell-results-toolbar{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+  padding-bottom:10px;
+  margin-bottom:4px;
+}
+.a-shell-market .results-panel{
+  min-width:0;
+  border:1px solid var(--line,#dde6e7);
+  border-radius:11px;
+  padding:18px 20px 96px;
+  background:#fff;
+}
+.a-shell-market .results-panel > .panel-head{display:none}
+.a-shell-market .a-shell-results-toolbar .segmented{display:flex;gap:12px;align-items:center;background:transparent;padding:0}
+.a-shell-market .a-shell-results-toolbar .segmented button{
+  border:0;border-radius:0;background:transparent;color:var(--muted,#647d84);
+  padding:6px 10px;border-bottom:2px solid transparent;
+  white-space:nowrap;flex:0 0 auto;
+}
+.a-shell-market .a-shell-results-toolbar .segmented{
+  flex-wrap:wrap;overflow:visible;
+}
+.a-shell-market .a-shell-results-toolbar .segmented button.active{
+  border-bottom-color:var(--accent,#11786f);color:var(--accent,#11786f);
+}
+.a-shell-market .a-shell-sortbar{display:flex;align-items:center;gap:6px;font-size:12px;flex-wrap:wrap}
+.a-shell-market .a-pro-hint{
+  padding:7px 10px;background:#e4f3ef;color:#11786f;border-radius:8px;font-size:12px;margin-bottom:8px;
+}
+
+/* 托盘贴合左侧深色导航宽度 */
+.a-shell-ready .a-pro-tray{left:174px}
+.a-shell-ready .sidebar .muted,
+.a-shell-ready .sidebar small{color:#a8c5c6}
+
+@media(max-width:1150px){
+  .a-shell-market .scanlayout,
+  .a-shell-market .a-pro-workbench.scanlayout{grid-template-columns:1fr;max-height:none}
+  .a-shell-ready .a-pro-tray{left:0}
+}
+@media(max-width:800px){
+  .a-shell-ready .layout{display:block}
+  .a-shell-ready .sidebar{height:auto;position:static;flex-direction:row;flex-wrap:wrap;padding:12px 14px}
+  .a-shell-ready .sidebar nav{display:flex;flex-wrap:wrap;gap:4px}
+  .a-shell-ready main{padding:16px 14px 120px;max-width:none;margin:0}
+}
+
+/* scan-pro-table: comfort density — explicit col widths + horizontal scroll in wrap only */
+.a-shell-market .results-panel,
+.a-shell-market .a-pro-market .results-panel{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  overflow-x:visible;
+  padding:18px 20px 96px;
+  box-sizing:border-box;
+}
+.a-shell-market .results-panel .a-pro-tablewrap,
+.a-shell-market .a-pro-tablewrap,
+.a-shell-market .tablewrap{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  overflow-x:auto;
+  overflow-y:visible;
+  max-height:none;
+  border:1px solid var(--line,#dce5e9);
+  border-radius:10px;
+  box-sizing:border-box;
+  -webkit-overflow-scrolling:touch;
+}
+.a-shell-market .a-pro-hint{
+  padding:10px 14px;
+  font-size:13px;
+  margin-bottom:12px;
+  line-height:1.45;
+}
+.a-shell-market .a-pro-table{
+  width:max-content;
+  min-width:100%;
+  max-width:none;
+  table-layout:fixed;
+  border-collapse:separate;
+  border-spacing:0;
+  font-size:13.5px;
+}
+.a-shell-market .a-pro-table th,
+.a-shell-market .a-pro-table td{
+  padding:13px 12px;
+  border-bottom:1px solid var(--line,#dce5e9);
+  vertical-align:top;
+  font-variant-numeric:tabular-nums;
+  background:var(--panel,#fff);
+  font-size:13.5px;
+  line-height:1.5;
+  overflow:hidden;
+  white-space:nowrap;
+  word-break:normal;
+  overflow-wrap:normal;
+}
+.a-shell-market .a-pro-table th{
+  position:sticky;top:0;z-index:4;
+  background:var(--soft,#f5faf8);
+  color:var(--muted,#6d8290);
+  font-weight:600;
+  font-size:12.5px;
+  line-height:1.35;
+  white-space:normal;
+  padding:13px 12px;
+  text-align:center;
+  vertical-align:bottom;
+}
+.a-shell-market .a-pro-table th > button[data-pro-sort],
+.a-shell-market .a-pro-table th > button{
+  display:block;
+  width:100%;
+  max-width:100%;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  border:0 !important;
+  border-radius:0;
+  background:transparent !important;
+  box-shadow:none;
+  color:inherit;
+  font:inherit;
+  font-weight:600;
+  font-size:12.5px;
+  line-height:1.35;
+  text-align:center !important;
+  white-space:normal;
+  cursor:pointer;
+}
+.a-shell-market .a-pro-table th:first-child,
+.a-shell-market .a-pro-table td:first-child{
+  position:sticky;left:0;z-index:5;
+  width:40px;min-width:40px;max-width:40px;
+  padding-left:10px;padding-right:6px;
+  background:var(--panel,#fff);
+}
+.a-shell-market .a-pro-table th:nth-child(2),
+.a-shell-market .a-pro-table td:nth-child(2){
+  position:sticky;left:40px;z-index:5;
+  width:160px;min-width:160px;max-width:160px;
+  white-space:normal;
+  background:var(--panel,#fff);
+  box-shadow:2px 0 4px rgba(33,62,70,.06);
+}
+.a-shell-market .a-pro-table th:first-child,
+.a-shell-market .a-pro-table th:nth-child(2){
+  z-index:6;
+  background:var(--soft,#f5faf8);
+}
+.a-shell-market .a-pro-table .coin-sub,
+.a-shell-market .a-pro-table small{
+  display:block;
+  font-size:12px;
+  color:var(--muted,#6d8290);
+  margin-top:3px;
+  line-height:1.45;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:100%;
+}
+/* SCREEN: critical stage/confirm must stay fully readable (no ellipsis) */
+.a-shell-market .a-pro-table .coin-sub-critical{
+  white-space:normal;
+  overflow:visible;
+  text-overflow:unset;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+  max-width:none;
+  color:var(--ink,#203742);
+  font-weight:600;
+}
+/* Left rail / filter labels wrap instead of clipping */
+.a-shell-market .filterbox label,
+.a-shell-market .a-pro-filter-rail label,
+.a-shell-market .query-controls .field span{
+  white-space:normal;
+  overflow-wrap:anywhere;
+  line-height:1.35;
+}
+/* Tab titles: allow shrink+ellipsis only after min readable width; prefer wrap */
+.a-shell-market .a-shell-results-toolbar .result-tabs,
+.a-shell-market .result-tabs{
+  flex-wrap:wrap;
+  min-width:0;
+}
+.a-shell-market .result-tabs button,
+.a-shell-market .subtabs button,
+.a-shell-market .segmented button{
+  white-space:normal;
+  overflow:visible;
+  text-overflow:unset;
+  line-height:1.3;
+  max-width:100%;
+}
+.a-shell-market .a-pro-table .hitdots{display:flex;gap:3px;margin-top:4px;flex-wrap:wrap;justify-content:center}
+.a-shell-market .a-pro-table .dot{width:7px;height:7px;border-radius:50%;background:#d5dee3;display:inline-block}
+.a-shell-market .a-pro-table .hitval{font-weight:600;font-size:14px}
+.a-shell-market .a-pro-table .hitval small{display:inline;font-size:12px;margin:0;white-space:nowrap}
+.a-shell-market .a-shell-results-toolbar{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  margin:12px 0 14px;padding-bottom:10px;
+}
+.a-shell-market .a-shell-results-toolbar .result-tabs{display:flex;gap:12px;align-items:center;flex:1;min-width:200px}
+.a-shell-market .a-shell-sortbar{
+  display:flex;align-items:center;gap:8px;font-size:13px;flex-wrap:wrap;margin-left:auto;
+}
+.a-shell-market .a-shell-filter-meta{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 10px;font-size:13px;
+}
+@media(max-width:1150px){
+  .a-shell-market .scanlayout,
+  .a-shell-market .a-pro-workbench.scanlayout{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+  .a-shell-market .filterbox,
+  .a-shell-market .a-pro-filter-rail.filterbox{
+    position:static;max-height:none;
+  }
+}
+@media(max-width:800px){
+  .a-shell-ready main{padding:16px 14px 120px;max-width:none;margin:0}
+}
+
+
+/* layout-widen-20261014: full-bleed main + filter 260-280 */
+.a-shell-ready main{
+  max-width:none !important;
+  width:auto;
+  margin:0 !important;
+  padding:24px 18px 120px;
+  box-sizing:border-box;
+}
+.a-shell-market .a-pro-workbench.scanlayout,
+.a-shell-market .scanlayout{
+  display:grid;
+  grid-template-columns:minmax(260px,280px) minmax(0,1fr);
+  gap:20px;
+  align-items:start;
+  width:100%;
+  max-width:none;
+}
+.a-shell-market .filterbox,
+.a-shell-market .a-pro-workbench .filterbox{
+  width:auto;
+  max-width:280px;
+  min-width:260px;
+}
+.a-shell-market .results-panel,
+.a-shell-market .a-pro-results{
+  min-width:0;
+  max-width:none;
+  width:100%;
+}
+.a-shell-market .tablewrap{
+  overflow-x:auto;
+  overflow-y:visible;
+  max-width:100%;
+}
+@media(max-width:1150px){
+  .a-shell-market .a-pro-workbench.scanlayout,
+  .a-shell-market .scanlayout{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+  .a-shell-market .filterbox,
+  .a-shell-market .a-pro-workbench .filterbox{
+    max-width:none;
+    min-width:0;
+    width:100%;
+  }
+}
+@media(max-width:800px){
+  .a-shell-ready main{
+    padding:16px 14px 120px;
+  }
+}
+
+
+/* col-align-20261014: header/data same center */
+.a-shell-market .a-pro-table th,
+.a-shell-market .a-pro-table td{
+  text-align:center;
+}
+.a-shell-market .a-pro-table thead th{
+  vertical-align:bottom;
+}
+.a-shell-market .a-pro-table th > button[data-pro-sort],
+.a-shell-market .a-pro-table th > button{
+  display:block;
+  width:100%;
+  padding:0;
+  margin:0;
+  border:0 !important;
+  background:transparent !important;
+  text-align:center !important;
+  color:inherit;
+  font:inherit;
+  font-weight:600;
+}
+/* 勾选列、合约列保持左对齐 */
+.a-shell-market .a-pro-table th:first-child,
+.a-shell-market .a-pro-table td:first-child,
+.a-shell-market .a-pro-table th:nth-child(2),
+.a-shell-market .a-pro-table td:nth-child(2){
+  text-align:left;
+}
+.a-shell-market .a-pro-table th:nth-child(2) > button{
+  text-align:left !important;
+}
+/* 单元格内多行说明也居中，避免主值居中、副文左贴 */
+.a-shell-market .a-pro-table td .coin-sub,
+.a-shell-market .a-pro-table td small{
+  text-align:center;
+}
+.a-shell-market .a-pro-table td:nth-child(2) .coin-sub{
+  text-align:left;
+}
+
+.a-shell-market .a-pro-table .hitdots{
+  justify-content:center;
+}
+.a-shell-market .a-pro-table .hitval,
+.a-shell-market .a-pro-table td > span{
+  display:inline-block;
+  text-align:center;
+}
+
+
+/* p2-tray-header-dots-20261014 */
+/* 底部托盘固定；为表区横滚条留空 */
+.a-shell-ready.has-a-pro-tray .a-pro-tray,
+.a-shell-ready .a-pro-tray.tray,
+#mainTray.a-pro-tray{
+  position:fixed;
+  left:174px;
+  right:0;
+  bottom:0;
+  z-index:45;
+  margin:0;
+  background:rgba(255,255,255,.97);
+  border-top:1px solid var(--line,#dce5e9);
+  box-shadow:0 -6px 24px rgba(22,52,58,.08);
+}
+@media(max-width:1150px){
+  .a-shell-ready .a-pro-tray,
+  #mainTray.a-pro-tray{ left:0; }
+}
+/* 表在视口内滚动，表头才能 sticky；并避免托盘挡住横滚条 */
+.a-shell-market .tablewrap{
+  max-height:calc(100vh - 240px);
+  overflow:auto;
+  padding-bottom:4px;
+}
+.a-shell-market .a-pro-table thead th{
+  position:sticky;
+  top:0;
+  z-index:4;
+}
+.a-shell-market .a-pro-table thead th:first-child,
+.a-shell-market .a-pro-table thead th:nth-child(2){
+  z-index:6;
+}
+/* 命中 / 未知 / 未命中 分色 */
+.a-shell-market .a-pro-table .dot{
+  background:#cfd8dc;
+}
+.a-shell-market .a-pro-table .dot.on{
+  background:#0f9f6e;
+}
+.a-shell-market .a-pro-table .dot.unknown{
+  background:#e6a23c;
+}
+
+/* Codex P2：表体视口内纵滚，表头 sticky（盖过上文 max-height:none） */
+.a-shell-market .results-panel .a-pro-tablewrap.tablewrap,
+.a-shell-market .results-panel .a-pro-tablewrap,
+.a-shell-market .a-pro-tablewrap.tablewrap{
+  max-height:calc(100vh - 240px) !important;
+  overflow-x:auto !important;
+  overflow-y:auto !important;
+}
+.a-shell-market .a-pro-table thead th{
+  position:sticky;
+  top:0;
+  z-index:4;
+  background:var(--panel,#fff);
+}

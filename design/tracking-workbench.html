@@ -1,0 +1,30 @@
+<div id="trackingWorkbench">
+ <header class="tw-heading"><div><h1>持续追踪</h1><p>保留已经发生的信号，继续观察后续闭合K线。</p></div><button id="tw-refresh" type="button">刷新已保存数据</button></header>
+ <nav class="tw-tabs" role="tablist" aria-label="追踪与历史信号">
+  <button id="tw-tab-tracking" type="button" role="tab" aria-selected="true" aria-controls="tw-content" data-tracking-tab="tracking">持续追踪</button>
+  <button id="tw-tab-history" type="button" role="tab" aria-selected="false" aria-controls="tw-content" tabindex="-1" data-tracking-tab="history">历史信号</button>
+ </nav><section id="tw-content" role="tabpanel" aria-labelledby="tw-tab-tracking">
+ <div class="tw-filters">
+  <label>搜索资产 / 合约<input id="tw-search" type="search" placeholder="如 JCT / BRUSDT" autocomplete="off"></label>
+  <label><span id="tw-statuslabel">追踪范围</span><select id="tw-status"><option value="active">追踪中＋待补数据</option><option value="paused">待补数据</option><option value="ended">已结束</option><option value="all">全部追踪记录</option></select></label>
+  <label>信号来源<select id="tw-strategy"><option value="all">全部ABC</option><option value="A">A · 金叉观察</option><option value="B">B · 吸筹背离</option><option value="C">C · 超卖反弹</option></select></label>
+  <label>市场<select id="tw-market"><option value="all">全部永续合约</option><option value="USDT-M">USDⓈ-M</option><option value="COIN-M">COIN-M</option></select></label>
+  <label>排序<select id="tw-sort"><option value="trigger">触发时间 · 最近优先</option><option value="symbol">合约名称 · A—Z</option></select></label>
+  <label>触发日期从<input id="tw-from" type="date"></label><label>至<input id="tw-to" type="date"></label>
+  <button id="tw-reset" type="button">重置筛选</button>
+ </div>
+ <p id="tw-statusline" role="status" aria-live="polite">正在连接已保存的追踪记录，请稍候…</p>
+ <noscript><p>持续追踪需要启用JavaScript后读取已保存记录。</p></noscript>
+ <p id="tw-updates" class="tw-updatebar" role="status" aria-live="polite" hidden><span id="tw-updatecount"></span><span class="tw-muted">本次打开后的变化；查看详情可消除标记。</span><button id="tw-readupdates" type="button">本页标记已读</button></p>
+ <p id="tw-warning" class="tw-muted"></p>
+ <div class="tw-tablewrap"><table><thead id="tw-heads"><tr><th>代币 / 市场</th><th>当前价格</th><th>24H涨跌</th><th>24H成交额</th><th>触发信号 / 信号等级</th><th>触发K线</th><th>触发后表现</th><th>当前4H走势</th><th>追踪状态</th><th>检查截至</th></tr></thead><tbody id="tw-rows"></tbody></table></div>
+ <footer class="tw-footer"><span id="tw-count"></span><div><button id="tw-prev" disabled>上一页</button><button id="tw-next" disabled>下一页</button></div></footer>
+ <p id="tw-explain" class="tw-muted">已有记录不会因本轮没有新金叉而消失。行情时间与追踪检查时间分别显示；观察记录不代表完整策略通过。</p>
+ </section>
+ <div id="tw-veil" hidden></div>
+ <aside id="tw-drawer" role="dialog" aria-modal="true" aria-labelledby="tw-detailtitle" tabindex="-1" hidden>
+  <header><h2 id="tw-detailtitle">追踪详情</h2><button id="tw-close" aria-label="关闭追踪详情">关闭</button></header>
+  <p id="tw-detailstatus" role="status"></p><div id="tw-events"></div><button id="tw-moreevents" hidden>更多历史事件</button>
+  <div id="tw-eventdetail"></div>
+ </aside>
+</div>

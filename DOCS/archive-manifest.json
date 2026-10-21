@@ -1,0 +1,87 @@
+[
+  {
+    "original": "独立审计报告.md",
+    "archived": "DOCS\\独立审计报告.md",
+    "originalSHA256": "E529B19B7CE5329C627EE2FE712DA83881F3FD5016146EA8537D6139D78578AB"
+  },
+  {
+    "original": "ai-review.md",
+    "archived": "DOCS\\ai-review.md",
+    "originalSHA256": "56CD2C9CF8170951279054CBDF63A1F6A390F6F438061A4E052AD41142C7C8E0"
+  },
+  {
+    "original": "chain-flow-report.md",
+    "archived": "DOCS\\chain-flow-report.md",
+    "originalSHA256": "78B8DA07EA800A2CBA02D7F1EB7E66D2B19FC8ECE16A87820583A8FD9F2D6D47"
+  },
+  {
+    "original": "data-capability-audit.md",
+    "archived": "DOCS\\data-capability-audit.md",
+    "originalSHA256": "54CCFF12C48C3805673E3C46CCD242D998C4A8D0011B66F66913C6B8B51FA1F1"
+  },
+  {
+    "original": "implementation-plan.md",
+    "archived": "DOCS\\implementation-plan.md",
+    "originalSHA256": "26B9387FF50FA64DF7B52C07CFD0B33594CC9787B0213C03B5FDD499A4F2B543"
+  },
+  {
+    "original": "migration-report.md",
+    "archived": "DOCS\\migration-report.md",
+    "originalSHA256": "9019B85D9E2006EEB518E526FCD06AD2453BB3DF39FECFF3A98BED938F652DAC"
+  },
+  {
+    "original": "README.md",
+    "archived": "DOCS\\README.md",
+    "originalSHA256": "EAF63ECD33A48131F54D8C52B62F14359241D86A5E44CB7DB83893238BFBC60E"
+  },
+  {
+    "original": "report.md",
+    "archived": "DOCS\\report.md",
+    "originalSHA256": "A3618A1F905FAE662DDD134936ACE68413E2838322900D552725EA6EE6361C8D"
+  },
+  {
+    "original": "strategy-test-report.md",
+    "archived": "DOCS\\strategy-test-report.md",
+    "originalSHA256": "29E583B381AFEB08465E339E398545084AD0770564254E85674F804B55915DFE"
+  },
+  {
+    "original": "design\\design-code-review.md",
+    "archived": "DOCS\\design\\design-code-review.md",
+    "originalSHA256": "FCBB81C97F092FE5C55F505C1D6B23DF1B5987CA0234F926B6B2FBE9D81F8179"
+  },
+  {
+    "original": "design\\iteration-v2.1.md",
+    "archived": "DOCS\\design\\iteration-v2.1.md",
+    "originalSHA256": "9E9F9426EF224544D57E2369D60C0201F352B3433B0A68BD7698B8149BE50728"
+  },
+  {
+    "original": "design\\iteration-v2.2.md",
+    "archived": "DOCS\\design\\iteration-v2.2.md",
+    "originalSHA256": "F2E1127A406107E396A6B9C17A795F383416C50361F40AE7C2039322463235E3"
+  },
+  {
+    "original": "design\\iteration-v2.3.md",
+    "archived": "DOCS\\design\\iteration-v2.3.md",
+    "originalSHA256": "473C3C485CA1B9471EC54857287E45A0FA0A5F639D70359552F728FCFB273313"
+  },
+  {
+    "original": "design\\iteration-v2.4.md",
+    "archived": "DOCS\\design\\iteration-v2.4.md",
+    "originalSHA256": "84C8CAC928D2875D0747DD5C0CAB29B7FB8640458F4DD28D749960E705A023F7"
+  },
+  {
+    "original": "design\\iteration-v2.md",
+    "archived": "DOCS\\design\\iteration-v2.md",
+    "originalSHA256": "738353E10C1C7D246685404EDBB451A8154880D2B0DFB41B6FC21B364BD421D5"
+  },
+  {
+    "original": "design\\README.md",
+    "archived": "DOCS\\design\\README.md",
+    "originalSHA256": "F06E01C3CE56587DA715B65D91F35F81CDA0F3E2C396DACBE880E863CE0F259A"
+  },
+  {
+    "original": "design\\requirements.md",
+    "archived": "DOCS\\design\\requirements.md",
+    "originalSHA256": "65992DABB89CB9BD23B8DCE3EE9A5FD8F8867B87313EF0827D18A5DAABDFD095"
+  }
+]

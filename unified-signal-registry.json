@@ -1,0 +1,30 @@
+{
+  "schema": "unified-signals-v33r5",
+  "version": "v3.3-r5",
+  "combos": "design/unified-combos.js",
+  "legacy_registry": "strategy-registry.json",
+  "legacy_policy": "preserve hashes and original below_ema profile; quiet/repair/all6 require reselection",
+  "I4": {
+    "ui": "EMA三线金叉",
+    "default_stage": "strongmedium",
+    "candidate_stage": "active",
+    "calculation": "A v4 appendix D.10-D.13 unchanged"
+  },
+  "B": "independent 1H",
+  "C": "connected_disabled",
+  "aux_new": "not_connected",
+  "tracking": {
+    "implementation": "codex-abc-tracking-20261019-v2",
+    "profile": "tracking-observation-v1.1.0",
+    "default_enabled": false,
+    "production_validated": false,
+    "source_recovery": {
+      "schema": "recovery-v2.3",
+      "default_enabled": false,
+      "requires_explicit_scoped_grant": true,
+      "implicit_network_worker": false,
+      "local_consumer_replay": true,
+      "quality_scope": "registered_tracking_recovery_only_not_all_production_sources"
+    }
+  }
+}

@@ -1,0 +1,138 @@
+﻿# -*- coding: utf-8 -*-
+from pathlib import Path
+import re
+
+ROOT = Path(r"D:\Axiangmu\异动观察工作台")
+bak = ROOT / "runtime" / "code-backups" / "v32-p2-observe-1h"
+bak.mkdir(parents=True, exist_ok=True)
+
+p = ROOT / "design" / "tasks-runtime.js"
+text = p.read_text(encoding="utf-8")
+if "observeEnabled" in text:
+    print("tasks-runtime already patched")
+else:
+    (bak / "tasks-runtime.js").write_text(text, encoding="utf-8")
+    m = re.search(r"q\('#scheduleState'\)\.textContent=`[^`]*`;", text)
+    if not m:
+        raise SystemExit("scheduleState missing")
+    old = m.group(0)
+    # insert before closing backtick
+    inner = old[len("q('#scheduleState').textContent=`"):-2]  # content inside backticks without trailing ;
+    new = (
+        "q('#scheduleState').textContent=`"
+        + inner
+        + " · B观察：${(value.observe&&value.observe.enabled)?'已开启':'关闭'}"
+        + " · 收盘偏移${(value.timing&&value.timing.closeOffsetSec)!=null?value.timing.closeOffsetSec:120}秒`;"
+    )
+    text = text.replace(old, new, 1)
+
+    load_fill = "q('#scheduleToggle').checked=config.scan.enabled;q('#scanInterval').value=String(config.scan.intervalHours);q('#scanTimezone').value=config.scan.timezone;"
+    if load_fill not in text:
+        raise SystemExit("load fill miss")
+    text = text.replace(
+        load_fill,
+        load_fill
+        + "if(q('#observeEnabled'))q('#observeEnabled').checked=!!(config.observe&&config.observe.enabled);"
+        + "if(q('#closeOffsetSec'))q('#closeOffsetSec').value=String((config.timing&&config.timing.closeOffsetSec)!=null?config.timing.closeOffsetSec:120);",
+        1,
+    )
+
+    m2 = re.search(
+        r"await api\('/api/settings','PUT',\{version:config\.version,scan:\{[^}]+\}\}\);",
+        text,
+    )
+    if not m2:
+        raise SystemExit("save put miss")
+    replacement = (
+        "const payload={version:config.version,scan:{enabled:q('#scheduleToggle').checked,"
+        "intervalHours:Number(q('#scanInterval').value),timezone:q('#scanTimezone').value,"
+        "recoverMissed:q('#recoverMissedScan').checked}};"
+        "if(q('#observeEnabled')||q('#closeOffsetSec')){"
+        "payload.timing={closeOffsetSec:Number((q('#closeOffsetSec')||{value:120}).value||120),schema_version:1};"
+        "payload.observe=Object.assign({schema_version:1,enabled:false,strategy_id:'B_ACCUMULATION_1H',"
+        "rule_version:'b-accum-1h-v1',baseline_bars:168,event_ratio:8.0,confirm_ratio:2.0,"
+        "max_abs_return:0.03,evidence_profile:'binance-1h-oi-lsr-v1',oi_lsr_period:'1h',"
+        "oi_lsr_max_lag_ms:300000},config.observe||{},"
+        "{enabled:q('#observeEnabled')?q('#observeEnabled').checked:!!(config.observe&&config.observe.enabled)});"
+        "}"
+        "await api('/api/settings','PUT',payload);"
+    )
+    text = text.replace(m2.group(0), replacement, 1)
+    p.write_text(text, encoding="utf-8", newline="\n")
+    print("tasks-runtime patched")
+
+# HTML: inject observe controls near schedule
+for html_name in ["index.html"]:
+    hp = ROOT / html_name
+    ht = hp.read_text(encoding="utf-8")
+    if "observeEnabled" in ht:
+        print(html_name, "already has observe")
+        continue
+    if "recoverMissedScan" not in ht:
+        print(html_name, "no recoverMissedScan")
+        continue
+    (bak / (html_name.replace("/", "__"))).write_text(ht, encoding="utf-8")
+    # Find a label/checkbox block for recoverMissedScan and append after its parent-ish
+    needle = 'id="recoverMissedScan"'
+    i = ht.find(needle)
+    if i < 0:
+        print("needle miss")
+        continue
+    # find end of that input's enclosing label or paragraph - insert after next </label> or </p>
+    tail = ht[i:]
+    end_label = tail.find("</label>")
+    end_p = tail.find("</p>")
+    cut = None
+    if end_label >= 0 and (end_p < 0 or end_label < end_p):
+        cut = i + end_label + len("</label>")
+    elif end_p >= 0:
+        cut = i + end_p + len("</p>")
+    if cut is None:
+        # fallback: after input tag
+        gt = ht.find(">", i)
+        cut = gt + 1
+    insert = (
+        '\n<label style="display:inline-block;margin-left:12px">'
+        '<input type="checkbox" id="observeEnabled"> B观察（默认关）</label>'
+        '\n<label style="display:inline-block;margin-left:12px">收盘偏移秒 '
+        '<input type="number" id="closeOffsetSec" min="0" max="600" value="120" style="width:4.5em"></label>'
+    )
+    ht = ht[:cut] + insert + ht[cut:]
+    # add link to B page near top if possible
+    if "/b-observe.html" not in ht:
+        ht = ht.replace(
+            "</h1>",
+            '</h1>\n<p><a href="/b-observe.html">打开 B 吸筹观察（独立）</a></p>',
+            1,
+        )
+    hp.write_text(ht, encoding="utf-8", newline="\n")
+    print(html_name, "controls inserted at", cut)
+
+# config-runtime saveScan: keep scan-only (backend OK); optionally show observe read-only meta
+cfg = ROOT / "design" / "config-runtime.js"
+ct = cfg.read_text(encoding="utf-8")
+if "B观察" not in ct:
+    (bak / "config-runtime.js").write_text(ct, encoding="utf-8")
+    # extend meta line
+    old_meta = "meta.textContent = 'version=' + ((state.scan && state.scan.version) || '—') +"
+    if old_meta in ct:
+        # find full assignment
+        m = re.search(r"meta\.textContent = 'version=' \+[\s\S]*?;", ct)
+        if m:
+            ct = ct.replace(
+                m.group(0),
+                m.group(0)[:-1]
+                + " + ' · B观察=' + ((state.scan && state.scan.observe && state.scan.observe.enabled) ? '开' : '关')"
+                + " + ' · 偏移=' + ((state.scan && state.scan.timing && state.scan.timing.closeOffsetSec) != null ? state.scan.timing.closeOffsetSec : 120) + 's';",
+                1,
+            )
+            cfg.write_text(ct, encoding="utf-8", newline="\n")
+            print("config-runtime meta patched")
+        else:
+            print("meta assign not found")
+    else:
+        print("meta prefix miss")
+else:
+    print("config-runtime already mentions B观察")
+
+print("done")

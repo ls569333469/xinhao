@@ -1,0 +1,257 @@
+{
+  "schema": "original-confirmation-freeze-v1",
+  "freeze_id": "original-confirmation-freeze-v1",
+  "freeze_version": "original-confirmation-v1.2.0",
+  "supersedes_version": "original-confirmation-v1.1.0 (grok-submissions/S1-20261018T012744Z-r1)",
+  "frozen_at_utc": "2026-10-18T01:27:44Z",
+  "immutable_note": "Documents CURRENT production rules WITHOUT changing them. S1 r1 edits no threshold and no production file. Line numbers refer to the source hashes in evidence/source-start-hashes.json.",
+  "time_units": "All bar times are UTC epoch milliseconds. Binance close_time = open_time + bar_ms - 1. Decision boundary (judgement instant) = open_time + bar_ms.",
+  "constants": {
+    "A.VOL_CONFIRM_RATIO": 2.0,
+    "A.CANDIDATE_MAX_DAYS": 30,
+    "A.OI_CONTRACTION_RATIO": 0.7,
+    "A.NEW_LOW_WINDOW": 10,
+    "A.NEW_LOW_MIN_COUNT": 3,
+    "A.AMPLITUDE_BARS": 20,
+    "A.AMPLITUDE_MAX": 1.35,
+    "A.SIDEWAYS_RSI_MIN_INCL": 30,
+    "A.SIDEWAYS_RSI_MAX_INCL": 55,
+    "A.POOL_OI_CAP_PCT_GT": 30,
+    "A.POOL_LSR_LT": 0.8,
+    "A.BAR_MS": 14400000,
+    "B.BASELINE_BARS": 168,
+    "B.EVENT_RATIO": 8.0,
+    "B.CONFIRM_RATIO": 2.0,
+    "B.MAX_ABS_RETURN": 0.03,
+    "B.OI_CAP_PCT_GT": 30,
+    "B.LSR_LT": 0.8,
+    "B.OI_LSR_MAX_LAG_MS": 300000,
+    "B.CAP_MAX_AGE_MS": 3600000,
+    "B.BAR_MS": 3600000,
+    "B.BG_BAR_MS": 14400000,
+    "B.BG_MIN_ROWS": 120,
+    "C.RSI_LT": 25,
+    "C.OI_CAP_PCT_GT": 30,
+    "C.LSR_LT": 1.5,
+    "C.NEW_LOWS14_MAX": 2,
+    "C.NEW_LOW_WINDOW": 14,
+    "C.C1_FIRST_OFFSET": 1,
+    "C.C1_LAST_OFFSET": 10,
+    "C.C1_VOL_RATIO_GT": 3.0,
+    "C.VOL_PRIOR_BARS": 7,
+    "C.INVALID_NEW_LOWS_GE": 3,
+    "C.INVALID_ADJ_LSR_GE": 1.5,
+    "C.BAR_MS": 14400000,
+    "C.OI_LSR_MAX_LAG_MS": 300000
+  },
+  "constants_sources": {
+    "A.*": "ema_squeeze_rules.py:11-19 (RULES_VERSION, CANDIDATE_MAX_DAYS, OI_CONTRACTION_RATIO, VOL_CONFIRM_RATIO, NEW_LOW_WINDOW, NEW_LOW_MIN_COUNT, AMPLITUDE_BARS, AMPLITUDE_MAX)",
+    "A.SIDEWAYS_RSI_MIN_INCL/MAX_INCL": "scanner.py:217 sidewaysOk = (30 <= rsi4h <= 55) and deathTrend is False and amplitudeOk is True",
+    "A.POOL_OI_CAP_PCT_GT / A.POOL_LSR_LT": "strategy-registry.json indicators I1 {gt oiCapPct 30}, I2 {lt accountRatio 0.8}; scanner.py:435-436 row.signals = indicator_states(row); ema_squeeze_store.py:193 core12 = signals[0] is True and signals[1] is True",
+    "B.*": "strategy-registry.json observationStrategies B_ACCUMULATION_1H {baseline_bars 168, event_ratio 8.0, confirm_ratio 2.0, max_abs_return 0.03, oi_lsr_period 1h, oi_lsr_max_lag_ms 300000}; b_accumulation_rules.py:16-20, 102-107; b_evidence.py:34 (cap 0<=t-capObservedAt<=1h); b_evidence.py:15-19 (4H background, >=120 rows)",
+    "C.*": "DOCS/1015-C策略方案整理与数据就绪.md v1.1 §3.1-3.3, §5.1 (no production C module; unified-signal-registry.json C = not_connected)"
+  },
+  "A": {
+    "rule_version_code": "ema-squeeze-v4",
+    "source_files": [
+      "ema_squeeze_rules.py",
+      "ema_event_timing.py",
+      "ema_observations.py",
+      "ema_squeeze_store.py",
+      "scanner.py"
+    ],
+    "clock": {
+      "timeframe": "4h closed bars",
+      "legacy_bar_time": "candleAsOf / bar_time = Binance close_time = open_time + 14_400_000 - 1 (ema_observations.py:48,63; ema_event_timing.py:17)",
+      "decision_boundary": "open_time + 14_400_000",
+      "legacy_confirm_time": "ema_event_timing.py:4,48 confirm_time = now_s = SYSTEM DISCOVERY time (ISO), NOT the candle close; candle is confirm_bar_time"
+    },
+    "technical_cross": {
+      "strong_full_cross": "ema_squeeze_rules.full_cross:30-40: current EMA7>EMA25>EMA99 (strict) AND prev EMA25<=EMA99 (equality allowed on prev; equality on current fails)",
+      "medium_cross": "ema_squeeze_rules.medium_cross:43-52: prev EMA7<=EMA25 AND current EMA7>EMA25 AND close>EMA99 (strict)",
+      "precedence": "ema_event_timing.py:93 level = strong if fullCross else medium if mediumCrossEvent",
+      "weak_label": "scanner.py:199-200 grade 'weak' = priceAboveEma99 (close>EMA99) AND ema7Below25 (EMA7<EMA25); scanner.py:448 riskFlag '弱穿线…勿当入场'. Label only, never a cross event, never upgraded (see tracking profile A.weak_scope)",
+      "warmup": "scanner.py:165-187: <120 bars insufficient; at exactly 120 bars fullCross/mediumCrossEvent=None (prev state unproven)"
+    },
+    "volume_confirm": {
+      "ratio": "VOL_CONFIRM_RATIO = 2.0; vol_ratio7 = bar quote volume / mean(prior 7 bars), denominator excludes the bar (scanner.py:188-190, ema_observations.py:58-62); >= 2.0 passes (equality passes)",
+      "window": "T (cross bar, if vol>=2 on T) OR the real next bar T+1 only (bar - cross == 14_400_000); no T+2 window",
+      "t1_order": "ema_event_timing.py:76-91 at T+1: gap_missing_next_bar -> next_bar_structure_unknown -> structure_broken -> next_bar_volume_unknown -> next_bar_oi_unknown (non-historical) -> next_bar_volume_fail (<2) -> confirmed",
+      "on_t1_still_fail": "void that cross event (terminal); later volume is progress only, never back-filled confirm",
+      "progress_definition": "progress_offsets = offsets (in 4H bars from T) of bars strictly AFTER the bar that resolved the event (T, T+1, or the bar that exposed the gap) where vol_ratio7 newly reaches >= 2.0 after a bar below 2.0; the resolving bar itself is never counted; progress is observation only"
+    },
+    "structure_hold_at_confirm": {
+      "strong": "structure_still_holds_strong: EMA7>EMA25>EMA99",
+      "medium": "structure_still_holds_medium: EMA7>EMA25 and close>EMA99"
+    },
+    "candidate_gate": {
+      "summary": "Original A candidate pool (Stage1). Documentation of existing semantics only; no new rule.",
+      "new_entry": {
+        "condition": "ema_squeeze_store.py:192-196,258-259: core12 (signals[0] OI/cap>30 is True AND signals[1] account LSR<0.80 is True) AND sidewaysOk is True AND belowAllEma is True",
+        "sidewaysOk": "scanner.py:214-217: None if rsi4h/deathTrend/amplitudeOk is None; else 30<=rsi4h<=55 (both inclusive) AND deathTrend is False AND amplitudeOk is True",
+        "deathTrend": "ema_squeeze_rules.death_trend_new_lows:57-74: last 10 closed closes, first is baseline, strict < min(earlier) counts; >=3 -> True; <10 values or invalid -> None",
+        "amplitudeOk": "ema_squeeze_rules.amplitude_ok:91-112: max(high)/min(low) over last 20 bars < 1.35 (STRICT; exactly 1.35 fails); missing/<=0 -> None",
+        "belowAllEma": "scanner.py:397: close strictly < EMA7, EMA25 and EMA99 (equality is NOT below)",
+        "valid_oi_required": "ema_squeeze_store.py:260-262: oiUsd must be finite and >0, else stageNote pool_gate_ok_but_oi_missing and NO entry",
+        "unknown_handling": "any None in sideways inputs -> sidewaysOk None -> no entry (unknown never enters)"
+      },
+      "entry_clock_and_oi_baseline": {
+        "rule": "ema_squeeze_store.py:3,80-93: an active cycle keeps the FIRST entered_at and entry_oi_usd; rescans/restarts only update last_seen_at/last_evidence; never refreshed",
+        "new_cycle": "ema_squeeze_store.py:94-121: new candidate_cycle_id (uuid4) only when no active cycle; previous cycle archived"
+      },
+      "exits_order": {
+        "older_bar": "ema_squeeze_store.py:210-212: row older than last_processed_bar_time -> ignored (stays active)",
+        "1_expired_30d": "ema_squeeze_rules.candidate_expired:139-147 + store:213-217: (now - entered_at) >= 30 days (equality expires); counted from entered_at, never from the cross",
+        "2_new_lows": "store:218-222: deathTrend is True -> exit new_lows",
+        "3_oi_contraction": "ema_squeeze_rules.oi_contraction:115-123 + store:223-228: current OI USD < entry_oi_usd * 0.70 (strict; exactly 0.70x does NOT exit); missing -> None",
+        "oi_unknown": "store:229-230: oi_contraction None -> stays active, stageNote oi_unknown_blocks_new_entry",
+        "break_above_three": "store:237-246: belowAllEma False while active -> broke_below_ema=True (field actually means 'broke above three EMAs'), still active",
+        "no_auto_close": "store docstring:3 exiting the pool never closes a position"
+      },
+      "eligibility_precedes_cross": "ema_event_timing.py:100-102: a new cross with bar_time <= entered_at is blocked 'cross_precedes_candidate_qualification'; candidate eligibility must exist BEFORE the cross bar closes",
+      "historical_layer_separate": "ema_event_timing.py:103-105, 126-158: archive replay without historical OI/cap gives technicalOnly / 'unverified_historical' confirmations; never mixed with candidate-at-cross confirmations",
+      "mapping_to_independent_technical_events": "ema_observations.bind_identity:136-148 gives cycle-independent technical ids market|symbol|4h|ema-squeeze-v4|bar_time|kind; ema_event_timing.event_id:10-12 gives the cycle-bound legacy id market|symbol|4h|ema-squeeze-v4|candidate_cycle_id|bar_time|level. S1 r1 tracking identity = technical (cycle-free); candidate_cycle_id is a separate nullable link (schema E02/E09)",
+      "continuity": "ema_event_timing.py:34 quality_ok requires emaQuality not insufficient/gap and no K线连续性 error; ema_observations.states:55-56 gaps reset EMA warmup; nothing is stitched across gaps"
+    },
+    "qualification_separate": {
+      "note": "Technical event != full A candidate qualification; funding is bonus only, not a hard gate",
+      "candidate_max_days": 30,
+      "oi_contraction_exit": "current OI USD < entry_oi * 0.70",
+      "new_low_window": 10,
+      "new_low_min_count_exit": 3,
+      "amplitude_bars": 20,
+      "amplitude_max": 1.35
+    },
+    "fixtures": [
+      "fixtures/a_cross_levels_equality.json",
+      "fixtures/a_t_confirm_vol_equal_2.json",
+      "fixtures/a_t1_confirm.json",
+      "fixtures/a_t1_vol_1_99_void_then_progress.json",
+      "fixtures/a_t1_gap_void.json",
+      "fixtures/a_t1_structure_broken.json",
+      "fixtures/a_cross_before_candidate_blocked.json",
+      "fixtures/a_candidate_gate_boundaries.json",
+      "fixtures/a_observation_profiles.json"
+    ]
+  },
+  "B": {
+    "strategy_id": "B_ACCUMULATION_1H",
+    "rule_version": "b-accum-1h-v1",
+    "source_files": [
+      "b_observe_evaluate.py",
+      "b_accumulation_rules.py",
+      "b_evidence.py",
+      "b_contemporaneous.py",
+      "b_accumulation_store.py",
+      "strategy-registry.json"
+    ],
+    "technical": {
+      "timeframe": "1h",
+      "baseline_bars": 168,
+      "event_volume_ratio": "q_h / mean(q[h-168..h-1]) >= 8.0; window + h must be 168 contiguous 1h bars (b_accumulation_rules.volume_ratio:50-83); else unknown",
+      "abs_return_at_h": "|c/o - 1| < 0.03 (strict; equality fails) (b_accumulation_rules.py:86-93)",
+      "confirm_h1_volume_ratio": "q_{h+1} / mean(q[h+1-168..h]) >= 2.0 (window includes h) on the REAL h+1 only",
+      "no_h2_confirm_window": true
+    },
+    "clocks": {
+      "authority": "b_observe_evaluate.calculate_event:14-20",
+      "h_close": "t_h = h.open_time + 3_600_000 (the real hourly close of h)",
+      "h1_close": "t_h1 = t_h + 3_600_000 (the real hourly close of h+1); evaluated only when t_h1 <= target_close_boundary, else pending",
+      "structure_at_h": "structure(t_h) -> b_evidence.structure_at(t_h): OI and LSR picked at t_h, NOT at a 4H boundary",
+      "structure_at_h1": "structure(t_h1) -> b_evidence.structure_at(t_h1)",
+      "combined": "combine_tri(structure_h, structure_h1) (fail first); while h+1 is open: fail if structure_h fail else pending",
+      "background_at_h": "background(t_h) = latest CLOSED 4H whose close boundary == floor(t_h / 4H) * 4H (b_evidence.background_at:12-26); EMA7>EMA25 strict; requires >=120 contiguous 4H rows",
+      "background_at_h1": "background(t_h1), selected independently; when h+1 closes on a 4H boundary (e.g. 08:00) it is a DIFFERENT 4H bar than background(t_h)",
+      "r0_error_fixed": "r0 wrote 'contemporaneous_with = closed 4H boundary' (S1-P1-01). That was wrong: the OI/LSR clock is the hourly close of h / h+1; only the EMA background uses the latest closed 4H."
+    },
+    "structure_qualification": {
+      "oi_over_circulating_mcap_pct": ">30 (equality fails)",
+      "lsr_account": "<0.80 (equality fails)",
+      "sample_pick": "b_contemporaneous.pick_sample_at_or_before:25-49: latest sample with timestamp <= t; quality pass iff 0 <= t - s <= 300000 ms; s > t ignored; stale -> quality 'fail'",
+      "quality_to_state": "b_evidence.structure_at:28-30: any non-pass OI/LSR quality -> 'unknown' (never an economic fail)",
+      "effective_at": "sample 'timestamp' field of the Binance 1h OI / account-LSR row (oi_source_period='1h', b_evidence.py:55)",
+      "available_at": "system retrieved_at of that sample; stored separately; NOT used to decide contemporaneity (1015 §5.1: contemporaneous != available at that time)",
+      "cap": "capTrusted is True AND 0 <= t - capObservedAt <= 3_600_000 AND capUsd finite > 0 (b_evidence.py:31-35); same cap record checked separately against t_h and t_h1",
+      "per_point_record": "each of h and h+1 stores its own {boundary_ms, oi_sample_ts, oi_delta_ms, lsr_sample_ts, lsr_delta_ms, cap quality, state} (b_evidence.py:55 source_boundary/oi_delta_ms/lsr_delta_ms)",
+      "counterexample_from_codex": "h closes 06:00, latest closed 4H closes 04:00, only OI/LSR sample at 04:00: hourly clock -> delta 7_200_000 > 300_000 -> quality fail -> structure unknown. Binding to 04:00 would wrongly pass. Fixtures b_non4h_hour_only_4h_sample.json (valid) and negative/neg_b_wrong_4h_binding.json"
+    },
+    "never_rewrite_historical_qualification": true,
+    "fixtures": [
+      "fixtures/b_cross4h_two_backgrounds.json",
+      "fixtures/b_non4h_hour_only_4h_sample.json",
+      "fixtures/b_lag_boundaries.json",
+      "fixtures/b_equality_boundaries.json",
+      "fixtures/b_baseline_gap_unknown.json",
+      "fixtures/b_h1_fail_still_trackable.json",
+      "fixtures/b_tech_confirm_qual_fail_lsr.json",
+      "fixtures/b_h1_not_closed_pending.json",
+      "fixtures/b_end_ema7_le_ema25.json",
+      "fixtures/b_observation_boundaries.json"
+    ]
+  },
+  "C": {
+    "status_in_production": "not_connected (no formal C compute module wired); S1 freezes the 1015 contract and an isolated judge only",
+    "authority_docs": [
+      "DOCS/1015-C策略方案整理与数据就绪.md v1.1 §3, §5.1, §6.7, §7",
+      "DOCS/1017 §4.1"
+    ],
+    "rule_version_label": "c-1015-v1.1",
+    "clock": {
+      "timeframe": "4h closed bars; T0 = open_time of the C0 bar; T+k = the bar whose open = T0 + k*14_400_000",
+      "t_plus_k_close": "T0 + (k+1)*14_400_000",
+      "lifetime_end": "T0 + 11*14_400_000 (close of real T+10), fixed at C0; missing data never pauses or extends it (1015 §3.3 line 59, §6 item 7 line 127)",
+      "oi_lsr_contemporaneity": "0 <= t - s <= 300000 at each 4H close t (1015 §5.1); LSR < 1.5 (NOT B's 0.80)"
+    },
+    "C0": {
+      "rsi14_wilder": "<25 (25 fails)",
+      "below_all_ema": "close strictly below EMA7, EMA25, EMA99 (equality fails)",
+      "oi_over_circulating_mcap_pct": ">30 (30 fails)",
+      "lsr_account": "<1.5 (1.5 fails)",
+      "strict_new_lows_14": "<=2; 14 consecutive real closes ending at the bar; first = baseline; strict < min(previous) counts; any missing bar -> unknown",
+      "tri_state": "fail first, unknown second; only all-pass forms C0"
+    },
+    "C1": {
+      "window": "T+1..T+10 inclusive (never T0); T+11 never confirms the old cycle",
+      "volume": "confirm bar quote vol / mean(prior 7 real consecutive 4H) > 3 (STRICT; exactly 3.0 fails) AND close > open (doji fails); zero/short baseline -> unknown",
+      "at_confirm_still_require": [
+        "OI/cap>30%",
+        "LSR<1.5",
+        "14-bar strict new lows <=2"
+      ],
+      "no_longer_require_at_c1": [
+        "RSI<25",
+        "below all EMA"
+      ],
+      "max_one_confirm_per_cycle": true
+    },
+    "invalidation_expiry_rearm": {
+      "per_bar_order": "1) explicit invalidation  2) valid confirmation  3) at T+10 only: expiry_10_bars",
+      "new_lows_ge_3": "invalidate (priority over a same-bar confirmation)",
+      "two_adjacent_closed_4h_lsr_ge_1_5": "invalidate only if BOTH real adjacent bars exist and both LSR valid >= 1.5; a missing candle/LSR is UNPROVABLE, not a proof of non-adjacency: the pair is proven absent only when one real side is < 1.5 (1.6 -> 1.4 -> 1.7 is not); 1.6 -> missing -> any is UNRESOLVED and must be replayed from that root once the value arrives (1.6 -> 1.7 invalidates at that root)",
+      "unresolved_root_rule": "(S1-R1-P1-01) a root is RESOLVED when invalidation is proven yes, or proven no AND confirmation is proven pass/fail; otherwise UNRESOLVED (missing candle, missing OI/LSR/volume baseline/new-low window that can still change the root). Later roots may record LOCAL technical facts, but formal confirmation / invalidation / notify_live / continuity watermark must not advance past the earliest unresolved root; the cycle stays waiting (partially_unverified) until backfill replays from that root. A missing input on a root whose outcome is already proven (e.g. bearish candle => confirmation fail and the other side of the LSR pair < 1.5) does NOT block. The fixed T+10 lifetime is unaffected: at T+10 with an unresolved root the cycle expires with partially_unverified=true; a late backfill appends a historical late_backfill revision (never live, never extends)",
+      "expiry_reason": "primary expiry_10_bars; secondary missing_candles / missing_oi / missing_lsr / missing_volume_baseline; partially_unverified=true when any",
+      "late_backfill": "after expiry, a backfilled bar that would have confirmed/invalidated creates revision 2 (historical, discovery=late_backfill, notify_live=false) linked to revision 1; revision 1 retained; lifetime_end unchanged",
+      "rearm": "after a terminal state a full C0 explicit 'fail' must be observed, then 'pass'; 'unknown' never completes the step; new cycle gets a new identity"
+    },
+    "lsr_contrast": {
+      "C_threshold": 1.5,
+      "B_threshold": 0.8,
+      "note": "LSR 1.2 passes C structure gate and fails B (fixture c_lsr_contrast.json)"
+    },
+    "fixtures": [
+      "fixtures/c_c0_strict_boundaries.json",
+      "fixtures/c_c1_confirm.json",
+      "fixtures/c_c1_strict_volume.json",
+      "fixtures/c_t10_confirm_before_expiry.json",
+      "fixtures/c_t10_real_clock_expiry_with_gaps.json",
+      "fixtures/c_t11_no_confirm.json",
+      "fixtures/c_invalidation_priority.json",
+      "fixtures/c_two_high_lsr.json",
+      "fixtures/c_rearm_unknown_not_rearm.json",
+      "fixtures/c_late_backfill_after_expiry.json",
+      "fixtures/c_observation_after_terminal.json",
+      "fixtures/c_lsr_contrast.json",
+      "fixtures/c_pause_does_not_extend.json"
+    ]
+  }
+}

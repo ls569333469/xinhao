@@ -1,0 +1,22 @@
+{
+  "default": [
+    {
+      "evidence_id": "ev-fixture-partial-announce",
+      "title": "公告摘要（动态表格未加载）",
+      "excerpt": "外层页面可访问；关键解锁表格未渲染，仅有标题摘要。",
+      "source_url": "fixture://partial/announce",
+      "fetch_status": "partial",
+      "content_level": "excerpt",
+      "quality": "unverified",
+      "publisher": "fixture-partial",
+      "gaps_note": "动态组件未加载；不得标全文核验或无解锁",
+      "gap": "dynamic_component_not_loaded"
+    }
+  ],
+  "gaps": [
+    {
+      "reason": "dynamic_component_not_loaded",
+      "detail": "关键表格未加载"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+# iteration-v2.8 · CONFIG-01 全量备份/恢复向导（首刀加深）
+
+- **时间**：2026-10-13 22:55 Asia/Shanghai
+- **实现ID**：CONFIG-01（加深：backup wizard）
+- **状态**：部分实现（**不标 CONFIG 完成**）
+- **schema**：`workbench-backup-v1`
+- **向导步骤**：manifest → export → review → import
+- **API**：
+  - `POST /api/config/backup/manifest`
+  - `POST /api/config/backup/export`
+  - `POST /api/config/backup/review`
+  - `POST /api/config/backup/import`
+- **覆盖段**：`config_core` · `strategies`（草案/冻结版本 refs+bodies）· `sim`（费用/分档预算）· `eval_plans` · `review_plans`
+- **硬约束**：
+  - 凭证 / AI Key / DPAPI 路径 **永远排除**（`include_credentials` 直接 ValueError）
+  - SIM 账本默认排除；`include_sim_ledger` / `import_sim_ledger` 显式打开
+  - hash/fork 冲突 → `ConfigConflict` 409，拒绝静默覆盖（可 `force` / `allow_divergent` / `overwrite_drafts`）
+- **UI**：`config-runtime.js` 设置页向导条（清单→导出→审阅→导入 / 下载 JSON）
+- **验证**：`unittest test_config_store`（12）
+- **备份**：`runtime/code-backups/config-backup-wizard-*`
+- **未做**：设置页全字段双向绑定；EXT 加深；不把 CONFIG 标完成
+- **下一刀建议**：设置页全字段双向绑定（CONFIG）或 EXT 精确流深化

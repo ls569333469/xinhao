@@ -1,0 +1,158 @@
+{
+  "schema": "tracking-observation-profile-v1",
+  "profile_id": "tracking-observation-profile-v1",
+  "profile_version": "tracking-observation-v1.2.0",
+  "supersedes_version": "tracking-observation-v1.1.0 (grok-submissions/S1-20261018T012744Z-r1)",
+  "frozen_at_utc": "2026-10-18T01:27:44Z",
+  "authority": {
+    "doc": "DOCS/1017-ABC持续追踪与C接入-最终执行与审计方案.md",
+    "section": "4.2",
+    "also": [
+      "ABC信号持续追踪与补数机制实施方案-待审阅.md §4.1 (weak label)",
+      "DOCS/1015 §6 item 7, §7.1-7.2"
+    ],
+    "note": "Observation end conditions only; not validated profit parameters; never written back into the original confirmation result"
+  },
+  "status": "shadow_only_not_enabled",
+  "lifetime": {
+    "auto_void_by_16h": false,
+    "auto_void_by_1_week": false,
+    "end_only_on": [
+      "structure_invalid",
+      "human_stop",
+      "cycle_invalidated (C waiting phase only)",
+      "delisted_verified"
+    ],
+    "history_retained": true
+  },
+  "observation_status_enum": [
+    "observing",
+    "paused_awaiting_data",
+    "ended"
+  ],
+  "end_reason_enum": [
+    "structure_invalid",
+    "human_stop",
+    "cycle_invalidated",
+    "delisted_verified"
+  ],
+  "A": {
+    "strong": {
+      "profile_id": "A_strong_observation",
+      "applies_to": "technical_level == strong (full cross)",
+      "continue_while": "each closed 4H: EMA7>EMA25>EMA99",
+      "end_when": "arrangement breaks; any equality counts as break",
+      "reference": "none"
+    },
+    "medium": {
+      "profile_id": "A_medium_observation",
+      "applies_to": "technical_level == medium ONLY",
+      "continue_while": "each closed 4H: EMA7>EMA25 AND close>EMA99 (compound)",
+      "end_when": "the compound condition fails (equality fails)",
+      "note": "independent profile; must NOT be judged with the strong condition and must NOT impersonate strong",
+      "reference": "none"
+    },
+    "weak_scope": {
+      "definition": "weak label = EMA7<EMA25 AND close>EMA99 (scanner.py:199-200 ignitionGrade 'weak', riskFlag 弱穿线)",
+      "mapping": "keeps its original label only; tracking_profile = null",
+      "creates_tracking_session": false,
+      "upgrade_to_medium_or_strong": false,
+      "new_cross_each_bar": false,
+      "legacy_weak_ema99_cross_technical_id": "ema_observations bind_identity kind weak_ema99_cross exists but is OUT of v1 tracking scope (no event_kind in schema)",
+      "note": "1017 selected only strong and independent medium observation; a weak hint is never promoted to a medium/strong confirmation"
+    },
+    "original_cycle_state_enum": [
+      "pending",
+      "confirmed",
+      "void",
+      "blocked",
+      "technical_only"
+    ],
+    "candidate_independent": "A technical tracking identity does not depend on a candidate cycle; candidate expired_30d/new_lows/oi_contraction keep their original qualification result and do not end technical observation"
+  },
+  "B": {
+    "profile_id": "B_trend_observation",
+    "original_cycle_state_enum": [
+      "pending",
+      "confirmed",
+      "confirm_failed",
+      "unknown"
+    ],
+    "start": "technical h pass (technical_event == pass) may start observation; confirm_failed stays trackable without rewrite; structure fail -> technical_observation_only",
+    "end_when": "a later closed 4H with EMA7 <= EMA25 (equality ends)",
+    "do_not_end_for": [
+      "normal_price_rise_over_3pct",
+      "current_LSR_change",
+      "s0_break (alert only)"
+    ],
+    "never_rewrite_historical_qualification": true,
+    "identity": "session uses the ORIGINAL B event_id (bev-…); tracking profile identity stored separately in session.tracking_profile_id/version",
+    "rearm": {
+      "s0_risk_line": "fixed S0 = EMA99 of the 4H bound to confirmation; close < S0 -> risk alert only",
+      "auto_rearm": false,
+      "auto_sell": false
+    }
+  },
+  "C": {
+    "original_cycle_state_enum": [
+      "waiting",
+      "confirmed",
+      "invalidated",
+      "expired"
+    ],
+    "state_to_observation": {
+      "waiting": {
+        "profile_id": "C_waiting_observation",
+        "behaviour": "observe while the original cycle runs; evidence gaps pause only the affected judgement"
+      },
+      "invalidated": {
+        "profile_id": null,
+        "behaviour": "END the observation of that cycle (end_reason cycle_invalidated); a new cycle needs the original rearm; never reopen the same event"
+      },
+      "expired": {
+        "profile_id": "C_expired_technical_observation",
+        "behaviour": "keep original cycle state 'expired' (fact retained); MAY continue technical observation with fixed T0 real low; end when a later closed 4H close < T0 low (strict); post-window volume = progress only, never back-fills C1"
+      },
+      "confirmed": {
+        "profile_id": "C_confirmed_observation",
+        "behaviour": "ONLY the independent post-confirm profile applies: cycle_low = min(low of all real closed 4H T0..C1); end when a later close < cycle_low (strict; equal does not end); missing bar in T0..C1 -> reference unknown -> paused; waiting-phase rules (adjacent LSR>=1.5, new lows) are NOT applied after confirm (risk note only)"
+      }
+    },
+    "authority_note": "1017 §4.2 uses 收盘严格跌破 (close), not low"
+  },
+  "common": {
+    "missing_data": {
+      "action": "pause ONLY the evidence-dependent judgement (structure end checks, confirm checks) and backfill",
+      "never": "judge a structure break or stitch continuity across a gap",
+      "pauses_c_t10_lifetime": false,
+      "c_lifetime_rule": "C waiting lifetime ends at the real T+10 close boundary regardless of gaps; expiry is recorded with partially_unverified + missing reasons",
+      "late_backfill_after_expiry": "append_historical_revision_never_extend_lifetime",
+      "keep_gap_evidence": true
+    },
+    "qualification_fail": {
+      "may_keep": "technical_observation_only",
+      "never_treat_as": "strategy_tradable"
+    },
+    "human_stop": {
+      "durable": true,
+      "independent_of_market_data_completeness": "(S1-R1-P2-02) an explicit human stop at boundary B (stop_at_open_ms) is evaluated BEFORE any evidence-dependent early return: a missing reference low, missing/incomplete after-bars, missing close, unknown EMA or empty after_bars never turn it into paused_awaiting_data and never lose end_reason=human_stop. Applies to A, B and C observation.",
+      "precedence_vs_natural_end": "an earlier PROVABLE natural end (structure_invalid at a bar open < B, continuity intact) keeps its own reason and time; the human stop is retained as a control fact (human_stop_at_open_ms) and never reopens. Otherwise ended/human_stop at B with natural_end_unverified=true when the bars before B could not be fully evaluated (gap_from_open_ms keeps the first hole). A later backfill that proves an earlier natural end appends a historical revision; it never revives the session. A cycle_invalidated end is not rewritten by a later stop.",
+      "no_auto_reopen_same_event": true,
+      "new_trigger": "a genuinely new trigger creates a new event identity"
+    }
+  },
+  "dimensions_separate": [
+    "technical_signal (original cycle state)",
+    "strategy_qualification",
+    "observation_followup",
+    "data_quality"
+  ],
+  "fixtures": [
+    "fixtures/a_observation_profiles.json",
+    "fixtures/b_end_ema7_le_ema25.json",
+    "fixtures/b_observation_boundaries.json",
+    "fixtures/c_observation_after_terminal.json",
+    "fixtures/c_pause_does_not_extend.json",
+    "fixtures/c_late_backfill_after_expiry.json"
+  ]
+}

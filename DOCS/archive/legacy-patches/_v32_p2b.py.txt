@@ -1,0 +1,277 @@
+# -*- coding: utf-8 -*-
+"""P2 continued: hourly B-observe schedule (default off) + task kind wiring."""
+from __future__ import annotations
+
+import re
+from pathlib import Path
+
+ROOT = Path(r"D:\Axiangmu\异动观察工作台")
+BAK = ROOT / "runtime" / "code-backups" / "v32-p2-observe-1h"
+BAK.mkdir(parents=True, exist_ok=True)
+
+
+def backup(rel: str) -> None:
+    src = ROOT / rel
+    if src.exists():
+        dest = BAK / (rel.replace("/", "__") + ".p2b")
+        if not dest.exists():
+            dest.write_bytes(src.read_bytes())
+
+
+SCHED = r'''# -*- coding: utf-8 -*-
+"""B 观察小时调度：按闭合边界 + offset 对齐；默认关闭不入队。"""
+from __future__ import annotations
+
+import datetime as dt
+
+from observe_config import target_close_boundary_ms
+
+UTC = dt.timezone.utc
+BAR_MS = 3_600_000
+
+
+def next_observe_due_iso(now: dt.datetime, *, offset_sec: int = 120) -> str:
+    """下一轮计划启动时刻 = 当前目标闭合边界 + offset；若已过则推到下一小时边界+offset。"""
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=UTC)
+    now_ms = int(now.timestamp() * 1000)
+    boundary = target_close_boundary_ms(now_ms, offset_sec=offset_sec)
+    start_ms = boundary + offset_sec * 1000
+    if start_ms <= now_ms:
+        # 本边界已触发过，排下一根
+        boundary += BAR_MS
+        start_ms = boundary + offset_sec * 1000
+    return dt.datetime.fromtimestamp(start_ms / 1000, tz=UTC).isoformat(timespec="microseconds")
+
+
+def should_fire(now: dt.datetime, next_due_iso: str | None, *, enabled: bool) -> bool:
+    if not enabled:
+        return False
+    if not next_due_iso:
+        return False
+    due = dt.datetime.fromisoformat(next_due_iso)
+    if due.tzinfo is None:
+        due = due.replace(tzinfo=UTC)
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=UTC)
+    return due <= now
+
+
+def in_flight_reuse_key(target_close_boundary: int) -> str:
+    return f"b_observe_1h:{int(target_close_boundary)}"
+'''
+
+RUNNER = r'''# -*- coding: utf-8 -*-
+"""B 观察一轮：按目标闭合边界拉取/写入 1H（无网络时仅用已有 raw）。默认不自动开计划。"""
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Any, Callable, Optional
+
+from b_1h_ingest import ingest_symbol_1h
+from market_candle_cache import MarketCandleCache
+from observe_config import target_close_boundary_ms
+
+
+def run_b_observe_round(
+    root: Path,
+    *,
+    symbols: list[dict],
+    observe: dict,
+    timing: dict,
+    now_ms: int,
+    fetch_1h: Optional[Callable[[str, str], list]] = None,
+) -> dict:
+    """symbols: [{market, symbol}]。fetch_1h(market, symbol)->raw klines；None 则只统计跳过。"""
+    if not observe.get("enabled"):
+        return {"skipped": True, "reason": "observe_disabled", "written": 0}
+    offset = int(timing.get("closeOffsetSec", 120))
+    boundary = target_close_boundary_ms(now_ms, offset_sec=offset)
+    cache = MarketCandleCache(root)
+    written = 0
+    errors = []
+    details = []
+    for item in symbols or []:
+        market = item.get("market")
+        symbol = item.get("symbol")
+        if not market or not symbol:
+            continue
+        raw = []
+        if fetch_1h is not None:
+            try:
+                raw = fetch_1h(market, symbol) or []
+            except Exception as exc:  # noqa: BLE001
+                errors.append({"symbol": symbol, "error": str(exc)[:180]})
+                continue
+        else:
+            details.append({"symbol": symbol, "skipped": "no_fetch"})
+            continue
+        meta = ingest_symbol_1h(
+            cache,
+            market=market,
+            symbol=symbol,
+            raw_klines=raw,
+            target_close_boundary=boundary,
+        )
+        written += int(meta.get("written") or 0)
+        details.append(meta)
+    return {
+        "skipped": False,
+        "target_close_boundary": boundary,
+        "symbols": len(symbols or []),
+        "written": written,
+        "errors": errors[:20],
+        "strategy_id": observe.get("strategy_id"),
+        "rule_version": observe.get("rule_version"),
+        "details_sample": details[:5],
+    }
+'''
+
+
+def write_mods():
+    (ROOT / "b_observe_schedule.py").write_text(SCHED, encoding="utf-8", newline="\n")
+    (ROOT / "b_observe_runner.py").write_text(RUNNER, encoding="utf-8", newline="\n")
+    print("wrote schedule+runner")
+
+
+def patch_task_service():
+    backup("task_service.py")
+    p = ROOT / "task_service.py"
+    text = p.read_text(encoding="utf-8")
+    if "_tick_b_observe" in text:
+        print("task_service already has b observe tick")
+        return
+
+    # import schedule helpers
+    if "from b_observe_schedule import" not in text:
+        text = text.replace(
+            "from observe_config import OBSERVE_DEFAULT, TIMING_DEFAULT, migrate_observe, migrate_timing, validate_observe, validate_timing\n",
+            "from observe_config import OBSERVE_DEFAULT, TIMING_DEFAULT, migrate_observe, migrate_timing, validate_observe, validate_timing\n"
+            "from b_observe_schedule import in_flight_reuse_key, next_observe_due_iso, should_fire\n"
+            "from observe_config import target_close_boundary_ms\n",
+            1,
+        )
+
+    # migrate observe_next_due column
+    if "observe_next_due" not in text:
+        migrate_marker = "if 'observe' not in cols:\n                db.execute(\"ALTER TABLE settings ADD COLUMN observe TEXT\")"
+        if migrate_marker not in text:
+            raise SystemExit("observe column migrate marker missing")
+        text = text.replace(
+            migrate_marker,
+            migrate_marker
+            + "\n            if 'observe_next_due' not in cols:\n"
+            + "                db.execute(\"ALTER TABLE settings ADD COLUMN observe_next_due TEXT\")",
+            1,
+        )
+
+    # settings() include observe_next_due
+    old = "'timing': timing, 'observe': observe,"
+    if old not in text:
+        raise SystemExit("timing/observe return missing")
+    text = text.replace(
+        old,
+        "'timing': timing, 'observe': observe, 'observe_next_due': row['observe_next_due'] if 'observe_next_due' in row.keys() else None,",
+        1,
+    )
+
+    # After save_settings observe enabled flip: set observe_next_due
+    # Find the UPDATE settings line in save_settings and extend
+    # Also when enabling observe, compute next due
+    save_anchor = "timing = validate_timing(payload['timing']) if 'timing' in payload else migrate_timing(json.loads(row['timing']) if row['timing'] else None)\n            observe = validate_observe(payload['observe']) if 'observe' in payload else migrate_observe(json.loads(row['observe']) if row['observe'] else None)\n            # 改间隔/偏移/观察开关不得静默把 scan.enabled 打开\n            db.execute('UPDATE settings SET version=version+1,scan=?,next_due=?,timing=?,observe=?,updated_at=? WHERE id=1',\n                       (json.dumps(scan), due, json.dumps(timing), json.dumps(observe), iso(self.clock())))"
+    if save_anchor not in text:
+        raise SystemExit("save_settings observe block exact miss")
+    save_new = """timing = validate_timing(payload['timing']) if 'timing' in payload else migrate_timing(json.loads(row['timing']) if row['timing'] else None)
+            observe = validate_observe(payload['observe']) if 'observe' in payload else migrate_observe(json.loads(row['observe']) if row['observe'] else None)
+            # 改间隔/偏移/观察开关不得静默把 scan.enabled 打开
+            obs_due = row['observe_next_due'] if 'observe_next_due' in row.keys() else None
+            prev_obs = migrate_observe(json.loads(row['observe']) if row['observe'] else None)
+            if not observe['enabled']:
+                obs_due = None
+            elif (not prev_obs['enabled']) or ('timing' in payload and timing['closeOffsetSec'] != migrate_timing(json.loads(row['timing']) if row['timing'] else None)['closeOffsetSec']) or obs_due is None:
+                obs_due = next_observe_due_iso(self.clock(), offset_sec=timing['closeOffsetSec'])
+            db.execute('UPDATE settings SET version=version+1,scan=?,next_due=?,timing=?,observe=?,observe_next_due=?,updated_at=? WHERE id=1',
+                       (json.dumps(scan), due, json.dumps(timing), json.dumps(observe), obs_due, iso(self.clock())))"""
+    text = text.replace(save_anchor, save_new, 1)
+
+    # Add _enqueue_b_observe and _tick_b_observe before _tick_eval_review
+    methods = '''
+    def _enqueue_b_observe(self, db, reason, version, target_close_boundary):
+        reuse = in_flight_reuse_key(target_close_boundary)
+        active = db.execute(
+            "SELECT * FROM tasks WHERE kind='b_observe_1h' AND status IN ('queued','running') AND request_hash=?",
+            (reuse,),
+        ).fetchone()
+        if active:
+            return active['id'], True
+        task_id = 'task-' + uuid.uuid4().hex
+        db.execute(
+            "INSERT INTO tasks (id,kind,status,reason,created_at,progress,settings_version,request,request_hash) VALUES (?,?,?,?,?,?,?,?,?)",
+            (task_id, 'b_observe_1h', 'queued', reason, iso(self.clock()),
+             json.dumps({'phase': '等待B观察1H', 'completed': 0, 'total': 0}, ensure_ascii=False),
+             version, json.dumps({'target_close_boundary': int(target_close_boundary)}), reuse),
+        )
+        return task_id, False
+
+    def _tick_b_observe(self):
+        """观察默认关闭：不入队。开启后按 boundary+offset 对齐。"""
+        with self.lock, self._db() as db:
+            row = db.execute('SELECT * FROM settings WHERE id=1').fetchone()
+            observe = migrate_observe(json.loads(row['observe']) if row['observe'] else None)
+            timing = migrate_timing(json.loads(row['timing']) if row['timing'] else None)
+            if not observe['enabled']:
+                return
+            now = self.clock()
+            due = row['observe_next_due'] if 'observe_next_due' in row.keys() else None
+            if due is None:
+                due = next_observe_due_iso(now, offset_sec=timing['closeOffsetSec'])
+                db.execute('UPDATE settings SET observe_next_due=? WHERE id=1', (due,))
+                return
+            if not should_fire(now, due, enabled=True):
+                return
+            now_ms = int(now.timestamp() * 1000)
+            boundary = target_close_boundary_ms(now_ms, offset_sec=timing['closeOffsetSec'])
+            self._enqueue_b_observe(db, 'scheduled_b_observe', row['version'], boundary)
+            # 跳过积压：直接排下一小时
+            nxt = next_observe_due_iso(now + dt.timedelta(seconds=timing['closeOffsetSec'] + 1), offset_sec=timing['closeOffsetSec'])
+            # 更稳：边界+1h+offset
+            nxt_ms = boundary + 3_600_000 + timing['closeOffsetSec'] * 1000
+            nxt = dt.datetime.fromtimestamp(nxt_ms / 1000, tz=UTC).isoformat(timespec='microseconds')
+            db.execute('UPDATE settings SET observe_next_due=? WHERE id=1', (nxt,))
+
+'''
+    anchor = "    def _tick_eval_review(self):"
+    if anchor not in text:
+        raise SystemExit("_tick_eval_review missing")
+    text = text.replace(anchor, methods + anchor, 1)
+
+    # call _tick_b_observe from tick()
+    text = text.replace(
+        "        # EVAL/REVIEW schedule ticks (plans default off; no AI auto-bill)\n        self._tick_eval_review()",
+        "        # B observe hour tick (default off)\n        self._tick_b_observe()\n\n        # EVAL/REVIEW schedule ticks (plans default off; no AI auto-bill)\n        self._tick_eval_review()",
+        1,
+    )
+
+    # Wire _run for b_observe_1h
+    # Find kind handling in _run — look for scan runner
+    if "b_observe_1h" not in text.split("def _run")[1][:2500] if "def _run" in text else True:
+        # Find a spot after task = self.task
+        run_marker = "    def _run(self, task_id):\n        task = self.task(task_id)"
+        if run_marker not in text:
+            # looser
+            idx = text.find("    def _run(self, task_id):")
+            print("run at", idx)
+            raise SystemExit("_run marker miss")
+        # We'll patch inside _run by searching for kind == 'scan' or similar
+        # Read _run body briefly via regex
+        m = re.search(r"def _run\(self, task_id\):\n(?:.*\n){30}", text)
+        print("--- _run head ---")
+        print(m.group(0) if m else "none")
+
+    p.write_text(text, encoding="utf-8", newline="\n")
+    print("patched task_service schedule")
+
+
+if __name__ == "__main__":
+    write_mods()
+    patch_task_service()

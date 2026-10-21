@@ -1,0 +1,2171 @@
+{
+  "schema": "docs-global-numbering-v1",
+  "created_at_utc": "2026-10-17T10:15:41.805056+00:00",
+  "rule": "GNNN-title; fixed-path compatibility exception",
+  "entries": [
+    {
+      "id": "0000",
+      "category": 0,
+      "old_path": null,
+      "path": "0000-文档编号与总目录.md",
+      "title": "文档编号与总目录",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "fa7dc979874286b4830c1d6f037d3b3fd50a2c877a8b74d859b84fdd60a04351"
+    },
+    {
+      "id": "0001",
+      "category": 0,
+      "old_path": "INDEX.md",
+      "path": "INDEX.md",
+      "title": "DOCS · 项目文档索引",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "标准目录/服务兼容入口",
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "be5081430bc172f7a0cba0f385167b54fcb171ca9ece69e8ce1fa9afce04ffeb",
+      "after_sha256": "052206fadec02db4b3c2de5f34cc35bdf82bccb348efd9ac925a0b973207b2a7"
+    },
+    {
+      "id": "0002",
+      "category": 0,
+      "old_path": "README.md",
+      "path": "README.md",
+      "title": "异动观察工作台",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "标准目录/服务兼容入口",
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "8595a167d4b7af45a55f4fe975a5788b79caad073ee5663456164f713d9e7e05",
+      "after_sha256": "8595a167d4b7af45a55f4fe975a5788b79caad073ee5663456164f713d9e7e05"
+    },
+    {
+      "id": "0003",
+      "category": 0,
+      "old_path": "design/README.md",
+      "path": "design/README.md",
+      "title": "V2 页面设计交付",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "标准目录/服务兼容入口",
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "3750d59a5eb10e220a7e55e7d5e75254c29b3cede115635a5d69444c4367300e",
+      "after_sha256": "3750d59a5eb10e220a7e55e7d5e75254c29b3cede115635a5d69444c4367300e"
+    },
+    {
+      "id": "0004",
+      "category": 0,
+      "old_path": "design/strategies/README.md",
+      "path": "design/strategies/README.md",
+      "title": "策略手册目录",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "标准目录/服务兼容入口",
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "dd0832e5a4074135a7033876917099d2bb909712cb2ad076db82d3ba07a55f92",
+      "after_sha256": "7c2cb41768531d4f02a30e604c3469fa0da4389214b9972c154a4ed2afbb1fc8"
+    },
+    {
+      "id": "0005",
+      "category": 0,
+      "old_path": "experience/README.md",
+      "path": "experience/README.md",
+      "title": "投研经验文件（当前文件阶段，不是页面功能）",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "标准目录/服务兼容入口",
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "de0f6a085f0a99a91981192d33d0206da62e94546919d6a0ee23d41c3696dfd4",
+      "after_sha256": "de0f6a085f0a99a91981192d33d0206da62e94546919d6a0ee23d41c3696dfd4"
+    },
+    {
+      "id": "1001",
+      "category": 1,
+      "old_path": null,
+      "path": "1001-统一信号工作台-3.2前后全站交互核查与调整建议.md",
+      "title": "统一信号工作台：3.2前后全站交互核查与调整建议",
+      "fixed_path": false,
+      "source": "C:\\Users\\ls569\\.codex\\visualizations\\2026\\10\\12\\01a12f09-8e85-72b1-885d-668752d27af6\\sidebar-a-full-interaction-audit-20261017T061500Z\\全站交互核查报告-审阅稿.md",
+      "before_sha256": null,
+      "after_sha256": "1312a2fc99827bd9a7411edd5c4f0d33bd5f7aef91fb78b80191369ac7a95ca3",
+      "revision_history": [
+        {
+          "at_utc": "2026-10-17T11:35:46.503187+00:00",
+          "prior_sha256": "7a1dd9b0dc9c810bec82516ac51f31e91ba156909a42f785ef61da4165de1cf0",
+          "sha256": "1312a2fc99827bd9a7411edd5c4f0d33bd5f7aef91fb78b80191369ac7a95ca3",
+          "reason": "r2：UI-22更多范围条件交互检查与实施验收要求",
+          "evidence_path": "C:\\Users\\ls569\\.codex\\visualizations\\2026\\10\\12\\01a12f09-8e85-72b1-885d-668752d27af6\\more-scope-audit-20261017T113327Z"
+        }
+      ]
+    },
+    {
+      "id": "1002",
+      "category": 1,
+      "old_path": "1H缓存与续接优化实施方案-v1.1-待审阅.md",
+      "path": "1H缓存与续接优化实施方案-v1.1-待审阅.md",
+      "title": "1H缓存与续接优化实施方案 v1.1（待审阅）",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "当前完成监控及用户已发布固定链接"
+      ],
+      "before_sha256": "fc4728de1322ca23d0682edd87331103f7f6b15c6a68aa7a8957c31d6513db8e",
+      "after_sha256": "1a66ae90752e444169664635a29bd64bd2100f7102394a41b93f0962d334bb54",
+      "revision_history": [
+        {
+          "at_utc": "2026-10-17T11:20:52.579822+00:00",
+          "prior_sha256": "096a263d585b24d3290d9f18906aed0e554eb396e52167fb0872e588fbf6c515",
+          "sha256": "1a66ae90752e444169664635a29bd64bd2100f7102394a41b93f0962d334bb54",
+          "reason": "原轮次终态证据补记§15；非代码实施",
+          "evidence_path": "C:\\Users\\ls569\\.codex\\visualizations\\2026\\10\\12\\01a12f09-8e85-72b1-885d-668752d27af6\\one-hour-terminal-20261017T112052Z"
+        }
+      ]
+    },
+    {
+      "id": "1004",
+      "category": 1,
+      "old_path": null,
+      "path": "1004-统一工作台布局跳动修复方案.md",
+      "title": "统一工作台布局跳动修复方案",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "89a31996c4feaa0830136beafb167c9bae1f54f058feec2d84643e91cc58c701",
+      "revision_history": [
+        {
+          "at_utc": "2026-10-17T14:41:50.417710+00:00",
+          "prior_sha256": null,
+          "sha256": "89a31996c4feaa0830136beafb167c9bae1f54f058feec2d84643e91cc58c701",
+          "reason": "新建：统一工作台布局跳动（filterchips/tabletools/nWrap/scope）修复方案并落地前端",
+          "evidence_path": null
+        }
+      ]
+    },
+    {
+      "id": "1005",
+      "category": 1,
+      "old_path": null,
+      "path": "1005-统一工作台范围选项收起方案.md",
+      "title": "统一工作台范围选项收起方案",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "0587656ff05d57af7efa14e70536c1cedbec01cec589751983a8ddcfc91520d3",
+      "revision_history": [
+        {
+          "at_utc": "2026-10-17T15:03:44.8915282Z",
+          "prior_sha256": null,
+          "sha256": "0587656ff05d57af7efa14e70536c1cedbec01cec589751983a8ddcfc91520d3",
+          "reason": "新建：四项范围默认藏进高级范围；主行只留搜索/市场/市值/组合；并落地前端",
+          "evidence_path": null
+        }
+      ]
+    },
+    {
+      "id": "1006",
+      "category": 1,
+      "old_path": null,
+      "path": "1006-统一工作台顶栏极简布局方案.md",
+      "title": "统一工作台顶栏极简布局方案",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "3364f1779e89dd5a381f95f6931644c640ed02acfff4fec5db33188fcf82597d",
+      "revision_history": [
+        {
+          "at_utc": "2026-10-17T16:05:42.343830+00:00",
+          "prior_sha256": null,
+          "sha256": "3364f1779e89dd5a381f95f6931644c640ed02acfff4fec5db33188fcf82597d",
+          "reason": "新建：选定预览C顶栏极简；组合用法删、保存组合迁侧栏；方案待确认未改生产前端",
+          "evidence_path": null
+        }
+      ]
+    },
+    {
+      "id": "1007",
+      "category": 1,
+      "old_path": null,
+      "path": "1007-统一工作台顶栏状态右置与副标题删除.md",
+      "title": "统一工作台顶栏状态右置与副标题删除",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "42d0afdf5eaf0180b2f3f16252b84739aaa44f7b3fa198002d0585131014c110",
+      "revision_history": [
+        {
+          "at_utc": "2026-10-17T16:20:04.2716074Z",
+          "prior_sha256": null,
+          "sha256": "4c690d5415ddd4ff88426079694cffe3cf331b39ea322a3e3e54e08f255dafb6",
+          "reason": "新建：删 intro 副标题；扫描 pill+说明右置；进度条挂右侧状态旁；状态落地中",
+          "evidence_path": null
+        },
+        {
+          "at_utc": "2026-10-17T16:21:06.983383Z",
+          "prior_sha256": "4c690d5415ddd4ff88426079694cffe3cf331b39ea322a3e3e54e08f255dafb6",
+          "sha256": "42d0afdf5eaf0180b2f3f16252b84739aaa44f7b3fa198002d0585131014c110",
+          "reason": "落地：删副标题；状态pill+说明右置；进度条挂右侧状态旁；标已落地",
+          "evidence_path": null
+        }
+      ]
+    },
+    {
+      "id": "1008",
+      "category": 1,
+      "old_path": null,
+      "path": "1008-统一工作台删除静态说明折叠.md",
+      "title": "统一工作台删除静态说明折叠",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "a9469b55b6c1a4d3696914e04eda6dcfa364d95c248348d07fcb1e7db7419ed4",
+      "revision_history": [
+        {
+          "at_utc": "2026-10-17T16:32:09.157869Z",
+          "prior_sha256": null,
+          "sha256": "3ad561caf86898affc384891295328b7627b1f65726044eeb9664f7c9519c0e4",
+          "reason": "新建：删除顶栏静态说明折叠；错误继续走 u-error/scanStatus；状态落地中",
+          "evidence_path": null
+        },
+        {
+          "at_utc": "2026-10-17T16:32:49.954201Z",
+          "prior_sha256": "3ad561caf86898affc384891295328b7627b1f65726044eeb9664f7c9519c0e4",
+          "sha256": "a9469b55b6c1a4d3696914e04eda6dcfa364d95c248348d07fcb1e7db7419ed4",
+          "reason": "落地：删 intro-fold/demo-note；清 CSS；保留 u-error；标已落地",
+          "evidence_path": null
+        }
+      ]
+    },
+    {
+      "id": "2001",
+      "category": 2,
+      "old_path": "design/strategies/02-合约妖币与Short-Squeeze-最终执行方案-v3.2.md",
+      "path": "design/strategies/02-合约妖币与Short-Squeeze-最终执行方案-v3.2.md",
+      "title": "合约妖币 + Short Squeeze 最终执行方案 v3.2",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "已批准r2冻结原文与路径，保留字节hash",
+        "源码/测试固定引用：design/unified-strategies.html"
+      ],
+      "before_sha256": "84e40f8abcd1ec4951b6bf55b5d0682d7e493e826f2ffb2a072fe7a8393a3a4a",
+      "after_sha256": "84e40f8abcd1ec4951b6bf55b5d0682d7e493e826f2ffb2a072fe7a8393a3a4a"
+    },
+    {
+      "id": "2002",
+      "category": 2,
+      "old_path": "design/strategies/01-EMA三线金叉与合约Squeeze.md",
+      "path": "design/strategies/01-EMA三线金叉与合约Squeeze.md",
+      "title": "EMA三线金叉",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py",
+        "源码/测试固定引用：design/unified-strategies.html"
+      ],
+      "before_sha256": "b14c0543ad83e104001298cf3571dc178856b4cd7b449fb2721c32242ee81abe",
+      "after_sha256": "b14c0543ad83e104001298cf3571dc178856b4cd7b449fb2721c32242ee81abe"
+    },
+    {
+      "id": "2003",
+      "category": 2,
+      "old_path": "design/strategies/03-统一信号工作台-最终优化方案-v3.3-r5.md",
+      "path": "design/strategies/03-统一信号工作台-最终优化方案-v3.3-r5.md",
+      "title": "统一信号工作台最终优化方案 v3.3 r5",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "55d590a18979ffccd07ff3e7678707923bf9e3ac8ad4867679bc67d095109441",
+      "after_sha256": "55d590a18979ffccd07ff3e7678707923bf9e3ac8ad4867679bc67d095109441"
+    },
+    {
+      "id": "2004",
+      "category": 2,
+      "old_path": "design/requirements.md",
+      "path": "design/requirements.md",
+      "title": "异动观察工作台 · 统一需求文档",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py",
+        "源码/测试固定引用：design/prototype.html"
+      ],
+      "before_sha256": "bc14e7a1fa396e9aa97e0a8ab048ec1b20fe1eab8ed0e260a60deae11bbdf94d",
+      "after_sha256": "95f4fc3640ac1dc03b216d59e8c0aa85289ea2f9c266e5e82cec1652ed319f38"
+    },
+    {
+      "id": "2005",
+      "category": 2,
+      "old_path": "design/ema-observation-contract-v1.md",
+      "path": "design/2005-ema-observation-contract-v1.md",
+      "title": "EMA观察与事件字段契约 v1",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "ba19815e626b74d9f1e99dc7516cf1174129af2f54950fa6a4af752998f61385",
+      "after_sha256": "ba19815e626b74d9f1e99dc7516cf1174129af2f54950fa6a4af752998f61385"
+    },
+    {
+      "id": "2006",
+      "category": 2,
+      "old_path": "design/给雪球-I4均线压制更新为金叉方案-Grok-v1.md",
+      "path": "design/2006-给雪球-I4均线压制更新为金叉方案-Grok-v1.md",
+      "title": "给雪球：I4 均线压制 → 对齐「EMA 三线金叉」新手册（方案 Grok-v1）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "93b6d975be1e45c072e7c0c20643a7c93bb13f542ab6cf310024c6bc3facfc39",
+      "after_sha256": "024635dd6d0535be13c3f881215fe9ace48aeb64bbaf46c12401c34975d19cfa"
+    },
+    {
+      "id": "2007",
+      "category": 2,
+      "old_path": "design/给雪球-异动指标①-⑫全实现方案-Grok-v1.md",
+      "path": "design/2007-给雪球-异动指标①-⑫全实现方案-Grok-v1.md",
+      "title": "给雪球 · 异动指标①–⑫全实现方案 · Grok-v1",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "0f46986bae093141b0f5444638aa5fd54f0ee197297befd2c724590ec64f40bf",
+      "after_sha256": "31f2440065eebdbc1d048fb7662a526ad8fa228b7ff0c9d227e53a1159da46bb"
+    },
+    {
+      "id": "2008",
+      "category": 2,
+      "old_path": "design/给雪球-精准净流入补数方案-Grok-v1.md",
+      "path": "design/2008-给雪球-精准净流入补数方案-Grok-v1.md",
+      "title": "给雪球 · 精准净流入（精确⑤ / I5）补数方案 · Grok独立检索方案 v1",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "e84e7512d48102673d530a5a50ef7cf68bb24ee2da03dda549488d1637aaee75",
+      "after_sha256": "e84e7512d48102673d530a5a50ef7cf68bb24ee2da03dda549488d1637aaee75"
+    },
+    {
+      "id": "3001",
+      "category": 3,
+      "old_path": "v3.2-前后端不匹配审计与测试方案.md",
+      "path": "3001-v3.2-前后端不匹配审计与测试方案.md",
+      "title": "v3.2 前后端不匹配审计与测试方案",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "532313511b15f57a786361067587967359af927d2a280c3557dc5a7d3b6054b9",
+      "after_sha256": "f41e91b4a2519a344282a8ad70a09eeefbb5318ef9aa22f4bbb1ee7976b166d0"
+    },
+    {
+      "id": "3002",
+      "category": 3,
+      "old_path": "v3.2-前后端问题深度增补.md",
+      "path": "3002-v3.2-前后端问题深度增补.md",
+      "title": "v3.2 前后端问题深度增补（快读）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "dfeac837ca624b165c278ec0a6dfafae9c2e5bc6d27f6dbd01b7bbf7c514c8f5",
+      "after_sha256": "7cb4cb78b322b522838a7cf7e9d4c5c0919cb36ce257d69059d1ba5e03ed1731"
+    },
+    {
+      "id": "3003",
+      "category": 3,
+      "old_path": "v3.2-问题二次深度核查.md",
+      "path": "3003-v3.2-问题二次深度核查.md",
+      "title": "v3.2 问题二次深度核查",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "dc033023214f2ca1aeb86e31f34caac866a0c1d6c9f551806997fffc74f444d6",
+      "after_sha256": "dc033023214f2ca1aeb86e31f34caac866a0c1d6c9f551806997fffc74f444d6"
+    },
+    {
+      "id": "3004",
+      "category": 3,
+      "old_path": "ai-review.md",
+      "path": "ai-review.md",
+      "title": "六项异动指标评估与全市场扫描复核",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "e45c61b5b005f15cfa04f7df44764fec4152c03af5aa065905b16c84d55c6067",
+      "after_sha256": "e45c61b5b005f15cfa04f7df44764fec4152c03af5aa065905b16c84d55c6067"
+    },
+    {
+      "id": "3005",
+      "category": 3,
+      "old_path": "data-capability-audit.md",
+      "path": "data-capability-audit.md",
+      "title": "已有数据可计算性审计",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "c5df4c6aaaf3f0731f0a15cebda7255ed0357ae6a92d11464fa327d15b6447eb",
+      "after_sha256": "c5df4c6aaaf3f0731f0a15cebda7255ed0357ae6a92d11464fa327d15b6447eb"
+    },
+    {
+      "id": "3006",
+      "category": 3,
+      "old_path": "design/audit-gpt-ema-v4/审计报告.md",
+      "path": "design/audit-gpt-ema-v4/审计报告.md",
+      "title": "EMA-Squeeze v3 与GROK当前代码只读审计",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "44c814267c200fb7878b8d01d34f2ed9101cae13774e3c0f5abf5d1f631f166f",
+      "after_sha256": "44c814267c200fb7878b8d01d34f2ed9101cae13774e3c0f5abf5d1f631f166f"
+    },
+    {
+      "id": "3007",
+      "category": 3,
+      "old_path": "design/codex-audit-20261014/审计报告.md",
+      "path": "design/codex-audit-20261014/审计报告.md",
+      "title": "只读增量审计报告：前端迁移、数据口径与主链路",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "ab4b6bdf641b2a2e0a8dc59c6048aefedf667838d72a8e3a9054768747c25952",
+      "after_sha256": "ab4b6bdf641b2a2e0a8dc59c6048aefedf667838d72a8e3a9054768747c25952"
+    },
+    {
+      "id": "3008",
+      "category": 3,
+      "old_path": "design/codex-audit-20261014/给GROK-遮挡排序数据与全链路排查.md",
+      "path": "design/codex-audit-20261014/3008-给GROK-遮挡排序数据与全链路排查.md",
+      "title": "给GROK：遮挡、排序数据、历史数据迁移及全链路排查",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "f2d0050f259dc5d77ab820b6cd013deee685a1fe173bbe2e1b98e4ef7ab26b34",
+      "after_sha256": "f2d0050f259dc5d77ab820b6cd013deee685a1fe173bbe2e1b98e4ef7ab26b34"
+    },
+    {
+      "id": "3009",
+      "category": 3,
+      "old_path": "design/design-code-review.md",
+      "path": "design/design-code-review.md",
+      "title": "整体设计与代码检查 · V2.7状态更新",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "e881f79014b94ade814fc74f4c90b5c01a25bb024ed3852bcc66c6d40490b615",
+      "after_sha256": "e881f79014b94ade814fc74f4c90b5c01a25bb024ed3852bcc66c6d40490b615"
+    },
+    {
+      "id": "3010",
+      "category": 3,
+      "old_path": "design/field-audit-a-pro-step1.md",
+      "path": "design/3010-field-audit-a-pro-step1.md",
+      "title": "字段对账：A布局+C专业表 · 第一步",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "90f7ecea696354ee86495d4c3a9943accc1945634a4690ae5d79d09e5ab3be4b",
+      "after_sha256": "90f7ecea696354ee86495d4c3a9943accc1945634a4690ae5d79d09e5ab3be4b"
+    },
+    {
+      "id": "3011",
+      "category": 3,
+      "old_path": "design/formal-vs-preview-capabilities-step1.md",
+      "path": "design/3011-formal-vs-preview-capabilities-step1.md",
+      "title": "正式功能 vs 预览能力对照（第一步）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "4a5971254e2fcc65c5d9b128b9c1503dd551b8aa0ae9468014157e6b6bd93bf9",
+      "after_sha256": "4a5971254e2fcc65c5d9b128b9c1503dd551b8aa0ae9468014157e6b6bd93bf9"
+    },
+    {
+      "id": "3012",
+      "category": 3,
+      "old_path": "design/iteration-v2.8-frontend-codex-audit-fix.md",
+      "path": "design/3012-iteration-v2.8-frontend-codex-audit-fix.md",
+      "title": "Codex 审计修复（P1/P2）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "159906b2e19d71683e681a15f3564f3442f356f9a53bf329d61358140a4f5b7e",
+      "after_sha256": "159906b2e19d71683e681a15f3564f3442f356f9a53bf329d61358140a4f5b7e"
+    },
+    {
+      "id": "3013",
+      "category": 3,
+      "old_path": "design/iteration-v2.8-review01-schedule.md",
+      "path": "design/iteration-v2.8-review01-schedule.md",
+      "title": "V2.8 REVIEW-01 加深 · 日/周计划调度绑定",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "cdca6bc32e1f40cbee92bc51f2e4d6786f7c4ebc88fe86b2b80c8ec25afca25a",
+      "after_sha256": "cdca6bc32e1f40cbee92bc51f2e4d6786f7c4ebc88fe86b2b80c8ec25afca25a"
+    },
+    {
+      "id": "3014",
+      "category": 3,
+      "old_path": "design/iteration-v2.8-review01.md",
+      "path": "design/iteration-v2.8-review01.md",
+      "title": "V2.8 REVIEW-01 首刀 · 数据复盘与持久计划",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "113409066bb1f1ca9d2588347dd36466532a1298115b9951733de5d8bde566ad",
+      "after_sha256": "113409066bb1f1ca9d2588347dd36466532a1298115b9951733de5d8bde566ad"
+    },
+    {
+      "id": "3015",
+      "category": 3,
+      "old_path": "design/V2.8-A档迭代需求-审计修复与01-02-03收口.md",
+      "path": "design/3015-V2.8-A档迭代需求-审计修复与01-02-03收口.md",
+      "title": "V2.8 A档迭代需求：审计修复与01/02/03收口",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "6335176386869746020bd8b14eb5f390defa657636f4523b5a341176b678ffba",
+      "after_sha256": "6335176386869746020bd8b14eb5f390defa657636f4523b5a341176b678ffba"
+    },
+    {
+      "id": "3016",
+      "category": 3,
+      "old_path": "design/v3.3-r5-全站审查报告.md",
+      "path": "design/v3.3-r5-全站审查报告.md",
+      "title": "v3.3 r5 全站审查报告",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "a3467471ec91c1a0337bfa93226de2fa6ebb80ee98c02425a7ad50c7556203d4",
+      "after_sha256": "a3467471ec91c1a0337bfa93226de2fa6ebb80ee98c02425a7ad50c7556203d4"
+    },
+    {
+      "id": "3017",
+      "category": 3,
+      "old_path": "整改清单.md",
+      "path": "整改清单.md",
+      "title": "独立审计核实与整改清单",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "434791dab374c97a7a1f1e4338f99b77126ae317c88768766338c06e7944f1f4",
+      "after_sha256": "d0047022b6d98359df72f43bc9cdeabf0e294894d5f30e9fc8889cad2d4d0de4"
+    },
+    {
+      "id": "3018",
+      "category": 3,
+      "old_path": "独立审计报告.md",
+      "path": "独立审计报告.md",
+      "title": "异动观察工作台 · 独立审计报告",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "e529b19b7ce5329c627ee2fe712da83881f3fd5016146ea8537d6139d78578ab",
+      "after_sha256": "e529b19b7ce5329c627ee2fe712da83881f3fd5016146ea8537d6139d78578ab"
+    },
+    {
+      "id": "3019",
+      "category": 3,
+      "old_path": "3019-1001与1002落地审计意见-v2.md",
+      "path": "3019-1001与1002落地审计意见-v2.md",
+      "title": "1001 / 1002 落地审计意见 v2（只查不修）",
+      "fixed_path": false,
+      "before_sha256": "5ba6fb920345ced05629ac1f155c47ed86c86bb0c7688d4794dbc581c7bd7e35",
+      "after_sha256": "5ba6fb920345ced05629ac1f155c47ed86c86bb0c7688d4794dbc581c7bd7e35"
+    },
+    {
+      "id": "4001",
+      "category": 4,
+      "old_path": "design/audit-gpt-ema-v4/iteration-ema-filter-store-split-20261016.md",
+      "path": "design/audit-gpt-ema-v4/4001-iteration-ema-filter-store-split-20261016.md",
+      "title": "iteration：④筛选与点火级别拆开 + 扫完写池",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "8a769d5337fca1fe2d8fab751c3b8f112ba82dfa013541f69f6c94f84f980ec2",
+      "after_sha256": "8a769d5337fca1fe2d8fab751c3b8f112ba82dfa013541f69f6c94f84f980ec2"
+    },
+    {
+      "id": "4002",
+      "category": 4,
+      "old_path": "design/audit-gpt-ema-v4/iteration-ema-name-v42-evidence.md",
+      "path": "design/audit-gpt-ema-v4/4002-iteration-ema-name-v42-evidence.md",
+      "title": "iteration-ema-name-v42 证据（仅第1节：统一命名）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "8de5ad5408fe60a9891dd56fa7c0040ed6f77512c464f64c64ca802de380facc",
+      "after_sha256": "8de5ad5408fe60a9891dd56fa7c0040ed6f77512c464f64c64ca802de380facc"
+    },
+    {
+      "id": "4003",
+      "category": 4,
+      "old_path": "design/audit-gpt-ema-v4/iteration-ema-p2-v42-evidence.md",
+      "path": "design/audit-gpt-ema-v4/4003-iteration-ema-p2-v42-evidence.md",
+      "title": "P2 证据 — UI05–UI08 + SCREEN + 排序标清窗口（v4.2）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "e236a657acf58f809ca603061a06516373588a08d899345129444b3e48d7ad97",
+      "after_sha256": "e236a657acf58f809ca603061a06516373588a08d899345129444b3e48d7ad97"
+    },
+    {
+      "id": "4004",
+      "category": 4,
+      "old_path": "design/audit-gpt-ema-v4/iteration-ema-ui01-v42-evidence.md",
+      "path": "design/audit-gpt-ema-v4/4004-iteration-ema-ui01-v42-evidence.md",
+      "title": "iteration-ema-ui01-v42 证据（仅 UI01 / POOL）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "659170e6118633c6825d60d78a4076cd89e046463c0df9ec1d7db36c7a774b50",
+      "after_sha256": "659170e6118633c6825d60d78a4076cd89e046463c0df9ec1d7db36c7a774b50"
+    },
+    {
+      "id": "4005",
+      "category": 4,
+      "old_path": "design/audit-gpt-ema-v4/iteration-ema-ui02-v42-evidence.md",
+      "path": "design/audit-gpt-ema-v4/4005-iteration-ema-ui02-v42-evidence.md",
+      "title": "iteration-ema-ui02-v42 证据（仅 UI02）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "5d4da1a8c1df9f485b277ea430201fdf676e8d6e473f0df46dec4322c6db4706",
+      "after_sha256": "5d4da1a8c1df9f485b277ea430201fdf676e8d6e473f0df46dec4322c6db4706"
+    },
+    {
+      "id": "4006",
+      "category": 4,
+      "old_path": "design/audit-gpt-ema-v4/iteration-ema-ui03-v42-evidence.md",
+      "path": "design/audit-gpt-ema-v4/4006-iteration-ema-ui03-v42-evidence.md",
+      "title": "UI03 证据 — 前向观察及模拟按冻结模式分支（v4.2）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "12764ffcfe66508cc973fb72e8840980fd69303b74b75690ecb7b2c80e954c5f",
+      "after_sha256": "12764ffcfe66508cc973fb72e8840980fd69303b74b75690ecb7b2c80e954c5f"
+    },
+    {
+      "id": "4007",
+      "category": 4,
+      "old_path": "design/audit-gpt-ema-v4/iteration-ema-ui04-v42-evidence.md",
+      "path": "design/audit-gpt-ema-v4/4007-iteration-ema-ui04-v42-evidence.md",
+      "title": "UI04 证据 — 回测单跑/公平对照不提交旧替代规则（v4.2）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "baf4f282ff4aa0a1123c76d50ba2a6141cb324aceb5bdcbe8f8fbe018af0bef3",
+      "after_sha256": "baf4f282ff4aa0a1123c76d50ba2a6141cb324aceb5bdcbe8f8fbe018af0bef3"
+    },
+    {
+      "id": "4008",
+      "category": 4,
+      "old_path": "design/iteration-ema-squeeze-v4-evidence.md",
+      "path": "design/4008-iteration-ema-squeeze-v4-evidence.md",
+      "title": "EMA-Squeeze v4 增量实施证据",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "855134720172c8d2555f7badeba8650062fb60c790bb094ef48a97454d05a767",
+      "after_sha256": "855134720172c8d2555f7badeba8650062fb60c790bb094ef48a97454d05a767"
+    },
+    {
+      "id": "4009",
+      "category": 4,
+      "old_path": "design/iteration-i4-frontend-align-evidence.md",
+      "path": "design/4009-iteration-i4-frontend-align-evidence.md",
+      "title": "迭代证据：I4 前端对齐（蓄力 ≠ 入场 + I4b 可见）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "d2c944a5ebd8d1783dee34ed388a24448604910d912219d336805aeb0c5ab79f",
+      "after_sha256": "d2c944a5ebd8d1783dee34ed388a24448604910d912219d336805aeb0c5ab79f"
+    },
+    {
+      "id": "4010",
+      "category": 4,
+      "old_path": "design/iteration-i4-golden-cross-evidence.md",
+      "path": "design/4010-iteration-i4-golden-cross-evidence.md",
+      "title": "迭代证据：I4 蓄力 + I4b 金叉点火（对齐新手册）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "ffcd1d67fb6676f2e6f7f05876afd3bf1c809eb25ac93a7574c289a8746d430a",
+      "after_sha256": "ffcd1d67fb6676f2e6f7f05876afd3bf1c809eb25ac93a7574c289a8746d430a"
+    },
+    {
+      "id": "4011",
+      "category": 4,
+      "old_path": "design/iteration-v3.3-r5-delivery.md",
+      "path": "design/iteration-v3.3-r5-delivery.md",
+      "title": "v3.3 r5 统一信号工作台实施与验收说明",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "77d21089023285a491d3d04c5dbed2cecf6b32431d1ceb879612a2a660dbeae4",
+      "after_sha256": "77d21089023285a491d3d04c5dbed2cecf6b32431d1ceb879612a2a660dbeae4"
+    },
+    {
+      "id": "4012",
+      "category": 4,
+      "old_path": "design/strategies/v3.2-Codex接手交付.md",
+      "path": "design/strategies/v3.2-Codex接手交付.md",
+      "title": "v3.2 r2 · Codex接手交付",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "d69236685afc2fe64c0f66b0ccacc6c1300ed5e12c7b2c8031f16b1528731891",
+      "after_sha256": "d69236685afc2fe64c0f66b0ccacc6c1300ed5e12c7b2c8031f16b1528731891"
+    },
+    {
+      "id": "4013",
+      "category": 4,
+      "old_path": "design/strategies/v3.2-Codex续作说明.md",
+      "path": "design/strategies/4013-v3.2-Codex续作说明.md",
+      "title": "v3.2 Codex 续作说明（按第13/15章）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "e287d296f0a40571218361385ad5c376cc2d7b3a63c6dbe6fdd6fdaa8d08e4bd",
+      "after_sha256": "e287d296f0a40571218361385ad5c376cc2d7b3a63c6dbe6fdd6fdaa8d08e4bd"
+    },
+    {
+      "id": "4014",
+      "category": 4,
+      "old_path": "design/strategies/v3.2-P0P1-实施说明.md",
+      "path": "design/strategies/4014-v3.2-P0P1-实施说明.md",
+      "title": "v3.2 首批 P0/P1 实施说明（进行中）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "14077eaec7dd84113d26ffe5411bdaf55b5a67efbcdc57a8261b6c436e200092",
+      "after_sha256": "14077eaec7dd84113d26ffe5411bdaf55b5a67efbcdc57a8261b6c436e200092"
+    },
+    {
+      "id": "4015",
+      "category": 4,
+      "old_path": "design/strategies/v3.2-P2-实施说明.md",
+      "path": "design/strategies/4015-v3.2-P2-实施说明.md",
+      "title": "v3.2 P2 实施说明",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "bac9d4a3f0517f5decac743a24d9bb957b759b97ca585a727a944de79f5e6667",
+      "after_sha256": "bac9d4a3f0517f5decac743a24d9bb957b759b97ca585a727a944de79f5e6667"
+    },
+    {
+      "id": "4016",
+      "category": 4,
+      "old_path": "design/strategies/v3.2-P3-实施说明.md",
+      "path": "design/strategies/4016-v3.2-P3-实施说明.md",
+      "title": "v3.2 P3 实施说明",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "92e2feb126572085b1c134dc757d26d929ef2dbd4a5d2093bad22658b2d0acd2",
+      "after_sha256": "92e2feb126572085b1c134dc757d26d929ef2dbd4a5d2093bad22658b2d0acd2"
+    },
+    {
+      "id": "4017",
+      "category": 4,
+      "old_path": "design/strategies/v3.2-P4-实施说明.md",
+      "path": "design/strategies/4017-v3.2-P4-实施说明.md",
+      "title": "v3.2 P4 实施说明",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "338b96f23f8782f33f25e8469589207025261a4b42c6d624111625d4e0d9f5df",
+      "after_sha256": "338b96f23f8782f33f25e8469589207025261a4b42c6d624111625d4e0d9f5df"
+    },
+    {
+      "id": "4018",
+      "category": 4,
+      "old_path": "design/strategies/v3.2-P5-真实运行证据.md",
+      "path": "design/strategies/4018-v3.2-P5-真实运行证据.md",
+      "title": "v3.2 P5 真实运行证据（首轮）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "8cd43d89dbc4803f9c4707ed237adbe7a390bf971b6eacd6cf59b700984f2df0",
+      "after_sha256": "8cd43d89dbc4803f9c4707ed237adbe7a390bf971b6eacd6cf59b700984f2df0"
+    },
+    {
+      "id": "4019",
+      "category": 4,
+      "old_path": "design/strategies/v3.2-首批交付说明.md",
+      "path": "design/strategies/4019-v3.2-首批交付说明.md",
+      "title": "v3.2 首批交付说明（P0～P4 代码骨架）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "1b6da1c325545671303ac2c552ef9d5d6c26c32ebb42d0aad964cabc09bb5fce",
+      "after_sha256": "1b6da1c325545671303ac2c552ef9d5d6c26c32ebb42d0aad964cabc09bb5fce"
+    },
+    {
+      "id": "5001",
+      "category": 5,
+      "old_path": "chain-flow-report.md",
+      "path": "chain-flow-report.md",
+      "title": "链上净流补充报告",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "78b8da07ea800a2cba02d7f1eb7e66d2b19fc8ece16a87820583a8fd9f2d6d47",
+      "after_sha256": "78b8da07ea800a2cba02d7f1eb7e66d2b19fc8ece16a87820583a8fd9f2d6d47"
+    },
+    {
+      "id": "5002",
+      "category": 5,
+      "old_path": "design/iteration-asset-identity-mapping.md",
+      "path": "design/5002-iteration-asset-identity-mapping.md",
+      "title": "扫描资产身份映射与指数市值口径修复",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "8a8bb6e849f23ed2236dff142c66670dfdfdad1930564f64692f367f7ba9033f",
+      "after_sha256": "8a8bb6e849f23ed2236dff142c66670dfdfdad1930564f64692f367f7ba9033f"
+    },
+    {
+      "id": "5003",
+      "category": 5,
+      "old_path": "design/iteration-market-cap-full-coverage.md",
+      "path": "design/5003-iteration-market-cap-full-coverage.md",
+      "title": "流通市值全覆盖与数据身份核验",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "0c6991fdf8752b93b8b304eedf3d56ee705535a8e805e107bdc4e39fe7e290e5",
+      "after_sha256": "0c6991fdf8752b93b8b304eedf3d56ee705535a8e805e107bdc4e39fe7e290e5"
+    },
+    {
+      "id": "5004",
+      "category": 5,
+      "old_path": "design/iteration-scan-auto-verification.md",
+      "path": "design/5004-iteration-scan-auto-verification.md",
+      "title": "扫描后的自动缺失数据补查（一次有界）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "ab001260eee703566754adfc7b985142f31396d65e7d73f9efe719468abfadc8",
+      "after_sha256": "ab001260eee703566754adfc7b985142f31396d65e7d73f9efe719468abfadc8"
+    },
+    {
+      "id": "5005",
+      "category": 5,
+      "old_path": "design/iteration-scan-coingecko-pacing.md",
+      "path": "design/5005-iteration-scan-coingecko-pacing.md",
+      "title": "扫描：CoinGecko 独立节流与限流冷却",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "cbbe878a67700342d7499ef552331f9ecfb9c7d53ecf4c54663bcfee7b09eee5",
+      "after_sha256": "cbbe878a67700342d7499ef552331f9ecfb9c7d53ecf4c54663bcfee7b09eee5"
+    },
+    {
+      "id": "5006",
+      "category": 5,
+      "old_path": "design/iteration-scan-reserves-refresh.md",
+      "path": "design/iteration-scan-reserves-refresh.md",
+      "title": "扫描辅助储备自动更新方案",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "6e73e9dfdba1cfc47b15ba962465b2c7da0b9f7e0f1a957b1efc43dcddd0a48b",
+      "after_sha256": "6e73e9dfdba1cfc47b15ba962465b2c7da0b9f7e0f1a957b1efc43dcddd0a48b"
+    },
+    {
+      "id": "5007",
+      "category": 5,
+      "old_path": "design/iteration-scan-stability-and-exclusions.md",
+      "path": "design/5007-iteration-scan-stability-and-exclusions.md",
+      "title": "每次扫描的市值覆盖与显式排除（2026-10-15）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "1ab4cfdf53bc644d060c4ce491039b479b01dd120c9ae360725d6873ff722c1e",
+      "after_sha256": "1ab4cfdf53bc644d060c4ce491039b479b01dd120c9ae360725d6873ff722c1e"
+    },
+    {
+      "id": "5008",
+      "category": 5,
+      "old_path": "migration-report.md",
+      "path": "migration-report.md",
+      "title": "项目迁移记录",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "58d43ef5ec89894bf8bcd6cb5fdece998081df72b493d57eb3d8f7dbc08ee404",
+      "after_sha256": "58d43ef5ec89894bf8bcd6cb5fdece998081df72b493d57eb3d8f7dbc08ee404"
+    },
+    {
+      "id": "5009",
+      "category": 5,
+      "old_path": "report.md",
+      "path": "report.md",
+      "title": "币安全市场永续异动扫描报告",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：scanner.py",
+        "源码/测试固定引用：server.py",
+        "源码/测试固定引用：test_scan_contract.py",
+        "源码/测试固定引用：index.html",
+        "源码/测试固定引用：design/rule-market-runtime.js"
+      ],
+      "before_sha256": "3dfcb48d24bc3b061ce16f50adc9102646b65b8c9462033cdb12c438adba0a5a",
+      "after_sha256": "3dfcb48d24bc3b061ce16f50adc9102646b65b8c9462033cdb12c438adba0a5a"
+    },
+    {
+      "id": "5010",
+      "category": 5,
+      "old_path": "strategy-test-report.md",
+      "path": "strategy-test-report.md",
+      "title": "现有数据策略筛选测试",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "843acb5603bf036eb5b61b7495a9f2ef4a431360c5ee68b7fe477e11251818c4",
+      "after_sha256": "843acb5603bf036eb5b61b7495a9f2ef4a431360c5ee68b7fe477e11251818c4"
+    },
+    {
+      "id": "5011",
+      "category": 5,
+      "old_path": "维护与清理说明.md",
+      "path": "维护与清理说明.md",
+      "title": "当前维护与清理说明",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "d3e74cca49c70fdd690c5f6a8409e53cc1fc6c23f51303ac6624c7b902032f8f",
+      "after_sha256": "d3e74cca49c70fdd690c5f6a8409e53cc1fc6c23f51303ac6624c7b902032f8f"
+    },
+    {
+      "id": "6001",
+      "category": 6,
+      "old_path": "design/iteration-research-r1-v11-evidence.md",
+      "path": "design/6001-iteration-research-r1-v11-evidence.md",
+      "title": "投研迭代 R1（v1.1 P1）离线取证 · 身份/两阶段冻结/去重",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "fb700e3a7d8eaaf885c3db0fc1d8b5ab462c03618bdd50e147433a75380698c4",
+      "after_sha256": "fb700e3a7d8eaaf885c3db0fc1d8b5ab462c03618bdd50e147433a75380698c4"
+    },
+    {
+      "id": "6002",
+      "category": 6,
+      "old_path": "design/iteration-research-r2a-evidence.md",
+      "path": "design/6002-iteration-research-r2a-evidence.md",
+      "title": "投研迭代 R2a（v1.1 §4）离线取证 · 模板 B / 旧报告兼容 / 前端 submission 接线",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "f2bc58284a15022ebca5fd659f78610326e9ed25dbd7079d914aaaa4481a3a40",
+      "after_sha256": "f2bc58284a15022ebca5fd659f78610326e9ed25dbd7079d914aaaa4481a3a40"
+    },
+    {
+      "id": "6003",
+      "category": 6,
+      "old_path": "design/iteration-research-r2b-evidence.md",
+      "path": "design/6003-iteration-research-r2b-evidence.md",
+      "title": "投研迭代 R2b（v1.1 REV-03）离线取证 · 先检索后生成",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "526203572d56661401270bf26ef90335461ebf8ba8987f3366a7f128bac91ead",
+      "after_sha256": "526203572d56661401270bf26ef90335461ebf8ba8987f3366a7f128bac91ead"
+    },
+    {
+      "id": "6004",
+      "category": 6,
+      "old_path": "design/iteration-research-r2b-ui-evidence.md",
+      "path": "design/6004-iteration-research-r2b-ui-evidence.md",
+      "title": "投研迭代 R2b UI：检索/证据状态只读展示证据",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "7a6a33431f34e4d1a42f015c61f953e041f8663cf17f5e9c9d958d52e987300e",
+      "after_sha256": "7a6a33431f34e4d1a42f015c61f953e041f8663cf17f5e9c9d958d52e987300e"
+    },
+    {
+      "id": "6005",
+      "category": 6,
+      "old_path": "design/iteration-research-r3-evidence.md",
+      "path": "design/6005-iteration-research-r3-evidence.md",
+      "title": "投研迭代 R3（真实供应商单币标准档闭环）取证",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "6982181850f7a0d528d38fba3a238cd5971931dc59767c4dc05b74a8c995c82d",
+      "after_sha256": "6982181850f7a0d528d38fba3a238cd5971931dc59767c4dc05b74a8c995c82d"
+    },
+    {
+      "id": "6006",
+      "category": 6,
+      "old_path": "design/iteration-research-r4-con-usage-evidence.md",
+      "path": "design/6006-iteration-research-r4-con-usage-evidence.md",
+      "title": "投研迭代 R4：用量解析、多报告并发（离线）与经验文件 取证",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "f21161b2b1f45a5b1d47bbaa1dd6f511403f36de385c00147419068d0291be88",
+      "after_sha256": "f21161b2b1f45a5b1d47bbaa1dd6f511403f36de385c00147419068d0291be88"
+    },
+    {
+      "id": "6007",
+      "category": 6,
+      "old_path": "design/iteration-research-r5-evidence.md",
+      "path": "design/6007-iteration-research-r5-evidence.md",
+      "title": "投研迭代 R5：CON-04 / CON-08+REV-10 / CON-06 页面 / 检索 live 接线 取证",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "76bb07646ea5a27fc542aea191ce16236cedb5b8c79ba164ae4e3124a8a74b14",
+      "after_sha256": "76bb07646ea5a27fc542aea191ce16236cedb5b8c79ba164ae4e3124a8a74b14"
+    },
+    {
+      "id": "6008",
+      "category": 6,
+      "old_path": "design/iteration-research-r6-evidence.md",
+      "path": "design/6008-iteration-research-r6-evidence.md",
+      "title": "投研迭代 R6：RES-16 / REV-07 / REV-09 / RES-14 取证",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "7a0df6c37d6f6182946940ecdcbecc3c0e6c7d340965d9d3ed591461883ca812",
+      "after_sha256": "7a0df6c37d6f6182946940ecdcbecc3c0e6c7d340965d9d3ed591461883ca812"
+    },
+    {
+      "id": "6009",
+      "category": 6,
+      "old_path": "design/iteration-research-r7-live-evidence.md",
+      "path": "design/6009-iteration-research-r7-live-evidence.md",
+      "title": "投研迭代 R7：真实 API 核验取证",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "a619532110126bb6a6f6f2df1e26ded6ee41bfcd2fe92bc48afadd6fa2d6c1fd",
+      "after_sha256": "a619532110126bb6a6f6f2df1e26ded6ee41bfcd2fe92bc48afadd6fa2d6c1fd"
+    },
+    {
+      "id": "6010",
+      "category": 6,
+      "old_path": "design/iteration-research-r8-evidence.md",
+      "path": "design/6010-iteration-research-r8-evidence.md",
+      "title": "投研迭代 R8：开头截止时间 + CON-08 空失败重试 取证",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "7a6cdcffef3343777f97b6edead7179ad835df494f586cca54e1c952bb7150dc",
+      "after_sha256": "7a6cdcffef3343777f97b6edead7179ad835df494f586cca54e1c952bb7150dc"
+    },
+    {
+      "id": "6011",
+      "category": 6,
+      "old_path": "design/iteration-research-r9-standard-native-search.md",
+      "path": "design/6011-iteration-research-r9-standard-native-search.md",
+      "title": "投研 R9：标准版收口、现有模型原生检索与生成验收",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "f8e84849e5f04cb1528ca2a118be2d0d46308021e596e16182590a0cdef50d22",
+      "after_sha256": "f8e84849e5f04cb1528ca2a118be2d0d46308021e596e16182590a0cdef50d22"
+    },
+    {
+      "id": "6012",
+      "category": 6,
+      "old_path": "design/iteration-research-r10-resume-experience-concurrency.md",
+      "path": "design/6012-iteration-research-r10-resume-experience-concurrency.md",
+      "title": "投研 R10：恢复服务、昨夜缺陷修复、经验库与执行器并行",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "f3561147652b9b7b68e620e88f6d0cf0cb6fb62b3c6f89602aeb6730c3d43882",
+      "after_sha256": "f3561147652b9b7b68e620e88f6d0cf0cb6fb62b3c6f89602aeb6730c3d43882"
+    },
+    {
+      "id": "6013",
+      "category": 6,
+      "old_path": "design/iteration-v2.8-frontend-p1-research-select.md",
+      "path": "design/6013-iteration-v2.8-frontend-p1-research-select.md",
+      "title": "前端 P1/P2 修补：选币与投研预览（承接 Codex 审阅意见）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "24f7def0ed08827a21d14ae4f67041baaa4e6705c7cf7300a549f84d4fc91e85",
+      "after_sha256": "24f7def0ed08827a21d14ae4f67041baaa4e6705c7cf7300a549f84d4fc91e85"
+    },
+    {
+      "id": "6014",
+      "category": 6,
+      "old_path": "design/iteration-v2.8-frontend-research-step2.md",
+      "path": "design/6014-iteration-v2.8-frontend-research-step2.md",
+      "title": "前端第二步：对象与投研链路（Grok 迭代）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "b3e145c2d7e8e458b7876435f6142f7dbf828e836f7abf1399cfb6f7d2dd8cc2",
+      "after_sha256": "b3e145c2d7e8e458b7876435f6142f7dbf828e836f7abf1399cfb6f7d2dd8cc2"
+    },
+    {
+      "id": "6015",
+      "category": 6,
+      "old_path": "design/给GROK-多报告并发补充-v1.2.md",
+      "path": "design/6015-给GROK-多报告并发补充-v1.2.md",
+      "title": "多报告同时生成：并发补充 v1.2",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "28c207649c183b1999e6a83a73feb467e11ebd1c79d96b6f41fd23160d3e8048",
+      "after_sha256": "3f428c47a27f305445f97b850417428daf36bd62eab52aaeb205bbc8b03213a1"
+    },
+    {
+      "id": "6016",
+      "category": 6,
+      "old_path": "design/给GROK-投研方案复核补充-v1.1.md",
+      "path": "design/6016-给GROK-投研方案复核补充-v1.1.md",
+      "title": "投研方案复核补充 v1.1",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "9ecc0d66227c78271a40fdca14b3d4d9c451dae6212fe761e9b19092b493cece",
+      "after_sha256": "9ecc0d66227c78271a40fdca14b3d4d9c451dae6212fe761e9b19092b493cece"
+    },
+    {
+      "id": "6017",
+      "category": 6,
+      "old_path": "design/给GROK-投研迭代需求-模板B新任务检索核验与经验积累.md",
+      "path": "design/6017-给GROK-投研迭代需求-模板B新任务检索核验与经验积累.md",
+      "title": "投研迭代需求：模板 B、新任务、实际检索、核验与经验积累",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "d4b5216ce562623d65dc3de70edd4ff6440bf444672a614f60ba360a6ca23fd5",
+      "after_sha256": "93d75e60f08e3b891d003d48063b6336422757fb3d52c686896575f19f34b2d2"
+    },
+    {
+      "id": "7001",
+      "category": 7,
+      "old_path": "experience/EXP-0001-标准档超时.md",
+      "path": "experience/7001-EXP-0001-标准档超时.md",
+      "title": "EXP-0001 标准档真实调用超时不能低于 300 秒",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "752fdc9b2e5647a10b0a574254eb3742e3bbe3261932bfdeea7d50a68146910d",
+      "after_sha256": "752fdc9b2e5647a10b0a574254eb3742e3bbe3261932bfdeea7d50a68146910d"
+    },
+    {
+      "id": "7002",
+      "category": 7,
+      "old_path": "experience/EXP-0002-用量未知与原始响应.md",
+      "path": "experience/7002-EXP-0002-用量未知与原始响应.md",
+      "title": "EXP-0002 用量没解析到就记“未知”，并保存原始响应",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "159cd794a0d370efba48e9f647adcd1d837dd0dfe28fbbfc2b575926462ce99d",
+      "after_sha256": "159cd794a0d370efba48e9f647adcd1d837dd0dfe28fbbfc2b575926462ce99d"
+    },
+    {
+      "id": "7003",
+      "category": 7,
+      "old_path": "experience/EXP-0003-夹具非在线核验.md",
+      "path": "experience/7003-EXP-0003-夹具非在线核验.md",
+      "title": "EXP-0003 夹具检索成功不等于在线核验",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "540feb912e6d80216ca3294d73dd9204b36afd9941be849e88be14d586526837",
+      "after_sha256": "540feb912e6d80216ca3294d73dd9204b36afd9941be849e88be14d586526837"
+    },
+    {
+      "id": "7004",
+      "category": 7,
+      "old_path": "experience/EXP-0004-模板B八节与引用.md",
+      "path": "experience/7004-EXP-0004-模板B八节与引用.md",
+      "title": "EXP-0004 标准档报告按模板 B 八节写，只引用允许的证据 ID",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "1c7c2959bd9da35d0a7439c7597f5d7f2a5c5ed42f4cb38f42fbf6c22d576a2d",
+      "after_sha256": "1c7c2959bd9da35d0a7439c7597f5d7f2a5c5ed42f4cb38f42fbf6c22d576a2d"
+    },
+    {
+      "id": "8001",
+      "category": 8,
+      "old_path": "1H缓存与续接优化实施方案-v1.0-待审阅.md",
+      "path": "8001-1H缓存与续接优化实施方案-v1.0-待审阅.md",
+      "title": "1H缓存与续接优化实施方案-v1.0-待审阅",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "13c821fb2439ef382e59c2a7bac82029773af65f7dd20765e888d2e35a554886",
+      "after_sha256": "13c821fb2439ef382e59c2a7bac82029773af65f7dd20765e888d2e35a554886"
+    },
+    {
+      "id": "8002",
+      "category": 8,
+      "old_path": "design/audit-gpt-ema-v4/给GROK-EMA-Squeeze增量实施规则-v4.md",
+      "path": "design/audit-gpt-ema-v4/给GROK-EMA-Squeeze增量实施规则-v4.md",
+      "title": "给GROK：EMA三线金叉＋Squeeze 增量实施规则 v4（已对照当前代码）",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：ema_squeeze_rules.py"
+      ],
+      "before_sha256": "d1c2012c49eee8240396400be88b12b64ff3ee38f77a234a5274a455cc426ee1",
+      "after_sha256": "d1c2012c49eee8240396400be88b12b64ff3ee38f77a234a5274a455cc426ee1"
+    },
+    {
+      "id": "8003",
+      "category": 8,
+      "old_path": "design/audit-gpt-ema-v4/给GROK-EMA三线金叉统一命名与前端收口清单-v4.2.md",
+      "path": "design/audit-gpt-ema-v4/8003-给GROK-EMA三线金叉统一命名与前端收口清单-v4.2.md",
+      "title": "给GROK：EMA三线金叉统一命名与前端收口清单 v4.2",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "f14a80a45020f2b18796f9136728529e5a5aacf309ca5414558df0f46da9d20d",
+      "after_sha256": "f14a80a45020f2b18796f9136728529e5a5aacf309ca5414558df0f46da9d20d"
+    },
+    {
+      "id": "8004",
+      "category": 8,
+      "old_path": "design/GROK-前端实施方案-A布局-C专业表格.md",
+      "path": "design/8004-GROK-前端实施方案-A布局-C专业表格.md",
+      "title": "前端实施方案：A 布局 + C 专业表格",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "5128ae34f81735ed18f92beaed591030381c889e1724523a2d6d37d5c6b250f0",
+      "after_sha256": "5128ae34f81735ed18f92beaed591030381c889e1724523a2d6d37d5c6b250f0"
+    },
+    {
+      "id": "8005",
+      "category": 8,
+      "old_path": "design/GROK-横向留白与显示不全-补充建议.md",
+      "path": "design/8005-GROK-横向留白与显示不全-补充建议.md",
+      "title": "给 GROK：横向留白收窄与显示不全的补充建议",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "6e780ebb73971604c720e79f80517a1a5eb85f1b13055c319375e032accc3e62",
+      "after_sha256": "6e780ebb73971604c720e79f80517a1a5eb85f1b13055c319375e032accc3e62"
+    },
+    {
+      "id": "8006",
+      "category": 8,
+      "old_path": "design/GROK-页面间距与专业表格阅读优化建议.md",
+      "path": "design/8006-GROK-页面间距与专业表格阅读优化建议.md",
+      "title": "给 GROK：A 布局 + C 专业表格的间距与阅读优化建议",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "6723b38f1337aa4d2a5e47e49b4f3a84f48f9ebfa4fea5a83a6869690ba58b9b",
+      "after_sha256": "6723b38f1337aa4d2a5e47e49b4f3a84f48f9ebfa4fea5a83a6869690ba58b9b"
+    },
+    {
+      "id": "8007",
+      "category": 8,
+      "old_path": "design/iteration-fix-depth-template-switch.md",
+      "path": "design/8007-iteration-fix-depth-template-switch.md",
+      "title": "异动观察工作台 · 档位模板切换 UI 修复取证",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "a6c88b89e911af00143544688d83c6f6f521e26f05c96869f710ed7ae98f00c6",
+      "after_sha256": "a6c88b89e911af00143544688d83c6f6f521e26f05c96869f710ed7ae98f00c6"
+    },
+    {
+      "id": "8008",
+      "category": 8,
+      "old_path": "design/iteration-smart-money-i5.md",
+      "path": "design/8008-iteration-smart-money-i5.md",
+      "title": "⑤聪明钱流入实施说明",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "5579533ba1e431356f57aef9dba83d562b27ac9dc6bab445c5e09a108f6267d3",
+      "after_sha256": "5579533ba1e431356f57aef9dba83d562b27ac9dc6bab445c5e09a108f6267d3"
+    },
+    {
+      "id": "8009",
+      "category": 8,
+      "old_path": "design/iteration-v2.1.md",
+      "path": "design/iteration-v2.1.md",
+      "title": "异动观察 V2.1：交互整理、选币投研、提示词与多策略",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "2ef91e2e79008eff3da4d620084d7d4c1d173a90a94911edd997392018257b69",
+      "after_sha256": "2ef91e2e79008eff3da4d620084d7d4c1d173a90a94911edd997392018257b69"
+    },
+    {
+      "id": "8010",
+      "category": 8,
+      "old_path": "design/iteration-v2.2.md",
+      "path": "design/iteration-v2.2.md",
+      "title": "V2.2 更新与链上数据补充",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "5946337cff521f1389bb66e55eec873afa7d3bb908e0a4663edda6bb28823e0b",
+      "after_sha256": "5946337cff521f1389bb66e55eec873afa7d3bb908e0a4663edda6bb28823e0b"
+    },
+    {
+      "id": "8011",
+      "category": 8,
+      "old_path": "design/iteration-v2.3.md",
+      "path": "design/iteration-v2.3.md",
+      "title": "V2.3 找到可用数据，并进入研究流程",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "9cac61f2259c8519dd143afc5ca5c25d31cfb383174a28fdb1d58b95f73021e4",
+      "after_sha256": "9cac61f2259c8519dd143afc5ca5c25d31cfb383174a28fdb1d58b95f73021e4"
+    },
+    {
+      "id": "8012",
+      "category": 8,
+      "old_path": "design/iteration-v2.4.md",
+      "path": "design/iteration-v2.4.md",
+      "title": "V2.4 · 完整证据展示",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "8cb59569b171b26999ae08f49d610c92798d16260ee5bfa21f3e8feedab37189",
+      "after_sha256": "8cb59569b171b26999ae08f49d610c92798d16260ee5bfa21f3e8feedab37189"
+    },
+    {
+      "id": "8013",
+      "category": 8,
+      "old_path": "design/iteration-v2.5.md",
+      "path": "design/iteration-v2.5.md",
+      "title": "V2.5 · 审计整改代码交付",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "35c365ec48a10742db13e7296f9858de333874a76e75e0159782f1678eccc334",
+      "after_sha256": "35c365ec48a10742db13e7296f9858de333874a76e75e0159782f1678eccc334"
+    },
+    {
+      "id": "8014",
+      "category": 8,
+      "old_path": "design/iteration-v2.6.md",
+      "path": "design/iteration-v2.6.md",
+      "title": "V2.6 · 扫描任务与持久更新计划",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "ca19803b8b7f32bd237079a94a62d36e07fa549d65fd55bfb8e6b0dc1603db5d",
+      "after_sha256": "ca19803b8b7f32bd237079a94a62d36e07fa549d65fd55bfb8e6b0dc1603db5d"
+    },
+    {
+      "id": "8015",
+      "category": 8,
+      "old_path": "design/iteration-v2.7.md",
+      "path": "design/iteration-v2.7.md",
+      "title": "V2.7 · 区间行情补查与覆盖预检",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "35039c21ae93ae6b36247c5d7ff078464d87f996b0d6b4bb17481174960dea4b",
+      "after_sha256": "35039c21ae93ae6b36247c5d7ff078464d87f996b0d6b4bb17481174960dea4b"
+    },
+    {
+      "id": "8016",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-a-close-s2-evidence.md",
+      "path": "design/8016-iteration-v2.8-a-close-s2-evidence.md",
+      "title": "V2.8 A 档阶段 S2 证据：01 扫描 / 02 投研离线回归",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "d567b40d951d0998767bc68684caf3995445bce8a254befd1531c52051ec9fc1",
+      "after_sha256": "d567b40d951d0998767bc68684caf3995445bce8a254befd1531c52051ec9fc1"
+    },
+    {
+      "id": "8017",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-a-close-s3-evidence.md",
+      "path": "design/8017-iteration-v2.8-a-close-s3-evidence.md",
+      "title": "V2.8 A 档阶段 S3 证据：03 指标与策略本地服务链路 + 失败矩阵",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "18d44f5a500e05df4b9a822801376067292155a2f52d70ab02728a5a0549e17a",
+      "after_sha256": "18d44f5a500e05df4b9a822801376067292155a2f52d70ab02728a5a0549e17a"
+    },
+    {
+      "id": "8018",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-a-close-s4-pending.md",
+      "path": "design/8018-iteration-v2.8-a-close-s4-pending.md",
+      "title": "iteration-v2.8-a-close-s4-pending",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "cb4d725f213a8d592f3c161e73911f833e9e9f370e0ecba44ab637a4408f1179",
+      "after_sha256": "cb4d725f213a8d592f3c161e73911f833e9e9f370e0ecba44ab637a4408f1179"
+    },
+    {
+      "id": "8019",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-ai01.md",
+      "path": "design/iteration-v2.8-ai01.md",
+      "title": "V2.8 · AI-01/AI-02 代码交付（进行中）",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "51aed400eac6a6602bbeb6170c257a2c88cd29b4acfe6acab83397682ead3a47",
+      "after_sha256": "51aed400eac6a6602bbeb6170c257a2c88cd29b4acfe6acab83397682ead3a47"
+    },
+    {
+      "id": "8020",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-ai-f09-fingerprint-check.md",
+      "path": "design/8020-iteration-v2.8-ai-f09-fingerprint-check.md",
+      "title": "V2.8 AI 报告指纹 / 证据 / schema·缓存 贯通检查",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "c841897d2a638553c682dc52c8bcd10e8c20f8ff6e72285f4de3604528e3f395",
+      "after_sha256": "c841897d2a638553c682dc52c8bcd10e8c20f8ff6e72285f4de3604528e3f395"
+    },
+    {
+      "id": "8021",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-backtest01-compare.md",
+      "path": "design/8021-iteration-v2.8-backtest01-compare.md",
+      "title": "V2.8 BACKTEST-01 加深 · 多合约/多版本公平对照（首刀）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "0ce567ce437e7a4a0cc6257d255dd6e4e500749901be6fcf526b825ff969e55b",
+      "after_sha256": "4d3fbd59fd36453955d6eb2acb4a88fb784f84e99baf4da57b56e2e8180c6822"
+    },
+    {
+      "id": "8022",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-backtest01.md",
+      "path": "design/iteration-v2.8-backtest01.md",
+      "title": "V2.8 BACKTEST-01 首刀（部分实现）",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "59e564258bfa311e30e5d7e7fc21bde43dec836dcdbc7074e1d320f6bf9c7590",
+      "after_sha256": "4471e9a438afa7f6b25e7a80af25c23ff7f2198ef12627875a811dc941f21546"
+    },
+    {
+      "id": "8023",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-config01-backup-wizard.md",
+      "path": "design/8023-iteration-v2.8-config01-backup-wizard.md",
+      "title": "iteration-v2.8 · CONFIG-01 全量备份/恢复向导（首刀加深）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "ca5c229c64edc04b111465c00d45c329306790f3d6be38e996e52a69a4cbecfd",
+      "after_sha256": "ca5c229c64edc04b111465c00d45c329306790f3d6be38e996e52a69a4cbecfd"
+    },
+    {
+      "id": "8024",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-config01-settings-bind.md",
+      "path": "design/8024-iteration-v2.8-config01-settings-bind.md",
+      "title": "iteration-v2.8 · CONFIG-01 设置页全字段双向绑定（首刀加深）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "8337bb1e948d37bf756deb6d937379e6be853e742def992e1b61659b73144e65",
+      "after_sha256": "8337bb1e948d37bf756deb6d937379e6be853e742def992e1b61659b73144e65"
+    },
+    {
+      "id": "8025",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-config01.md",
+      "path": "design/iteration-v2.8-config01.md",
+      "title": "V2.8 CONFIG-01 首刀（部分实现）",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "31a2c81009d43a3ee31986f1c570827fbb201bc8dd2cce36093709b3f9d2b07c",
+      "after_sha256": "31a2c81009d43a3ee31986f1c570827fbb201bc8dd2cce36093709b3f9d2b07c"
+    },
+    {
+      "id": "8026",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-data01-coverage-deepen.md",
+      "path": "design/8026-iteration-v2.8-data01-coverage-deepen.md",
+      "title": "iteration-v2.8 · DATA-01 覆盖闸加深（缺口/补查/指纹）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "4c0e98427f5d382af496e299fce201f8db28256e1ffdbed71dfa496ca377c0ce",
+      "after_sha256": "4c0e98427f5d382af496e299fce201f8db28256e1ffdbed71dfa496ca377c0ce"
+    },
+    {
+      "id": "8027",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-data01-coverage.md",
+      "path": "design/iteration-v2.8-data01-coverage.md",
+      "title": "V2.8 DATA-01 加深刀 · 多字段覆盖闸门",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "d19c3f8164bc2b3c27ae94d1c1ce82a0e2def5601ab31c253706c6a8cc2f669e",
+      "after_sha256": "d19c3f8164bc2b3c27ae94d1c1ce82a0e2def5601ab31c253706c6a8cc2f669e"
+    },
+    {
+      "id": "8028",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-data01.md",
+      "path": "design/iteration-v2.8-data01.md",
+      "title": "V2.8 DATA-01 第一刀 · 只读价格索引",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "ce0a44506d30baa4e545187e6bbd5c25456505898a9c41abe522d689e070dd17",
+      "after_sha256": "ce0a44506d30baa4e545187e6bbd5c25456505898a9c41abe522d689e070dd17"
+    },
+    {
+      "id": "8029",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-eval01-schedule.md",
+      "path": "design/iteration-v2.8-eval01-schedule.md",
+      "title": "V2.8 EVAL-01 加深 · 观察计划调度与补查联动",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "d3f20f8948d71eca537b9163e9231e7d05ce2cb17eba308d909e631667d1a12e",
+      "after_sha256": "d3f20f8948d71eca537b9163e9231e7d05ce2cb17eba308d909e631667d1a12e"
+    },
+    {
+      "id": "8030",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-eval01.md",
+      "path": "design/iteration-v2.8-eval01.md",
+      "title": "V2.8 EVAL-01 第一刀 · 前向观察与结算",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "e7f70ffab692b691745901b2a33bd569452f556c77ba66867e1cc6391511ee13",
+      "after_sha256": "e7f70ffab692b691745901b2a33bd569452f556c77ba66867e1cc6391511ee13"
+    },
+    {
+      "id": "8031",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-ext01-auth-bypass.md",
+      "path": "design/8031-iteration-v2.8-ext01-auth-bypass.md",
+      "title": "V2.8 EXT auth bypass 收口",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "1ea11a8626bbcbc5317d709007ba009d7c20a4fce3902b6718297a628a3943d8",
+      "after_sha256": "1ea11a8626bbcbc5317d709007ba009d7c20a4fce3902b6718297a628a3943d8"
+    },
+    {
+      "id": "8032",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-ext01-precise-flow.md",
+      "path": "design/8032-iteration-v2.8-ext01-precise-flow.md",
+      "title": "iteration-v2.8 · EXT-01 精确流加深（来源槽位闸门）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "f6d25d7f12b8ab25f5a2427686525d0e88826a4dd59ccf79c560980313e2c8e9",
+      "after_sha256": "4054d38ef89b2abfd55bc84556bdddce55c51f81529831eddcb0566e7bbad34d"
+    },
+    {
+      "id": "8033",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-ext01.md",
+      "path": "design/8033-iteration-v2.8-ext01.md",
+      "title": "V2.8 EXT-01 首刀（部分实现）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "a80c41a701b8a087e05258c640344b07d7c8940853688e9d09d06c4e177ed9ee",
+      "after_sha256": "a80c41a701b8a087e05258c640344b07d7c8940853688e9d09d06c4e177ed9ee"
+    },
+    {
+      "id": "8034",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-frontend-a-fix-0607.md",
+      "path": "design/8034-iteration-v2.8-frontend-a-fix-0607.md",
+      "title": "iteration-v2.8-frontend-a-fix-0607",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "663dc39f808fc4cae826e07f9bb297111e6034fca1bf5ff9898d667d27645a8b",
+      "after_sha256": "663dc39f808fc4cae826e07f9bb297111e6034fca1bf5ff9898d667d27645a8b"
+    },
+    {
+      "id": "8035",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-frontend-col-drop-vol.md",
+      "path": "design/8035-iteration-v2.8-frontend-col-drop-vol.md",
+      "title": "删量细项三列（投研确认后）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "094c2430cb34ecf2b3fed02443abf8506d321cecb45fac1809a1087fb50bb917",
+      "after_sha256": "094c2430cb34ecf2b3fed02443abf8506d321cecb45fac1809a1087fb50bb917"
+    },
+    {
+      "id": "8036",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-frontend-col-trim.md",
+      "path": "design/8036-iteration-v2.8-frontend-col-trim.md",
+      "title": "列裁剪（用户验收指定 apply-full）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "7ccc2950fac364f617494f93028c9a96cc6305b91a86441245de22bd85ad27b6",
+      "after_sha256": "7ccc2950fac364f617494f93028c9a96cc6305b91a86441245de22bd85ad27b6"
+    },
+    {
+      "id": "8037",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-frontend-p2-tray-report118.md",
+      "path": "design/8037-iteration-v2.8-frontend-p2-tray-report118.md",
+      "title": "前端 P2 + §11.8：托盘/表头/分色 + 报告标题收紧",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "228c3bfc90e4f010824779470c617c43e88e2f94178caa0cc4f9a4eac8dc3914",
+      "after_sha256": "228c3bfc90e4f010824779470c617c43e88e2f94178caa0cc4f9a4eac8dc3914"
+    },
+    {
+      "id": "8038",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-frontend-reports-step3.md",
+      "path": "design/8038-iteration-v2.8-frontend-reports-step3.md",
+      "title": "前端第三步：报告阅读与设置（Grok 迭代）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "6f25e7a193702b215523648d4032e23373b94ff167d342f328cb3d7f6ad5dd40",
+      "after_sha256": "6f25e7a193702b215523648d4032e23373b94ff167d342f328cb3d7f6ad5dd40"
+    },
+    {
+      "id": "8039",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-frontend-step4-smoke.md",
+      "path": "design/8039-iteration-v2.8-frontend-step4-smoke.md",
+      "title": "前端第四步：联调冒烟（部分）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "6df4a43a3b7cea04b55541fff417def97efcbc7913e450c91efe7ac0dc7faf12",
+      "after_sha256": "6df4a43a3b7cea04b55541fff417def97efcbc7913e450c91efe7ac0dc7faf12"
+    },
+    {
+      "id": "8040",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-frontend-v1b1-coverage-tip.md",
+      "path": "design/8040-iteration-v2.8-frontend-v1b1-coverage-tip.md",
+      "title": "V1-B1：扫描→报告覆盖提示可读",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "3951325ee0e63eb5b2628c0407ed72f593e2de366d0a64d725257989737278c4",
+      "after_sha256": "3951325ee0e63eb5b2628c0407ed72f593e2de366d0a64d725257989737278c4"
+    },
+    {
+      "id": "8041",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-frontend-v1b2-strategy-export.md",
+      "path": "design/8041-iteration-v2.8-frontend-v1b2-strategy-export.md",
+      "title": "V1-B2：策略冻结页导出/导入接线",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "7920991c9f274ea0d9ff0b8b63af761707b87ae89c003a755c86dfe2fe6cd81d",
+      "after_sha256": "7920991c9f274ea0d9ff0b8b63af761707b87ae89c003a755c86dfe2fe6cd81d"
+    },
+    {
+      "id": "8042",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-frontend-v1b3-sim-freeze.md",
+      "path": "design/8042-iteration-v2.8-frontend-v1b3-sim-freeze.md",
+      "title": "V1-B3：纸面模拟与冻结策略联调",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "97a845a2075b44cfe1c12871532b42694e03772695551d9faa3152e1231c2ac2",
+      "after_sha256": "97a845a2075b44cfe1c12871532b42694e03772695551d9faa3152e1231c2ac2"
+    },
+    {
+      "id": "8043",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-frontend-v1b4-eval-freeze.md",
+      "path": "design/8043-iteration-v2.8-frontend-v1b4-eval-freeze.md",
+      "title": "V1-B4：前向结算与冻结参数联调",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "8d133027bf58d7ce14cf10653f1837fb85a078da6c6ba4713c008e35760caeac",
+      "after_sha256": "8d133027bf58d7ce14cf10653f1837fb85a078da6c6ba4713c008e35760caeac"
+    },
+    {
+      "id": "8044",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-frontend-v1b6-config-backup.md",
+      "path": "design/8044-iteration-v2.8-frontend-v1b6-config-backup.md",
+      "title": "V1-B6：配置备份向导页接线",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "61731d2c7d494b6e7eff1a02ee034a887f511cd129f9063b9fb3e8d74815cd63",
+      "after_sha256": "61731d2c7d494b6e7eff1a02ee034a887f511cd129f9063b9fb3e8d74815cd63"
+    },
+    {
+      "id": "8045",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-remaining-work-for-codex.md",
+      "path": "design/8045-iteration-v2.8-remaining-work-for-codex.md",
+      "title": "迭代方案：V2.8 剩余工作统计（给 Codex 审）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "cc905df5a6766bd2e949638ffdda172d908c873ef5e5fa7143d5ffb5eef3c1a5",
+      "after_sha256": "9e3287dd17b0837bc0d229d08317d6c6ff68adc07ab3b9bcea175ac0fe8d6f98"
+    },
+    {
+      "id": "8046",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-rule01-bindings.md",
+      "path": "design/iteration-v2.8-rule01-bindings.md",
+      "title": "V2.8 RULE-01 加深刀 · 跨页统一引用绑定",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "e0ddff1698f23d0660ba4b1544ac86674cce24980f045fd6ec8ac5a41eb627a5",
+      "after_sha256": "e0ddff1698f23d0660ba4b1544ac86674cce24980f045fd6ec8ac5a41eb627a5"
+    },
+    {
+      "id": "8047",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-rule01-coverage-gate.md",
+      "path": "design/iteration-v2.8-rule01-coverage-gate.md",
+      "title": "V2.8 RULE-01 加深刀 · 启用前覆盖硬闸",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "69d145f50116bcf8c5819d606f319b284191b83b16cb61ed482b6c156efba491",
+      "after_sha256": "69d145f50116bcf8c5819d606f319b284191b83b16cb61ed482b6c156efba491"
+    },
+    {
+      "id": "8048",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-rule01-export-fingerprint-deepen.md",
+      "path": "design/iteration-v2.8-rule01-export-fingerprint-deepen.md",
+      "title": "iteration-v2.8 · RULE-01 导出指纹联调加深",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "fea7f1d6bfd0e4791bfc89480a3084f540bbc588cff1aae11034ecf3e278bd5e",
+      "after_sha256": "fea7f1d6bfd0e4791bfc89480a3084f540bbc588cff1aae11034ecf3e278bd5e"
+    },
+    {
+      "id": "8049",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-rule01-export-fingerprint.md",
+      "path": "design/iteration-v2.8-rule01-export-fingerprint.md",
+      "title": "V2.8 RULE-01 加深刀 · 市场只读指纹 + 报告导出 fingerprint",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "22ec5b8e03971c41c30731f7a9a4c1ca52fb59a3495aceaf444dedf8a38c3df4",
+      "after_sha256": "22ec5b8e03971c41c30731f7a9a4c1ca52fb59a3495aceaf444dedf8a38c3df4"
+    },
+    {
+      "id": "8050",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-rule01.md",
+      "path": "design/iteration-v2.8-rule01.md",
+      "title": "V2.8 RULE-01 第一刀 · 策略草案与冻结版本",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "41a7ac09c309f00c872e520d098f7c6b4ee749cdc4f70f6889f24504976594a9",
+      "after_sha256": "41a7ac09c309f00c872e520d098f7c6b4ee749cdc4f70f6889f24504976594a9"
+    },
+    {
+      "id": "8051",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-sim01-autofill.md",
+      "path": "design/iteration-v2.8-sim01-autofill.md",
+      "title": "V2.8 SIM-01 加深刀 · 确认信号自动填仓",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "1a20cebd5745e91cf238a396918b2cbd19d50ba3e407baa72928e767c1423e52",
+      "after_sha256": "1a20cebd5745e91cf238a396918b2cbd19d50ba3e407baa72928e767c1423e52"
+    },
+    {
+      "id": "8052",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-sim01-tier-budget.md",
+      "path": "design/8052-iteration-v2.8-sim01-tier-budget.md",
+      "title": "V2.8 SIM-01 加深 · T1/T2/T3 分档保证金预算硬闸",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "7a7b785659502a146531d8a55d53c207a28180f8f15e29f9cd1dee73bcd15b14",
+      "after_sha256": "7a7b785659502a146531d8a55d53c207a28180f8f15e29f9cd1dee73bcd15b14"
+    },
+    {
+      "id": "8053",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-sim01.md",
+      "path": "design/iteration-v2.8-sim01.md",
+      "title": "V2.8 SIM-01 第一刀 · 纸面账户与事件账本",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "cfbd7c5f7e8d7cdeb7d488b8241d08b3a1960872190e6e3f4c88031bc3820c1f",
+      "after_sha256": "03e169552134424c778de433234e0dbd7344cd382e44ee3a2278f7665277efb1"
+    },
+    {
+      "id": "8054",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-struct01.md",
+      "path": "design/iteration-v2.8-struct01.md",
+      "title": "V2.8 STRUCT-01 首刀（部分实现）",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "641979e119dfb3376c479a04c2325c653130b6812681753215c15f05f84c3220",
+      "after_sha256": "75eefefe59ddb48743109060ed6f4b7c0d96f7e0dabe727f113169d10b739f1d"
+    },
+    {
+      "id": "8055",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-struct-backtest-gate.md",
+      "path": "design/8055-iteration-v2.8-struct-backtest-gate.md",
+      "title": "V2.8 STRUCT×BACKTEST 过滤闸（首刀）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "305d2335d87bf8f55465e6ce6f477f10270a451914ec46340cf35718daf98647",
+      "after_sha256": "305d2335d87bf8f55465e6ce6f477f10270a451914ec46340cf35718daf98647"
+    },
+    {
+      "id": "8056",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-v1-api-smoke.md",
+      "path": "design/8056-iteration-v2.8-v1-api-smoke.md",
+      "title": "V2.8 V1 API smoke · 扫描→报告→冻结→USDT纸面→定期结算复盘",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "dd9e6c58163f109e90fd9245fda718f9347bf12dc4512ae66ad638047587b054",
+      "after_sha256": "dd9e6c58163f109e90fd9245fda718f9347bf12dc4512ae66ad638047587b054"
+    },
+    {
+      "id": "8057",
+      "category": 8,
+      "old_path": "design/iteration-v2.8-剩余工作方案-给Codex.md",
+      "path": "design/8057-iteration-v2.8-剩余工作方案-给Codex.md",
+      "title": "迭代方案：V2.8 剩余工作统计（给 Codex 审）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "0b90542ce05dd573d72179d368c2c73da2101d5804d74b526a86452a3ff50f03",
+      "after_sha256": "cc83cd7385f8b667e33cf10dd1862d79949d1fef9293912bff77c4782c635dcd"
+    },
+    {
+      "id": "8058",
+      "category": 8,
+      "old_path": "design/iteration-v2.md",
+      "path": "design/iteration-v2.md",
+      "title": "异动观察 V2：页面设计与更新迭代方案",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "529e3f76e3d7f9825953d9a409c28af2c04b85e0aab691e20928a1ddbe7d6c8b",
+      "after_sha256": "529e3f76e3d7f9825953d9a409c28af2c04b85e0aab691e20928a1ddbe7d6c8b"
+    },
+    {
+      "id": "8059",
+      "category": 8,
+      "old_path": "design/requirements-r2b-progress.md",
+      "path": "design/8059-requirements-r2b-progress.md",
+      "title": "requirements 进度追加 · R2b（UTF-8 干净副本）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "4c5cd4c534e7b2517057a3e67420f5e1bc19bcadac4d47e0c4de1d3984db98a9",
+      "after_sha256": "4c5cd4c534e7b2517057a3e67420f5e1bc19bcadac4d47e0c4de1d3984db98a9"
+    },
+    {
+      "id": "8060",
+      "category": 8,
+      "old_path": "design/requirements-r3-progress.md",
+      "path": "design/8060-requirements-r3-progress.md",
+      "title": "requirements 进度追加 · R3（UTF-8 干净副本）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "d7d57ec125187902fc674536dbd2c8cc913af09dd3c3aaf5fb799361722bd5d8",
+      "after_sha256": "d7d57ec125187902fc674536dbd2c8cc913af09dd3c3aaf5fb799361722bd5d8"
+    },
+    {
+      "id": "8061",
+      "category": 8,
+      "old_path": "design/strategies/02-B策略改用4H数据-专项送审稿.md",
+      "path": "design/strategies/8061-B策略改用4H数据-专项送审稿.md",
+      "title": "策略B“庄家吸筹背离”改用4H数据：专项送审稿",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "6d532e04dc8655deebc263e894da89ccd96c3808d61c3b9464160fb51f7f9a1e",
+      "after_sha256": "58f2f6b631af8544b89376e0a647fd1ed1f86740af43075ffbd9812857980bda"
+    },
+    {
+      "id": "8062",
+      "category": 8,
+      "old_path": "design/strategies/02-合约妖币与Short-Squeeze-统一更新方案-v3.1-送审稿.md",
+      "path": "design/strategies/8062-合约妖币与Short-Squeeze-统一更新方案-v3.1-送审稿.md",
+      "title": "合约妖币 + Short Squeeze 统一更新方案 v3.1（送审稿）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "44117aabfd03650886a66aea93c579aeb2c3d419b3a778eb2213b883f3f6a80c",
+      "after_sha256": "44117aabfd03650886a66aea93c579aeb2c3d419b3a778eb2213b883f3f6a80c"
+    },
+    {
+      "id": "8063",
+      "category": 8,
+      "old_path": "design/strategies/02-合约妖币与Short-Squeeze完整信号体系-v3.0.md",
+      "path": "design/strategies/02-合约妖币与Short-Squeeze完整信号体系-v3.0.md",
+      "title": "**合约妖币 + Short Squeeze 完整信号体系 v3.0**",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：design/unified-strategies.html"
+      ],
+      "before_sha256": "4d794ac8d383dfe4b818b2670dc39bf1abc290af43e6642a29dea7b495430818",
+      "after_sha256": "4d794ac8d383dfe4b818b2670dc39bf1abc290af43e6642a29dea7b495430818"
+    },
+    {
+      "id": "8064",
+      "category": 8,
+      "old_path": "design/剩余工作方案审阅意见.md",
+      "path": "design/8064-剩余工作方案审阅意见.md",
+      "title": "剩余工作方案审阅意见",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "6cbe103a0469d5b20f5e230d1284506dee3ca99ab6c7ab05ed81288c7af128bf",
+      "after_sha256": "6cbe103a0469d5b20f5e230d1284506dee3ca99ab6c7ab05ed81288c7af128bf"
+    },
+    {
+      "id": "8065",
+      "category": 8,
+      "old_path": "design/策略手册-EMA三线金叉与合约Squeeze-v1.md",
+      "path": "design/8065-策略手册-EMA三线金叉与合约Squeeze-v1.md",
+      "title": "EMA 三线金叉 + 合约结构 Squeeze — 策略手册入口（v1）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "a51b60034cb2bbfd10785b8df6e9aa3ce466544c5119373f9053fa6ed1ddd6c8",
+      "after_sha256": "a51b60034cb2bbfd10785b8df6e9aa3ce466544c5119373f9053fa6ed1ddd6c8"
+    },
+    {
+      "id": "8066",
+      "category": 8,
+      "old_path": "GROK实施交接.md",
+      "path": "GROK实施交接.md",
+      "title": "GROK实施交接 · V2.8需求修订",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "45902da1e05626aad4918809a8cabf560afef3f07ace98f758f42b61e3dbc3cc",
+      "after_sha256": "27e64778bf64e3df6a0f464ae5e1aa0e524f56c6b613c7d8bd347e4b8c8555c9"
+    },
+    {
+      "id": "8067",
+      "category": 8,
+      "old_path": "implementation-plan.md",
+      "path": "implementation-plan.md",
+      "title": "更新、策略制定与回测实施方案",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "源码/测试固定引用：server.py"
+      ],
+      "before_sha256": "b784a1104000b5753ee20da4a9112db0882931d5731cab10e2ed3b638fddae14",
+      "after_sha256": "b784a1104000b5753ee20da4a9112db0882931d5731cab10e2ed3b638fddae14"
+    },
+    {
+      "id": "8068",
+      "category": 8,
+      "old_path": "open-gaps-v2.8-for-gpt.md",
+      "path": "8068-open-gaps-v2.8-for-gpt.md",
+      "title": "未完成需求整理 · V2.8 待审（给 GPT）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "5f60aa62fca61fedfcb50ac69106e11d8d8352fc4b88c9b28a5c14704aa30a72",
+      "after_sha256": "7fd280d2799a4a236ce5436d18ce8b366c8535e131227b492dcd3efcb6593f6c"
+    },
+    {
+      "id": "8069",
+      "category": 8,
+      "old_path": "未完成需求-v2.8-待审.md",
+      "path": "8069-未完成需求-v2.8-待审.md",
+      "title": "未完成需求整理 · V2.8 待审（给 GPT）",
+      "fixed_path": false,
+      "fixed_reasons": [],
+      "before_sha256": "c1a2a4e142f73ef277fa64bcc7a531f4db36455ffdb670c32149cbc02aa639c6",
+      "after_sha256": "4d2cc173680183c50caf469f2d28b41874c3d44a9c608b0c850d682a3a378bc7"
+    },
+    {
+      "id": "9001",
+      "category": 9,
+      "old_path": "archive-manifest.json",
+      "path": "archive-manifest.json",
+      "title": "archive-manifest",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "原始附件/机器证据；保留路径与hash"
+      ],
+      "before_sha256": "73fdd45b5fc2537e37dbe42ed5423d7150acc320f5b2ed40037d379256b1f302",
+      "after_sha256": "73fdd45b5fc2537e37dbe42ed5423d7150acc320f5b2ed40037d379256b1f302"
+    },
+    {
+      "id": "9002",
+      "category": 9,
+      "old_path": "design/_extract-research-phases.txt",
+      "path": "design/_extract-research-phases.txt",
+      "title": "_extract-research-phases",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "原始附件/机器证据；保留路径与hash"
+      ],
+      "before_sha256": "5f3df6626b5034a219c9bdac2e76120f6f4ad2e907fccb8a356e5a77cdfd270a",
+      "after_sha256": "5f3df6626b5034a219c9bdac2e76120f6f4ad2e907fccb8a356e5a77cdfd270a"
+    },
+    {
+      "id": "9003",
+      "category": 9,
+      "old_path": "design/_r1_ai_research_excerpt.py.txt",
+      "path": "design/_r1_ai_research_excerpt.py.txt",
+      "title": "_r1_ai_research_excerpt.py",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "原始附件/机器证据；保留路径与hash"
+      ],
+      "before_sha256": "2dff2a639dab93cc9e1b3af921b19ffe3f188fd1c4c71d3ddd50b7bc7972e34c",
+      "after_sha256": "2dff2a639dab93cc9e1b3af921b19ffe3f188fd1c4c71d3ddd50b7bc7972e34c"
+    },
+    {
+      "id": "9004",
+      "category": 9,
+      "old_path": "design/_r1_demand_excerpt.txt",
+      "path": "design/_r1_demand_excerpt.txt",
+      "title": "_r1_demand_excerpt",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "原始附件/机器证据；保留路径与hash"
+      ],
+      "before_sha256": "0600701d2f519111836567adf9e3dbee61485094b76452e622543f0b96f5ac48",
+      "after_sha256": "0600701d2f519111836567adf9e3dbee61485094b76452e622543f0b96f5ac48"
+    },
+    {
+      "id": "9005",
+      "category": 9,
+      "old_path": "design/strategies/v3.2-P0-baseline-manifest.json",
+      "path": "design/strategies/v3.2-P0-baseline-manifest.json",
+      "title": "v3.2-P0-baseline-manifest",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "原始附件/机器证据；保留路径与hash"
+      ],
+      "before_sha256": "13358f781560d4bd83ec1398d349c685ba20b5326d518637ade7f3e1004f44a1",
+      "after_sha256": "13358f781560d4bd83ec1398d349c685ba20b5326d518637ade7f3e1004f44a1"
+    },
+    {
+      "id": "9006",
+      "category": 9,
+      "old_path": "design/strategies/v3.2-P1-cleanup-dry-run.json",
+      "path": "design/strategies/v3.2-P1-cleanup-dry-run.json",
+      "title": "v3.2-P1-cleanup-dry-run",
+      "fixed_path": true,
+      "fixed_reasons": [
+        "原始附件/机器证据；保留路径与hash"
+      ],
+      "before_sha256": "766278703e4f781e5b900f1ae0305e68d562c6b932fa0c667770317b92fe6c5e",
+      "after_sha256": "766278703e4f781e5b900f1ae0305e68d562c6b932fa0c667770317b92fe6c5e"
+    },
+    {
+      "id": "1009",
+      "category": 1,
+      "old_path": null,
+      "path": "1009-统一工作台扫描状态全文显示.md",
+      "title": "统一工作台扫描状态全文显示",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "361637f7bb98f06b6f9631bca00fae5dc4c5fb56fcef4f6fd83ccc2eae6c3fa9"
+    },
+    {
+      "id": "1010",
+      "category": 1,
+      "old_path": null,
+      "path": "1010-吸筹背离本轮与历史分开展示方案.md",
+      "title": "吸筹背离本轮与历史分开展示方案",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "6304d5807a05c6caca32c4f46eb5f438cf4cc2c84a4ff2c188d5f0cd5bc0f448"
+    },
+    {
+      "id": "1011",
+      "category": 1,
+      "old_path": null,
+      "path": "1011-统一工作台快捷组合精简推荐方案.md",
+      "title": "统一工作台快捷组合精简推荐方案",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "8ee8e70e2b2d48ce8bff5072744a376832ec6083c440ad9e95347d13addc796b"
+    },
+    {
+      "id": "1012",
+      "category": 1,
+      "old_path": null,
+      "path": "1012-统一工作台主表列居中对齐.md",
+      "title": "统一工作台主表列居中对齐",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "2610508f83373202e0e74fe8858a2ae5bd30d7187f760512bf332f2019072a79"
+    },
+    {
+      "id": "1013",
+      "category": 1,
+      "old_path": null,
+      "path": "1013-合约列副文只留价格.md",
+      "title": "合约列副文只留价格",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "55e8d93ab299b4174c2ee3bba4c31f0099293b0cefc3f7f9d832bf426554addd"
+    },
+    {
+      "id": "1014",
+      "category": 1,
+      "old_path": null,
+      "path": "1014-主表对齐唯一口径.md",
+      "title": "主表对齐唯一口径",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "aa0be4bf9bc4647ff796dd88cd4b9d34ab6cdd323fba13b447d97fb860b80108"
+    },
+    {
+      "id": "1015",
+      "category": 1,
+      "old_path": null,
+      "path": "1015-C策略方案整理与数据就绪.md",
+      "title": "C策略方案整理与数据就绪",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "a2fefc6226b26e116e8dca809778d66872ff05dc39d6b0d6ea0dd3d65e121992"
+    },
+    {
+      "id": "1016",
+      "category": 1,
+      "old_path": null,
+      "path": "1016-Grok审核-ABC持续追踪方案.md",
+      "title": "Grok审核-ABC持续追踪方案",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "8daac60570fe28d02f3429a920d2805b96121f3005efb799a06d2c4f0018ac24"
+    },
+    {
+      "id": "1017",
+      "category": 1,
+      "old_path": null,
+      "path": "1017-ABC持续追踪与C接入-最终执行与审计方案.md",
+      "title": "ABC持续追踪与C接入：最终执行与审计方案",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "cde360aa67d08218a0cad5461d184123666315f0b1ed7ed102001eea2a2d99c3"
+    },
+    {
+      "id": "1021",
+      "category": 1,
+      "old_path": null,
+      "path": "1021-EMA金叉弱中强统一分级与列表简化方案.md",
+      "title": "EMA金叉弱中强统一分级与列表简化方案",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "cb812cd6a869b678777217e33cbfa3714cdcb1c1557aeafeb6abc64761a97dfa"
+    },
+    {
+      "id": "1022",
+      "category": 1,
+      "old_path": null,
+      "path": "1022-持续追踪主站页面接入与数据同步方案-v1.0.md",
+      "title": "持续追踪主站页面接入与数据同步方案 v1.0",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "85580923153c4c400841506569958a2db0a3899ee6ac2497e0d0926aa3dc482f"
+    },
+    {
+      "id": "1023",
+      "category": 1,
+      "old_path": null,
+      "path": "1023-降速恢复与小时采集时限协调修复方案.md",
+      "title": "降速恢复与小时采集时限协调修复方案 v1.0",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "ee2ed37dbac5b92257d4634b70c7dd2ba4cbb7ada22b7e1af90ab286e63d78a0",
+      "status": "待审阅；限流修复保留，统一采集架构续见1024",
+      "added_at_local": "2026-10-21"
+    },
+    {
+      "id": "1024",
+      "category": 1,
+      "old_path": null,
+      "path": "1024-统一增量采集与ABC分类计算方案.md",
+      "title": "统一增量采集与ABC分类计算方案 v1.2",
+      "fixed_path": false,
+      "before_sha256": null,
+      "after_sha256": "21472ba8632e8524e35f6cd778fac44a3c1545de2dedc84553e4e568dc4d4fb3",
+      "status": "待审阅；补齐重启锁恢复、分层完成状态、统一预算及补齐公平性，未实施",
+      "added_at_local": "2026-10-21"
+    }
+  ]
+}

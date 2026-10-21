@@ -1,0 +1,159 @@
+﻿# -*- coding: utf-8 -*-
+"""Expand real B observe: universe from 24h volume + wire OI/LSR/4H into runner."""
+from __future__ import annotations
+
+import json
+import urllib.request
+from pathlib import Path
+
+ROOT = Path(r"D:\Axiangmu\异动观察工作台")
+
+
+def http_json(url: str, params: dict | None = None):
+    if params:
+        from urllib.parse import urlencode
+        url = url + "?" + urlencode(params)
+    with urllib.request.urlopen(url, timeout=30) as r:
+        return json.loads(r.read().decode("utf-8"))
+
+
+def build_universe(limit: int = 40) -> list[dict]:
+    """USDⓈ-M USDT 永续，按 24h 成交额取前 N（真实目录，不依赖 A 池）。"""
+    info = http_json("https://fapi.binance.com/fapi/v1/exchangeInfo")
+    tradable = {
+        s["symbol"]
+        for s in info.get("symbols", [])
+        if s.get("contractType") == "PERPETUAL"
+        and s.get("quoteAsset") == "USDT"
+        and s.get("status") == "TRADING"
+    }
+    tickers = http_json("https://fapi.binance.com/fapi/v1/ticker/24hr")
+    rows = []
+    for t in tickers:
+        sym = t.get("symbol")
+        if sym not in tradable:
+            continue
+        try:
+            qv = float(t.get("quoteVolume") or 0)
+        except (TypeError, ValueError):
+            qv = 0.0
+        rows.append((qv, sym))
+    rows.sort(reverse=True)
+    out = [{"market": "USDⓈ-M", "symbol": sym} for _, sym in rows[:limit]]
+    path = ROOT / "runtime" / "b-observe-universe.json"
+    path.write_text(json.dumps({"symbols": out, "source": "binance-fapi-24hr-top", "limit": limit}, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
+    print("universe", len(out), "top", [x["symbol"] for x in out[:8]])
+    return out
+
+
+# Patch runner to attach oi/lsr + simple 4h ema bg when fetching
+runner = ROOT / "b_observe_runner.py"
+rt = runner.read_text(encoding="utf-8")
+if "fetch_oi_lsr_1h(" not in rt:
+    # ensure import
+    if "from b_1h_fetch import" not in rt:
+        rt = rt.replace(
+            "from b_1h_ingest import ingest_symbol_1h\n",
+            "from b_1h_ingest import ingest_symbol_1h\nfrom b_1h_fetch import fetch_1h_klines, fetch_oi_lsr_1h\n",
+            1,
+        )
+    elif "fetch_oi_lsr_1h" not in rt.split("from b_1h_fetch")[0] + rt.split("from b_1h_fetch")[1][:80] if "from b_1h_fetch" in rt else "":
+        rt = rt.replace(
+            "from b_1h_fetch import make_fetch_1h\n" if "make_fetch_1h" in rt else "from b_1h_ingest import ingest_symbol_1h\n",
+            "from b_1h_ingest import ingest_symbol_1h\nfrom b_1h_fetch import fetch_oi_lsr_1h\n" if "from b_1h_fetch" not in rt else rt[:0],
+            1,
+        )
+    # cleaner: rewrite evaluate call site inside fetch loop to enrich item
+    # After ingest_symbol_1h success, fetch oi/lsr and 4h bg
+    needle = """        meta = ingest_symbol_1h(
+            cache,
+            market=market,
+            symbol=symbol,
+            raw_klines=raw,
+            target_close_boundary=boundary,
+        )
+        written += int(meta.get("written") or 0)
+        try:
+            ev = evaluate_symbol_from_cache(
+                root,
+                market=market,
+                symbol=symbol,
+                target_close_boundary=boundary,
+                bg4h=item.get("bg4h"),
+                bg4h_h1=item.get("bg4h_h1"),
+            )
+"""
+    if needle not in rt:
+        print("needle miss for enrich; dumping snippet")
+        i = rt.find("ingest_symbol_1h")
+        print(rt[i:i+700])
+    else:
+        repl = """        meta = ingest_symbol_1h(
+            cache,
+            market=market,
+            symbol=symbol,
+            raw_klines=raw,
+            target_close_boundary=boundary,
+        )
+        written += int(meta.get("written") or 0)
+        # 真链路：同期 OI/LSR + 最近已闭合 4H EMA 背景（缺则 unknown）
+        oi_samples = None
+        lsr_samples = None
+        bg4h = item.get("bg4h")
+        bg4h_h1 = item.get("bg4h_h1")
+        market_cap = item.get("market_cap")
+        try:
+            from b_1h_fetch import fetch_oi_lsr_1h
+            from scanner import safe, ema
+            import time as _time
+            oi_pack = fetch_oi_lsr_1h(market, symbol, limit=30)
+            if oi_pack.get("oi_hist"):
+                # openInterestHist returns list; fetch_oi_lsr currently keeps last only — re-fetch list for gate
+                pass
+            # broader samples via safe
+            host = "https://fapi.binance.com" if market != "COIN-M" else "https://dapi.binance.com"
+            oi_list, _ = safe(host + "/futures/data/openInterestHist", {"symbol": symbol, "period": "1h", "limit": 30})
+            lsr_list, _ = safe(host + "/futures/data/globalLongShortAccountRatio", {"symbol": symbol, "period": "1h", "limit": 30})
+            oi_samples = oi_list if isinstance(oi_list, list) else None
+            lsr_samples = lsr_list if isinstance(lsr_list, list) else None
+            kl4, _ = safe(host + ("/fapi/v1/" if market != "COIN-M" else "/dapi/v1/") + "klines", {"symbol": symbol, "interval": "4h", "limit": 200})
+            if isinstance(kl4, list) and len(kl4) >= 30:
+                cutoff = int(_time.time() * 1000)
+                closed = [k for k in kl4 if isinstance(k, list) and len(k) >= 7 and int(k[6]) < cutoff]
+                if len(closed) >= 25:
+                    closes = [float(k[4]) for k in closed]
+                    bg4h = {"ema7": ema(closes, 7), "ema25": ema(closes, 25), "ema99": ema(closes, 99) if len(closes) >= 99 else None}
+                    bg4h_h1 = bg4h
+        except Exception as exc:  # noqa: BLE001
+            errors.append({"symbol": symbol, "enrich_error": str(exc)[:180]})
+        try:
+            ev = evaluate_symbol_from_cache(
+                root,
+                market=market,
+                symbol=symbol,
+                target_close_boundary=boundary,
+                bg4h=bg4h,
+                bg4h_h1=bg4h_h1,
+                oi_samples=oi_samples,
+                lsr_samples=lsr_samples,
+                market_cap=market_cap,
+                cap_quality="unknown" if market_cap is None else "pass",
+            )
+"""
+        rt = rt.replace(needle, repl, 1)
+        # fix import fetch_oi at top if missing
+        if "from b_1h_fetch import fetch_oi_lsr_1h" not in rt and "fetch_oi_lsr_1h" in rt:
+            rt = rt.replace(
+                "from b_1h_ingest import ingest_symbol_1h\n",
+                "from b_1h_ingest import ingest_symbol_1h\nfrom b_1h_fetch import fetch_oi_lsr_1h\n",
+                1,
+            )
+        runner.write_text(rt, encoding="utf-8", newline="\n")
+        print("runner enrich wired")
+else:
+    print("runner already has oi call")
+
+# load_universe must accept {"symbols":[...]} — already does
+from b_observe_universe import load_universe
+build_universe(40)
+print("loaded", len(load_universe(ROOT)))

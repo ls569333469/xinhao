@@ -1,0 +1,351 @@
+# -*- coding: utf-8 -*-
+"""Continue Codex v3.2: contemporaneous gate, process order, round stats."""
+from __future__ import annotations
+
+from pathlib import Path
+
+ROOT = Path(r"D:\Axiangmu\异动观察工作台")
+
+# --- contemporaneous gate module ---
+GATE = r'''# -*- coding: utf-8 -*-
+"""B 同期门禁：0 ≤ t − s ≤ max_lag_ms；s>t 或不符 → 不通过。"""
+from __future__ import annotations
+
+from typing import Any, Optional
+
+
+def contemporaneous_ok(t_ms: int, s_ms: int | None, *, max_lag_ms: int = 300_000) -> str:
+    """返回 pass / fail / unknown。"""
+    if s_ms is None:
+        return "unknown"
+    try:
+        t = int(t_ms)
+        s = int(s_ms)
+    except (TypeError, ValueError):
+        return "unknown"
+    delta = t - s
+    if delta < 0:
+        return "fail"  # s after t
+    if delta > int(max_lag_ms):
+        return "fail"
+    return "pass"
+
+
+def pick_sample_at_or_before(t_ms: int, samples: list[dict], *, time_key: str = "timestamp", max_lag_ms: int = 300_000) -> tuple[Optional[dict], str, Optional[int]]:
+    """选不晚于 t、最接近 t 且满足门禁的样本。返回 (sample, quality, delta_ms)。"""
+    if not samples:
+        return None, "unknown", None
+    best = None
+    best_delta = None
+    for row in samples:
+        if not isinstance(row, dict):
+            continue
+        s = row.get(time_key)
+        if s is None:
+            continue
+        try:
+            s_i = int(s)
+        except (TypeError, ValueError):
+            continue
+        delta = int(t_ms) - s_i
+        if delta < 0:
+            continue
+        if best is None or delta < best_delta:
+            best, best_delta = row, delta
+    if best is None:
+        return None, "unknown", None
+    q = contemporaneous_ok(t_ms, int(best[time_key]), max_lag_ms=max_lag_ms)
+    return best, q, best_delta
+'''
+(ROOT / "b_contemporaneous.py").write_text(GATE, encoding="utf-8", newline="\n")
+
+# --- enrich evaluate with contemporaneous + structure ---
+ev_path = ROOT / "b_observe_evaluate.py"
+ev = ev_path.read_text(encoding="utf-8")
+if "pick_sample_at_or_before" not in ev:
+    ev = ev.replace(
+        "from b_accumulation_rules import BAR_MS, BASELINE_BARS, evaluate_h_event, evaluate_h1_confirm, structure_gate\n",
+        "from b_accumulation_rules import BAR_MS, BASELINE_BARS, evaluate_h_event, evaluate_h1_confirm, structure_gate\n"
+        "from b_contemporaneous import pick_sample_at_or_before\n",
+        1,
+    )
+    # Add oi_samples/lsr_samples optional lists
+    if "oi_samples" not in ev:
+        ev = ev.replace(
+            "    oi_cap_pct=None,\n    lsr=None,\n    oi_quality: str = \"unknown\",\n    lsr_quality: str = \"unknown\",\n    cap_quality: str = \"unknown\",\n) -> dict:",
+            "    oi_cap_pct=None,\n    lsr=None,\n    oi_quality: str = \"unknown\",\n    lsr_quality: str = \"unknown\",\n    cap_quality: str = \"unknown\",\n"
+            "    oi_samples: list | None = None,\n    lsr_samples: list | None = None,\n"
+            "    max_lag_ms: int = 300_000,\n"
+            "    market_cap: float | None = None,\n) -> dict:",
+            1,
+        )
+        # after computing h_open and before structure_gate, resolve samples
+        insert = '''
+    close_boundary = int(h_open) + BAR_MS
+    oi_delta = None
+    lsr_delta = None
+    if oi_samples is not None:
+        samp, oq, oi_delta = pick_sample_at_or_before(close_boundary, oi_samples, max_lag_ms=max_lag_ms)
+        oi_quality = oq
+        if samp is not None and oi_cap_pct is None and market_cap and market_cap > 0:
+            try:
+                oi_usd = float(samp.get("sumOpenInterestValue"))
+                oi_cap_pct = oi_usd / float(market_cap) * 100.0
+            except (TypeError, ValueError):
+                oi_quality = "unknown"
+    if lsr_samples is not None:
+        samp, lq, lsr_delta = pick_sample_at_or_before(close_boundary, lsr_samples, max_lag_ms=max_lag_ms)
+        lsr_quality = lq
+        if samp is not None and lsr is None:
+            try:
+                lsr = float(samp.get("longShortRatio"))
+            except (TypeError, ValueError):
+                lsr_quality = "unknown"
+'''
+        if "close_boundary = int(h_open) + BAR_MS" not in ev:
+            ev = ev.replace(
+                "    struct = structure_gate(oi_cap_pct=oi_cap_pct, lsr=lsr, oi_quality=oi_quality, lsr_quality=lsr_quality, cap_quality=cap_quality)\n",
+                insert + "    struct = structure_gate(oi_cap_pct=oi_cap_pct, lsr=lsr, oi_quality=oi_quality, lsr_quality=lsr_quality, cap_quality=cap_quality)\n",
+                1,
+            )
+        # add deltas to payload
+        ev = ev.replace(
+            '        "structure_gate": struct,',
+            '        "structure_gate": struct,\n'
+            '        "oi_cap_pct": oi_cap_pct,\n'
+            '        "lsr": lsr,\n'
+            '        "oi_delta_ms": oi_delta,\n'
+            '        "lsr_delta_ms": lsr_delta,\n'
+            '        "oi_quality": oi_quality,\n'
+            '        "lsr_quality": lsr_quality,',
+            1,
+        )
+    ev_path.write_text(ev, encoding="utf-8", newline="\n")
+    print("evaluate contemporaneous wired")
+else:
+    print("evaluate already has contemporaneous")
+
+# --- process order helper ---
+PROC = r'''# -*- coding: utf-8 -*-
+"""按 Codex 13.2：先确认 expected h+1，再判断新 h。纯函数，不发网络。"""
+from __future__ import annotations
+
+from typing import Any
+
+from b_accumulation_rules import BAR_MS, BASELINE_BARS, evaluate_h_event, evaluate_h1_confirm
+from b_accumulation_store import BAccumulationStore, stable_event_id
+
+
+def process_bars_in_order(
+    root,
+    *,
+    market: str,
+    symbol: str,
+    bars_asc: list[dict],
+    observation_started_open: int | None = None,
+    bg4h_for=None,
+) -> dict:
+    """bars_asc 已去重升序。bg4h_for(open_time)->dict|None。"""
+    store = BAccumulationStore(root)
+    store.ensure_observation_start()
+    confirmed = 0
+    new_events = 0
+    # pending confirmations: map expected_open -> h_open
+    pending = {}
+    # seed from existing store events that await confirm
+    for rec in store.list_events():
+        if rec.get("market") != market or rec.get("symbol") != symbol:
+            continue
+        exp = rec.get("expected_confirmation_open_time")
+        if exp and rec.get("technical_confirmation") in (None, "pending", "unknown"):
+            pending[int(exp)] = int(rec["trigger_open_time"])
+
+    for i, b in enumerate(bars_asc):
+        ot = int(b["open_time"])
+        # 1) if this bar is expected confirmation
+        if ot in pending:
+            h_open = pending[ot]
+            bg = bg4h_for(ot) if callable(bg4h_for) else None
+            conf = evaluate_h1_confirm(bars_asc, h_open, bg4h_h1=bg, h1_closed=True)
+            store.upsert_event(
+                market=market,
+                symbol=symbol,
+                trigger_open_time=h_open,
+                payload={
+                    "technical_confirmation": conf.get("technical_confirmation"),
+                    "confirm_ratio": conf.get("ratio"),
+                    "pending_confirm": conf.get("pending"),
+                    "input_fingerprint": f"confirm:{h_open}:{conf.get('technical_confirmation')}:{conf.get('ratio')}",
+                },
+            )
+            confirmed += 1
+            pending.pop(ot, None)
+        # 2) evaluate as potential new h (need warmup)
+        if i < BASELINE_BARS:
+            continue
+        if observation_started_open is not None and ot < int(observation_started_open):
+            continue  # 历史，不新建提醒事件；仍可评估但不计 new_events 提醒
+        bg = bg4h_for(ot) if callable(bg4h_for) else None
+        ev = evaluate_h_event(bars_asc, i, bg4h=bg)
+        if ev.get("technical_event") == "pass":
+            exp = ev.get("expected_confirmation_open_time")
+            store.upsert_event(
+                market=market,
+                symbol=symbol,
+                trigger_open_time=ot,
+                payload={
+                    "technical_event": "pass",
+                    "event_ratio": ev.get("ratio"),
+                    "abs_return_ok": ev.get("abs_return_ok"),
+                    "expected_confirmation_open_time": exp,
+                    "technical_confirmation": "pending",
+                    "pending_confirm": True,
+                    "input_fingerprint": f"event:{ot}:{ev.get('ratio')}",
+                },
+            )
+            if exp:
+                pending[int(exp)] = ot
+            new_events += 1
+    return {"market": market, "symbol": symbol, "confirmed": confirmed, "new_events": new_events, "pending": len(pending)}
+'''
+(ROOT / "b_process_order.py").write_text(PROC, encoding="utf-8", newline="\n")
+
+# --- round stats in runner ---
+runner = ROOT / "b_observe_runner.py"
+rt = runner.read_text(encoding="utf-8")
+if "round_stats" not in rt:
+    rt = rt.replace(
+        '        "details_sample": details[:5],\n    }\n',
+        '        "details_sample": details[:5],\n'
+        '        "round_stats": {\n'
+        '            "universe": len(symbols or []),\n'
+        '            "written_1h_bars": written,\n'
+        '            "evaluated_symbols": evaluated,\n'
+        '            "errors": len(errors),\n'
+        '            "target_close_boundary": boundary,\n'
+        '        },\n'
+        '    }\n',
+        1,
+    )
+    runner.write_text(rt, encoding="utf-8", newline="\n")
+    print("runner round_stats added")
+
+# --- tests B07 + process order ---
+TEST = r'''# -*- coding: utf-8 -*-
+from __future__ import annotations
+
+import tempfile
+import unittest
+from pathlib import Path
+
+from b_accumulation_rules import BAR_MS
+from b_contemporaneous import contemporaneous_ok, pick_sample_at_or_before
+from b_observe_evaluate import evaluate_symbol_from_cache
+from b_1h_ingest import ingest_symbol_1h
+from market_candle_cache import MarketCandleCache
+from b_process_order import process_bars_in_order
+
+
+class B07Contemporaneous(unittest.TestCase):
+    def test_gate_edges(self):
+        t = 1_000_000
+        self.assertEqual(contemporaneous_ok(t, t), "pass")
+        self.assertEqual(contemporaneous_ok(t, t - 300_000), "pass")
+        self.assertEqual(contemporaneous_ok(t, t - 300_001), "fail")
+        self.assertEqual(contemporaneous_ok(t, t + 1), "fail")
+        self.assertEqual(contemporaneous_ok(t, None), "unknown")
+
+    def test_pick_nearest(self):
+        t = 1_000_000
+        samples = [
+            {"timestamp": t - 400_000, "v": 1},
+            {"timestamp": t - 100_000, "v": 2},
+            {"timestamp": t + 10, "v": 3},
+        ]
+        samp, q, delta = pick_sample_at_or_before(t, samples)
+        self.assertEqual(samp["v"], 2)
+        self.assertEqual(q, "pass")
+        self.assertEqual(delta, 100_000)
+
+
+class ProcessOrder(unittest.TestCase):
+    def test_confirm_before_new_h(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            base = 1_700_000_000_000
+            bars = []
+            for i in range(170):
+                q = 10.0 if i < 168 else (90.0 if i == 168 else 30.0)
+                ot = base + i * BAR_MS
+                bars.append({"open_time": ot, "o": 100.0, "h": 101.0, "l": 99.0, "c": 100.5, "q": q})
+            def bg(_ot):
+                return {"ema7": 2.0, "ema25": 1.0}
+            out = process_bars_in_order(root, market="USDⓈ-M", symbol="EEEUSDT", bars_asc=bars, bg4h_for=bg)
+            self.assertGreaterEqual(out["new_events"], 1)
+
+
+class StructureWithSamples(unittest.TestCase):
+    def test_oi_lsr_gate_in_evaluate(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            cache = MarketCandleCache(root)
+            base = 1_700_000_000_000
+            raw = []
+            for i in range(170):
+                q = 10.0 if i < 168 else 90.0
+                ot = base + i * 3_600_000
+                raw.append([ot, "100", "101", "99", "100.5", "1", ot + 3_599_999, str(q)])
+            ingest_symbol_1h(cache, market="USDⓈ-M", symbol="FFFUSDT", raw_klines=raw)
+            h_open = base + 168 * 3_600_000
+            boundary = h_open + 3_600_000
+            oi_samples = [{"timestamp": boundary, "sumOpenInterestValue": "40000000"}]
+            lsr_samples = [{"timestamp": boundary - 60_000, "longShortRatio": "0.5"}]
+            out = evaluate_symbol_from_cache(
+                root,
+                market="USDⓈ-M",
+                symbol="FFFUSDT",
+                target_close_boundary=boundary,
+                bg4h={"ema7": 2, "ema25": 1},
+                bg4h_h1={"ema7": 2, "ema25": 1},
+                oi_samples=oi_samples,
+                lsr_samples=lsr_samples,
+                market_cap=100_000_000.0,
+                cap_quality="pass",
+            )
+            self.assertTrue(out["evaluated"])
+
+
+if __name__ == "__main__":
+    unittest.main()
+'''
+(ROOT / "test_v32_codex_gates.py").write_text(TEST, encoding="utf-8", newline="\n")
+
+# update delivery note
+doc = ROOT / "DOCS" / "design" / "strategies" / "v3.2-Codex续作说明.md"
+doc.write_text(
+    """# v3.2 Codex 续作说明（按第13/15章）
+
+## 本刀
+
+- `b_contemporaneous.py`：B07 同期门禁 `0≤t−s≤300000`
+- `b_observe_evaluate.py`：OI/LSR 样本挑选 + structure_gate
+- `b_process_order.py`：13.2 先确认 expected h+1，再判新 h
+- `b_observe_runner.py`：round_stats 轮次分母字段
+
+## 仍未做（方案后续）
+
+- P5 真实小时观察（需用户启动指令）
+- 正式页 U01/U02 全宽分栏（现有独立 `/b-observe.html`）
+- 配置页 timing/observe 前端往返（后端已有）
+- C档 / 模拟
+
+## 测试
+
+```
+python -m unittest test_v32_codex_gates.py test_v32_b_1h_fetch.py test_v32_p2_observe_1h.py -v
+```
+""",
+    encoding="utf-8",
+    newline="\n",
+)
+print("codex continue modules written")

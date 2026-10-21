@@ -1,0 +1,237 @@
+# DOCS · 文档索引（兼容入口，编号0001）
+
+本入口直接展示完整编号目录；标准本地目录为[0000｜文档编号与总目录](0000-文档编号与总目录.md)。固定HTTP白名单未因文件排序扩展，本文不宣称新增文档已成为在线说明页。
+
+更新日期：2026-10-17（Asia/Shanghai）。本次只整理文档，不修改生产代码、行情、任务、计划或服务。
+
+## 统一编号规则
+
+- 全目录（含子目录）共享四位编号`GNNN`：首位为分类，后三位为该分类流水号；每份文件一个唯一编号。编号不是策略版本或验收状态。
+- 普通Markdown文件名为`四位编号-原主题名.md`；原版本、阶段、EXP/UI/H/M/L等业务编号保留。后续同分类取下一未用号，不因新增文件批量重排历史编号。
+- 现网服务/测试固定引用、当前监控底稿、README/INDEX标准入口、已批准r2原文保留路径，仍在下表分配同一规则的唯一编号；“固定路径”不表示遗漏整理。
+- JSON/TXT附件及归档manifest保留原路径、字节和hash，纳入90类附件登记；不把取证清单中的历史路径改写成新路径。
+- 原目录层级保持，文件内容只更新实际Markdown导航链接；原规则、审计结论、历史证据与状态不因排序改变。旧新路径完整对照见[编号登记表](document-registry.json)。
+- 项目外审计源码、图片及复现证据继续留在项目外。1001为交互报告的项目内阅读副本，证据链接指向原始位置。
+
+## 先看这几份
+
+- [1001｜全站交互与契约调整](1001-统一信号工作台-3.2前后全站交互核查与调整建议.md)
+- [1002｜1H缓存与续接优化v1.1](1H缓存与续接优化实施方案-v1.1-待审阅.md)：扫描终态补§15后按当前S1～S6执行，不能中途迁移。
+- [2001｜v3.2 r2唯一执行设计](design/strategies/02-合约妖币与Short-Squeeze-最终执行方案-v3.2.md)：原SHA256保持`84e40f8abcd1ec4951b6bf55b5d0682d7e493e826f2ffb2a072fe7a8393a3a4a`。
+- 2002为A现行手册，2003为v3.3 r5页面方案，2004为统一需求；策略优先级按用户已批准规则及后续明确决定，不按编号大小判断。
+
+## 0xxx｜目录与使用入口
+
+| 编号 | 文档 | 路径状态 |
+|---|---|---|
+| 0000 | [文档编号与总目录](0000-文档编号与总目录.md) | 总目录 |
+| 0001 | [DOCS · 项目文档索引](INDEX.md) | 固定路径 |
+| 0002 | [异动观察工作台](README.md) | 固定路径 |
+| 0003 | [V2 页面设计交付](design/README.md) | 固定路径 |
+| 0004 | [策略手册目录](design/strategies/README.md) | 固定路径 |
+| 0005 | [投研经验文件（当前文件阶段，不是页面功能）](experience/README.md) | 固定路径 |
+
+## 1xxx｜当前待实施方案
+
+| 编号 | 文档 | 路径状态 |
+|---|---|---|
+| 1001 | [统一信号工作台：3.2前后全站交互核查与调整建议](1001-统一信号工作台-3.2前后全站交互核查与调整建议.md) | 编号文件 |
+| 1002 | [1H缓存与续接优化实施方案 v1.1（待审阅）](1H缓存与续接优化实施方案-v1.1-待审阅.md) | 固定路径 |
+
+| 1021 | [EMA金叉弱中强统一分级与列表简化](1021-EMA金叉弱中强统一分级与列表简化方案.md) | 已授权实施；承接1020，检查与发布记录见本方案 |
+| 1022 | [持续追踪主站页面接入与数据同步方案 v1.0](1022-持续追踪主站页面接入与数据同步方案-v1.0.md) | 已批准实施；主站独立页面＋追踪／历史双标签，验收见1022第10节 |
+| 1023 | [降速恢复与小时采集时限协调修复方案 v1.0](1023-降速恢复与小时采集时限协调修复方案.md) | 待审阅；限流修复保留，统一采集架构续见1024 |
+| 1024 | [统一增量采集与ABC分类计算方案 v1.2](1024-统一增量采集与ABC分类计算方案.md) | 待审阅；补齐重启锁恢复、分层完成状态、统一预算及补齐公平性，未实施 |
+
+## 2xxx｜当前规则、字段契约与正式设计
+
+| 编号 | 文档 | 路径状态 |
+|---|---|---|
+| 2001 | [合约妖币 + Short Squeeze 最终执行方案 v3.2](design/strategies/02-合约妖币与Short-Squeeze-最终执行方案-v3.2.md) | 固定路径 |
+| 2002 | [EMA三线金叉](design/strategies/01-EMA三线金叉与合约Squeeze.md) | 固定路径 |
+| 2003 | [统一信号工作台最终优化方案 v3.3 r5](design/strategies/03-统一信号工作台-最终优化方案-v3.3-r5.md) | 固定路径 |
+| 2004 | [异动观察工作台 · 统一需求文档](design/requirements.md) | 固定路径 |
+| 2005 | [EMA观察与事件字段契约 v1](design/2005-ema-observation-contract-v1.md) | 编号文件 |
+| 2006 | [给雪球：I4 均线压制 → 对齐「EMA 三线金叉」新手册（方案 Grok-v1）](design/2006-给雪球-I4均线压制更新为金叉方案-Grok-v1.md) | 编号文件 |
+| 2007 | [给雪球 · 异动指标①–⑫全实现方案 · Grok-v1](design/2007-给雪球-异动指标①-⑫全实现方案-Grok-v1.md) | 编号文件 |
+| 2008 | [给雪球 · 精准净流入（精确⑤ / I5）补数方案 · Grok独立检索方案 v1](design/2008-给雪球-精准净流入补数方案-Grok-v1.md) | 编号文件 |
+
+## 3xxx｜审计与整改
+
+| 编号 | 文档 | 路径状态 |
+|---|---|---|
+| 3001 | [v3.2 前后端不匹配审计与测试方案](3001-v3.2-前后端不匹配审计与测试方案.md) | 编号文件 |
+| 3002 | [v3.2 前后端问题深度增补（快读）](3002-v3.2-前后端问题深度增补.md) | 编号文件 |
+| 3003 | [v3.2 问题二次深度核查](3003-v3.2-问题二次深度核查.md) | 编号文件 |
+| 3004 | [六项异动指标评估与全市场扫描复核](ai-review.md) | 固定路径 |
+| 3005 | [已有数据可计算性审计](data-capability-audit.md) | 固定路径 |
+| 3006 | [EMA-Squeeze v3 与GROK当前代码只读审计](design/audit-gpt-ema-v4/审计报告.md) | 固定路径 |
+| 3007 | [只读增量审计报告：前端迁移、数据口径与主链路](design/codex-audit-20261014/审计报告.md) | 固定路径 |
+| 3008 | [给GROK：遮挡、排序数据、历史数据迁移及全链路排查](design/codex-audit-20261014/3008-给GROK-遮挡排序数据与全链路排查.md) | 编号文件 |
+| 3009 | [整体设计与代码检查 · V2.7状态更新](design/design-code-review.md) | 固定路径 |
+| 3010 | [字段对账：A布局+C专业表 · 第一步](design/3010-field-audit-a-pro-step1.md) | 编号文件 |
+| 3011 | [正式功能 vs 预览能力对照（第一步）](design/3011-formal-vs-preview-capabilities-step1.md) | 编号文件 |
+| 3012 | [Codex 审计修复（P1/P2）](design/3012-iteration-v2.8-frontend-codex-audit-fix.md) | 编号文件 |
+| 3013 | [V2.8 REVIEW-01 加深 · 日/周计划调度绑定](design/iteration-v2.8-review01-schedule.md) | 固定路径 |
+| 3014 | [V2.8 REVIEW-01 首刀 · 数据复盘与持久计划](design/iteration-v2.8-review01.md) | 固定路径 |
+| 3015 | [V2.8 A档迭代需求：审计修复与01/02/03收口](design/3015-V2.8-A档迭代需求-审计修复与01-02-03收口.md) | 编号文件 |
+| 3016 | [v3.3 r5 全站审查报告](design/v3.3-r5-全站审查报告.md) | 固定路径 |
+| 3017 | [独立审计核实与整改清单](整改清单.md) | 固定路径 |
+| 3018 | [异动观察工作台 · 独立审计报告](独立审计报告.md) | 固定路径 |
+
+## 4xxx｜v3.2/v3.3交付与运行证据
+
+| 编号 | 文档 | 路径状态 |
+|---|---|---|
+| 4001 | [iteration：④筛选与点火级别拆开 + 扫完写池](design/audit-gpt-ema-v4/4001-iteration-ema-filter-store-split-20261016.md) | 编号文件 |
+| 4002 | [iteration-ema-name-v42 证据（仅第1节：统一命名）](design/audit-gpt-ema-v4/4002-iteration-ema-name-v42-evidence.md) | 编号文件 |
+| 4003 | [P2 证据 — UI05–UI08 + SCREEN + 排序标清窗口（v4.2）](design/audit-gpt-ema-v4/4003-iteration-ema-p2-v42-evidence.md) | 编号文件 |
+| 4004 | [iteration-ema-ui01-v42 证据（仅 UI01 / POOL）](design/audit-gpt-ema-v4/4004-iteration-ema-ui01-v42-evidence.md) | 编号文件 |
+| 4005 | [iteration-ema-ui02-v42 证据（仅 UI02）](design/audit-gpt-ema-v4/4005-iteration-ema-ui02-v42-evidence.md) | 编号文件 |
+| 4006 | [UI03 证据 — 前向观察及模拟按冻结模式分支（v4.2）](design/audit-gpt-ema-v4/4006-iteration-ema-ui03-v42-evidence.md) | 编号文件 |
+| 4007 | [UI04 证据 — 回测单跑/公平对照不提交旧替代规则（v4.2）](design/audit-gpt-ema-v4/4007-iteration-ema-ui04-v42-evidence.md) | 编号文件 |
+| 4008 | [EMA-Squeeze v4 增量实施证据](design/4008-iteration-ema-squeeze-v4-evidence.md) | 编号文件 |
+| 4009 | [迭代证据：I4 前端对齐（蓄力 ≠ 入场 + I4b 可见）](design/4009-iteration-i4-frontend-align-evidence.md) | 编号文件 |
+| 4010 | [迭代证据：I4 蓄力 + I4b 金叉点火（对齐新手册）](design/4010-iteration-i4-golden-cross-evidence.md) | 编号文件 |
+| 4011 | [v3.3 r5 统一信号工作台实施与验收说明](design/iteration-v3.3-r5-delivery.md) | 固定路径 |
+| 4012 | [v3.2 r2 · Codex接手交付](design/strategies/v3.2-Codex接手交付.md) | 固定路径 |
+| 4013 | [v3.2 Codex 续作说明（按第13/15章）](design/strategies/4013-v3.2-Codex续作说明.md) | 编号文件 |
+| 4014 | [v3.2 首批 P0/P1 实施说明（进行中）](design/strategies/4014-v3.2-P0P1-实施说明.md) | 编号文件 |
+| 4015 | [v3.2 P2 实施说明](design/strategies/4015-v3.2-P2-实施说明.md) | 编号文件 |
+| 4016 | [v3.2 P3 实施说明](design/strategies/4016-v3.2-P3-实施说明.md) | 编号文件 |
+| 4017 | [v3.2 P4 实施说明](design/strategies/4017-v3.2-P4-实施说明.md) | 编号文件 |
+| 4018 | [v3.2 P5 真实运行证据（首轮）](design/strategies/4018-v3.2-P5-真实运行证据.md) | 编号文件 |
+| 4019 | [v3.2 首批交付说明（P0～P4 代码骨架）](design/strategies/4019-v3.2-首批交付说明.md) | 编号文件 |
+
+## 5xxx｜维护、扫描与数据报告
+
+| 编号 | 文档 | 路径状态 |
+|---|---|---|
+| 5001 | [链上净流补充报告](chain-flow-report.md) | 固定路径 |
+| 5002 | [扫描资产身份映射与指数市值口径修复](design/5002-iteration-asset-identity-mapping.md) | 编号文件 |
+| 5003 | [流通市值全覆盖与数据身份核验](design/5003-iteration-market-cap-full-coverage.md) | 编号文件 |
+| 5004 | [扫描后的自动缺失数据补查（一次有界）](design/5004-iteration-scan-auto-verification.md) | 编号文件 |
+| 5005 | [扫描：CoinGecko 独立节流与限流冷却](design/5005-iteration-scan-coingecko-pacing.md) | 编号文件 |
+| 5006 | [扫描辅助储备自动更新方案](design/iteration-scan-reserves-refresh.md) | 固定路径 |
+| 5007 | [每次扫描的市值覆盖与显式排除（2026-10-15）](design/5007-iteration-scan-stability-and-exclusions.md) | 编号文件 |
+| 5008 | [项目迁移记录](migration-report.md) | 固定路径 |
+| 5009 | [币安全市场永续异动扫描报告](report.md) | 固定路径 |
+| 5010 | [现有数据策略筛选测试](strategy-test-report.md) | 固定路径 |
+| 5011 | [当前维护与清理说明](维护与清理说明.md) | 固定路径 |
+
+## 6xxx｜投研设计及迭代记录
+
+| 编号 | 文档 | 路径状态 |
+|---|---|---|
+| 6001 | [投研迭代 R1（v1.1 P1）离线取证 · 身份/两阶段冻结/去重](design/6001-iteration-research-r1-v11-evidence.md) | 编号文件 |
+| 6002 | [投研迭代 R2a（v1.1 §4）离线取证 · 模板 B / 旧报告兼容 / 前端 submission 接线](design/6002-iteration-research-r2a-evidence.md) | 编号文件 |
+| 6003 | [投研迭代 R2b（v1.1 REV-03）离线取证 · 先检索后生成](design/6003-iteration-research-r2b-evidence.md) | 编号文件 |
+| 6004 | [投研迭代 R2b UI：检索/证据状态只读展示证据](design/6004-iteration-research-r2b-ui-evidence.md) | 编号文件 |
+| 6005 | [投研迭代 R3（真实供应商单币标准档闭环）取证](design/6005-iteration-research-r3-evidence.md) | 编号文件 |
+| 6006 | [投研迭代 R4：用量解析、多报告并发（离线）与经验文件 取证](design/6006-iteration-research-r4-con-usage-evidence.md) | 编号文件 |
+| 6007 | [投研迭代 R5：CON-04 / CON-08+REV-10 / CON-06 页面 / 检索 live 接线 取证](design/6007-iteration-research-r5-evidence.md) | 编号文件 |
+| 6008 | [投研迭代 R6：RES-16 / REV-07 / REV-09 / RES-14 取证](design/6008-iteration-research-r6-evidence.md) | 编号文件 |
+| 6009 | [投研迭代 R7：真实 API 核验取证](design/6009-iteration-research-r7-live-evidence.md) | 编号文件 |
+| 6010 | [投研迭代 R8：开头截止时间 + CON-08 空失败重试 取证](design/6010-iteration-research-r8-evidence.md) | 编号文件 |
+| 6011 | [投研 R9：标准版收口、现有模型原生检索与生成验收](design/6011-iteration-research-r9-standard-native-search.md) | 编号文件 |
+| 6012 | [投研 R10：恢复服务、昨夜缺陷修复、经验库与执行器并行](design/6012-iteration-research-r10-resume-experience-concurrency.md) | 编号文件 |
+| 6013 | [前端 P1/P2 修补：选币与投研预览（承接 Codex 审阅意见）](design/6013-iteration-v2.8-frontend-p1-research-select.md) | 编号文件 |
+| 6014 | [前端第二步：对象与投研链路（Grok 迭代）](design/6014-iteration-v2.8-frontend-research-step2.md) | 编号文件 |
+| 6015 | [多报告同时生成：并发补充 v1.2](design/6015-给GROK-多报告并发补充-v1.2.md) | 编号文件 |
+| 6016 | [投研方案复核补充 v1.1](design/6016-给GROK-投研方案复核补充-v1.1.md) | 编号文件 |
+| 6017 | [投研迭代需求：模板 B、新任务、实际检索、核验与经验积累](design/6017-给GROK-投研迭代需求-模板B新任务检索核验与经验积累.md) | 编号文件 |
+
+## 7xxx｜投研经验
+
+| 编号 | 文档 | 路径状态 |
+|---|---|---|
+| 7001 | [EXP-0001 标准档真实调用超时不能低于 300 秒](experience/7001-EXP-0001-标准档超时.md) | 编号文件 |
+| 7002 | [EXP-0002 用量没解析到就记“未知”，并保存原始响应](experience/7002-EXP-0002-用量未知与原始响应.md) | 编号文件 |
+| 7003 | [EXP-0003 夹具检索成功不等于在线核验](experience/7003-EXP-0003-夹具非在线核验.md) | 编号文件 |
+| 7004 | [EXP-0004 标准档报告按模板 B 八节写，只引用允许的证据 ID](experience/7004-EXP-0004-模板B八节与引用.md) | 编号文件 |
+
+## 8xxx｜历史需求、备选方案及旧版证据
+
+| 编号 | 文档 | 路径状态 |
+|---|---|---|
+| 8001 | [1H缓存与续接优化实施方案-v1.0-待审阅](8001-1H缓存与续接优化实施方案-v1.0-待审阅.md) | 编号文件 |
+| 8002 | [给GROK：EMA三线金叉＋Squeeze 增量实施规则 v4（已对照当前代码）](design/audit-gpt-ema-v4/给GROK-EMA-Squeeze增量实施规则-v4.md) | 固定路径 |
+| 8003 | [给GROK：EMA三线金叉统一命名与前端收口清单 v4.2](design/audit-gpt-ema-v4/8003-给GROK-EMA三线金叉统一命名与前端收口清单-v4.2.md) | 编号文件 |
+| 8004 | [前端实施方案：A 布局 + C 专业表格](design/8004-GROK-前端实施方案-A布局-C专业表格.md) | 编号文件 |
+| 8005 | [给 GROK：横向留白收窄与显示不全的补充建议](design/8005-GROK-横向留白与显示不全-补充建议.md) | 编号文件 |
+| 8006 | [给 GROK：A 布局 + C 专业表格的间距与阅读优化建议](design/8006-GROK-页面间距与专业表格阅读优化建议.md) | 编号文件 |
+| 8007 | [异动观察工作台 · 档位模板切换 UI 修复取证](design/8007-iteration-fix-depth-template-switch.md) | 编号文件 |
+| 8008 | [⑤聪明钱流入实施说明](design/8008-iteration-smart-money-i5.md) | 编号文件 |
+| 8009 | [异动观察 V2.1：交互整理、选币投研、提示词与多策略](design/iteration-v2.1.md) | 固定路径 |
+| 8010 | [V2.2 更新与链上数据补充](design/iteration-v2.2.md) | 固定路径 |
+| 8011 | [V2.3 找到可用数据，并进入研究流程](design/iteration-v2.3.md) | 固定路径 |
+| 8012 | [V2.4 · 完整证据展示](design/iteration-v2.4.md) | 固定路径 |
+| 8013 | [V2.5 · 审计整改代码交付](design/iteration-v2.5.md) | 固定路径 |
+| 8014 | [V2.6 · 扫描任务与持久更新计划](design/iteration-v2.6.md) | 固定路径 |
+| 8015 | [V2.7 · 区间行情补查与覆盖预检](design/iteration-v2.7.md) | 固定路径 |
+| 8016 | [V2.8 A 档阶段 S2 证据：01 扫描 / 02 投研离线回归](design/8016-iteration-v2.8-a-close-s2-evidence.md) | 编号文件 |
+| 8017 | [V2.8 A 档阶段 S3 证据：03 指标与策略本地服务链路 + 失败矩阵](design/8017-iteration-v2.8-a-close-s3-evidence.md) | 编号文件 |
+| 8018 | [iteration-v2.8-a-close-s4-pending](design/8018-iteration-v2.8-a-close-s4-pending.md) | 编号文件 |
+| 8019 | [V2.8 · AI-01/AI-02 代码交付（进行中）](design/iteration-v2.8-ai01.md) | 固定路径 |
+| 8020 | [V2.8 AI 报告指纹 / 证据 / schema·缓存 贯通检查](design/8020-iteration-v2.8-ai-f09-fingerprint-check.md) | 编号文件 |
+| 8021 | [V2.8 BACKTEST-01 加深 · 多合约/多版本公平对照（首刀）](design/8021-iteration-v2.8-backtest01-compare.md) | 编号文件 |
+| 8022 | [V2.8 BACKTEST-01 首刀（部分实现）](design/iteration-v2.8-backtest01.md) | 固定路径 |
+| 8023 | [iteration-v2.8 · CONFIG-01 全量备份/恢复向导（首刀加深）](design/8023-iteration-v2.8-config01-backup-wizard.md) | 编号文件 |
+| 8024 | [iteration-v2.8 · CONFIG-01 设置页全字段双向绑定（首刀加深）](design/8024-iteration-v2.8-config01-settings-bind.md) | 编号文件 |
+| 8025 | [V2.8 CONFIG-01 首刀（部分实现）](design/iteration-v2.8-config01.md) | 固定路径 |
+| 8026 | [iteration-v2.8 · DATA-01 覆盖闸加深（缺口/补查/指纹）](design/8026-iteration-v2.8-data01-coverage-deepen.md) | 编号文件 |
+| 8027 | [V2.8 DATA-01 加深刀 · 多字段覆盖闸门](design/iteration-v2.8-data01-coverage.md) | 固定路径 |
+| 8028 | [V2.8 DATA-01 第一刀 · 只读价格索引](design/iteration-v2.8-data01.md) | 固定路径 |
+| 8029 | [V2.8 EVAL-01 加深 · 观察计划调度与补查联动](design/iteration-v2.8-eval01-schedule.md) | 固定路径 |
+| 8030 | [V2.8 EVAL-01 第一刀 · 前向观察与结算](design/iteration-v2.8-eval01.md) | 固定路径 |
+| 8031 | [V2.8 EXT auth bypass 收口](design/8031-iteration-v2.8-ext01-auth-bypass.md) | 编号文件 |
+| 8032 | [iteration-v2.8 · EXT-01 精确流加深（来源槽位闸门）](design/8032-iteration-v2.8-ext01-precise-flow.md) | 编号文件 |
+| 8033 | [V2.8 EXT-01 首刀（部分实现）](design/8033-iteration-v2.8-ext01.md) | 编号文件 |
+| 8034 | [iteration-v2.8-frontend-a-fix-0607](design/8034-iteration-v2.8-frontend-a-fix-0607.md) | 编号文件 |
+| 8035 | [删量细项三列（投研确认后）](design/8035-iteration-v2.8-frontend-col-drop-vol.md) | 编号文件 |
+| 8036 | [列裁剪（用户验收指定 apply-full）](design/8036-iteration-v2.8-frontend-col-trim.md) | 编号文件 |
+| 8037 | [前端 P2 + §11.8：托盘/表头/分色 + 报告标题收紧](design/8037-iteration-v2.8-frontend-p2-tray-report118.md) | 编号文件 |
+| 8038 | [前端第三步：报告阅读与设置（Grok 迭代）](design/8038-iteration-v2.8-frontend-reports-step3.md) | 编号文件 |
+| 8039 | [前端第四步：联调冒烟（部分）](design/8039-iteration-v2.8-frontend-step4-smoke.md) | 编号文件 |
+| 8040 | [V1-B1：扫描→报告覆盖提示可读](design/8040-iteration-v2.8-frontend-v1b1-coverage-tip.md) | 编号文件 |
+| 8041 | [V1-B2：策略冻结页导出/导入接线](design/8041-iteration-v2.8-frontend-v1b2-strategy-export.md) | 编号文件 |
+| 8042 | [V1-B3：纸面模拟与冻结策略联调](design/8042-iteration-v2.8-frontend-v1b3-sim-freeze.md) | 编号文件 |
+| 8043 | [V1-B4：前向结算与冻结参数联调](design/8043-iteration-v2.8-frontend-v1b4-eval-freeze.md) | 编号文件 |
+| 8044 | [V1-B6：配置备份向导页接线](design/8044-iteration-v2.8-frontend-v1b6-config-backup.md) | 编号文件 |
+| 8045 | [迭代方案：V2.8 剩余工作统计（给 Codex 审）](design/8045-iteration-v2.8-remaining-work-for-codex.md) | 编号文件 |
+| 8046 | [V2.8 RULE-01 加深刀 · 跨页统一引用绑定](design/iteration-v2.8-rule01-bindings.md) | 固定路径 |
+| 8047 | [V2.8 RULE-01 加深刀 · 启用前覆盖硬闸](design/iteration-v2.8-rule01-coverage-gate.md) | 固定路径 |
+| 8048 | [iteration-v2.8 · RULE-01 导出指纹联调加深](design/iteration-v2.8-rule01-export-fingerprint-deepen.md) | 固定路径 |
+| 8049 | [V2.8 RULE-01 加深刀 · 市场只读指纹 + 报告导出 fingerprint](design/iteration-v2.8-rule01-export-fingerprint.md) | 固定路径 |
+| 8050 | [V2.8 RULE-01 第一刀 · 策略草案与冻结版本](design/iteration-v2.8-rule01.md) | 固定路径 |
+| 8051 | [V2.8 SIM-01 加深刀 · 确认信号自动填仓](design/iteration-v2.8-sim01-autofill.md) | 固定路径 |
+| 8052 | [V2.8 SIM-01 加深 · T1/T2/T3 分档保证金预算硬闸](design/8052-iteration-v2.8-sim01-tier-budget.md) | 编号文件 |
+| 8053 | [V2.8 SIM-01 第一刀 · 纸面账户与事件账本](design/iteration-v2.8-sim01.md) | 固定路径 |
+| 8054 | [V2.8 STRUCT-01 首刀（部分实现）](design/iteration-v2.8-struct01.md) | 固定路径 |
+| 8055 | [V2.8 STRUCT×BACKTEST 过滤闸（首刀）](design/8055-iteration-v2.8-struct-backtest-gate.md) | 编号文件 |
+| 8056 | [V2.8 V1 API smoke · 扫描→报告→冻结→USDT纸面→定期结算复盘](design/8056-iteration-v2.8-v1-api-smoke.md) | 编号文件 |
+| 8057 | [迭代方案：V2.8 剩余工作统计（给 Codex 审）](design/8057-iteration-v2.8-剩余工作方案-给Codex.md) | 编号文件 |
+| 8058 | [异动观察 V2：页面设计与更新迭代方案](design/iteration-v2.md) | 固定路径 |
+| 8059 | [requirements 进度追加 · R2b（UTF-8 干净副本）](design/8059-requirements-r2b-progress.md) | 编号文件 |
+| 8060 | [requirements 进度追加 · R3（UTF-8 干净副本）](design/8060-requirements-r3-progress.md) | 编号文件 |
+| 8061 | [策略B“庄家吸筹背离”改用4H数据：专项送审稿](design/strategies/8061-B策略改用4H数据-专项送审稿.md) | 编号文件 |
+| 8062 | [合约妖币 + Short Squeeze 统一更新方案 v3.1（送审稿）](design/strategies/8062-合约妖币与Short-Squeeze-统一更新方案-v3.1-送审稿.md) | 编号文件 |
+| 8063 | [**合约妖币 + Short Squeeze 完整信号体系 v3.0**](design/strategies/02-合约妖币与Short-Squeeze完整信号体系-v3.0.md) | 固定路径 |
+| 8064 | [剩余工作方案审阅意见](design/8064-剩余工作方案审阅意见.md) | 编号文件 |
+| 8065 | [EMA 三线金叉 + 合约结构 Squeeze — 策略手册入口（v1）](design/8065-策略手册-EMA三线金叉与合约Squeeze-v1.md) | 编号文件 |
+| 8066 | [GROK实施交接 · V2.8需求修订](GROK实施交接.md) | 固定路径 |
+| 8067 | [更新、策略制定与回测实施方案](implementation-plan.md) | 固定路径 |
+| 8068 | [未完成需求整理 · V2.8 待审（给 GPT）](8068-open-gaps-v2.8-for-gpt.md) | 编号文件 |
+| 8069 | [未完成需求整理 · V2.8 待审（给 GPT）](8069-未完成需求-v2.8-待审.md) | 编号文件 |
+
+## 9xxx｜原始附件与机器证据
+
+| 编号 | 文档 | 路径状态 |
+|---|---|---|
+| 9001 | [archive-manifest](archive-manifest.json) | 固定路径 |
+| 9002 | [_extract-research-phases](design/_extract-research-phases.txt) | 固定路径 |
+| 9003 | [_r1_ai_research_excerpt.py](design/_r1_ai_research_excerpt.py.txt) | 固定路径 |
+| 9004 | [_r1_demand_excerpt](design/_r1_demand_excerpt.txt) | 固定路径 |
+| 9005 | [v3.2-P0-baseline-manifest](design/strategies/v3.2-P0-baseline-manifest.json) | 固定路径 |
+| 9006 | [v3.2-P1-cleanup-dry-run](design/strategies/v3.2-P1-cleanup-dry-run.json) | 固定路径 |
+

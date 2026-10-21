@@ -1,0 +1,17 @@
+{
+  "schema": "cache-cleanup-dry-run-v1",
+  "generated_at": 1792158360.203647,
+  "defaults": {
+    "temp_hours": 48,
+    "debug_days": 14,
+    "log_days": 30,
+    "raw_api_days": 30,
+    "full_snapshot_days": 90,
+    "oi_lsr_days": 365,
+    "1h_days": 365,
+    "backup_days": 30,
+    "backup_min_success": 3
+  },
+  "candidates": [],
+  "note": "首批仅 dry-run；未执行删除。"
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "s2-s1-freeze-pointer-v1",
+  "freeze_submission": "grok-submissions/S1-20261018T022834Z-r2",
+  "freeze_manifest_sha256": "17bd804cf24b7c9bfc9642a9729b514ed113b8ab47838440072b2c0833b9e4c9",
+  "copied_into": [
+    "s1_contract/profiles/",
+    "s1_contract/schema/tracking-event-schema-v1.json",
+    "s1_contract/s1_contract_judge.py"
+  ],
+  "policy": "reuse as contract; do not weaken thresholds or observation enums",
+  "note": "Copies are byte-identical to S1-r2 freeze; S2 does not edit them."
+}

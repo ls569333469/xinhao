@@ -1,0 +1,19 @@
+[Unit]
+Description=ABC market workbench (single writer)
+After=network-online.target
+
+[Service]
+Type=simple
+User=abc
+WorkingDirectory=/opt/abc/current
+Environment=ABC_DATA_ROOT=/var/lib/abc-workbench
+EnvironmentFile=-/etc/abc-workbench/env
+ExecStart=/usr/bin/python3 -u /opt/abc/current/server.py
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=90
+KillSignal=SIGINT
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

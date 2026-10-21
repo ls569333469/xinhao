@@ -1,0 +1,9 @@
+{
+  "default": [],
+  "gaps": [
+    {
+      "reason": "no_news_result",
+      "detail": "检索无新闻命中；不得捏造「没有新闻/没有事件」为已核验结论"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+# -*- coding: utf-8 -*-
+from pathlib import Path
+import re
+
+ROOT = Path(r"D:\Axiangmu\异动观察工作台")
+p = ROOT / "task_service.py"
+text = p.read_text(encoding="utf-8")
+
+if "elif task['kind'] == 'b_observe_1h':" in text:
+    print("already wired")
+else:
+    # Insert before ai_research or after candle_range
+    needle = "            elif task['kind'] == 'ai_research':"
+    if needle not in text:
+        raise SystemExit("ai_research branch missing")
+    branch = '''            elif task['kind'] == 'b_observe_1h':
+                from b_observe_runner import run_b_observe_round
+                settings = self.settings()
+                observe = settings['observe']
+                timing = settings['timing']
+                # 首批：无全市场拉取钩子时只跑空 universe，记录边界；真正采集等 P2 收尾接 scanner fetch
+                symbols = []
+                universe_path = self.root / 'runtime' / 'b-observe-universe.json'
+                if universe_path.exists():
+                    import json as _json
+                    raw_u = _json.loads(universe_path.read_text(encoding='utf-8'))
+                    if isinstance(raw_u, list):
+                        symbols = raw_u
+                now_ms = int(self.clock().timestamp() * 1000)
+                result = run_b_observe_round(
+                    self.root,
+                    symbols=symbols,
+                    observe=observe,
+                    timing=timing,
+                    now_ms=now_ms,
+                    fetch_1h=None,
+                )
+                status = 'success' if not result.get('skipped') else 'success'
+                output = result
+                progress = {'phase': 'B观察1H完成' if not result.get('skipped') else 'B观察关闭已跳过',
+                            'completed': result.get('written', 0), 'total': result.get('symbols', 0)}
+                error = None
+'''
+    text = text.replace(needle, branch + needle, 1)
+    p.write_text(text, encoding="utf-8", newline="\n")
+    print("wired b_observe_1h in _run")
+
+# Extend tests
+test_path = ROOT / "test_v32_p2_observe_1h.py"
+t = test_path.read_text(encoding="utf-8")
+if "ScheduleFireTests" not in t:
+    extra = '''
+
+class ScheduleFireTests(unittest.TestCase):
+    def test_disabled_never_enqueues(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "runtime").mkdir()
+            svc = TaskService(root, runner=lambda: None)
+            # observe off
+            for _ in range(3):
+                svc.tick()
+            tasks = svc.tasks()
+            self.assertFalse(any(x["kind"] == "b_observe_1h" for x in tasks))
+
+    def test_enable_sets_next_due_without_scan(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "runtime").mkdir()
+            svc = TaskService(root, runner=lambda: None)
+            s = svc.settings()
+            out = svc.save_settings({
+                "version": s["version"],
+                "scan": s["scan"],
+                "observe": {**s["observe"], "enabled": True},
+            })
+            self.assertTrue(out["observe"]["enabled"])
+            self.assertFalse(out["scan"]["enabled"])
+            self.assertIsNotNone(out["observe_next_due"])
+'''
+    # need import nothing extra
+    t = t.rstrip() + "\n" + extra + "\n"
+    # ensure TaskService import already there
+    test_path.write_text(t, encoding="utf-8", newline="\n")
+    print("tests extended")
+
+# update doc
+doc = ROOT / "DOCS" / "design" / "strategies" / "v3.2-P2-实施说明.md"
+doc.write_text(
+    """# v3.2 P2 实施说明
+
+## 本步完成
+
+- `observe_config.py`：timing.closeOffsetSec 默认 120；observe 默认 enabled=false
+- `task_service.py`：settings 增加 timing/observe/observe_next_due；旧库迁移；保存不会因新字段打开扫描
+- `_tick_b_observe`：观察开启后按 boundary+offset 入队 `b_observe_1h`；在途按 request_hash 复用
+- `b_1h_ingest.py` / `b_observe_runner.py`：已收盘 1H 规范化写入共享缓存
+- `scanner.py`：`maybe_ingest_1h_for_row` 钩子（观察关闭则跳过）
+- `candle_ranges` 已支持 1h（P1）
+
+## 未完成 / 下刀
+
+- 扫描循环真正请求 1H + OI/LSR，并传入 `fetch_1h`
+- `runtime/b-observe-universe.json` 由扫描结果维护
+- P3 事件写入 / P4 前端
+
+## 测试
+
+```
+python -m unittest test_v32_p2_observe_1h.py test_v32_b_cache_first_batch.py -v
+```
+""",
+    encoding="utf-8",
+    newline="\n",
+)
+print("doc updated")

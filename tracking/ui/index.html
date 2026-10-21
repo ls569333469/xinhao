@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC 持续追踪</title><link rel="stylesheet" href="/tracking/styles.css"></head>
+<body><header><div class="eyebrow">信号与走势记录</div><h1>ABC 持续追踪 <span class="badge">独立观察</span></h1><p class="sub">原确认、完整资格、后续走势与数据质量分别展示。记录按保存时点读取；行情采集关闭时也可查看历史。</p><a href="/">返回统一工作台</a></header>
+<section class="toolbar" aria-label="观察筛选">
+<label>策略 <select id="filter-strategy"><option value="">ABC 全部</option><option>A</option><option>B</option><option>C</option></select></label>
+<label>观察状态 <select id="filter-observation"><option value="">全部状态</option><option value="active">活动与待补</option><option value="ended">已结束</option></select></label>
+<label>形成范围 <select id="filter-history"><option value="">全部记录</option><option value="history">历史与晚补</option><option value="forward">前向发现</option></select></label>
+<label>合约 <input id="filter-symbol" placeholder="如 BTCUSDT" maxlength="40"></label>
+<label>市场 <select id="filter-market"><option value="">全部市场</option><option value="USDT-M">USDT-M</option><option value="COIN-M">COIN-M</option></select></label>
+<button id="btn-open-view">载入观察记录</button><button id="btn-reload" disabled>刷新列表</button></section><p id="view-meta" role="status" aria-live="polite">尚未载入；读取页面不会启动扫描。</p>
+<section class="layout"><div class="panel"><h2>事件列表</h2><div class="table-scroll"><table id="events-table"><thead><tr><th>策略 / 合约</th><th>形成时间</th><th>原确认</th><th>资格</th><th>观察</th><th>质量</th><th>发现范围</th></tr></thead><tbody></tbody></table></div><div class="pager"><button id="btn-next" disabled>下一页</button><span id="page-info"></span></div></div>
+<div class="panel"><h2>详情</h2><div id="detail-empty" class="muted">选择记录查看原确认、走势、修订与缺口。</div><div id="detail" class="hidden"><pre id="detail-header"></pre><h3>形成与确认依据</h3><pre id="detail-evidence"></pre><h3>后续观察轨迹</h3><pre id="detail-transitions"></pre><button id="btn-next-tr" disabled>轨迹下一页</button><h3>信号修订</h3><pre id="detail-revisions"></pre><button id="btn-next-rev" disabled>修订下一页</button><h3>数据缺口</h3><pre id="detail-gaps"></pre><button id="btn-next-gap" disabled>缺口下一页</button></div></div></section>
+<section class="panel"><h2>同一记录视图导出</h2><p class="muted">每份最多 100 条修订；有后续页时可继续导出。数据更新后需重新载入。</p><div class="toolbar"><button id="btn-export-csv" disabled>导出 CSV</button><button id="btn-export-json" disabled>导出 JSON</button><button id="btn-export-report" disabled>导出报告</button><button id="btn-export-next" disabled>导出下一页</button></div><pre id="export-preview">尚未导出</pre></section>
+<section class="panel"><h2>站内状态提醒</h2><p class="muted">查看后记录送达，点击“标为已读”才记录已读。这里只显示已保存的状态变化；刷新不会启动行情采集。</p><div class="toolbar"><button id="btn-notices">载入状态提醒</button><button id="btn-notices-next" disabled>提醒下一页</button></div><div id="notices" role="status">尚未载入</div></section>
+<section class="panel"><h2>持续处理与来源恢复</h2><p class="muted">显示已保存的恢复进度和近期处理耗时。读取此处不会启动采集，来源权限或历史不可得会保留。</p><button id="btn-runtime">查看运行进度</button><pre id="runtime-status" role="status">尚未载入</pre></section>
+<footer>只提供信号与走势事实。历史形成记录不作为实时机会；无自动成交、卖出或收益结论。</footer><script src="/tracking/app.js"></script></body></html>

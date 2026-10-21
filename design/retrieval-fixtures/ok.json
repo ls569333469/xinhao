@@ -1,0 +1,31 @@
+{
+  "default": [
+    {
+      "evidence_id": "ev-fixture-ok-catalyst",
+      "title": "官方动态夹具（非 live）",
+      "excerpt": "这是离线夹具摘录，用于证明 evidence 登记与冻结；非付费联网全文。",
+      "source_url": "fixture://ok/official",
+      "fetch_status": "fixture",
+      "content_level": "excerpt",
+      "quality": "fixture",
+      "publisher": "fixture-official",
+      "published_at": "2026-10-01T00:00:00+00:00"
+    }
+  ],
+  "by_symbol": {
+    "DEMOUSDT": [
+      {
+        "evidence_id": "ev-fixture-demo-catalyst",
+        "title": "DEMO 项目公告夹具",
+        "excerpt": "DEMO 已完成测试网升级提案讨论（夹具；非 live）。",
+        "source_url": "fixture://ok/DEMOUSDT",
+        "fetch_status": "fixture",
+        "content_level": "excerpt",
+        "quality": "fixture",
+        "publisher": "fixture-demo",
+        "published_at": "2026-10-10T08:00:00+00:00"
+      }
+    ]
+  },
+  "gaps": []
+}

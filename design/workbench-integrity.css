@@ -1,0 +1,22 @@
+/* Top navigation layout: contain cards without dropping content. */
+.main,.content,.panel,.card,.grid2>*,.grid3>*,.report-detail-panel,.report-list-panel{min-width:0}
+.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+#templateCards>p{grid-column:1/-1}
+#mainTray{left:0!important;right:0!important;width:auto!important;box-sizing:border-box;max-width:100vw}
+.current-combo ol{padding-left:22px;line-height:1.65}
+.current-combo>button{margin-top:12px}
+.current-combo h3,.card p,.card code,.note,.report-body{overflow-wrap:anywhere}
+.legacy-reference>summary,.advanced-config>summary,.test-versions>summary{cursor:pointer;font-weight:600;padding:4px 0}
+.legacy-reference[open]>summary,.advanced-config[open]>summary{margin-bottom:14px}
+.report-shell{grid-template-columns:minmax(210px,250px) minmax(0,1fr)!important}
+#generatedReport pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f4f6f8;padding:12px;border-radius:6px}
+#generatedReport .markdown-table{overflow-x:auto;margin:10px 0}
+#generatedReport table{width:100%;border-collapse:collapse}
+#generatedReport td,#generatedReport th{padding:8px;border:1px solid var(--line,#dfe5e8);text-align:left}
+#reportTaskBoard details>summary{cursor:pointer;font-size:13px}
+#reportMeta details>summary{cursor:pointer}
+.report-body{max-width:100%;line-height:1.75}
+[data-view="settings"]>.panel,[data-view="tasks"]>.panel{max-width:100%}
+@media(max-width:1000px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}.report-shell{grid-template-columns:minmax(180px,210px) minmax(0,1fr)!important}}
+@media(max-width:700px){.grid2,.grid3,.report-shell{grid-template-columns:minmax(0,1fr)!important}#mainTray{flex-wrap:wrap}.panel-head{flex-wrap:wrap}.current-combo ol{padding-left:18px}}

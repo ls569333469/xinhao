@@ -1,0 +1,5027 @@
+{
+  "schema": "smart-money-identities-v1",
+  "source": "CoinGecko platforms + reviewed asset-mappings",
+  "source_retrieved_at": "2026-10-15T08:27:15.285950+00:00",
+  "source_sha256": "498f2da1a8bef654120c6a292fac93a8e31b673a98cb6b2d58e18593fd8823ef",
+  "entries": [
+    {
+      "asset": "0G",
+      "chain": "56",
+      "address": "0x4b948d64de1f71fcd12fb586f4c776421a35b3ee",
+      "coingecko_id": "zero-gravity",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "0G",
+      "chain": "1",
+      "address": "0x4b948d64de1f71fcd12fb586f4c776421a35b3ee",
+      "coingecko_id": "zero-gravity",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "1INCH",
+      "chain": "1",
+      "address": "0x111111111117dc0aa78b770fa6a738034120c302",
+      "coingecko_id": "1inch",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "1INCH",
+      "chain": "8453",
+      "address": "0xc5fecc3a29fb57b5024eec8a2239d4621e111cbe",
+      "coingecko_id": "1inch",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "1INCH",
+      "chain": "56",
+      "address": "0x111111111117dc0aa78b770fa6a738034120c302",
+      "coingecko_id": "1inch",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "1MBABYDOGE",
+      "chain": "56",
+      "address": "0xc748673057861a797275cd8a068abb95a902e8de",
+      "coingecko_id": "baby-doge-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "1MBABYDOGE",
+      "chain": "1",
+      "address": "0xac57de9c1a09fec648e93eb98875b212db0d460b",
+      "coingecko_id": "baby-doge-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "1MBABYDOGE",
+      "chain": "8453",
+      "address": "0x58ecef26335af7b04a998105a6603b0dc475af33",
+      "coingecko_id": "baby-doge-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "1MBABYDOGE",
+      "chain": "CT_501",
+      "address": "7dUKUopcNWW6CcU4eRxCHh1uiMh32zDrmGf6ufqhxann",
+      "coingecko_id": "baby-doge-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "2Z",
+      "chain": "CT_501",
+      "address": "J6pQQ3FAcJQeWPPGppWRb4nM8jU3wLyYbRrLh7feMfvd",
+      "coingecko_id": "doublezero",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "4",
+      "chain": "56",
+      "address": "0x0a43fc31a73013089df59194872ecae4cae14444",
+      "coingecko_id": "4-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AAVE",
+      "chain": "1",
+      "address": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9",
+      "coingecko_id": "aave",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AAVE",
+      "chain": "CT_501",
+      "address": "AavE1kKKnesPw4MuRJmJ9jZs9QzEE8CPxQ3ViczUDfc1",
+      "coingecko_id": "aave",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AAVE",
+      "chain": "8453",
+      "address": "0x63706e401c06ac8513145b7687a14804d17f814b",
+      "coingecko_id": "aave",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AAVE",
+      "chain": "56",
+      "address": "0xfb6115445bff7b52feb98650c87f44907e58f802",
+      "coingecko_id": "aave",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ACE",
+      "chain": "56",
+      "address": "0xc27a719105a987b4c34116223cae8bd8f4b5def4",
+      "coingecko_id": "endurance",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ACH",
+      "chain": "1",
+      "address": "0xed04915c23f00a313a544955524eb7dbd823143d",
+      "coingecko_id": "alchemy-pay",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ACH",
+      "chain": "56",
+      "address": "0xbc7d6b50616989655afd682fb42743507003056d",
+      "coingecko_id": "alchemy-pay",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ACT",
+      "chain": "CT_501",
+      "address": "GJAFwWjJ3vnTsrQVabjBVK2TYB1YtRCQXRDfDgUnpump",
+      "coingecko_id": "act-i-the-ai-prophecy",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ACU",
+      "chain": "56",
+      "address": "0x6ef2ffb38d64afe18ce782da280b300e358cfeaf",
+      "coingecko_id": "acurast",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ACU",
+      "chain": "1",
+      "address": "0x216b3643ff8b7bb30d8a48e9f1bd550126202add",
+      "coingecko_id": "acurast",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ACU",
+      "chain": "8453",
+      "address": "0xc5fed7c8ccc75d8a72b601a66dffd7a489073f0b",
+      "coingecko_id": "acurast",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AERO",
+      "chain": "8453",
+      "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+      "coingecko_id": "aerodrome-finance",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AEVO",
+      "chain": "1",
+      "address": "0xb528edbef013aff855ac3c50b381f253af13b997",
+      "coingecko_id": "aevo-exchange",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AGLD",
+      "chain": "1",
+      "address": "0x32353a6c91143bfd6c7d363b546e62a9a2489a20",
+      "coingecko_id": "adventure-gold",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AGT",
+      "chain": "56",
+      "address": "0x5dbde81fce337ff4bcaaee4ca3466c00aecae274",
+      "coingecko_id": "alaya-ai",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AIA",
+      "chain": "56",
+      "address": "0x53ec33cd4fa46b9eced9ca3f6db626c5ffcd55cc",
+      "coingecko_id": "aia",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AIGENSYN",
+      "chain": "1",
+      "address": "0x4d7078ddd6ccfed2f85db5b7d3ff16828d378d48",
+      "coingecko_id": "gensyn",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AIN",
+      "chain": "56",
+      "address": "0x9558a9254890b2a8b057a789f413631b9084f4a3",
+      "coingecko_id": "infinity-ground",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AIO",
+      "chain": "56",
+      "address": "0x81a7da4074b8e0ed51bea40f9dcbdf4d9d4832b4",
+      "coingecko_id": "olaxbt",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AIOT",
+      "chain": "56",
+      "address": "0x55ad16bd573b3365f43a9daeb0cc66a73821b4a5",
+      "coingecko_id": "okzoo",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AIXBT",
+      "chain": "8453",
+      "address": "0x4f9fd6be4a90f2620860d680c0d4d5fb53d1a825",
+      "coingecko_id": "aixbt",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AIXBT",
+      "chain": "1",
+      "address": "0x0d37af9d8ae74f35f3a38bd2a08fcb29890ca6d2",
+      "coingecko_id": "aixbt",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AIXBT",
+      "chain": "CT_501",
+      "address": "14zP2ToQ79XWvc7FQpm4bRnp9d6Mp1rFfsUW3gpLcRX",
+      "coingecko_id": "aixbt",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AKE",
+      "chain": "56",
+      "address": "0x2c3a8ee94ddd97244a93bc48298f97d2c412f7db",
+      "coingecko_id": "akedo",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ALCH",
+      "chain": "CT_501",
+      "address": "HNg5PYJmtqcmzXrv6S9zP1CDKk5BgDuyFBxbvNApump",
+      "coingecko_id": "alchemist-ai",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ALICE",
+      "chain": "1",
+      "address": "0xac51066d7bec65dc4589368da368b212745d63e8",
+      "coingecko_id": "my-neighbor-alice",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ALICE",
+      "chain": "56",
+      "address": "0xac51066d7bec65dc4589368da368b212745d63e8",
+      "coingecko_id": "my-neighbor-alice",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ALLO",
+      "chain": "56",
+      "address": "0xcce5f304fd043d6a4e8ccb5376a4a4fb583b98d5",
+      "coingecko_id": "allora",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ALLO",
+      "chain": "1",
+      "address": "0x8408d45b61f5823298f19a09b53b7339c0280489",
+      "coingecko_id": "allora",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ALLO",
+      "chain": "8453",
+      "address": "0x032d86656db142138ac97d2c5c4e3766e8c0482d",
+      "coingecko_id": "allora",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ALPINE",
+      "chain": "56",
+      "address": "0x287880ea252b52b63cc5f40a2d3e5a44aa665a76",
+      "coingecko_id": "alpine-f1-team-fan-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ALT",
+      "chain": "1",
+      "address": "0x8457ca5040ad67fdebbcc8edce889a335bc0fbfb",
+      "coingecko_id": "altlayer",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ALT",
+      "chain": "56",
+      "address": "0x8457ca5040ad67fdebbcc8edce889a335bc0fbfb",
+      "coingecko_id": "altlayer",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ANIME",
+      "chain": "1",
+      "address": "0x4dc26fc5854e7648a064a4abd590bbe71724c277",
+      "coingecko_id": "anime",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ANKR",
+      "chain": "1",
+      "address": "0x8290333cef9e6d528dd5618fb97a76f268f3edd4",
+      "coingecko_id": "ankr",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ANKR",
+      "chain": "56",
+      "address": "0xf307910a4c7bbc79691fd374889b36d8531b08e3",
+      "coingecko_id": "ankr",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "APE",
+      "chain": "1",
+      "address": "0x4d224452801aced8b2f0aebe155379bb5d594381",
+      "coingecko_id": "apecoin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "APE",
+      "chain": "56",
+      "address": "0x8f86a15ec17cb3369d8b3e666dadbc11daa82b79",
+      "coingecko_id": "apecoin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "APE",
+      "chain": "CT_501",
+      "address": "C1MHyoTJpRTeS9AQCyspNVu2EWAYCZwmJ1jNkEArFP1f",
+      "coingecko_id": "apecoin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "API3",
+      "chain": "1",
+      "address": "0x0b38210ea11411557c13457d4da7dc6ea731b88a",
+      "coingecko_id": "api3",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "APR",
+      "chain": "56",
+      "address": "0x299ad4299da5b2b93fba4c96967b040c7f611099",
+      "coingecko_id": "apriori",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "APR",
+      "chain": "1",
+      "address": "0x5a9610919f5e81183823a2be4bd1beb2b4da2a20",
+      "coingecko_id": "apriori",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ARB",
+      "chain": "1",
+      "address": "0xb50721bcf8d664c30412cfbc6cf7a15145234ad1",
+      "coingecko_id": "arbitrum",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ARC",
+      "chain": "CT_501",
+      "address": "61V8vBaqAGMpgDQi4JcAwo1dmBGHsyhzodcPqnEVpump",
+      "coingecko_id": "ai-rig-complex",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ARIA",
+      "chain": "56",
+      "address": "0x5d3a12c42e5372b2cc3264ab3cdcf660a1555238",
+      "coingecko_id": "aria-ai",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ARKM",
+      "chain": "1",
+      "address": "0x6e2a43be0b1d33b726f0ca3b8de60b3482b8b050",
+      "coingecko_id": "arkham",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ARPA",
+      "chain": "1",
+      "address": "0xba50933c268f567bdc86e1ac131be072c6b0b71a",
+      "coingecko_id": "arpa",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ARPA",
+      "chain": "56",
+      "address": "0x6f769e65c14ebd1f68817f5f1dcdb61cfa2d6f7e",
+      "coingecko_id": "arpa",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ARX",
+      "chain": "56",
+      "address": "0xd5f6ef5deabe61e6d5cdb49bfb6f156f2c1ca715",
+      "coingecko_id": "arcium",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ARX",
+      "chain": "CT_501",
+      "address": "ARXwZkNAtzPfdcoqQiduJn8EPv9fKiDfGn2KyggyDrFs",
+      "coingecko_id": "arcium",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ASR",
+      "chain": "CT_501",
+      "address": "3cVuTnMj8FeqK82PDgK4JzKnLP7LM6GauqTyqnxtcSk1",
+      "coingecko_id": "as-roma-fan-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ASR",
+      "chain": "8453",
+      "address": "0x53838837f258f8ef337c8b4ceb60a89190ecba8b",
+      "coingecko_id": "as-roma-fan-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ASTER",
+      "chain": "56",
+      "address": "0x000ae314e2a2172a039b26378814c252734f556a",
+      "coingecko_id": "aster-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ASTR",
+      "chain": "1",
+      "address": "0xf27441230eadeac85b764610325cc9a0d7859689",
+      "coingecko_id": "astar",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AT",
+      "chain": "56",
+      "address": "0x9be61a38725b265bc3eb7bfdf17afdfc9d26c130",
+      "coingecko_id": "apro",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AT",
+      "chain": "1",
+      "address": "0x0581ccdf2d9bca21baeff8b32b2551fd49cf70aa",
+      "coingecko_id": "apro",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ATH",
+      "chain": "1",
+      "address": "0xbe0ed4138121ecfc5c0e56b40517da27e6c5226b",
+      "coingecko_id": "aethir",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ATH",
+      "chain": "CT_501",
+      "address": "Dm5BxyMetG3Aq5PaG1BrG7rBYqEMtnkjvPNMExfacVk7",
+      "coingecko_id": "aethir",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ATOM",
+      "chain": "56",
+      "address": "0x0eb3a705fc54725037cc9e008bdede697f62f335",
+      "coingecko_id": "cosmos",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AUCTION",
+      "chain": "1",
+      "address": "0xa9b1eb5908cfc3cdf91f9b8b3a74108598009096",
+      "coingecko_id": "auction",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AVA",
+      "chain": "1",
+      "address": "0xa6c0c097741d55ecd9a3a7def3a8253fd022ceb9",
+      "coingecko_id": "concierge-io",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AVA",
+      "chain": "CT_501",
+      "address": "G8LfyGVsjsLzetJ5RWZVAhMo4H9cb58ET1Z6gEZJQdPM",
+      "coingecko_id": "concierge-io",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AVAAI",
+      "chain": "CT_501",
+      "address": "DKu9kykSfbN5LBfFXtNNDPaX35o4Fv6vJ9FKk7pZpump",
+      "coingecko_id": "ava-ai",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AVNT",
+      "chain": "8453",
+      "address": "0x696f9436b67233384889472cd7cd58a6fb5df4f1",
+      "coingecko_id": "avantis",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AWE",
+      "chain": "8453",
+      "address": "0x1b4617734c43f6159f3a70b7e06d883647512778",
+      "coingecko_id": "stp-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AXL",
+      "chain": "1",
+      "address": "0x467719ad09025fcc6cf6f8311755809d45a5e5f3",
+      "coingecko_id": "axelar",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AXL",
+      "chain": "8453",
+      "address": "0x23ee2343b892b1bb63503a4fabc840e0e2c6810f",
+      "coingecko_id": "axelar",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AXL",
+      "chain": "56",
+      "address": "0x8b1f4432f943c465a973fedc6d7aa50fc96f1f65",
+      "coingecko_id": "axelar",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AXS",
+      "chain": "1",
+      "address": "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b",
+      "coingecko_id": "axie-infinity",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AXS",
+      "chain": "56",
+      "address": "0x715d400f88c167884bbcc41c5fea407ed4d2f8a0",
+      "coingecko_id": "axie-infinity",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "AZTEC",
+      "chain": "1",
+      "address": "0xa27ec0006e59f245217ff08cd52a7e8b169e62d2",
+      "coingecko_id": "aztec",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "B",
+      "chain": "56",
+      "address": "0x6bdcce4a559076e37755a78ce0c06214e59e4444",
+      "coingecko_id": "build-on",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "B2",
+      "chain": "56",
+      "address": "0x783c3f003f172c6ac5ac700218a357d2d66ee2a2",
+      "coingecko_id": "bsquared-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BABYDOGE",
+      "chain": "56",
+      "address": "0xc748673057861a797275cd8a068abb95a902e8de",
+      "coingecko_id": "baby-doge-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BABYDOGE",
+      "chain": "1",
+      "address": "0xac57de9c1a09fec648e93eb98875b212db0d460b",
+      "coingecko_id": "baby-doge-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BABYDOGE",
+      "chain": "8453",
+      "address": "0x58ecef26335af7b04a998105a6603b0dc475af33",
+      "coingecko_id": "baby-doge-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BABYDOGE",
+      "chain": "CT_501",
+      "address": "7dUKUopcNWW6CcU4eRxCHh1uiMh32zDrmGf6ufqhxann",
+      "coingecko_id": "baby-doge-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BAN",
+      "chain": "CT_501",
+      "address": "9PR7nCP9DpcUotnDPVLUBUZKu5WAYkwrCUx9wDnSpump",
+      "coingecko_id": "comedian",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BANANA",
+      "chain": "1",
+      "address": "0x38e68a37e401f7271568cecaac63c6b1e19130b4",
+      "coingecko_id": "banana-gun",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BANANAS31",
+      "chain": "56",
+      "address": "0x3d4f0513e8a29669b960f9dbca61861548a9a760",
+      "coingecko_id": "banana-for-scale-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BAND",
+      "chain": "1",
+      "address": "0xba11d00c5f74255f56a5e366f4f77f5a186d7f55",
+      "coingecko_id": "band-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BANK",
+      "chain": "56",
+      "address": "0x3aee7602b612de36088f3ffed8c8f10e86ebf2bf",
+      "coingecko_id": "lorenzo-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BARD",
+      "chain": "56",
+      "address": "0xd23a186a78c0b3b805505e5f8ea4083295ef9f3a",
+      "coingecko_id": "lombard-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BARD",
+      "chain": "1",
+      "address": "0xf0db65d17e30a966c2ae6a21f6bba71cea6e9754",
+      "coingecko_id": "lombard-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BAS",
+      "chain": "56",
+      "address": "0x0f0df6cb17ee5e883eddfef9153fc6036bdb4e37",
+      "coingecko_id": "bas",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BASED",
+      "chain": "56",
+      "address": "0x1d28d989f9e3ccb8b15d0cec601734514f958e4d",
+      "coingecko_id": "based-one",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BASED",
+      "chain": "1",
+      "address": "0x4f2b33840227ddd0e28da8d4185d6fa07adfed87",
+      "coingecko_id": "based-one",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BAT",
+      "chain": "1",
+      "address": "0x0d8775f648430679a709e98d2b0cb6250d2887ef",
+      "coingecko_id": "basic-attention-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BAT",
+      "chain": "CT_501",
+      "address": "EPeUFDgHRxs9xxEPVaL6kfGQvCon7jmAWKVUHuux1Tpz",
+      "coingecko_id": "basic-attention-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BB",
+      "chain": "56",
+      "address": "0xe0620abea429a66ba69d9a0cde9ab93dc15bb9c4",
+      "coingecko_id": "bouncebit",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BEAMX",
+      "chain": "1",
+      "address": "0x62d0a8458ed7719fdaf978fe5929c6d342b0bfce",
+      "coingecko_id": "beam-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BEAMX",
+      "chain": "8453",
+      "address": "0x2a66d51407b84b82b5aff3dec4d49f72cbcd322a",
+      "coingecko_id": "beam-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BEAMX",
+      "chain": "56",
+      "address": "0x62d0a8458ed7719fdaf978fe5929c6d342b0bfce",
+      "coingecko_id": "beam-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BEAT",
+      "chain": "56",
+      "address": "0xcf3232b85b43bca90e51d38cc06cc8bb8c8a3e36",
+      "coingecko_id": "audiera",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BEL",
+      "chain": "1",
+      "address": "0xa91ac63d040deb1b7a5e4d4134ad23eb0ba07e14",
+      "coingecko_id": "bella-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BEL",
+      "chain": "56",
+      "address": "0x8443f091997f06a61670b735ed92734f5628692f",
+      "coingecko_id": "bella-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BICO",
+      "chain": "1",
+      "address": "0xf17e65822b568b3903685a7c9f496cf7656cc6c2",
+      "coingecko_id": "biconomy",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BIGTIME",
+      "chain": "1",
+      "address": "0x64bc2ca1be492be7185faa2c8835d9b824c8a194",
+      "coingecko_id": "big-time",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BILL",
+      "chain": "56",
+      "address": "0xdf24f8c21cb404b3031a450d8e049d6e39fc1fa5",
+      "coingecko_id": "billions-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BILL",
+      "chain": "1",
+      "address": "0xb1110919016846972056ab995054d65560d5f05e",
+      "coingecko_id": "billions-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BILL",
+      "chain": "CT_501",
+      "address": "Bi11Je4MH3PpyCNiuTAepRbsA5U6DK3DJy79ZFthddX",
+      "coingecko_id": "billions-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BIO",
+      "chain": "1",
+      "address": "0xcb1592591996765ec0efc1f92599a19767ee5ffa",
+      "coingecko_id": "bio-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BIO",
+      "chain": "8453",
+      "address": "0x226a2fa2556c48245e57cd1cba4c6c9e67077dd2",
+      "coingecko_id": "bio-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BIO",
+      "chain": "56",
+      "address": "0x226a2fa2556c48245e57cd1cba4c6c9e67077dd2",
+      "coingecko_id": "bio-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BIO",
+      "chain": "CT_501",
+      "address": "bioJ9JTqW62MLz7UKHU69gtKhPpGi1BQhccj2kmSvUJ",
+      "coingecko_id": "bio-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BIRB",
+      "chain": "CT_501",
+      "address": "G7vQWurMkMMm2dU3iZpXYFTHT9Biio4F4gZCrwFpKNwG",
+      "coingecko_id": "moonbirds",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BLESS",
+      "chain": "56",
+      "address": "0x7c8217517ed4711fe2deccdfeffe8d906b9ae11f",
+      "coingecko_id": "bless-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BLESS",
+      "chain": "CT_501",
+      "address": "A1t2UviBYwyfYZDJyKY2W6Td8ritgsCriUDuNaAQN49S",
+      "coingecko_id": "bless-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BLUAI",
+      "chain": "56",
+      "address": "0xed9ae3def8d6f052971bb8b6d1975ff267cf9aad",
+      "coingecko_id": "bluwhale",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BLUR",
+      "chain": "1",
+      "address": "0x5283d291dbcf85356a21ba090e6db59121208b44",
+      "coingecko_id": "blur",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BMT",
+      "chain": "56",
+      "address": "0x7d814b9ed370ec0a502edc3267393bf62d891b62",
+      "coingecko_id": "bubblemaps",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BMT",
+      "chain": "CT_501",
+      "address": "FQgtfugBdpFN7PZ6NdPrZpVLDBrPGxXesi4gVu3vErhY",
+      "coingecko_id": "bubblemaps",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BNB",
+      "chain": "1",
+      "address": "0xb8c77482e45f1f44de1745f52c74426c631bdd52",
+      "coingecko_id": "binancecoin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BNT",
+      "chain": "1",
+      "address": "0x1f573d6fb3f13d689ff844b4ce37794d79a7ff1c",
+      "coingecko_id": "bancor",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BOME",
+      "chain": "CT_501",
+      "address": "ukHH6c7mMyiWCf1b9pnWe25TSpkDDt3H5pQZgZ74J82",
+      "coingecko_id": "book-of-meme",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BONK",
+      "chain": "CT_501",
+      "address": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+      "coingecko_id": "bonk",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BONK",
+      "chain": "1",
+      "address": "0x1151cb3d861920e07a38e03eead12c32178567f6",
+      "coingecko_id": "bonk",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BONK",
+      "chain": "56",
+      "address": "0xa697e272a73744b343528c3bc4702f2565b2f422",
+      "coingecko_id": "bonk",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BR",
+      "chain": "56",
+      "address": "0xff7d6a96ae471bbcd7713af9cb1feeb16cf56b41",
+      "coingecko_id": "bedrock-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BR",
+      "chain": "8453",
+      "address": "0xd6122ddada244913521f3d62006eaf756c157660",
+      "coingecko_id": "bedrock-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BR",
+      "chain": "1",
+      "address": "0x9b61879e91a0b1322f3d61c23aaf936231882096",
+      "coingecko_id": "bedrock-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BRETT",
+      "chain": "8453",
+      "address": "0x532f27101965dd16442e59d40670faf5ebb142e4",
+      "coingecko_id": "based-brett",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BRETT",
+      "chain": "56",
+      "address": "0xa7440029eca41deabd8775ef1d6086b37d4df8d6",
+      "coingecko_id": "based-brett",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BREV",
+      "chain": "56",
+      "address": "0x086f405146ce90135750bbec9a063a8b20a8bffb",
+      "coingecko_id": "brevis",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BREV",
+      "chain": "1",
+      "address": "0x086f405146ce90135750bbec9a063a8b20a8bffb",
+      "coingecko_id": "brevis",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BREV",
+      "chain": "8453",
+      "address": "0x086f405146ce90135750bbec9a063a8b20a8bffb",
+      "coingecko_id": "brevis",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BROCCOLI714",
+      "chain": "56",
+      "address": "0x6d5ad1592ed9d6d1df9b93c793ab759573ed6714",
+      "coingecko_id": "czs-dog",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BROCCOLIF3B",
+      "chain": "56",
+      "address": "0x12b4356c65340fb02cdff01293f95febb1512f3b",
+      "coingecko_id": "broccoli-3",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BSB",
+      "chain": "56",
+      "address": "0x595deaad1eb5476ff1e649fdb7efc36f1e4679cc",
+      "coingecko_id": "block-street",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BSB",
+      "chain": "1",
+      "address": "0xdb6ba5d510f114f9b2ea08bea7d30e32eee33411",
+      "coingecko_id": "block-street",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BSB",
+      "chain": "8453",
+      "address": "0x0dc28efba8c6e0c14fa7391636b8bec86c4c83d6",
+      "coingecko_id": "block-street",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BTR",
+      "chain": "1",
+      "address": "0x6c76de483f1752ac8473e2b4983a873991e70da7",
+      "coingecko_id": "bitlayer-bitvm",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BTR",
+      "chain": "56",
+      "address": "0xfed13d0c40790220fbde712987079eda1ed75c51",
+      "coingecko_id": "bitlayer-bitvm",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BTW",
+      "chain": "56",
+      "address": "0x444045b0ee1ee319a660a5e3d604ca0ffa35acaa",
+      "coingecko_id": "bitway",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BTW",
+      "chain": "1",
+      "address": "0x3a63de3572c69a1307ff08394f3ee7702c16d25d",
+      "coingecko_id": "bitway",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "BULLA",
+      "chain": "56",
+      "address": "0x595e21b20e78674f8a64c1566a20b2b316bc3511",
+      "coingecko_id": "bulla-3",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "C",
+      "chain": "56",
+      "address": "0xc32cc70741c3a8433dcbcb5ade071c299b55ffc8",
+      "coingecko_id": "chainbase",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "C",
+      "chain": "8453",
+      "address": "0xba12bc7b210e61e5d3110b997a63ea216e0e18f7",
+      "coingecko_id": "chainbase",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "C98",
+      "chain": "56",
+      "address": "0xaec945e04baf28b135fa7c640f624f8d90f1c3a6",
+      "coingecko_id": "coin98",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "C98",
+      "chain": "1",
+      "address": "0xae12c5930881c53715b369cec7606b70d8eb229f",
+      "coingecko_id": "coin98",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "C98",
+      "chain": "CT_501",
+      "address": "C98A4nkJXhpVZNAZdHUA95RpTF3T4whtQubL3YobiUX9",
+      "coingecko_id": "coin98",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CAKE",
+      "chain": "56",
+      "address": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82",
+      "coingecko_id": "pancakeswap-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CAKE",
+      "chain": "1",
+      "address": "0x152649ea73beab28c5b49b26eb48f7ead6d4c898",
+      "coingecko_id": "pancakeswap-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CAKE",
+      "chain": "8453",
+      "address": "0x3055913c90fcc1a6ce9a358911721eeb942013a1",
+      "coingecko_id": "pancakeswap-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CAKE",
+      "chain": "CT_501",
+      "address": "4qQeZ5LwSz6HuupUu8jCtgXyW1mYQcNbFAW1sWZp89HL",
+      "coingecko_id": "pancakeswap-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CAP",
+      "chain": "56",
+      "address": "0x99991c6aabba5a096f24f250b73580f5179b9999",
+      "coingecko_id": "cap-4",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CAP",
+      "chain": "1",
+      "address": "0x99991c6aabba5a096f24f250b73580f5179b9999",
+      "coingecko_id": "cap-4",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CARV",
+      "chain": "8453",
+      "address": "0xc08cd26474722ce93f4d0c34d16201461c10aa8c",
+      "coingecko_id": "carv",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CARV",
+      "chain": "1",
+      "address": "0xc08cd26474722ce93f4d0c34d16201461c10aa8c",
+      "coingecko_id": "carv",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CARV",
+      "chain": "56",
+      "address": "0xc08cd26474722ce93f4d0c34d16201461c10aa8c",
+      "coingecko_id": "carv",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CARV",
+      "chain": "CT_501",
+      "address": "AFJtnuqGMaj5jAo6Pwxo28r1f7XAXXTSA8q3rG3q8b4A",
+      "coingecko_id": "carv",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CAT",
+      "chain": "56",
+      "address": "0x6894cde390a3f51155ea41ed24a33a4827d3063d",
+      "coingecko_id": "simon-s-cat",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CAT",
+      "chain": "CT_501",
+      "address": "3joMReCCSESngJEpFLoKR2dNcChjSRCDtybQet5uSpse",
+      "coingecko_id": "simon-s-cat",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CELR",
+      "chain": "1",
+      "address": "0x4f9254c83eb525f9fcf346490bbb3ed28a81c667",
+      "coingecko_id": "celer-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CFG",
+      "chain": "1",
+      "address": "0xcccccccccc33d538dbc2ee4feab0a7a1ff4e8a94",
+      "coingecko_id": "centrifuge-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CGPT",
+      "chain": "56",
+      "address": "0x9840652dc04fb9db2c43853633f0f62be6f00f98",
+      "coingecko_id": "chaingpt",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CGPT",
+      "chain": "1",
+      "address": "0x25931894a86d47441213199621f1f2994e1c39aa",
+      "coingecko_id": "chaingpt",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CGPT",
+      "chain": "CT_501",
+      "address": "CCDfDXZxzZtkZLuhY48gyKdXc5KywqpR8xEVHHh8ck1G",
+      "coingecko_id": "chaingpt",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CHEEMS",
+      "chain": "56",
+      "address": "0x0df0587216a4a1bb7d5082fdc491d93d2dd4b413",
+      "coingecko_id": "cheems-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CHILLGUY",
+      "chain": "CT_501",
+      "address": "Df6yfrKC8kZE3KNkrHERKzAetSxbrWeniQfyJY4Jpump",
+      "coingecko_id": "chill-guy",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CHIP",
+      "chain": "1",
+      "address": "0x0c1c1c109fe34733fca54b82d7b46b75cfb71f6e",
+      "coingecko_id": "chip-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CHIP",
+      "chain": "8453",
+      "address": "0x0c1c1c109fe34733fca54b82d7b46b75cfb71f6e",
+      "coingecko_id": "chip-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CHIP",
+      "chain": "CT_501",
+      "address": "chipCAT7vi5CZtbZsn9z7iMPXvFwyAnKz3QFu8XVuHm",
+      "coingecko_id": "chip-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CHR",
+      "chain": "1",
+      "address": "0x8a2279d4a90b6fe1c4b30fa660cc9f926797baa2",
+      "coingecko_id": "chromaway",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CHR",
+      "chain": "56",
+      "address": "0xf9cec8d50f6c8ad3fb6dccec577e05aa32b224fe",
+      "coingecko_id": "chromaway",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CHZ",
+      "chain": "1",
+      "address": "0x3506424f91fd33084466f402d5d97f05f8e3b4af",
+      "coingecko_id": "chiliz",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CHZ",
+      "chain": "CT_501",
+      "address": "6eftxVbSAunVEoxUWdGhPdxg5UdsJ8Wkwy5w5YFuxouw",
+      "coingecko_id": "chiliz",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CHZ",
+      "chain": "8453",
+      "address": "0x70c8392de9b39a1e48d12a70af6ff4be25d6d0a2",
+      "coingecko_id": "chiliz",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CLANKER",
+      "chain": "8453",
+      "address": "0x1bc0c42215582d5a085795f4badbac3ff36d1bcb",
+      "coingecko_id": "tokenbot-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CLO",
+      "chain": "56",
+      "address": "0x81d3a238b02827f62b9f390f947d36d4a5bf89d2",
+      "coingecko_id": "yei-finance",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "COAI",
+      "chain": "56",
+      "address": "0x0a8d6c86e1bce73fe4d0bd531e1a567306836ea5",
+      "coingecko_id": "chainopera-ai",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "COLLECT",
+      "chain": "56",
+      "address": "0x4b3d30992f003c8167699735f5ab2831b2a087d3",
+      "coingecko_id": "collect-on-fanable",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "COMP",
+      "chain": "1",
+      "address": "0xc00e94cb662c3520282e6f5717214004a7f26888",
+      "coingecko_id": "compound-governance-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "COMP",
+      "chain": "8453",
+      "address": "0x9e1028f5f1d5ede59748ffcee5532509976840e0",
+      "coingecko_id": "compound-governance-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "COMP",
+      "chain": "56",
+      "address": "0x52ce071bd9b1c4b00a0b92d298c512478cad67e8",
+      "coingecko_id": "compound-governance-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "COOKIE",
+      "chain": "56",
+      "address": "0xc0041ef357b183448b235a8ea73ce4e4ec8c265f",
+      "coingecko_id": "cookie",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "COOKIE",
+      "chain": "1",
+      "address": "0xc0041ef357b183448b235a8ea73ce4e4ec8c265f",
+      "coingecko_id": "cookie",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "COOKIE",
+      "chain": "8453",
+      "address": "0xc0041ef357b183448b235a8ea73ce4e4ec8c265f",
+      "coingecko_id": "cookie",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "COTI",
+      "chain": "1",
+      "address": "0xddb3422497e61e13543bea06989c0789117555c5",
+      "coingecko_id": "coti",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "COW",
+      "chain": "1",
+      "address": "0xdef1ca1fb7fbcdc777520aa7f396b4e015f497ab",
+      "coingecko_id": "cow-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "COW",
+      "chain": "56",
+      "address": "0x5bfdaa3f7c28b9994b56135403bf1acea02595b0",
+      "coingecko_id": "cow-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "COW",
+      "chain": "8453",
+      "address": "0xc694a91e6b071bf030a18bd3053a7fe09b6dae69",
+      "coingecko_id": "cow-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CROSS",
+      "chain": "56",
+      "address": "0x6bf62ca91e397b5a7d1d6bce97d9092065d7a510",
+      "coingecko_id": "cross-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CRV",
+      "chain": "1",
+      "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
+      "coingecko_id": "curve-dao-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CRV",
+      "chain": "8453",
+      "address": "0x8ee73c484a26e0a5df2ee2a4960b789967dd0415",
+      "coingecko_id": "curve-dao-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CT",
+      "chain": "56",
+      "address": "0x0a092e544da31150b439a1aaa1a3a2214a867f46",
+      "coingecko_id": "concrete",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CT",
+      "chain": "1",
+      "address": "0x0a092e544da31150b439a1aaa1a3a2214a867f46",
+      "coingecko_id": "concrete",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CTR",
+      "chain": "8453",
+      "address": "0x11030f79109269d796fd0fb956d6244e502757f7",
+      "coingecko_id": "citrea",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CTSI",
+      "chain": "1",
+      "address": "0x491604c0fdf08347dd1fa4ee062a822a5dd06b5d",
+      "coingecko_id": "cartesi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CTSI",
+      "chain": "8453",
+      "address": "0x259fac10c5cbfefe3e710e1d9467f70a76138d45",
+      "coingecko_id": "cartesi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CTSI",
+      "chain": "56",
+      "address": "0x8da443f84fea710266c8eb6bc34b71702d033ef2",
+      "coingecko_id": "cartesi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CVC",
+      "chain": "1",
+      "address": "0x41e5560054824ea6b0732e656e3ad64e20e94e45",
+      "coingecko_id": "civic",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CVX",
+      "chain": "1",
+      "address": "0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b",
+      "coingecko_id": "convex-finance",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CYBER",
+      "chain": "1",
+      "address": "0x14778860e937f509e651192a90589de711fb88a9",
+      "coingecko_id": "cyberconnect",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CYBER",
+      "chain": "56",
+      "address": "0x14778860e937f509e651192a90589de711fb88a9",
+      "coingecko_id": "cyberconnect",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CYS",
+      "chain": "56",
+      "address": "0x0c69199c1562233640e0db5ce2c399a88eb507c7",
+      "coingecko_id": "cysic",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "CYS",
+      "chain": "8453",
+      "address": "0x19e8d59ff3d7a31289e0dc04db48d43b02c7ffa6",
+      "coingecko_id": "cysic",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "DATAIP",
+      "chain": "56",
+      "address": "0xa37eded373c5cdf88644db7c6b89f222e756afb2",
+      "coingecko_id": null,
+      "basis": "reviewed_alpha"
+    },
+    {
+      "asset": "DEXE",
+      "chain": "1",
+      "address": "0xde4ee8057785a7e8e800db58f9784845a5c2cbd6",
+      "coingecko_id": "dexe",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "DEXE",
+      "chain": "56",
+      "address": "0x6e88056e8376ae7709496ba64d37fa2f8015ce3e",
+      "coingecko_id": "dexe",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "DIA",
+      "chain": "1",
+      "address": "0x84ca8bc7997272c7cfb4d0cd3d55cd942b3c9419",
+      "coingecko_id": "dia-data",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "DIA",
+      "chain": "56",
+      "address": "0x99956d38059cf7beda96ec91aa7bb2477e0901dd",
+      "coingecko_id": "dia-data",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "DODOX",
+      "chain": "1",
+      "address": "0x43dfc4159d86f3a37a5a4b3d4580b888ad7d4ddd",
+      "coingecko_id": "dodo",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "DODOX",
+      "chain": "56",
+      "address": "0x67ee3cb086f8a16f34bee3ca72fad36f7db929e2",
+      "coingecko_id": "dodo",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "DOLO",
+      "chain": "1",
+      "address": "0x0f81001ef0a83ecce5ccebf63eb302c70a39a654",
+      "coingecko_id": "dolomite",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "DOOD",
+      "chain": "56",
+      "address": "0x722294f6c97102fb0ddb5b907c8d16bdeab3f6d9",
+      "coingecko_id": "doodles",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "DOOD",
+      "chain": "CT_501",
+      "address": "DvjbEsdca43oQcw2h3HW1CT7N3x5vRcr3QrvTUHnXvgV",
+      "coingecko_id": "doodles",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "DOS",
+      "chain": "56",
+      "address": "0xb0f09ea9ae0515c3551080d4a745c8115aa30e37",
+      "coingecko_id": "dappos",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "DOS",
+      "chain": "1",
+      "address": "0x951f086a127e280724fd93ccc543f65065afeb5e",
+      "coingecko_id": "dappos",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "DRIFT",
+      "chain": "CT_501",
+      "address": "DriFtupJYLTosbwoN8koMbEYSx54aFAVLddWsbksjwg7",
+      "coingecko_id": "drift-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "DUSK",
+      "chain": "1",
+      "address": "0x940a2db1b7008b6c776d4faaca729d6d4a4aa551",
+      "coingecko_id": "dusk-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "DUSK",
+      "chain": "56",
+      "address": "0xb2bd0749dbe21f623d9baba856d3b0f0e1bfec9c",
+      "coingecko_id": "dusk-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "EDEN",
+      "chain": "56",
+      "address": "0x235b6fe22b4642ada16d311855c49ce7de260841",
+      "coingecko_id": "openeden",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "EDEN",
+      "chain": "1",
+      "address": "0x24a3d725c37a8d1a66eb87f0e5d07fe67c120035",
+      "coingecko_id": "openeden",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "EDGE",
+      "chain": "1",
+      "address": "0xb0076de78dc50581770bba1d211ddc0ad4f2a241",
+      "coingecko_id": "edgex",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "EDU",
+      "chain": "56",
+      "address": "0xbdeae1ca48894a1759a8374d63925f21f2ee2639",
+      "coingecko_id": "edu-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "EDU",
+      "chain": "1",
+      "address": "0xf8173a39c56a554837c4c7f104153a005d284d11",
+      "coingecko_id": "edu-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "EIGEN",
+      "chain": "1",
+      "address": "0xec53bf9167f50cdeb3ae105f56099aaab9061f83",
+      "coingecko_id": "eigenlayer",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "EIGEN",
+      "chain": "8453",
+      "address": "0x2081ab0d9ec9e4303234ab26d86b20b3367946ee",
+      "coingecko_id": "eigenlayer",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ELSA",
+      "chain": "8453",
+      "address": "0x29cc30f9d113b356ce408667aa6433589cecbdca",
+      "coingecko_id": "elsa",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ENA",
+      "chain": "1",
+      "address": "0x57e114b691db790c35207b2e685d4a43181e6061",
+      "coingecko_id": "ethena",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ENA",
+      "chain": "8453",
+      "address": "0x58538e6a46e07434d7e7375bc268d3cb839c0133",
+      "coingecko_id": "ethena",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ENA",
+      "chain": "CT_501",
+      "address": "72QvBVwpxqmheEPfaCwWSWqEFsUy3rhWt6JhQBMNTwD1",
+      "coingecko_id": "ethena",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ENJ",
+      "chain": "1",
+      "address": "0xf629cbd94d3791c9250152bd8dfbdf380e2a3b9c",
+      "coingecko_id": "enjincoin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ENS",
+      "chain": "1",
+      "address": "0xc18360217d8f7ab5e7c516566761ea12ce7f9d72",
+      "coingecko_id": "ethereum-name-service",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ENSO",
+      "chain": "56",
+      "address": "0xfeb339236d25d3e415f280189bc7c2fbab6ae9ef",
+      "coingecko_id": "enso",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ENSO",
+      "chain": "1",
+      "address": "0x699f088b5dddcafb7c4824db5b10b57b37cb0c66",
+      "coingecko_id": "enso",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "EPIC",
+      "chain": "1",
+      "address": "0x94314a14df63779c99c0764a30e0cd22fa78fc0e",
+      "coingecko_id": "epic-chain",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ERA",
+      "chain": "56",
+      "address": "0x00312400303d02c323295f6e8b7309bc30fb6bce",
+      "coingecko_id": "caldera",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ERA",
+      "chain": "1",
+      "address": "0xe2ad0bf751834f2fbdc62a41014f84d67ca1de2a",
+      "coingecko_id": "caldera",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ERA",
+      "chain": "8453",
+      "address": "0x00312400303d02c323295f6e8b7309bc30fb6bce",
+      "coingecko_id": "caldera",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ESP",
+      "chain": "1",
+      "address": "0x031de51f3e8016514bd0963d0b2ab825a591db9a",
+      "coingecko_id": "espresso",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ESPORTS",
+      "chain": "56",
+      "address": "0xf39e4b21c84e737df08e2c3b32541d856f508e48",
+      "coingecko_id": "yooldo-games",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ETHFI",
+      "chain": "1",
+      "address": "0xfe0c30065b384f05761f15d0cc899d4f9f9cc0eb",
+      "coingecko_id": "ether-fi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ETHFI",
+      "chain": "8453",
+      "address": "0x6c240dda6b5c336df09a4d011139beaaa1ea2aa2",
+      "coingecko_id": "ether-fi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "EUL",
+      "chain": "1",
+      "address": "0xd9fcd98c322942075a5c3860693e9f4f03aae07b",
+      "coingecko_id": "euler",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "EUL",
+      "chain": "8453",
+      "address": "0xa153ad732f831a79b5575fa02e793ec4e99181b0",
+      "coingecko_id": "euler",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "EUL",
+      "chain": "56",
+      "address": "0x2117e8b79e8e176a670c9fcf945d4348556bffad",
+      "coingecko_id": "euler",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "EVAA",
+      "chain": "56",
+      "address": "0xaa036928c9c0df07d525b55ea8ee690bb5a628c1",
+      "coingecko_id": "evaa-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "F",
+      "chain": "56",
+      "address": "0xc9ccbd76c2353e593cc975f13295e8289d04d3bb",
+      "coingecko_id": "synfutures",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "F",
+      "chain": "1",
+      "address": "0x6e15a54b5ecac17e58dadeddbe8506a7560252f9",
+      "coingecko_id": "synfutures",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "F",
+      "chain": "8453",
+      "address": "0x2c24497d4086490e7ead87cc12597fb50c2e6ed6",
+      "coingecko_id": "synfutures",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FARTCOIN",
+      "chain": "CT_501",
+      "address": "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump",
+      "coingecko_id": "fartcoin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FET",
+      "chain": "1",
+      "address": "0xaea46a60368a7bd060eec7df8cba43b7ef41ad85",
+      "coingecko_id": "fetch-ai",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FET",
+      "chain": "56",
+      "address": "0x031b41e504677879370e9dbcf937283a8691fa7f",
+      "coingecko_id": "fetch-ai",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FF",
+      "chain": "56",
+      "address": "0xac23b90a79504865d52b49b327328411a23d4db2",
+      "coingecko_id": "falcon-finance-ff",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FF",
+      "chain": "1",
+      "address": "0xfa1c09fc8b491b6a4d3ff53a10cad29381b3f949",
+      "coingecko_id": "falcon-finance-ff",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FHE",
+      "chain": "1",
+      "address": "0xd55c9fb62e176a8eb6968f32958fefdd0962727e",
+      "coingecko_id": "mind-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FHE",
+      "chain": "56",
+      "address": "0xd55c9fb62e176a8eb6968f32958fefdd0962727e",
+      "coingecko_id": "mind-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FIDA",
+      "chain": "CT_501",
+      "address": "EchesyfXePKdLtoiZSL8pBe8Myagyy8ZRqsACNCFGnvp",
+      "coingecko_id": "bonfida",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FIGHT",
+      "chain": "56",
+      "address": "0xb2d97c4ed2d0ef452654f5cab3da3735b5e6f3ab",
+      "coingecko_id": "fight-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FIGHT",
+      "chain": "CT_501",
+      "address": "8f62NyJGo7He5uWeveTA2JJQf4xzf8aqxkmzxRQ3mxfU",
+      "coingecko_id": "fight-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FLOCK",
+      "chain": "8453",
+      "address": "0x5ab3d4c385b400f3abb49e80de2faf6a88a7b691",
+      "coingecko_id": "flock-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FLOCK",
+      "chain": "56",
+      "address": "0x5ab3d4c385b400f3abb49e80de2faf6a88a7b691",
+      "coingecko_id": "flock-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FLOCK",
+      "chain": "1",
+      "address": "0x5ab3d4c385b400f3abb49e80de2faf6a88a7b691",
+      "coingecko_id": "flock-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FLOCK",
+      "chain": "CT_501",
+      "address": "FmysnoAQ7ifx3La6C7D9cM5tcpoTxEnakbnZPhrC2pJi",
+      "coingecko_id": "flock-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FLOKI",
+      "chain": "1",
+      "address": "0xcf0c122c6b73ff809c693db761e7baebe62b6a2e",
+      "coingecko_id": "floki",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FLOKI",
+      "chain": "56",
+      "address": "0xfb5b838b6cfeedc2873ab27866079ac55363d37e",
+      "coingecko_id": "floki",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FLUID",
+      "chain": "1",
+      "address": "0x6f40d4a6237c257fff2db00fa0510deeecd303eb",
+      "coingecko_id": "instadapp",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FLUID",
+      "chain": "CT_501",
+      "address": "DuEy8wWrzCUun5ZbbG9hkVqXqqicpTQw8gB7nEAzpCHQ",
+      "coingecko_id": "instadapp",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FLUID",
+      "chain": "8453",
+      "address": "0x61e030a56d33e8260fdd81f03b162a79fe3449cd",
+      "coingecko_id": "instadapp",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FOLKS",
+      "chain": "56",
+      "address": "0xff7f8f301f7a706e3cfd3d2275f5dc0b9ee8009b",
+      "coingecko_id": "folks",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FOLKS",
+      "chain": "1",
+      "address": "0xff7f8f301f7a706e3cfd3d2275f5dc0b9ee8009b",
+      "coingecko_id": "folks",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FOLKS",
+      "chain": "8453",
+      "address": "0xff7f8f301f7a706e3cfd3d2275f5dc0b9ee8009b",
+      "coingecko_id": "folks",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FORM",
+      "chain": "56",
+      "address": "0x5b73a93b4e5e4f1fd27d8b3f8c97d69908b5e284",
+      "coingecko_id": "four",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FRAX",
+      "chain": "1",
+      "address": "0x3432b6a60d23ca0dfca7761b7ab56459d9c964d0",
+      "coingecko_id": "frax-share",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FRAX",
+      "chain": "CT_501",
+      "address": "6LX8BhMQ4Sy2otmAWj7Y5sKd9YTVVUgfMsBzT6B9W7ct",
+      "coingecko_id": "frax-share",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "FRAX",
+      "chain": "56",
+      "address": "0xe48a3d7d0bc88d552f730b62c006bc925eadb9ee",
+      "coingecko_id": "frax-share",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "G",
+      "chain": "1",
+      "address": "0x9c7beba8f6ef6643abd725e45a4e8387ef260649",
+      "coingecko_id": "g-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "G",
+      "chain": "8453",
+      "address": "0x9c7beba8f6ef6643abd725e45a4e8387ef260649",
+      "coingecko_id": "g-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "G",
+      "chain": "56",
+      "address": "0x9c7beba8f6ef6643abd725e45a4e8387ef260649",
+      "coingecko_id": "g-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GALA",
+      "chain": "1",
+      "address": "0xd1d2eb1b1e90b638588728b4130137d262c87cae",
+      "coingecko_id": "gala",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GALA",
+      "chain": "CT_501",
+      "address": "eEUiUs4JWYZrp72djAGF1A8PhpR6rHphGeGN7GbVLp6",
+      "coingecko_id": "gala",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GENIUS",
+      "chain": "56",
+      "address": "0x1f12b85aac097e43aa1555b2881e98a51090e9a6",
+      "coingecko_id": "genius-3",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GIGGLE",
+      "chain": "56",
+      "address": "0x20d6015660b3fe52e6690a889b5c51f69902ce0e",
+      "coingecko_id": "giggle-fund",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GLM",
+      "chain": "1",
+      "address": "0x7dd9c5cba05e151c895fde1cf355c9a1d5da6429",
+      "coingecko_id": "golem",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GMT",
+      "chain": "CT_501",
+      "address": "7i5KKsX2weiTkry7jA4ZwSuXGhs5eJBEjY8vVxR4pfRx",
+      "coingecko_id": "stepn",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GMT",
+      "chain": "1",
+      "address": "0xe3c408bd53c31c085a1746af401a4042954ff740",
+      "coingecko_id": "stepn",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GMT",
+      "chain": "56",
+      "address": "0x3019bf2a2ef8040c242c9a4c5c4bd4c81678b2a1",
+      "coingecko_id": "stepn",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GOAT",
+      "chain": "CT_501",
+      "address": "CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump",
+      "coingecko_id": "goatseus-maximus",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GPS",
+      "chain": "8453",
+      "address": "0x0c1dc73159e30c4b06170f2593d3118968a0dca5",
+      "coingecko_id": "goplus-security",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GPS",
+      "chain": "56",
+      "address": "0x9a4a67721573f2c9209dfff972c52be4e3f6642e",
+      "coingecko_id": "goplus-security",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GRAM",
+      "chain": "1",
+      "address": "0x582d872a1b094fc48f5de31d3b73f2d9be47def1",
+      "coingecko_id": "the-open-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GRAM",
+      "chain": "56",
+      "address": "0x76a797a59ba2c17726896976b7b3747bfd1d220f",
+      "coingecko_id": "the-open-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GRASS",
+      "chain": "CT_501",
+      "address": "Grass7B4RdKfBCjTKgSqnXkqjwiGvQyFbuSCUJr3XXjs",
+      "coingecko_id": "grass",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GRIFFAIN",
+      "chain": "CT_501",
+      "address": "KENJSUYLASHUMfHyy5o4Hp2FdNqZg1AsUPhfH2kYvEP",
+      "coingecko_id": "griffain",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GRT",
+      "chain": "1",
+      "address": "0xc944e90c64b2c07662a292be6244bdf05cda44a7",
+      "coingecko_id": "the-graph",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GRVT",
+      "chain": "56",
+      "address": "0x46f2564e0fa8248d15125e7e54173cfbdef91be7",
+      "coingecko_id": "grvt",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GRVT",
+      "chain": "1",
+      "address": "0xad29f2723fcdbcf665f210f25e06f97477e417cf",
+      "coingecko_id": "grvt",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GTC",
+      "chain": "1",
+      "address": "0xde30da39c46104798bb5aa3fe8b9e0e1f348163f",
+      "coingecko_id": "gitcoin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GUA",
+      "chain": "56",
+      "address": "0xa5c8e1513b6a08334b479fe4d71f1253259469be",
+      "coingecko_id": "superfortune",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GUN",
+      "chain": "CT_501",
+      "address": "3jUf2RTyXp867piSB2dt8uUcNiLDW58asjGtXkRAkBbe",
+      "coingecko_id": "gunz",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GWEI",
+      "chain": "56",
+      "address": "0x30117e4bc17d7b044194b76a38365c53b72f7d49",
+      "coingecko_id": "ethgas-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "GWEI",
+      "chain": "1",
+      "address": "0x2798b1cc5a993085e8a9d46e80499f1b63f42204",
+      "coingecko_id": "ethgas-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "H",
+      "chain": "1",
+      "address": "0xe76c5b78f93909d34404e9eb4c1f19e7582a5de1",
+      "coingecko_id": "humanity",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HAEDAL",
+      "chain": "56",
+      "address": "0x3d9be0ac1001cd81c32464276d863d2ffdca4967",
+      "coingecko_id": "haedal",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HANA",
+      "chain": "56",
+      "address": "0x6261963ebe9ff014aad10ecc3b0238d4d04e8353",
+      "coingecko_id": "hana-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HEI",
+      "chain": "1",
+      "address": "0xf8f173e20e15f3b6cb686fb64724d370689de083",
+      "coingecko_id": "heima",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HEI",
+      "chain": "56",
+      "address": "0xf8f173e20e15f3b6cb686fb64724d370689de083",
+      "coingecko_id": "heima",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HEMI",
+      "chain": "56",
+      "address": "0x5ffd0eadc186af9512542d0d5e5eafc65d5afc5b",
+      "coingecko_id": "hemi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HEMI",
+      "chain": "1",
+      "address": "0xeb964a1a6fab73b8c72a0d15c7337fa4804f484d",
+      "coingecko_id": "hemi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HOLO",
+      "chain": "56",
+      "address": "0x1a5d7e4c3a7f940b240b7357a4bfed30d17f9497",
+      "coingecko_id": "holoworld",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HOLO",
+      "chain": "CT_501",
+      "address": "69RX85eQoEsnZvXGmLNjYcWgVkp9r2JjahVm99KbJETU",
+      "coingecko_id": "holoworld",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HOME",
+      "chain": "56",
+      "address": "0x4bfaa776991e85e5f8b1255461cbbd216cfc714f",
+      "coingecko_id": "home",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HOME",
+      "chain": "8453",
+      "address": "0x4bfaa776991e85e5f8b1255461cbbd216cfc714f",
+      "coingecko_id": "home",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HOME",
+      "chain": "CT_501",
+      "address": "J3umBWqhSjd13sag1E1aUojViWvPYA5dFNyqpKuX3WXj",
+      "coingecko_id": "home",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HOT",
+      "chain": "1",
+      "address": "0x6c6ee5e31d828de241282b9606c8e98ea48526e2",
+      "coingecko_id": "holotoken",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HOT",
+      "chain": "8453",
+      "address": "0xf3dd141109dfe8e4c006f88a2a8747a086e7c1f8",
+      "coingecko_id": "holotoken",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HUMA",
+      "chain": "56",
+      "address": "0x92516e0ddf1ddbf7fab1b79cac26689fdc5ba8e6",
+      "coingecko_id": "huma-finance",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HUMA",
+      "chain": "CT_501",
+      "address": "HUMA1821qVDKta3u2ovmfDQeW2fSQouSKE8fkF44wvGw",
+      "coingecko_id": "huma-finance",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HYPER",
+      "chain": "56",
+      "address": "0xc9d23ed2adb0f551369946bd377f8644ce1ca5c4",
+      "coingecko_id": "hyperlane",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HYPER",
+      "chain": "1",
+      "address": "0x93a2db22b7c736b341c32ff666307f4a9ed910f5",
+      "coingecko_id": "hyperlane",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "HYPER",
+      "chain": "8453",
+      "address": "0xc9d23ed2adb0f551369946bd377f8644ce1ca5c4",
+      "coingecko_id": "hyperlane",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ICNT",
+      "chain": "1",
+      "address": "0xe5e0b73380181273abcfd88695f52c4d0c825661",
+      "coingecko_id": "impossible-cloud-network-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ICNT",
+      "chain": "8453",
+      "address": "0xe0cd4cacddcbf4f36e845407ce53e87717b6601d",
+      "coingecko_id": "impossible-cloud-network-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ICP",
+      "chain": "8453",
+      "address": "0x00f3c42833c3170159af4e92dbb451fb3f708917",
+      "coingecko_id": "internet-computer",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ICP",
+      "chain": "1",
+      "address": "0x00f3c42833c3170159af4e92dbb451fb3f708917",
+      "coingecko_id": "internet-computer",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ID",
+      "chain": "56",
+      "address": "0x2dff88a56767223a5529ea5960da7a3f5f766406",
+      "coingecko_id": "space-id",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ID",
+      "chain": "1",
+      "address": "0x2dff88a56767223a5529ea5960da7a3f5f766406",
+      "coingecko_id": "space-id",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "IDOL",
+      "chain": "56",
+      "address": "0x3b4de3c7855c03bb9f50ea252cd2c9fa1125ab07",
+      "coingecko_id": "meet48",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ILV",
+      "chain": "1",
+      "address": "0x767fe9edc9e0df98e07454847909b5e959d7ca0e",
+      "coingecko_id": "illuvium",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "IMX",
+      "chain": "1",
+      "address": "0xf57e7e7c23978c3caec3c3548e3d615c346e79ff",
+      "coingecko_id": "immutable-x",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "IN",
+      "chain": "56",
+      "address": "0x61fac5f038515572d6f42d4bcb6b581642753d50",
+      "coingecko_id": "infinit",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "IN",
+      "chain": "1",
+      "address": "0x61fac5f038515572d6f42d4bcb6b581642753d50",
+      "coingecko_id": "infinit",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "INJ",
+      "chain": "1",
+      "address": "0xe28b3b32b6c345a34ff64674606124dd5aceca30",
+      "coingecko_id": "injective-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "INJ",
+      "chain": "56",
+      "address": "0xa2b726b1145a4773f68593cf171187d8ebe4d495",
+      "coingecko_id": "injective-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "INJ",
+      "chain": "CT_501",
+      "address": "1NJMqVM4PadjuzYmeB7zV7q7DV8oB3ExaQCd9x6KsLz",
+      "coingecko_id": "injective-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "INX",
+      "chain": "1",
+      "address": "0xdef1b2d939edc0e4d35806c59b3166f790175afe",
+      "coingecko_id": "infinex-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "INX",
+      "chain": "56",
+      "address": "0x45f55b46689402583073ff227b6ac20520052a24",
+      "coingecko_id": "infinex-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "INX",
+      "chain": "CT_501",
+      "address": "inxKXw9V2NDZE7hDijzpJaKKUb97NEPJDTCEEiYg4yY",
+      "coingecko_id": "infinex-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "IO",
+      "chain": "CT_501",
+      "address": "BZLbGTNCSFfoth2GYDtwr7e4imWzpR5jqcUuGEwr646K",
+      "coingecko_id": "io",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "IOST",
+      "chain": "56",
+      "address": "0xaf48b7e315a52518cfbf7d96c455d9dfad94cb48",
+      "coingecko_id": "iostoken",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "IOTX",
+      "chain": "1",
+      "address": "0x6fb3e0a217407efff7ca062d46c26e5d60a14d69",
+      "coingecko_id": "iotex",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "IOTX",
+      "chain": "8453",
+      "address": "0xbcbaf311cec8a4eac0430193a528d9ff27ae38c1",
+      "coingecko_id": "iotex",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "IRYS",
+      "chain": "56",
+      "address": "0x91152b4ef635403efbae860edd0f8c321d7c035d",
+      "coingecko_id": "irys",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "IRYS",
+      "chain": "1",
+      "address": "0x50f41f589afaca2ef41fdf590fe7b90cd26dee64",
+      "coingecko_id": "irys",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "JASMY",
+      "chain": "1",
+      "address": "0x7420b4b9a0110cdc71fb720908340c03f9bc03ec",
+      "coingecko_id": "jasmycoin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "JCT",
+      "chain": "56",
+      "address": "0xea37a8de1de2d9d10772eeb569e28bfa5cb17707",
+      "coingecko_id": "janction",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "JCT",
+      "chain": "1",
+      "address": "0xc477b6dfd26ec2460b3b92de18837fd476ea7549",
+      "coingecko_id": "janction",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "JELLYJELLY",
+      "chain": "CT_501",
+      "address": "FeR8VBqNRSUD5NtXAj2n3j1dAHkZHfyDktKuLXD4pump",
+      "coingecko_id": "jelly-my-jelly",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "JOE",
+      "chain": "56",
+      "address": "0x371c7ec6d8039ff7933a2aa28eb827ffe1f52f07",
+      "coingecko_id": "joe",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "JTO",
+      "chain": "CT_501",
+      "address": "jtojtomepa8beP8AuQc6eXt5FriJwfFMwQx2v2f9mCL",
+      "coingecko_id": "jito-governance-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "JUP",
+      "chain": "CT_501",
+      "address": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+      "coingecko_id": "jupiter-exchange-solana",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "KAITO",
+      "chain": "8453",
+      "address": "0x98d0baa52b2d063e780de12f615f963fe8537553",
+      "coingecko_id": "kaito",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "KAT",
+      "chain": "8453",
+      "address": "0xd5390300c5db71f80d46f0fa9983fc72d4d1e3da",
+      "coingecko_id": "katana-network-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "KAVA",
+      "chain": "56",
+      "address": "0x9bafc8d4b487cebff201721702507a3e2c67ad79",
+      "coingecko_id": "kava",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "KERNEL",
+      "chain": "1",
+      "address": "0x3f80b1c54ae920be41a77f8b902259d48cf24ccf",
+      "coingecko_id": "kernel-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "KERNEL",
+      "chain": "56",
+      "address": "0x9ecaf80c1303cca8791afbc0ad405c8a35e8d9f1",
+      "coingecko_id": "kernel-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "KGEN",
+      "chain": "56",
+      "address": "0xf3d5b4c34ed623478cc5141861776e6cf7ae3a1e",
+      "coingecko_id": "kgen",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "KGEN",
+      "chain": "8453",
+      "address": "0xf3d5b4c34ed623478cc5141861776e6cf7ae3a1e",
+      "coingecko_id": "kgen",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "KITE",
+      "chain": "56",
+      "address": "0x904567252d8f48555b7447c67dca23f0372e16be",
+      "coingecko_id": "kite-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "KITE",
+      "chain": "1",
+      "address": "0x118b70df4f06fa5678e7d543e6066e028c8ea0c0",
+      "coingecko_id": "kite-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "KMNO",
+      "chain": "CT_501",
+      "address": "KMNo3nJsBXfcpJTVhZcXLW7RmTwTt4GVFE7suUBo9sS",
+      "coingecko_id": "kamino",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "KNC",
+      "chain": "1",
+      "address": "0xdefa4e8a7bcba345f687a2f1456f5edd9ce97202",
+      "coingecko_id": "kyber-network-crystal",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "KNC",
+      "chain": "56",
+      "address": "0xfe56d5892bdffc7bf58f2e84be1b2c32d21c308b",
+      "coingecko_id": "kyber-network-crystal",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "KOMA",
+      "chain": "56",
+      "address": "0xd5eaaac47bd1993d661bc087e15dfb079a7f3c19",
+      "coingecko_id": "koma-inu",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LA",
+      "chain": "56",
+      "address": "0x389ad4bb96d0d6ee5b6ef0efaf4b7db0ba2e02a0",
+      "coingecko_id": "lagrange",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LA",
+      "chain": "1",
+      "address": "0x0fc2a55d5bd13033f1ee0cdd11f60f7efe66f467",
+      "coingecko_id": "lagrange",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LAB",
+      "chain": "56",
+      "address": "0x7ec43cf65f1663f820427c62a5780b8f2e25593a",
+      "coingecko_id": "lab",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LAYER",
+      "chain": "CT_501",
+      "address": "LAYER4xPpTCb3QL8S9u41EAhAX7mhBn8Q6xMTwY2Yzc",
+      "coingecko_id": "solayer",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LDO",
+      "chain": "1",
+      "address": "0x5a98fcbea516cf06857215779fd812ca3bef1b32",
+      "coingecko_id": "lido-dao",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LIGHT",
+      "chain": "56",
+      "address": "0x477c2c0459004e3354ba427fa285d7c053203c0e",
+      "coingecko_id": "bitlight",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LINEA",
+      "chain": "1",
+      "address": "0x1789e0043623282d5dcc7f213d703c6d8bafbb04",
+      "coingecko_id": "linea",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LINK",
+      "chain": "1",
+      "address": "0x514910771af9ca656af840dff83e8264ecf986ca",
+      "coingecko_id": "chainlink",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LINK",
+      "chain": "8453",
+      "address": "0x88fb150bdc53a65fe94dea0c9ba0a6daf8c6e196",
+      "coingecko_id": "chainlink",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LINK",
+      "chain": "CT_501",
+      "address": "LinkhB3afbBKb2EQQu7s7umdZceV3wcvAUJhQAfQ23L",
+      "coingecko_id": "chainlink",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LINK",
+      "chain": "56",
+      "address": "0xf8a0bf9cf54bb92f17374d9e9a321e6a111a51bd",
+      "coingecko_id": "chainlink",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LISTA",
+      "chain": "56",
+      "address": "0xfceb31a79f71ac9cbdcf853519c1b12d379edc46",
+      "coingecko_id": "lista",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LIT",
+      "chain": "1",
+      "address": "0x232ce3bd40fcd6f80f3d55a522d03f25df784ee2",
+      "coingecko_id": "lighter",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LPT",
+      "chain": "1",
+      "address": "0x58b6a8a3302369daec383334672404ee733ab239",
+      "coingecko_id": "livepeer",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LQTY",
+      "chain": "1",
+      "address": "0x6dea81c8171d0ba574754ef6f8b412f2ed88c54d",
+      "coingecko_id": "liquity",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LSK",
+      "chain": "1",
+      "address": "0x6033f7f88332b8db6ad452b7c6d5bb643990ae3f",
+      "coingecko_id": "lisk",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LSK",
+      "chain": "8453",
+      "address": "0xac485391eb2d7d88253a7f1ef18c37f4242d1a24",
+      "coingecko_id": "lisk",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LUMIA",
+      "chain": "1",
+      "address": "0xd9343a049d5dbd89cd19dc6bca8c48fb3a0a42a7",
+      "coingecko_id": "lumia",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LUMIA",
+      "chain": "56",
+      "address": "0x7f39bcdca8e0e581c1d43aaa1cb862aa1c8c2047",
+      "coingecko_id": "lumia",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "LYN",
+      "chain": "56",
+      "address": "0x302dfaf2cdbe51a18d97186a7384e87cf599877d",
+      "coingecko_id": "everlyn",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "M",
+      "chain": "56",
+      "address": "0x22b1458e780f8fa71e2f84502cee8b5a3cc731fa",
+      "coingecko_id": "memecore",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MAGIC",
+      "chain": "1",
+      "address": "0xb0c7a3ba49c7a6eaba6cd4a96c55a1391070ac9a",
+      "coingecko_id": "magic",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MAGIC",
+      "chain": "8453",
+      "address": "0xf1572d1da5c3cce14ee5a1c9327d17e9ff0e3f43",
+      "coingecko_id": "magic",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MANA",
+      "chain": "1",
+      "address": "0x0f5d2fb29fb7d3cfee444a200298f468908cc942",
+      "coingecko_id": "decentraland",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MARSCOIN",
+      "chain": "56",
+      "address": "0xfe189e97832da1573e4e4ff034f4ffc3a15c7777",
+      "coingecko_id": "marscoin-4",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MASK",
+      "chain": "1",
+      "address": "0x69af81e73a73b40adf4f3d4223cd9b1ece623074",
+      "coingecko_id": "mask-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MASK",
+      "chain": "56",
+      "address": "0x2ed9a5c8c13b93955103b9a7c167b67ef4d568a3",
+      "coingecko_id": "mask-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MAV",
+      "chain": "1",
+      "address": "0x7448c7456a97769f6cd04f1e83a4a23ccdc46abd",
+      "coingecko_id": "maverick-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MAV",
+      "chain": "8453",
+      "address": "0x64b88c73a5dfa78d1713fe1b4c69a22d7e0faaa7",
+      "coingecko_id": "maverick-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MAV",
+      "chain": "56",
+      "address": "0xd691d9a68c887bdf34da8c36f63487333acfd103",
+      "coingecko_id": "maverick-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MAVIA",
+      "chain": "1",
+      "address": "0x24fcfc492c1393274b6bcd568ac9e225bec93584",
+      "coingecko_id": "heroes-of-mavia",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MAVIA",
+      "chain": "8453",
+      "address": "0x24fcfc492c1393274b6bcd568ac9e225bec93584",
+      "coingecko_id": "heroes-of-mavia",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MAVIA",
+      "chain": "56",
+      "address": "0x24fcfc492c1393274b6bcd568ac9e225bec93584",
+      "coingecko_id": "heroes-of-mavia",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ME",
+      "chain": "CT_501",
+      "address": "MEFNBXixkEbait3xn9bkm8WsJzXtVsaJEn4c8Sam21u",
+      "coingecko_id": "magic-eden",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MELANIA",
+      "chain": "CT_501",
+      "address": "FUAfBo2jgks6gB4Z4LfZkqSZgzNucisEHqnNebaRxM1P",
+      "coingecko_id": "melania-meme",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MEME",
+      "chain": "1",
+      "address": "0xb131f4a55907b10d1f0a50d8ab8fa09ec342cd74",
+      "coingecko_id": "memecoin-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MERL",
+      "chain": "56",
+      "address": "0xa0c56a8c0692bd10b3fa8f8ba79cf5332b7107f9",
+      "coingecko_id": "merlin-chain",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MERL",
+      "chain": "1",
+      "address": "0xa0c56a8c0692bd10b3fa8f8ba79cf5332b7107f9",
+      "coingecko_id": "merlin-chain",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MET",
+      "chain": "CT_501",
+      "address": "METvsvVRapdj9cFLzq4Tr43xK4tAjQfwX76z3n6mWQL",
+      "coingecko_id": "meteora",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "METIS",
+      "chain": "1",
+      "address": "0x9e32b13ce7f2e80a01932b42553652e053d6ed8e",
+      "coingecko_id": "metis-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MEW",
+      "chain": "CT_501",
+      "address": "MEW1gQWJ3nEXg2qgERiKu7FAFj79PHvQVREQUzScPP5",
+      "coingecko_id": "cat-in-a-dogs-world",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MIRA",
+      "chain": "56",
+      "address": "0x7839fbfd09dae4d0f15bfb36b8f16f7898fbe684",
+      "coingecko_id": "mira-3",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MIRA",
+      "chain": "8453",
+      "address": "0x7aafd31a321d3627b30a8e2171264b56852187fe",
+      "coingecko_id": "mira-3",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MITO",
+      "chain": "56",
+      "address": "0x8e1e6bf7e13c400269987b65ab2b5724b016caef",
+      "coingecko_id": "mitosis",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MMT",
+      "chain": "56",
+      "address": "0xac246674dd88dd08f9c6dd0ab5e2115988bff34a",
+      "coingecko_id": "momentum-3",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MOCA",
+      "chain": "1",
+      "address": "0xf944e35f95e819e752f3ccb5faf40957d311e8c5",
+      "coingecko_id": "mocaverse",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MOCA",
+      "chain": "8453",
+      "address": "0x2b11834ed1feaed4b4b3a86a6f571315e25a884d",
+      "coingecko_id": "mocaverse",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MOG",
+      "chain": "1",
+      "address": "0xaaee1a9723aadb7afa2810263653a34ba2c21c7a",
+      "coingecko_id": "mog-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MOG",
+      "chain": "8453",
+      "address": "0x2da56acb9ea78330f947bd57c54119debda7af71",
+      "coingecko_id": "mog-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MOODENG",
+      "chain": "CT_501",
+      "address": "ED5nyyWEzpPPiWimP8vYm7sD7TD3LAt3Q3gRTWHzPJBY",
+      "coingecko_id": "moo-deng",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MORPHO",
+      "chain": "1",
+      "address": "0x58d97b57bb95320f9a05dc918aef65434969c2b2",
+      "coingecko_id": "morpho",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MORPHO",
+      "chain": "8453",
+      "address": "0xbaa5cc21fd487b8fcc2f632f3f4e8d37262a0842",
+      "coingecko_id": "morpho",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MOVE",
+      "chain": "1",
+      "address": "0x3073f7aaa4db83f95e9fff17424f71d4751a3073",
+      "coingecko_id": "movement",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MOVE",
+      "chain": "8453",
+      "address": "0x3073f7aaa4db83f95e9fff17424f71d4751a3073",
+      "coingecko_id": "movement",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MOVR",
+      "chain": "8453",
+      "address": "0x43feb74608334dda8c1a6500d185cfc3ea962b83",
+      "coingecko_id": "moonriver",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MUBARAK",
+      "chain": "56",
+      "address": "0x5c85d6c6825ab4032337f11ee92a72df936b46f6",
+      "coingecko_id": "mubarak",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "MYX",
+      "chain": "56",
+      "address": "0xd82544bf0dfe8385ef8fa34d67e6e4940cc63e16",
+      "coingecko_id": "myx-finance",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "NAORIS",
+      "chain": "1",
+      "address": "0x1b379a79c91a540b2bcd612b4d713f31de1b80cc",
+      "coingecko_id": "naoris",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "NAORIS",
+      "chain": "56",
+      "address": "0x1b379a79c91a540b2bcd612b4d713f31de1b80cc",
+      "coingecko_id": "naoris",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "NEIRO",
+      "chain": "1",
+      "address": "0x812ba41e071c7b7fa4ebcfb62df5f45f6fa853ee",
+      "coingecko_id": "neiro-3",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "NEIRO",
+      "chain": "8453",
+      "address": "0x5ca35ebc4f25b042d2cae75914c7e882e631fa9a",
+      "coingecko_id": "neiro-3",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "NEIRO",
+      "chain": "56",
+      "address": "0x94162acc63812d53ac2bcf1f4aef65863273e63b",
+      "coingecko_id": "neiro-3",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "NEWT",
+      "chain": "56",
+      "address": "0xb8a677e6d805c8d743e6f14c8bc9c19305b5defc",
+      "coingecko_id": "newton-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "NEWT",
+      "chain": "1",
+      "address": "0xd0ec028a3d21533fdd200838f39c85b03679285d",
+      "coingecko_id": "newton-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "NIGHT",
+      "chain": "56",
+      "address": "0xfe930c2d63aed9b82fc4dbc801920dd2c1a3224f",
+      "coingecko_id": "midnight-3",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "NIL",
+      "chain": "1",
+      "address": "0x7cf9a80db3b29ee8efe3710aadb7b95270572d47",
+      "coingecko_id": "nillion",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "NMR",
+      "chain": "1",
+      "address": "0x1776e1f26f98b1a5df9cd347953a26dd3cb46671",
+      "coingecko_id": "numeraire",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "NOM",
+      "chain": "1",
+      "address": "0x6e6f6d696e61decd6605bd4a57836c5db6923340",
+      "coingecko_id": "nomina",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "O",
+      "chain": "56",
+      "address": "0x500a02a20b0b0a3f3efccfc0559543f5743bd1c4",
+      "coingecko_id": "o1-exchange",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "O",
+      "chain": "8453",
+      "address": "0x182fa643e5f29d5eca75e7b9cf9336a3fe4620b2",
+      "coingecko_id": "o1-exchange",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "OG",
+      "chain": "CT_501",
+      "address": "BtjXf3LA7Z3jxAcQkKUqKYpLFS5B7GuB7pfjzeas1tdB",
+      "coingecko_id": "og-fan-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "OG",
+      "chain": "8453",
+      "address": "0xccd6ee493ce30ba25291f563f8b6892af4ba202a",
+      "coingecko_id": "og-fan-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "OGN",
+      "chain": "1",
+      "address": "0x8207c1ffc5b6804f6024322ccf34f29c3541ae26",
+      "coingecko_id": "origin-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "OGN",
+      "chain": "8453",
+      "address": "0x7002458b1df59eccb57387bc79ffc7c29e22e6f7",
+      "coingecko_id": "origin-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ON",
+      "chain": "56",
+      "address": "0x0e4f6209ed984b21edea43ace6e09559ed051d48",
+      "coingecko_id": "orochi-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ON",
+      "chain": "1",
+      "address": "0x33f6be84becff45ea6aa2952d7ef890b44bfb59d",
+      "coingecko_id": "orochi-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ONDO",
+      "chain": "1",
+      "address": "0xfaba6f8e4a5e8ab82f62fe7c39859fa577269be3",
+      "coingecko_id": "ondo-finance",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "OPEN",
+      "chain": "56",
+      "address": "0xa227cc36938f0c9e09ce0e64dfab226cad739447",
+      "coingecko_id": "openledger-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "OPEN",
+      "chain": "1",
+      "address": "0xa227cc36938f0c9e09ce0e64dfab226cad739447",
+      "coingecko_id": "openledger-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "OPG",
+      "chain": "56",
+      "address": "0x5feccd17c393caf1001d18164236a37e731fcb9d",
+      "coingecko_id": "opengradient",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "OPG",
+      "chain": "8453",
+      "address": "0xfbc2051ae2265686a469421b2c5a2d5462fbf5eb",
+      "coingecko_id": "opengradient",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "OPN",
+      "chain": "56",
+      "address": "0x7977bf3e7e0c954d12cdca3e013adaf57e0b06e0",
+      "coingecko_id": "opinion",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "OPN",
+      "chain": "1",
+      "address": "0x7977bf3e7e0c954d12cdca3e013adaf57e0b06e0",
+      "coingecko_id": "opinion",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ORCA",
+      "chain": "CT_501",
+      "address": "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE",
+      "coingecko_id": "orca",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ORDER",
+      "chain": "56",
+      "address": "0x4e200fe2f3efb977d5fd9c430a41531fb04d97b8",
+      "coingecko_id": "orderly-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ORDER",
+      "chain": "1",
+      "address": "0xabd4c63d2616a5201454168269031355f4764337",
+      "coingecko_id": "orderly-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ORDER",
+      "chain": "8453",
+      "address": "0x4e200fe2f3efb977d5fd9c430a41531fb04d97b8",
+      "coingecko_id": "orderly-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ORDER",
+      "chain": "CT_501",
+      "address": "ABt79MkRXUsoHuV2CVQT32YMXQhTparKFjmidQxgiQ6E",
+      "coingecko_id": "orderly-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ORDI",
+      "chain": "CT_501",
+      "address": "u9nmK5sQovm6ACVCQbbq8xUMpFqdPSYxdxVwXUX4sjY",
+      "coingecko_id": "ordinals",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PARTI",
+      "chain": "56",
+      "address": "0x59264f02d301281f3393e1385c0aefd446eb0f00",
+      "coingecko_id": "particle-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PARTI",
+      "chain": "8453",
+      "address": "0x59264f02d301281f3393e1385c0aefd446eb0f00",
+      "coingecko_id": "particle-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PAXG",
+      "chain": "1",
+      "address": "0x45804880de22913dafe09f4980848ece6ecbaf78",
+      "coingecko_id": "pax-gold",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PENDLE",
+      "chain": "1",
+      "address": "0x808507121b80c02388fad14726482e061b8da827",
+      "coingecko_id": "pendle",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PENDLE",
+      "chain": "8453",
+      "address": "0xa99f6e6785da0f5d6fb42495fe424bce029eeb3e",
+      "coingecko_id": "pendle",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PENDLE",
+      "chain": "56",
+      "address": "0xb3ed0a426155b79b898849803e3b36552f7ed507",
+      "coingecko_id": "pendle",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PENGU",
+      "chain": "CT_501",
+      "address": "2zMMhcVQEXDtdE6vsFS7S7D5oUodfJHE8vd1gnBouauv",
+      "coingecko_id": "pudgy-penguins",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PENGU",
+      "chain": "1",
+      "address": "0x6418c0dd099a9fda397c766304cdd918233e8847",
+      "coingecko_id": "pudgy-penguins",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PENGU",
+      "chain": "56",
+      "address": "0x6418c0dd099a9fda397c766304cdd918233e8847",
+      "coingecko_id": "pudgy-penguins",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PEOPLE",
+      "chain": "1",
+      "address": "0x7a58c0be72be218b41c608b7fe7c5bb630736c71",
+      "coingecko_id": "constitutiondao",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PEPE",
+      "chain": "1",
+      "address": "0x6982508145454ce325ddbe47a25d4ec3d2311933",
+      "coingecko_id": "pepe",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PEPE",
+      "chain": "56",
+      "address": "0x25d887ce7a35172c62febfd67a1856f20faebb00",
+      "coingecko_id": "pepe",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PHA",
+      "chain": "1",
+      "address": "0x6c5ba91642f10282b576d91922ae6448c9d52f4e",
+      "coingecko_id": "pha",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PIEVERSE",
+      "chain": "56",
+      "address": "0x0e63b9c287e32a05e6b9ab8ee8df88a2760225a9",
+      "coingecko_id": "pieverse",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PIEVERSE",
+      "chain": "1",
+      "address": "0x0e63b9c287e32a05e6b9ab8ee8df88a2760225a9",
+      "coingecko_id": "pieverse",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PIPPIN",
+      "chain": "CT_501",
+      "address": "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump",
+      "coingecko_id": "pippin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PIXEL",
+      "chain": "1",
+      "address": "0x3429d03c6f7521aec737a0bbf2e5ddcef2c3ae31",
+      "coingecko_id": "pixels",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PLAY",
+      "chain": "8453",
+      "address": "0x853a7c99227499dba9db8c3a02aa691afdebf841",
+      "coingecko_id": "playsout",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PLAY",
+      "chain": "56",
+      "address": "0xf86089b30f30285d492b0527c37b9c2225bfcf8c",
+      "coingecko_id": "playsout",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PLUME",
+      "chain": "1",
+      "address": "0x4c1746a800d224393fe2470c70a35717ed4ea5f1",
+      "coingecko_id": "plume",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PLUME",
+      "chain": "56",
+      "address": "0x5afadcd1e8e3ca78ee2d37100102f2aec8bc0aa8",
+      "coingecko_id": "plume",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PNUT",
+      "chain": "CT_501",
+      "address": "2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
+      "coingecko_id": "peanut-the-squirrel",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "POL",
+      "chain": "1",
+      "address": "0x455e53cbb86018ac2b8092fdcd39d8444affc3f6",
+      "coingecko_id": "polygon-ecosystem-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "POPCAT",
+      "chain": "CT_501",
+      "address": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
+      "coingecko_id": "popcat",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PORTAL",
+      "chain": "1",
+      "address": "0x1bbe973bef3a977fc51cbed703e8ffdefe001fed",
+      "coingecko_id": "portal-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PORTAL",
+      "chain": "8453",
+      "address": "0x0ffebc403f2d3dd9ea5501ca03916e98967acb2d",
+      "coingecko_id": "portal-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PORTAL",
+      "chain": "CT_501",
+      "address": "FMQjDvT1GztVxdvYgMBEde4L54fftFGx9m5GmbqeJGM5",
+      "coingecko_id": "portal-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "POWER",
+      "chain": "56",
+      "address": "0x9dc44ae5be187eca9e2a67e33f27a4c91cea1223",
+      "coingecko_id": "power-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "POWER",
+      "chain": "1",
+      "address": "0x9dc44ae5be187eca9e2a67e33f27a4c91cea1223",
+      "coingecko_id": "power-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "POWR",
+      "chain": "1",
+      "address": "0x595832f8fc6bf59c85c527fec3740a1b7a361269",
+      "coingecko_id": "power-ledger",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PRL",
+      "chain": "CT_501",
+      "address": "PERLEQKUNUp1dgFZ8EvyXHdN9d6ZQqfGxALDvfs6pDs",
+      "coingecko_id": "perle",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PROM",
+      "chain": "1",
+      "address": "0xfc82bb4ba86045af6f327323a46e80412b91b27d",
+      "coingecko_id": "prometeus",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PROM",
+      "chain": "56",
+      "address": "0xaf53d56ff99f1322515e54fdde93ff8b3b7dafd5",
+      "coingecko_id": "prometeus",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PROVE",
+      "chain": "56",
+      "address": "0x7ddf164cecfddd0f992299d033b5a11279a15929",
+      "coingecko_id": "succinct",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PROVE",
+      "chain": "1",
+      "address": "0x6bef15d938d4e72056ac92ea4bdd0d76b1c4ad29",
+      "coingecko_id": "succinct",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PTB",
+      "chain": "1",
+      "address": "0x30a25cc9c9eade4d4d9e9349be6e68c3411367d3",
+      "coingecko_id": "portal-to-bitcoin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PTB",
+      "chain": "56",
+      "address": "0x95c9b514566fbd224dc2037f5914eb8ab91c9201",
+      "coingecko_id": "portal-to-bitcoin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PUMP",
+      "chain": "CT_501",
+      "address": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+      "coingecko_id": "pump-fun",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PUNDIX",
+      "chain": "1",
+      "address": "0x0fd10b9899882a6f2fcb5c371e17e70fdee00c38",
+      "coingecko_id": "pundi-x-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "PYTH",
+      "chain": "CT_501",
+      "address": "HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3",
+      "coingecko_id": "pyth-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "Q",
+      "chain": "1",
+      "address": "0xc07e1300dc138601fa6b0b59f8d0fa477e690589",
+      "coingecko_id": "quack-ai",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "Q",
+      "chain": "56",
+      "address": "0xc07e1300dc138601fa6b0b59f8d0fa477e690589",
+      "coingecko_id": "quack-ai",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "QNT",
+      "chain": "1",
+      "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
+      "coingecko_id": "quant-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RARE",
+      "chain": "1",
+      "address": "0xba5bde662c17e2adff1075610382b9b691296350",
+      "coingecko_id": "superrare",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RAVE",
+      "chain": "56",
+      "address": "0x97693439ea2f0ecdeb9135881e49f354656a911c",
+      "coingecko_id": "ravedao",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RAVE",
+      "chain": "1",
+      "address": "0x17205fab260a7a6383a81452ce6315a39370db97",
+      "coingecko_id": "ravedao",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RAVE",
+      "chain": "8453",
+      "address": "0x1aa8fd5bcce2231c6100d55bf8b377cff33acfc3",
+      "coingecko_id": "ravedao",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RAYSOL",
+      "chain": "CT_501",
+      "address": "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
+      "coingecko_id": "raydium",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RE",
+      "chain": "1",
+      "address": "0x526526528f35ac738177003b8773b402b8df8143",
+      "coingecko_id": "re",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RECALL",
+      "chain": "8453",
+      "address": "0x1f16e03c1a5908818f47f6ee7bb16690b40d0671",
+      "coingecko_id": "recall",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RED",
+      "chain": "1",
+      "address": "0xc43c6bfeda065fe2c4c11765bf838789bd0bb5de",
+      "coingecko_id": "redstone-oracles",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RED",
+      "chain": "8453",
+      "address": "0x4eb92702ba4cfbf80561bad64d89c706ac824960",
+      "coingecko_id": "redstone-oracles",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RENDER",
+      "chain": "1",
+      "address": "0x6de037ef9ad2725eb40118bb1702ebb27e4aeb24",
+      "coingecko_id": "render-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RENDER",
+      "chain": "CT_501",
+      "address": "rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof",
+      "coingecko_id": "render-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RESOLV",
+      "chain": "1",
+      "address": "0x259338656198ec7a76c729514d3cb45dfbf768a1",
+      "coingecko_id": "resolv",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RESOLV",
+      "chain": "56",
+      "address": "0xda6cef7f667d992a60eb823ab215493aa0c6b360",
+      "coingecko_id": "resolv",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "REZ",
+      "chain": "1",
+      "address": "0x3b50805453023a91a8bf641e279401a0b23fa6f9",
+      "coingecko_id": "renzo",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "REZ",
+      "chain": "8453",
+      "address": "0xf757c9804cf2ee8d8ed64e0a8936293fe43a7252",
+      "coingecko_id": "renzo",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "REZ",
+      "chain": "CT_501",
+      "address": "3DK98MXPz8TRuim7rfQnebSLpA7VSoc79Bgiee1m4Zw5",
+      "coingecko_id": "renzo",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RIF",
+      "chain": "1",
+      "address": "0x01b603be3d545f096015741e6503440282bf45fb",
+      "coingecko_id": "rif-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RIF",
+      "chain": "8453",
+      "address": "0xe5e851b01dd3eda24fde709a407db44555b6d1e0",
+      "coingecko_id": "rif-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RIF",
+      "chain": "CT_501",
+      "address": "AAeENcfHbTExuTvs4q7r9Bjax98Dg6BGX3aMph4bTLdK",
+      "coingecko_id": "rif-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RIVER",
+      "chain": "56",
+      "address": "0xda7ad9dea9397cffddae2f8a052b82f1484252b3",
+      "coingecko_id": "river",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RIVER",
+      "chain": "1",
+      "address": "0xda7ad9dea9397cffddae2f8a052b82f1484252b3",
+      "coingecko_id": "river",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RIVER",
+      "chain": "8453",
+      "address": "0xda7ad9dea9397cffddae2f8a052b82f1484252b3",
+      "coingecko_id": "river",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RLC",
+      "chain": "1",
+      "address": "0x607f4c5bb672230e8672085532f7e901544a7375",
+      "coingecko_id": "iexec-rlc",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ROBO",
+      "chain": "56",
+      "address": "0x475cbf5919608e0c6af00e7bf87fab83bf3ef6e2",
+      "coingecko_id": "robo-token-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ROBO",
+      "chain": "1",
+      "address": "0x32b4d049fe4c888d2b92eecaf729f44df6b1f36e",
+      "coingecko_id": "robo-token-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ROBO",
+      "chain": "8453",
+      "address": "0x407a5fb66cb1b3d50004f7091c08a27b42ba6d6f",
+      "coingecko_id": "robo-token-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ROSE",
+      "chain": "56",
+      "address": "0xf00600ebc7633462bc4f9c61ea2ce99f5aaebd4a",
+      "coingecko_id": "oasis-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RPL",
+      "chain": "1",
+      "address": "0xd33526068d116ce69f19a9ee46f0bd304f21a51f",
+      "coingecko_id": "rocket-pool",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RSR",
+      "chain": "1",
+      "address": "0x320623b8e4ff03373931769a31fc52a4e78b5d70",
+      "coingecko_id": "reserve-rights-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "RSR",
+      "chain": "8453",
+      "address": "0xab36452dbac151be02b16ca17d8919826072f64a",
+      "coingecko_id": "reserve-rights-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SAFE",
+      "chain": "1",
+      "address": "0x5afe3855358e112b5647b952709e6165e1c1eeee",
+      "coingecko_id": "safe",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SAHARA",
+      "chain": "56",
+      "address": "0xfdffb411c4a70aa7c95d5c981a6fb4da867e1111",
+      "coingecko_id": "sahara-ai",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SAHARA",
+      "chain": "1",
+      "address": "0xfdffb411c4a70aa7c95d5c981a6fb4da867e1111",
+      "coingecko_id": "sahara-ai",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SAND",
+      "chain": "1",
+      "address": "0x3845badade8e6dff049820680d1f14bd3903a5d0",
+      "coingecko_id": "the-sandbox",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SAND",
+      "chain": "8453",
+      "address": "0xac531eb26ca1d21b85126de8fb87e80e09002dcf",
+      "coingecko_id": "the-sandbox",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SANTOS",
+      "chain": "56",
+      "address": "0xa64455a4553c9034236734faddaddbb64ace4cc7",
+      "coingecko_id": "santos-fc-fan-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SAPIEN",
+      "chain": "8453",
+      "address": "0xc729777d0470f30612b1564fd96e8dd26f5814e3",
+      "coingecko_id": "sapien-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SENT",
+      "chain": "1",
+      "address": "0x56a3ba04e95d34268a19b2a4474dc979babdaf76",
+      "coingecko_id": "sentient",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SFP",
+      "chain": "1",
+      "address": "0x12e2b8033420270db2f3b328e32370cb5b2ca134",
+      "coingecko_id": "safepal",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SFP",
+      "chain": "56",
+      "address": "0xd41fdb03ba84762dd66a0af1a6c8540ff1ba5dfb",
+      "coingecko_id": "safepal",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SHELL",
+      "chain": "56",
+      "address": "0xf2c88757f8d03634671208935974b60a2a28bdb3",
+      "coingecko_id": "myshell",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SHELL",
+      "chain": "1",
+      "address": "0xf2c88757f8d03634671208935974b60a2a28bdb3",
+      "coingecko_id": "myshell",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SHIB",
+      "chain": "1",
+      "address": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
+      "coingecko_id": "shiba-inu",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SIGN",
+      "chain": "56",
+      "address": "0x868fced65edbf0056c4163515dd840e9f287a4c3",
+      "coingecko_id": "sign-global",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SIGN",
+      "chain": "1",
+      "address": "0x868fced65edbf0056c4163515dd840e9f287a4c3",
+      "coingecko_id": "sign-global",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SIGN",
+      "chain": "8453",
+      "address": "0x868fced65edbf0056c4163515dd840e9f287a4c3",
+      "coingecko_id": "sign-global",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SIREN",
+      "chain": "56",
+      "address": "0x997a58129890bbda032231a52ed1ddc845fc18e1",
+      "coingecko_id": "siren-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SKL",
+      "chain": "1",
+      "address": "0x00c83aecc790e8a4453e5dd3b0b4b3680501a7a7",
+      "coingecko_id": "skale",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SKL",
+      "chain": "8453",
+      "address": "0xb9caa63e09c646c1ec79acb2158d173e64a5fed3",
+      "coingecko_id": "skale",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SKR",
+      "chain": "CT_501",
+      "address": "SKRbvo6Gf7GondiT3BbTfuRDPqLWei4j2Qy2NPGZhW3",
+      "coingecko_id": "seeker",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SKY",
+      "chain": "1",
+      "address": "0x56072c95faa701256059aa122697b133aded9279",
+      "coingecko_id": "sky",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SKYAI",
+      "chain": "56",
+      "address": "0x92aa03137385f18539301349dcfc9ebc923ffb10",
+      "coingecko_id": "skyai",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SLP",
+      "chain": "1",
+      "address": "0xcc8fa225d80b9c7d42f96e9570156c65d6caaa25",
+      "coingecko_id": "smooth-love-potion",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SLX",
+      "chain": "CT_501",
+      "address": "SLXdx4BUt2v9uJQNzWqSfzTJ9UKLUDsvxHFMEEdrfgq",
+      "coingecko_id": "solstice",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SLX",
+      "chain": "56",
+      "address": "0x02bcc4c181b83a8c0a342bc003389cbecb4bc54d",
+      "coingecko_id": "solstice",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SNX",
+      "chain": "1",
+      "address": "0xc011a73ee8576fb46f5e1c5751ca3b9fe0af2a6f",
+      "coingecko_id": "havven",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SNX",
+      "chain": "8453",
+      "address": "0x22e6966b799c4d5b13be962e1d117b56327fda66",
+      "coingecko_id": "havven",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SOLV",
+      "chain": "56",
+      "address": "0xabe8e5cabe24cb36df9540088fd7ce1175b9bc52",
+      "coingecko_id": "solv-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SOLV",
+      "chain": "1",
+      "address": "0x169e36f327caa83d004f5c2668ac25a1424c940d",
+      "coingecko_id": "solv-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SONIC",
+      "chain": "CT_501",
+      "address": "SonicxvLud67EceaEzCLRnMTBqzYUUYNr93DBkBdDES",
+      "coingecko_id": "sonic-svm",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SOON",
+      "chain": "56",
+      "address": "0xb9e1fd5a02d3a33b25a14d661414e6ed6954a721",
+      "coingecko_id": "soon-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SOON",
+      "chain": "CT_501",
+      "address": "4eDf52YYzL6i6gbZ6FXqrLUPXbtP61f1gPSFM66M4XHe",
+      "coingecko_id": "soon-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SOON",
+      "chain": "8453",
+      "address": "0xb9e1fd5a02d3a33b25a14d661414e6ed6954a721",
+      "coingecko_id": "soon-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SOPH",
+      "chain": "56",
+      "address": "0x31dba3c96481fde3cd81c2aaf51f2d8bf618c742",
+      "coingecko_id": "sophon",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SOPH",
+      "chain": "1",
+      "address": "0x6b7774cb12ed7573a7586e7d0e62a2a563ddd3f0",
+      "coingecko_id": "sophon",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SOPH",
+      "chain": "8453",
+      "address": "0x31dba3c96481fde3cd81c2aaf51f2d8bf618c742",
+      "coingecko_id": "sophon",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SPACE",
+      "chain": "56",
+      "address": "0x87acfa3fd7a6e0d48677d070644d76905c2bdc00",
+      "coingecko_id": "spacecoin-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SPACE",
+      "chain": "1",
+      "address": "0x87acfa3fd7a6e0d48677d070644d76905c2bdc00",
+      "coingecko_id": "spacecoin-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SPELL",
+      "chain": "1",
+      "address": "0x090185f2135308bad17527004364ebcc2d37e5f6",
+      "coingecko_id": "spell-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SPK",
+      "chain": "1",
+      "address": "0xc20059e0317de91738d13af027dfc4a50781b066",
+      "coingecko_id": "spark-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SPORTFUN",
+      "chain": "8453",
+      "address": "0x16ee7ecac70d1028e7712751e2ee6ba808a7dd92",
+      "coingecko_id": "football-fun",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SPORTFUN",
+      "chain": "CT_501",
+      "address": "8cn4JeRLiHTtfX6maZAsipGGyyZPdEcos3s2X3Hw3BS6",
+      "coingecko_id": "football-fun",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SPX",
+      "chain": "1",
+      "address": "0xe0f63a424a4439cbe457d80e4f4b51ad25b2c56c",
+      "coingecko_id": "spx6900",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SPX",
+      "chain": "8453",
+      "address": "0x50da645f148798f68ef2d7db7c1cb22a6819bb2c",
+      "coingecko_id": "spx6900",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SPX",
+      "chain": "CT_501",
+      "address": "J3NKxxXZcnNiMjKw9hYb2K4LUxgwB6t1FtPtQVsv3KFr",
+      "coingecko_id": "spx6900",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SQD",
+      "chain": "8453",
+      "address": "0xd4554bea546efa83c1e6b389ecac40ea999b3e78",
+      "coingecko_id": "subsquid",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SQD",
+      "chain": "56",
+      "address": "0xe50e3d1a46070444f44df911359033f2937fcc13",
+      "coingecko_id": "subsquid",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SSV",
+      "chain": "1",
+      "address": "0x9d65ff81a3c488d585bbfb0bfe3c7707c7917f54",
+      "coingecko_id": "ssv-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "STABLE",
+      "chain": "56",
+      "address": "0x011ebe7d75e2c9d1e0bd0be0bef5c36f0a90075f",
+      "coingecko_id": "stable-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "STAR",
+      "chain": "56",
+      "address": "0x8fce7206e3043dd360f115afa956ee31b90b787c",
+      "coingecko_id": "starpower",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "STAR",
+      "chain": "CT_501",
+      "address": "STARqri3xhy6Pyv1EpgdjkPDVcs9FncKcaEP6527krs",
+      "coingecko_id": "starpower",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "STBL",
+      "chain": "56",
+      "address": "0x8dedf84656fa932157e27c060d8613824e7979e3",
+      "coingecko_id": "stbl",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "STO",
+      "chain": "56",
+      "address": "0xdaf1695c41327b61b9b9965ac6a5843a3198cf07",
+      "coingecko_id": "stakestone",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "STO",
+      "chain": "1",
+      "address": "0x1d88713b483a8e45cff0e5cd7c2e15e5fab4534d",
+      "coingecko_id": "stakestone",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "STRK",
+      "chain": "1",
+      "address": "0xca14007eff0db1f8135f4c25b34de49ab0d42766",
+      "coingecko_id": "starknet",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "STRK",
+      "chain": "CT_501",
+      "address": "HsRpHQn6VbyMs5b5j5SV6xQ2VvpvvCCzu19GjytVSCoz",
+      "coingecko_id": "starknet",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SUPER",
+      "chain": "1",
+      "address": "0xe53ec727dbdeb9e2d5456c3be40cff031ab40a55",
+      "coingecko_id": "superfarm",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SUPER",
+      "chain": "8453",
+      "address": "0x391359ab0ccef572dcac78f74e47d7c06db0b982",
+      "coingecko_id": "superfarm",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SUSHI",
+      "chain": "1",
+      "address": "0x6b3595068778dd592e39a122f4f5a5cf09c90fe2",
+      "coingecko_id": "sushi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SUSHI",
+      "chain": "8453",
+      "address": "0x7d49a065d17d6d4a55dc13649901fdbb98b2afba",
+      "coingecko_id": "sushi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SUSHI",
+      "chain": "56",
+      "address": "0x947950bcc74888a40ffa2593c5798f11fc9124c4",
+      "coingecko_id": "sushi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SUSHI",
+      "chain": "CT_501",
+      "address": "ChVzxWRmrTeSgwd3Ui3UumcN8KX7VK3WaD4KGeSKpypj",
+      "coingecko_id": "sushi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SWARMS",
+      "chain": "CT_501",
+      "address": "74SBV4zDXxTRgv1pEMoECskKBkZHc2yGPnc7GYVepump",
+      "coingecko_id": "swarms",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SXT",
+      "chain": "8453",
+      "address": "0xa2c22252cdc8b7cddee1b0b2e242818509fcf7b8",
+      "coingecko_id": "space-and-time",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SXT",
+      "chain": "1",
+      "address": "0xe6bfd33f52d82ccb5b37e16d3dd81f9ffdabb195",
+      "coingecko_id": "space-and-time",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SYN",
+      "chain": "1",
+      "address": "0x0f2d719407fdbeff09d87557abb7232601fd9f29",
+      "coingecko_id": "synapse-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SYN",
+      "chain": "8453",
+      "address": "0x432036208d2717394d2614d6697c46df3ed69540",
+      "coingecko_id": "synapse-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SYN",
+      "chain": "56",
+      "address": "0xa4080f1778e69467e905b8d6f72f6e441f9e9484",
+      "coingecko_id": "synapse-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SYRUP",
+      "chain": "1",
+      "address": "0x643c4e15d7d62ad0abec4a9bd4b001aa3ef52d66",
+      "coingecko_id": "syrup",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "SYRUP",
+      "chain": "8453",
+      "address": "0x688aee022aa544f150678b8e5720b6b96a9e9a2f",
+      "coingecko_id": "syrup",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "T",
+      "chain": "1",
+      "address": "0xcdf7028ceab81fa0c6971208e83fa7872994bee5",
+      "coingecko_id": "threshold-network-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "T",
+      "chain": "8453",
+      "address": "0x26f3901ac8a79c50fb0d8289c74f0d09adc42e29",
+      "coingecko_id": "threshold-network-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "T",
+      "chain": "CT_501",
+      "address": "4Njvi3928U3figEF5tf8xvjLC5GqUN33oe4XTJNe7xXC",
+      "coingecko_id": "threshold-network-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TA",
+      "chain": "56",
+      "address": "0x539ae81a166e5e80aed211731563e549c411b140",
+      "coingecko_id": "trusta-ai",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TAC",
+      "chain": "56",
+      "address": "0xb305e6954e4e0cd021c06ec355681abc8a00dbd7",
+      "coingecko_id": "tac",
+      "basis": "reviewed_alpha"
+    },
+    {
+      "asset": "TAC",
+      "chain": "56",
+      "address": "0xb305E6954e4e0Cd021c06Ec355681abc8A00dbD7",
+      "coingecko_id": "tac",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TAG",
+      "chain": "56",
+      "address": "0x208bf3e7da9639f1eaefa2de78c23396b0682025",
+      "coingecko_id": "tagger",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TAIKO",
+      "chain": "1",
+      "address": "0x10dea67478c5f8c5e2d90e5e9b26dbe60c54d800",
+      "coingecko_id": "taiko",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TAIKO",
+      "chain": "56",
+      "address": "0x30c60b20c25b2810ca524810467a0c342294fc61",
+      "coingecko_id": "taiko",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TAKE",
+      "chain": "56",
+      "address": "0xe747e54783ba3f77a8e5251a3cba19ebe9c0e197",
+      "coingecko_id": "overtake",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "THE",
+      "chain": "56",
+      "address": "0xf4c8e32eadec4bfe97e0f595add0f4450a863a11",
+      "coingecko_id": "thena",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TLM",
+      "chain": "1",
+      "address": "0x888888848b652b3e3a0f34c96e00eec0f3a23f72",
+      "coingecko_id": "alien-worlds",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TLM",
+      "chain": "56",
+      "address": "0x2222227e22102fe3322098e4cbfe18cfebd57c95",
+      "coingecko_id": "alien-worlds",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TNSR",
+      "chain": "CT_501",
+      "address": "TNSRxcUxoT9xBG3de7PiJyTDYu7kskLqcpddxnEJAS6",
+      "coingecko_id": "tensor",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TOSHI",
+      "chain": "8453",
+      "address": "0xac1bd2486aaf3b5c0fc3fd868558b082a531b2b4",
+      "coingecko_id": "toshi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TOSHI",
+      "chain": "56",
+      "address": "0x6a2608dabe09bc1128eec7275b92dfb939d5db3f",
+      "coingecko_id": "toshi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TOWNS",
+      "chain": "1",
+      "address": "0x000000fa00b200406de700041cfc6b19bbfb4d13",
+      "coingecko_id": "towns",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TOWNS",
+      "chain": "56",
+      "address": "0x00000000bca93b25a6694ca3d2109d545988b13b",
+      "coingecko_id": "towns",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TOWNS",
+      "chain": "8453",
+      "address": "0x00000000a22c618fd6b4d7e9a335c4b96b189a38",
+      "coingecko_id": "towns",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TRADOOR",
+      "chain": "56",
+      "address": "0x9123400446a56176eb1b6be9ee5cf703e409f492",
+      "coingecko_id": "tradoor",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TRB",
+      "chain": "1",
+      "address": "0x88df592f8eb5d7bd38bfef7deb0fbc02cf3778a0",
+      "coingecko_id": "tellor",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TREE",
+      "chain": "56",
+      "address": "0x77146784315ba81904d654466968e3a7c196d1f3",
+      "coingecko_id": "treehouse",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TREE",
+      "chain": "1",
+      "address": "0x77146784315ba81904d654466968e3a7c196d1f3",
+      "coingecko_id": "treehouse",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TRIA",
+      "chain": "56",
+      "address": "0xb0b92de23baa85fb06208277e925ced53edab482",
+      "coingecko_id": "tria",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TRIA",
+      "chain": "1",
+      "address": "0x228bec415ade4b61d7caf0adf8c91eac587ba369",
+      "coingecko_id": "tria",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TRUMP",
+      "chain": "CT_501",
+      "address": "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN",
+      "coingecko_id": "official-trump",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TRUST",
+      "chain": "8453",
+      "address": "0x6cd905df2ed214b22e0d48ff17cd4200c1c6d8a3",
+      "coingecko_id": "intuition",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TST",
+      "chain": "56",
+      "address": "0x86bb94ddd16efc8bc58e6b056e8df71d9e666429",
+      "coingecko_id": "test-3",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TURBO",
+      "chain": "1",
+      "address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+      "coingecko_id": "turbo",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TURBO",
+      "chain": "CT_501",
+      "address": "2Dyzu65QA9zdX1UeE7Gx71k7fiwyUK6sZdrvJ7auq5wm",
+      "coingecko_id": "turbo",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TURTLE",
+      "chain": "56",
+      "address": "0x66fd8de541c0594b4dccdfc13bf3a390e50d3afd",
+      "coingecko_id": "turtle-4",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TURTLE",
+      "chain": "1",
+      "address": "0x66fd8de541c0594b4dccdfc13bf3a390e50d3afd",
+      "coingecko_id": "turtle-4",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TUT",
+      "chain": "56",
+      "address": "0xcaae2a2f939f51d97cdfa9a86e79e3f085b799f3",
+      "coingecko_id": "tutorial",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "TWT",
+      "chain": "56",
+      "address": "0x4b0f1812e5df2a09796481ff14017e6005508003",
+      "coingecko_id": "trust-wallet-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "UAI",
+      "chain": "56",
+      "address": "0x3e5d4f8aee0d9b3082d5f6da5d6e225d17ba9ea0",
+      "coingecko_id": "unifai-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "UB",
+      "chain": "56",
+      "address": "0x40b8129b786d766267a7a118cf8c07e31cdb6fde",
+      "coingecko_id": "unibase",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "UB",
+      "chain": "1",
+      "address": "0x6944e1df6bf5972305f9ab25df47ef10de01bcc8",
+      "coingecko_id": "unibase",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "UMA",
+      "chain": "1",
+      "address": "0x04fa0d235c4abf4bcf4787af4cf447de572ef828",
+      "coingecko_id": "uma",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "UNI",
+      "chain": "1",
+      "address": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
+      "coingecko_id": "uniswap",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "UNI",
+      "chain": "56",
+      "address": "0xbf5140a22578168fd562dccf235e5d43a02ce9b1",
+      "coingecko_id": "uniswap",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "USDC",
+      "chain": "1",
+      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "coingecko_id": "usd-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "USDC",
+      "chain": "8453",
+      "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+      "coingecko_id": "usd-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "USDC",
+      "chain": "CT_501",
+      "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "coingecko_id": "usd-coin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "USELESS",
+      "chain": "CT_501",
+      "address": "Dz9mQ9NzkBcCsuGPFJ3r1bS4wgqKMHBPiVuniW8Mbonk",
+      "coingecko_id": "useless-3",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "USELESS",
+      "chain": "56",
+      "address": "0xba38b3c706f7a515ff7c8db04daa0a134ec46d2b",
+      "coingecko_id": "useless-3",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "USUAL",
+      "chain": "1",
+      "address": "0xc4441c2be5d8fa8126822b9929ca0b81ea0de38e",
+      "coingecko_id": "usual",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "USUAL",
+      "chain": "56",
+      "address": "0x4acd4d03af6f9cc0fb7c5f0868b7b6287d7969c5",
+      "coingecko_id": "usual",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "USUAL",
+      "chain": "8453",
+      "address": "0x4acd4d03af6f9cc0fb7c5f0868b7b6287d7969c5",
+      "coingecko_id": "usual",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "VANA",
+      "chain": "1",
+      "address": "0x7ff7fa94b8b66ef313f7970d4eebd2cb3103a2c0",
+      "coingecko_id": "vana",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "VANA",
+      "chain": "8453",
+      "address": "0x7ff7fa94b8b66ef313f7970d4eebd2cb3103a2c0",
+      "coingecko_id": "vana",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "VANA",
+      "chain": "56",
+      "address": "0x7ff7fa94b8b66ef313f7970d4eebd2cb3103a2c0",
+      "coingecko_id": "vana",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "VELVET",
+      "chain": "56",
+      "address": "0x8b194370825e37b33373e74a41009161808c1488",
+      "coingecko_id": "velvet",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "VELVET",
+      "chain": "8453",
+      "address": "0xbf927b841994731c573bdf09ceb0c6b0aa887cdd",
+      "coingecko_id": "velvet",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "VIRTUAL",
+      "chain": "8453",
+      "address": "0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b",
+      "coingecko_id": "virtual-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "VIRTUAL",
+      "chain": "1",
+      "address": "0x44ff8620b8ca30902395a7bd3f2407e1a091bf73",
+      "coingecko_id": "virtual-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "VIRTUAL",
+      "chain": "CT_501",
+      "address": "3iQL8BFS2vE7mww4ehAqQHAsbmRNCrPxizWAT2Zfyr9y",
+      "coingecko_id": "virtual-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "VVV",
+      "chain": "8453",
+      "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf",
+      "coingecko_id": "venice-token",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "W",
+      "chain": "CT_501",
+      "address": "85VBFQZC9TZkfaptBWjvUw7YbZjy52A6mjtPGjstQAmQ",
+      "coingecko_id": "wormhole",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "W",
+      "chain": "1",
+      "address": "0xb0ffa8000886e57f86dd5264b9582b2ad87b2b91",
+      "coingecko_id": "wormhole",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "W",
+      "chain": "8453",
+      "address": "0xb0ffa8000886e57f86dd5264b9582b2ad87b2b91",
+      "coingecko_id": "wormhole",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "WAXP",
+      "chain": "1",
+      "address": "0x2a79324c19ef2b89ea98b23bc669b7e7c9f8a517",
+      "coingecko_id": "wax",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "WCT",
+      "chain": "8453",
+      "address": "0xef4461891dfb3ac8572ccf7c794664a8dd927945",
+      "coingecko_id": "connect-token-wct",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "WCT",
+      "chain": "1",
+      "address": "0xef4461891dfb3ac8572ccf7c794664a8dd927945",
+      "coingecko_id": "connect-token-wct",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "WCT",
+      "chain": "CT_501",
+      "address": "WCTk5xWdn5SYg56twGj32sUF3W4WFQ48ogezLBuYTBY",
+      "coingecko_id": "connect-token-wct",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "WET",
+      "chain": "CT_501",
+      "address": "WETZjtprkDMCcUxPi9PfWnowMRZkiGGHDb9rABuRZ2U",
+      "coingecko_id": "humidifi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "WIF",
+      "chain": "CT_501",
+      "address": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
+      "coingecko_id": "dogwifcoin",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "WLD",
+      "chain": "1",
+      "address": "0x163f8c2467924be0ae7b5347228cabf260318753",
+      "coingecko_id": "worldcoin-wld",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "WLFI",
+      "chain": "1",
+      "address": "0xda5e1988097297dcdc1f90d4dfe7909e847cbef6",
+      "coingecko_id": "world-liberty-financial",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "WLFI",
+      "chain": "CT_501",
+      "address": "WLFinEv6ypjkczcS83FZqFpgFZYwQXutRbxGe7oC16g",
+      "coingecko_id": "world-liberty-financial",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "WLFI",
+      "chain": "56",
+      "address": "0x47474747477b199288bf72a1d702f7fe0fb1deea",
+      "coingecko_id": "world-liberty-financial",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "WOO",
+      "chain": "1",
+      "address": "0x4691937a7508860f876c9c0a2a617e7d9e945d4b",
+      "coingecko_id": "woo-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "WOO",
+      "chain": "CT_501",
+      "address": "Dz8VutERqbHR2aFL5A3s1Ky4dG1unJT1jUFXXPaY9ytX",
+      "coingecko_id": "woo-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "WOO",
+      "chain": "56",
+      "address": "0x4691937a7508860f876c9c0a2a617e7d9e945d4b",
+      "coingecko_id": "woo-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "WOO",
+      "chain": "8453",
+      "address": "0xf3df0a31ec5ea438150987805e841f960b9471b6",
+      "coingecko_id": "woo-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "XAN",
+      "chain": "56",
+      "address": "0x7427bd9542e64d1ac207a540cfce194b7390a07f",
+      "coingecko_id": "anoma",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "XAN",
+      "chain": "1",
+      "address": "0xcedbea37c8872c4171259cdfd5255cb8923cf8e7",
+      "coingecko_id": "anoma",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "XAUT",
+      "chain": "1",
+      "address": "0x68749665ff8d2d112fa859aa293f07a622782f38",
+      "coingecko_id": "tether-gold",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "XNY",
+      "chain": "56",
+      "address": "0xe3225e11cab122f1a126a28997788e5230838ab9",
+      "coingecko_id": "codatta",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "XPIN",
+      "chain": "56",
+      "address": "0xd955c9ba56fb1ab30e34766e252a97ccce3d31a6",
+      "coingecko_id": "xpin-network",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "XVS",
+      "chain": "56",
+      "address": "0xcf6bb5389c92bdda8a3747ddb454cb7a64626c63",
+      "coingecko_id": "venus",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "XVS",
+      "chain": "8453",
+      "address": "0xebb7873213c8d1d9913d8ea39aa12d74cb107995",
+      "coingecko_id": "venus",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "XVS",
+      "chain": "1",
+      "address": "0xd3cc9d8f3689b83c91b7b59cab4946b063eb894a",
+      "coingecko_id": "venus",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "YB",
+      "chain": "56",
+      "address": "0xfb93ee8152dd0a0e6f4b49c66c06d800cf1db72d",
+      "coingecko_id": "yield-basis",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "YB",
+      "chain": "1",
+      "address": "0x01791f726b4103694969820be083196cc7c045ff",
+      "coingecko_id": "yield-basis",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "YFI",
+      "chain": "1",
+      "address": "0x0bc529c00c6401aef6d220be8c6ea1667f6ad93e",
+      "coingecko_id": "yearn-finance",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "YFI",
+      "chain": "8453",
+      "address": "0x9eaf8c1e34f05a589eda6bafdf391cf6ad3cb239",
+      "coingecko_id": "yearn-finance",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "YGG",
+      "chain": "1",
+      "address": "0x25f8087ead173b73d6e8b84329989a8eea16cf73",
+      "coingecko_id": "yield-guild-games",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "YGG",
+      "chain": "8453",
+      "address": "0xaac78d1219c08aecc8e37e03858fe885f5ef1799",
+      "coingecko_id": "yield-guild-games",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "YGG",
+      "chain": "56",
+      "address": "0x13ab6739368a4e4abf24695bf52959224367391f",
+      "coingecko_id": "yield-guild-games",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZAMA",
+      "chain": "56",
+      "address": "0x6907a5986c4950bdaf2f81828ec0737ce787519f",
+      "coingecko_id": "zama",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZAMA",
+      "chain": "1",
+      "address": "0xa12cc123ba206d4031d1c7f6223d1c2ec249f4f3",
+      "coingecko_id": "zama",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZAMA",
+      "chain": "CT_501",
+      "address": "4Zp52aF4hZi9fzH19xpbWKYKQvgLyCN67KFbrQDqeTKh",
+      "coingecko_id": "zama",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZBT",
+      "chain": "56",
+      "address": "0xfab99fcf605fd8f4593edb70a43ba56542777777",
+      "coingecko_id": "zerobase",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZBT",
+      "chain": "1",
+      "address": "0xfab99fcf605fd8f4593edb70a43ba56542777777",
+      "coingecko_id": "zerobase",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZBT",
+      "chain": "8453",
+      "address": "0xfab99fcf605fd8f4593edb70a43ba56542777777",
+      "coingecko_id": "zerobase",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZEN",
+      "chain": "8453",
+      "address": "0xf43eb8de897fbc7f2502483b2bef7bb9ea179229",
+      "coingecko_id": "zencash",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZEREBRO",
+      "chain": "CT_501",
+      "address": "8x5VqbHA8D7NkD52uNuS5nnt3PwA8pLD34ymskeSo2Wn",
+      "coingecko_id": "zerebro",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZEST",
+      "chain": "56",
+      "address": "0x5506599c722389a60580b5213ea1da60d64754a1",
+      "coingecko_id": "zest-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZEST",
+      "chain": "1",
+      "address": "0xf326c8c9a691319f6330e27aa4a39f2d22c88dc5",
+      "coingecko_id": "zest-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZEST",
+      "chain": "8453",
+      "address": "0x7297968ffb753dd12e4f6b1f18d9865c76707fc2",
+      "coingecko_id": "zest-protocol",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZETA",
+      "chain": "1",
+      "address": "0xf091867ec603a6628ed83d274e835539d82e9cc8",
+      "coingecko_id": "zetachain",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZETA",
+      "chain": "56",
+      "address": "0x0000028a2eb8346cd5c0267856ab7594b7a55308",
+      "coingecko_id": "zetachain",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZIL",
+      "chain": "56",
+      "address": "0xb86abcb37c3a4b64f74f59301aff131a1becc787",
+      "coingecko_id": "zilliqa",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZK",
+      "chain": "1",
+      "address": "0x66a5cfb2e9c529f14fe6364ad1075df3a649c0a5",
+      "coingecko_id": "zksync",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZKC",
+      "chain": "56",
+      "address": "0x15247e6e23d3923a853ccf15940a20ccdf16e94a",
+      "coingecko_id": "boundless",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZKC",
+      "chain": "1",
+      "address": "0x000006c2a22ff4a44ff1f5d0f2ed65f781f55555",
+      "coingecko_id": "boundless",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZKP",
+      "chain": "56",
+      "address": "0xd89b7dd376e671c124352267516bef1c2cc231a3",
+      "coingecko_id": "zkpass",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZKP",
+      "chain": "1",
+      "address": "0xe1be424f442d0687129128c6c38aace44f8c8dbc",
+      "coingecko_id": "zkpass",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZORA",
+      "chain": "8453",
+      "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+      "coingecko_id": "zora",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZRO",
+      "chain": "1",
+      "address": "0x6985884c4392d348587b19cb9eaaf157f13271cd",
+      "coingecko_id": "layerzero",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZRO",
+      "chain": "8453",
+      "address": "0x6985884c4392d348587b19cb9eaaf157f13271cd",
+      "coingecko_id": "layerzero",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZRO",
+      "chain": "56",
+      "address": "0x6985884c4392d348587b19cb9eaaf157f13271cd",
+      "coingecko_id": "layerzero",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "ZRX",
+      "chain": "1",
+      "address": "0xe41d2489571d322189246dafa5ebde1f4699f498",
+      "coingecko_id": "0x",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "哈基米",
+      "chain": "56",
+      "address": "0x82ec31d69b3c289e541b50e30681fd1acad24444",
+      "coingecko_id": "hakimi",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "币安人生",
+      "chain": "56",
+      "address": "0x924fa68a0fc644485b8df8abfa0a41c2e7744444",
+      "coingecko_id": "bianrensheng",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "我踏马来了",
+      "chain": "56",
+      "address": "0xc51a9250795c0186a6fb4a7d20a90330651e4444",
+      "coingecko_id": "wo-ta-ma-laile",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "牛来",
+      "chain": "56",
+      "address": "0xbeea1d618e533a387d941f58a7d4c9b7bd377777",
+      "coingecko_id": "niu-lai",
+      "basis": "reviewed_id_and_coingecko_platform"
+    },
+    {
+      "asset": "龙虾",
+      "chain": "56",
+      "address": "0xeccbb861c0dda7efd964010085488b69317e4444",
+      "coingecko_id": "lobster-2",
+      "basis": "reviewed_id_and_coingecko_platform"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "created_at": "2026-10-16T21:44:17.468822+08:00",
+  "doc": "02-合约妖币与Short-Squeeze-最终执行方案-v3.2.md",
+  "scope": "P0-P4 first batch: cache + hourly 1H + B observe + FE; NOT C/aux/sim; plans stay off",
+  "files": {
+    "scanner.py": {
+      "sha256": "9a6670cb219c3169fefad2f2dda3917a2d58b06b9a1441f7f712333e67d9f1d7",
+      "size": 42676,
+      "mtime": "2026-10-16T18:28:07.065615+08:00"
+    },
+    "candle_ranges.py": {
+      "sha256": "ca09851813e705c856eb7ce8ab02db41f5ac5c0729b3b2245cad1dc267b29a0d",
+      "size": 12877,
+      "mtime": "2026-10-13T20:50:18.239878+08:00"
+    },
+    "price_index.py": {
+      "sha256": "a119650a6d693996cee1d84ec70e9fecea4d87339b553c5974da2cb4be340cb6",
+      "size": 26208,
+      "mtime": "2026-10-16T16:49:16.956817+08:00"
+    },
+    "snapshot_store.py": {
+      "sha256": "0621181a50ff45ec32a93ca1d5dacacbb2f0f27cd7396e3f454d3a54f0cbe8ef",
+      "size": 13580,
+      "mtime": "2026-10-15T17:51:56.535688+08:00"
+    },
+    "task_service.py": {
+      "sha256": "ad7a119f0cf41d90383cf2c18716649e7a1d748256a7d119873aca2f4dd6d229",
+      "size": 37531,
+      "mtime": "2026-10-15T17:56:20.616260+08:00"
+    },
+    "server.py": {
+      "sha256": "348893d74135eea29b5a412dba305f8751e28f1e5637c5af2bda0cf6efce3fab",
+      "size": 55326,
+      "mtime": "2026-10-16T18:28:07.069079+08:00"
+    },
+    "ema_squeeze_rules.py": {
+      "sha256": "028f9c1e839f0ca7d3c4eb27e94e6de2e54baa2812a5d1b10e6f78f191d26583",
+      "size": 8193,
+      "mtime": "2026-10-16T16:49:16.979956+08:00"
+    },
+    "ema_squeeze_store.py": {
+      "sha256": "b38e22512556ea42773aa39a5367203148dfc90f74261c9e0b2ba53f4df383cb",
+      "size": 15618,
+      "mtime": "2026-10-16T16:49:16.973817+08:00"
+    },
+    "strategy-registry.json": {
+      "sha256": "f85b710a5abe265164ddf44c2a1929f93defcc1d3f3e034a4b05d8e4d89b3ff4",
+      "size": 9095,
+      "mtime": "2026-10-16T18:28:07.076082+08:00"
+    },
+    "strategy_registry.py": {
+      "sha256": "9d956a48f377a392cf4f1620766df51fb2daa5bf24cb56c472e9d4401b204689",
+      "size": 3582,
+      "mtime": "2026-10-16T18:28:07.077082+08:00"
+    },
+    "design/pro-table-runtime.js": {
+      "sha256": "57bb34abcf2642d4b7f794801b042678bbd01fab63c5c12e5ee12ccd37b54f4c",
+      "size": 60361,
+      "mtime": "2026-10-16T18:28:07.086852+08:00"
+    },
+    "design/tasks-runtime.js": {
+      "sha256": "c7b99faccbde2e4d32c7d5bcaacd41d47fbfb3b747282732f234f4a11dc7ed72",
+      "size": 17290,
+      "mtime": "2026-10-16T18:28:07.087852+08:00"
+    },
+    "design/config-runtime.js": {
+      "sha256": "e8f45f18556be8f813c791be60ae70ae25f6090c3fbcb04faa9125b35fc14773",
+      "size": 25630,
+      "mtime": "2026-10-14T13:48:13.417680+08:00"
+    },
+    "design/ranges-runtime.js": {
+      "sha256": "5e5ce62dda69ebd90633bf5167f168d5b62c9518113a35d0d74bcc6b2891af34",
+      "size": 13695,
+      "mtime": "2026-10-13T20:50:18.238878+08:00"
+    },
+    "design/prototype.html": {
+      "sha256": "8e0467c96331aa88788305b19cc2b33b67b49d191657ffe47b957eb4a70b7c03",
+      "size": 8452954,
+      "mtime": "2026-10-16T19:02:36.060906+08:00"
+    },
+    "design/publish_local.py": {
+      "sha256": "a9dd31efbee2642f99c12fa4718d717bbbd04d83da03ba174f7ef5de2c1f3156",
+      "size": 4183,
+      "mtime": "2026-10-16T19:02:36.062906+08:00"
+    },
+    "design/market-evidence.js": {
+      "sha256": "b1b83d7c31ec68d9fae699f48047283de17cd055309d335ba62f4ad7ef713b96",
+      "size": 24035,
+      "mtime": "2026-10-16T18:28:07.086852+08:00"
+    },
+    "index.html": {
+      "sha256": "37e0a75e87e325e45648df6bf27f440cfd27f4580161d5df2f3c516c73534254",
+      "size": 182793,
+      "mtime": "2026-10-16T18:28:07.098358+08:00"
+    },
+    "ema_observations.py": {
+      "sha256": "d773062d09258b5f9c1edb6e1ceb8143ed09bc978b5c76de02e45f02e399e9d8",
+      "size": 9965,
+      "mtime": "2026-10-16T15:50:17.981364+08:00"
+    },
+    "ema_event_timing.py": {
+      "sha256": "034ecbaccb97b6be8c751b5a3cd299fa49ae67ddcbbe177690d37daeb2191d43",
+      "size": 9826,
+      "mtime": "2026-10-16T15:21:50.959173+08:00"
+    }
+  },
+  "missing": [],
+  "notes": [],
+  "registry": {
+    "version": "1.1.0-smart-money-i5",
+    "indicators": 6,
+    "strategies": [
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "T8"
+    ]
+  },
+  "sqlite_tables": [
+    "ai_settings",
+    "settings",
+    "tasks"
+  ]
+}

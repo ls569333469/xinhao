@@ -1,0 +1,983 @@
+# -*- coding: utf-8 -*-
+"""v3.2 first-batch scaffold: P0 A baseline + P1 cache + B pure rules/store."""
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+
+ROOT = Path(r"D:\Axiangmu\异动观察工作台")
+BAK = ROOT / "runtime" / "code-backups" / "v32-p0p1-scaffold"
+BAK.mkdir(parents=True, exist_ok=True)
+
+
+def sha(p: Path) -> str:
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+
+
+def backup(rel: str) -> None:
+    src = ROOT / rel
+    if src.exists():
+        dst = BAK / rel.replace("/", "__")
+        dst.write_bytes(src.read_bytes())
+
+
+# ---------- A baseline fixture ----------
+def write_a_baseline():
+    import sys
+    from pathlib import Path as _P
+    sys.path.insert(0, str(_P(r"D:\Axiangmu\异动观察工作台")))
+    from scanner import ema  # type: ignore
+
+    # fixed closes: enough for 99+ lookback quality checks
+    closes = [100.0 + ((i * 17) % 13) * 0.1 for i in range(200)]
+    # inject a clear stack cross near the end
+    for i in range(160, 200):
+        closes[i] = 100 + (i - 160) * 0.5
+
+    volumes = [1000.0] * 200
+    volumes[-1] = 5000.0
+    volumes[-2] = 4500.0
+
+    curr = [ema(closes, p) for p in (7, 25, 99)]
+    prior = [ema(closes[:-1], p) for p in (7, 25, 99)]
+    fixture = {
+        "schema": "a-ema-p0-baseline-v1",
+        "contract": {"closes": closes, "volumes": volumes},
+        "ema_contract": {
+            "init": "values[0]",
+            "alpha": "2/(period+1)",
+            "curr_from": "closes",
+            "prior_from": "closes[:-1]",
+        },
+        "expected": {
+            "ema7": curr[0],
+            "ema25": curr[1],
+            "ema99": curr[2],
+            "prev_ema7": prior[0],
+            "prev_ema25": prior[1],
+            "prev_ema99": prior[2],
+            "stack": curr[0] > curr[1] > curr[2],
+            "full_cross": curr[0] > curr[1] > curr[2] and prior[1] <= prior[2],
+        },
+    }
+    out = ROOT / "runtime" / "fixtures" / "a-ema-p0-baseline.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(fixture, ensure_ascii=False, indent=2), encoding="utf-8")
+    print("wrote", out)
+    return out
+
+
+# ---------- patch candle_ranges 1h ----------
+def patch_candle_ranges():
+    backup("candle_ranges.py")
+    p = ROOT / "candle_ranges.py"
+    text = p.read_text(encoding="utf-8")
+    old = "STEPS = {'4h': 14_400_000, '1d': 86_400_000}"
+    new = "STEPS = {'1h': 3_600_000, '4h': 14_400_000, '1d': 86_400_000}"
+    if "1h" in text and "'1h'" in text.split("STEPS", 1)[1][:80]:
+        print("candle_ranges already has 1h")
+    else:
+        if old not in text:
+            raise SystemExit("STEPS line missing")
+        text = text.replace(old, new, 1)
+        text = text.replace("仅支持4h或1d已收盘K线", "仅支持1h/4h/1d已收盘K线", 1)
+        p.write_text(text, encoding="utf-8", newline="\n")
+        print("patched candle_ranges 1h")
+
+
+# ---------- market_candle_cache.py ----------
+CACHE_PY = r'''# -*- coding: utf-8 -*-
+"""共享K线缓存：逻辑键去重、不可变块、统一读取（JSON/JSONL/gzip）。
+
+首批：本地文件块 + SQLite 索引骨架。不发网络请求；不删受保护对象。
+A 计算窗口契约不在此模块改写。
+"""
+from __future__ import annotations
+
+import gzip
+import hashlib
+import json
+import sqlite3
+import threading
+import time
+from pathlib import Path
+from typing import Any, Iterable, Optional
+
+LOCK = threading.Lock()
+SCHEMA_VERSION = 1
+
+
+def _payload_hash(obj: Any) -> str:
+    raw = json.dumps(obj, ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _storage_hash(blob: bytes) -> str:
+    return hashlib.sha256(blob).hexdigest()
+
+
+class MarketCandleCache:
+    def __init__(self, root: Path):
+        self.root = Path(root)
+        self.dir = self.root / "runtime" / "candle-cache"
+        self.blocks = self.dir / "blocks"
+        self.dir.mkdir(parents=True, exist_ok=True)
+        self.blocks.mkdir(parents=True, exist_ok=True)
+        self.db_path = self.dir / "index.sqlite3"
+        self._init_db()
+
+    def _connect(self) -> sqlite3.Connection:
+        con = sqlite3.connect(str(self.db_path), timeout=30)
+        con.row_factory = sqlite3.Row
+        return con
+
+    def _init_db(self) -> None:
+        with LOCK:
+            con = self._connect()
+            try:
+                con.executescript(
+                    """
+                    CREATE TABLE IF NOT EXISTS meta (
+                      key TEXT PRIMARY KEY,
+                      value TEXT NOT NULL
+                    );
+                    CREATE TABLE IF NOT EXISTS bars (
+                      market TEXT NOT NULL,
+                      symbol TEXT NOT NULL,
+                      interval TEXT NOT NULL,
+                      open_time INTEGER NOT NULL,
+                      close_time INTEGER,
+                      payload_hash TEXT NOT NULL,
+                      block_id TEXT NOT NULL,
+                      first_seen_at REAL NOT NULL,
+                      last_seen_at REAL NOT NULL,
+                      PRIMARY KEY (market, symbol, interval, open_time, payload_hash)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_bars_lookup
+                      ON bars(market, symbol, interval, open_time);
+                    CREATE TABLE IF NOT EXISTS blocks (
+                      block_id TEXT PRIMARY KEY,
+                      storage_hash TEXT NOT NULL,
+                      payload_hash TEXT NOT NULL,
+                      path TEXT NOT NULL,
+                      bytes INTEGER NOT NULL,
+                      created_at REAL NOT NULL
+                    );
+                    CREATE TABLE IF NOT EXISTS retrievals (
+                      id INTEGER PRIMARY KEY AUTOINCREMENT,
+                      market TEXT NOT NULL,
+                      symbol TEXT NOT NULL,
+                      interval TEXT NOT NULL,
+                      open_time INTEGER NOT NULL,
+                      payload_hash TEXT NOT NULL,
+                      retrieved_at REAL NOT NULL,
+                      quality TEXT,
+                      error TEXT
+                    );
+                    """
+                )
+                con.execute(
+                    "INSERT OR IGNORE INTO meta(key,value) VALUES('schema_version',?)",
+                    (str(SCHEMA_VERSION),),
+                )
+                con.commit()
+            finally:
+                con.close()
+
+    def put_bar(
+        self,
+        *,
+        market: str,
+        symbol: str,
+        interval: str,
+        open_time: int,
+        bar: dict,
+        close_time: int | None = None,
+        quality: str | None = None,
+        error: str | None = None,
+        now: float | None = None,
+    ) -> dict:
+        """写入一根已规范化K线。同键同载荷复用块；同键不同值追加修订。"""
+        now = time.time() if now is None else now
+        payload = {
+            "market": market,
+            "symbol": symbol,
+            "interval": interval,
+            "open_time": int(open_time),
+            "close_time": close_time,
+            "bar": bar,
+        }
+        ph = _payload_hash(payload)
+        blob = gzip.compress(
+            json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode("utf-8"),
+            compresslevel=6,
+        )
+        sh = _storage_hash(blob)
+        block_id = ph[:32]
+        path = self.blocks / f"{block_id}.json.gz"
+        with LOCK:
+            if not path.exists():
+                tmp = path.with_suffix(".tmp")
+                tmp.write_bytes(blob)
+                tmp.replace(path)
+            con = self._connect()
+            try:
+                con.execute(
+                    """
+                    INSERT OR IGNORE INTO blocks(block_id, storage_hash, payload_hash, path, bytes, created_at)
+                    VALUES(?,?,?,?,?,?)
+                    """,
+                    (block_id, sh, ph, str(path.relative_to(self.root)).replace("\\", "/"), len(blob), now),
+                )
+                con.execute(
+                    """
+                    INSERT INTO bars(market,symbol,interval,open_time,close_time,payload_hash,block_id,first_seen_at,last_seen_at)
+                    VALUES(?,?,?,?,?,?,?,?,?)
+                    ON CONFLICT(market,symbol,interval,open_time,payload_hash) DO UPDATE SET
+                      last_seen_at=excluded.last_seen_at
+                    """,
+                    (market, symbol, interval, int(open_time), close_time, ph, block_id, now, now),
+                )
+                con.execute(
+                    """
+                    INSERT INTO retrievals(market,symbol,interval,open_time,payload_hash,retrieved_at,quality,error)
+                    VALUES(?,?,?,?,?,?,?,?)
+                    """,
+                    (market, symbol, interval, int(open_time), ph, now, quality, error),
+                )
+                con.commit()
+            finally:
+                con.close()
+        return {"payload_hash": ph, "block_id": block_id, "storage_hash": sh}
+
+    def get_bars(
+        self,
+        *,
+        market: str,
+        symbol: str,
+        interval: str,
+        start_open: int | None = None,
+        end_open: int | None = None,
+        latest_payload_only: bool = True,
+    ) -> list[dict]:
+        with LOCK:
+            con = self._connect()
+            try:
+                q = (
+                    "SELECT open_time, close_time, payload_hash, block_id, last_seen_at FROM bars "
+                    "WHERE market=? AND symbol=? AND interval=?"
+                )
+                args: list[Any] = [market, symbol, interval]
+                if start_open is not None:
+                    q += " AND open_time>=?"
+                    args.append(int(start_open))
+                if end_open is not None:
+                    q += " AND open_time<?"
+                    args.append(int(end_open))
+                q += " ORDER BY open_time ASC, last_seen_at DESC"
+                rows = [dict(r) for r in con.execute(q, args).fetchall()]
+            finally:
+                con.close()
+        if latest_payload_only:
+            seen = set()
+            uniq = []
+            for r in rows:
+                if r["open_time"] in seen:
+                    continue
+                seen.add(r["open_time"])
+                uniq.append(r)
+            rows = uniq
+        out = []
+        for r in rows:
+            payload = self.read_block(r["block_id"])
+            out.append({**r, "payload": payload})
+        return out
+
+    def read_block(self, block_id: str) -> dict:
+        with LOCK:
+            con = self._connect()
+            try:
+                row = con.execute("SELECT path, storage_hash FROM blocks WHERE block_id=?", (block_id,)).fetchone()
+            finally:
+                con.close()
+        if not row:
+            raise FileNotFoundError(block_id)
+        path = self.root / row["path"]
+        blob = path.read_bytes()
+        if _storage_hash(blob) != row["storage_hash"]:
+            raise ValueError(f"block storage hash mismatch: {block_id}")
+        if path.suffix == ".gz" or path.name.endswith(".json.gz"):
+            raw = gzip.decompress(blob)
+        else:
+            raw = blob
+        return json.loads(raw.decode("utf-8"))
+
+
+def read_json_maybe_gzip(path: Path) -> Any:
+    """统一读取 JSON / .json.gz / JSONL（返回 list）。"""
+    path = Path(path)
+    data = path.read_bytes()
+    if path.name.endswith(".gz"):
+        data = gzip.decompress(data)
+    text = data.decode("utf-8")
+    if path.name.endswith(".jsonl") or path.name.endswith(".jsonl.gz"):
+        return [json.loads(line) for line in text.splitlines() if line.strip()]
+    return json.loads(text)
+'''
+
+
+# ---------- b_accumulation_rules.py ----------
+RULES_PY = r'''# -*- coding: utf-8 -*-
+"""B_ACCUMULATION_1H 纯规则：不发网络、不写库、不发通知。
+
+时间：内部 UTC 毫秒。百分比阈值用小数：0.03=3%。
+资格三态：pass / fail / unknown；pending 仅表示等待未闭合确认根。
+"""
+from __future__ import annotations
+
+from typing import Any, Optional
+
+STRATEGY_ID = "B_ACCUMULATION_1H"
+RULE_VERSION = "b-accum-1h-v1"
+TIMEFRAME = "1h"
+BAR_MS = 3_600_000
+BASELINE_BARS = 168
+EVENT_RATIO = 8.0
+CONFIRM_RATIO = 2.0
+MAX_ABS_RETURN = 0.03  # 等于 3% 不通过
+
+
+def _finite(x) -> bool:
+    try:
+        return x is not None and float(x) == float(x) and abs(float(x)) != float("inf")
+    except (TypeError, ValueError):
+        return False
+
+
+def continuous_open_times(opens: list[int], step: int = BAR_MS) -> bool:
+    if len(opens) < 2:
+        return len(opens) == 1
+    for i in range(1, len(opens)):
+        if opens[i] - opens[i - 1] != step:
+            return False
+    return True
+
+
+def dedupe_bars_by_open(bars: list[dict]) -> list[dict]:
+    """同 open_time 保留最后一根；再按 open_time 升序。"""
+    by = {}
+    for b in bars:
+        ot = b.get("open_time")
+        if ot is None:
+            continue
+        by[int(ot)] = b
+    return [by[k] for k in sorted(by)]
+
+
+def volume_ratio(bars_asc: list[dict], index: int, lookback: int, *, include_prior_event_bar: bool) -> Optional[float]:
+    """index 为事件/确认根在 bars_asc 中的下标。
+
+    事件根 h：分母为前 lookback 根，不含 h。
+    确认根 h+1：分母为含 h 的 lookback 根，不含 h+1。
+    """
+    if index < 0 or index >= len(bars_asc):
+        return None
+    q = bars_asc[index].get("q")
+    if not _finite(q):
+        return None
+    if include_prior_event_bar:
+        # mean(q[h+1-168 : h+1]) includes h, excludes h+1 → bars[index-168 : index]
+        start = index - lookback
+        end = index
+    else:
+        # mean(q[h-168:h]) excludes h → bars[index-lookback : index]
+        start = index - lookback
+        end = index
+    if start < 0:
+        return None
+    window = bars_asc[start:end]
+    if len(window) != lookback:
+        return None
+    opens = [int(b["open_time"]) for b in window]
+    if not continuous_open_times(opens):
+        return None
+    vals = [b.get("q") for b in window]
+    if any(not _finite(v) for v in vals):
+        return None
+    mean = sum(float(v) for v in vals) / lookback
+    if mean <= 0:
+        return None
+    return float(q) / mean
+
+
+def abs_return_ok(bar: dict) -> Optional[bool]:
+    o, c = bar.get("o"), bar.get("c")
+    if not _finite(o) or not _finite(c) or float(o) == 0:
+        return None
+    ret = abs(float(c) / float(o) - 1.0)
+    if ret < MAX_ABS_RETURN:
+        return True
+    return False  # == or > 3% fail
+
+
+def ema_stack_ok(ema7, ema25) -> Optional[bool]:
+    if not _finite(ema7) or not _finite(ema25):
+        return None
+    return float(ema7) > float(ema25)
+
+
+def structure_gate(*, oi_cap_pct, lsr, oi_quality="pass", lsr_quality="pass", cap_quality="pass") -> str:
+    """返回 pass/fail/unknown。OI/市值>30%、LSR<0.80；等号失败。"""
+    quals = [oi_quality, lsr_quality, cap_quality]
+    if any(q == "fail" for q in quals):
+        # quality fail means data bad → unknown for structure? Spec: 字段缺失/超时 → unknown;
+        # 有效数据不满足 → fail. Quality fail on source → treat as unknown.
+        return "unknown"
+    if any(q == "unknown" for q in quals):
+        return "unknown"
+    if not _finite(oi_cap_pct) or not _finite(lsr):
+        return "unknown"
+    if float(oi_cap_pct) > 30.0 and float(lsr) < 0.80:
+        return "pass"
+    return "fail"
+
+
+def combine_tri(*states: str) -> str:
+    """fail 优先；无 fail 有 unknown → unknown；全 pass → pass。"""
+    if any(s == "fail" for s in states):
+        return "fail"
+    if any(s == "unknown" for s in states):
+        return "unknown"
+    if all(s == "pass" for s in states):
+        return "pass"
+    return "unknown"
+
+
+def evaluate_h_event(
+    bars_asc: list[dict],
+    h_index: int,
+    *,
+    bg4h: dict | None,
+) -> dict:
+    """评估事件根 h（技术层）。bars 须已去重升序。"""
+    out = {
+        "strategy_id": STRATEGY_ID,
+        "rule_version": RULE_VERSION,
+        "timeframe": TIMEFRAME,
+        "technical_event": "unknown",
+        "ratio": None,
+        "abs_return_ok": None,
+        "structure_h_bg": None,
+        "reasons": [],
+    }
+    bars = dedupe_bars_by_open(bars_asc)
+    # re-find index after dedupe by open_time
+    if h_index < 0 or h_index >= len(bars_asc):
+        out["reasons"].append("bad_index")
+        return out
+    target_ot = int(bars_asc[h_index]["open_time"])
+    bars = dedupe_bars_by_open(bars_asc)
+    try:
+        idx = next(i for i, b in enumerate(bars) if int(b["open_time"]) == target_ot)
+    except StopIteration:
+        out["reasons"].append("h_missing_after_dedupe")
+        return out
+
+    if idx < BASELINE_BARS:
+        out["reasons"].append("warmup_short")
+        return out
+
+    ratio = volume_ratio(bars, idx, BASELINE_BARS, include_prior_event_bar=False)
+    out["ratio"] = ratio
+    ret_ok = abs_return_ok(bars[idx])
+    out["abs_return_ok"] = ret_ok
+    stack = None
+    if bg4h:
+        stack = ema_stack_ok(bg4h.get("ema7"), bg4h.get("ema25"))
+        out["structure_h_bg"] = stack
+
+    checks = []
+    if ratio is None:
+        checks.append("unknown")
+        out["reasons"].append("baseline_unknown")
+    elif ratio >= EVENT_RATIO:
+        checks.append("pass")
+    else:
+        checks.append("fail")
+        out["reasons"].append("ratio_fail")
+
+    if ret_ok is None:
+        checks.append("unknown")
+        out["reasons"].append("return_unknown")
+    elif ret_ok:
+        checks.append("pass")
+    else:
+        checks.append("fail")
+        out["reasons"].append("return_fail")
+
+    if stack is None:
+        checks.append("unknown")
+        out["reasons"].append("bg4h_unknown")
+    elif stack:
+        checks.append("pass")
+    else:
+        checks.append("fail")
+        out["reasons"].append("bg4h_fail")
+
+    out["technical_event"] = combine_tri(*checks)
+    out["open_time"] = target_ot
+    out["expected_confirmation_open_time"] = target_ot + BAR_MS
+    return out
+
+
+def evaluate_h1_confirm(
+    bars_asc: list[dict],
+    h_open_time: int,
+    *,
+    bg4h_h1: dict | None,
+    h1_closed: bool,
+) -> dict:
+    out = {
+        "technical_confirmation": "unknown",
+        "ratio": None,
+        "pending": False,
+        "reasons": [],
+    }
+    bars = dedupe_bars_by_open(bars_asc)
+    expect = int(h_open_time) + BAR_MS
+    try:
+        idx = next(i for i, b in enumerate(bars) if int(b["open_time"]) == expect)
+    except StopIteration:
+        if not h1_closed:
+            out["technical_confirmation"] = "pending"
+            out["pending"] = True
+            out["reasons"].append("h1_not_closed")
+            return out
+        out["reasons"].append("h1_missing")
+        return out
+
+    if not h1_closed:
+        out["technical_confirmation"] = "pending"
+        out["pending"] = True
+        out["reasons"].append("h1_not_closed")
+        return out
+
+    if idx < BASELINE_BARS:
+        out["reasons"].append("warmup_short")
+        return out
+
+    ratio = volume_ratio(bars, idx, BASELINE_BARS, include_prior_event_bar=True)
+    out["ratio"] = ratio
+    stack = ema_stack_ok(bg4h_h1.get("ema7"), bg4h_h1.get("ema25")) if bg4h_h1 else None
+
+    checks = []
+    if ratio is None:
+        checks.append("unknown")
+        out["reasons"].append("confirm_baseline_unknown")
+    elif ratio >= CONFIRM_RATIO:
+        checks.append("pass")
+    else:
+        checks.append("fail")
+        out["reasons"].append("confirm_ratio_fail")
+
+    if stack is None:
+        checks.append("unknown")
+        out["reasons"].append("bg4h_h1_unknown")
+    elif stack:
+        checks.append("pass")
+    else:
+        checks.append("fail")
+        out["reasons"].append("bg4h_h1_fail")
+
+    out["technical_confirmation"] = combine_tri(*checks)
+    out["open_time"] = expect
+    return out
+
+
+def risk_theory(*, p_theory, s0) -> str:
+    if not _finite(p_theory) or not _finite(s0):
+        return "unknown"
+    if float(p_theory) > float(s0):
+        return "pass"
+    return "fail"
+'''
+
+
+# ---------- b_accumulation_store.py ----------
+STORE_PY = r'''# -*- coding: utf-8 -*-
+"""B 事件持久化：稳定 event_id、修订链、观察起点。不发网络。"""
+from __future__ import annotations
+
+import json
+import threading
+import uuid
+from pathlib import Path
+from typing import Any
+
+from b_accumulation_rules import RULE_VERSION, STRATEGY_ID, TIMEFRAME
+
+LOCK = threading.Lock()
+DEFAULT_NAME = "b-accumulation-events.json"
+
+
+def _now_iso():
+    import datetime as dt
+    return dt.datetime.now(dt.timezone.utc).isoformat(timespec="microseconds")
+
+
+def stable_event_id(*, market, symbol, trigger_open_time, event_type="tech_h") -> str:
+    raw = f"{STRATEGY_ID}|{RULE_VERSION}|{market}|{symbol}|{TIMEFRAME}|{int(trigger_open_time)}|{event_type}"
+    return "bev-" + uuid.uuid5(uuid.NAMESPACE_URL, raw).hex
+
+
+class BAccumulationStore:
+    def __init__(self, root: Path):
+        self.root = Path(root)
+        self.path = self.root / "runtime" / DEFAULT_NAME
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+
+    def _load(self) -> dict:
+        if not self.path.exists():
+            return {
+                "schema": "b-accumulation-events-v1",
+                "strategy_id": STRATEGY_ID,
+                "rule_version": RULE_VERSION,
+                "observation_started_at": None,
+                "events": {},
+            }
+        return json.loads(self.path.read_text(encoding="utf-8"))
+
+    def _save(self, data: dict) -> None:
+        tmp = self.path.with_suffix(".tmp")
+        tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
+        tmp.replace(self.path)
+
+    def ensure_observation_start(self, started_at: str | None = None) -> str:
+        with LOCK:
+            data = self._load()
+            if data.get("observation_started_at"):
+                return data["observation_started_at"]
+            data["observation_started_at"] = started_at or _now_iso()
+            self._save(data)
+            return data["observation_started_at"]
+
+    def upsert_event(self, *, market, symbol, trigger_open_time, payload: dict) -> dict:
+        eid = stable_event_id(market=market, symbol=symbol, trigger_open_time=trigger_open_time)
+        with LOCK:
+            data = self._load()
+            cur = data["events"].get(eid)
+            now = _now_iso()
+            if not cur:
+                rec = {
+                    "event_id": eid,
+                    "market": market,
+                    "symbol": symbol,
+                    "trigger_open_time": int(trigger_open_time),
+                    "first_seen_at": now,
+                    "event_revision": 1,
+                    "revisions": [],
+                    **payload,
+                }
+                data["events"][eid] = rec
+                self._save(data)
+                return dict(rec)
+            # same fingerprint → no new revision
+            prev_fp = cur.get("input_fingerprint")
+            new_fp = payload.get("input_fingerprint")
+            if prev_fp and new_fp and prev_fp == new_fp:
+                cur["last_evaluated_at"] = now
+                data["events"][eid] = cur
+                self._save(data)
+                return dict(cur)
+            cur["revisions"].append({
+                "event_revision": cur.get("event_revision"),
+                "replaced_at": now,
+                "snapshot": {k: cur.get(k) for k in ("technical_event", "technical_confirmation", "input_fingerprint")},
+            })
+            cur["event_revision"] = int(cur.get("event_revision") or 1) + 1
+            cur["previous_revision"] = cur["event_revision"] - 1
+            for k, v in payload.items():
+                cur[k] = v
+            cur["last_evaluated_at"] = now
+            data["events"][eid] = cur
+            self._save(data)
+            return dict(cur)
+'''
+
+
+# ---------- retention dry-run ----------
+RETENTION_PY = r'''# -*- coding: utf-8 -*-
+"""缓存保留/清理：首批只实现 dry-run 清单与保护检查，默认不删正式数据。"""
+from __future__ import annotations
+
+import json
+import time
+from pathlib import Path
+from typing import Any
+
+RETENTION_DEFAULTS = {
+    "temp_hours": 48,
+    "debug_days": 14,
+    "log_days": 30,
+    "raw_api_days": 30,
+    "full_snapshot_days": 90,
+    "oi_lsr_days": 365,
+    "1h_days": 365,
+    "backup_days": 30,
+    "backup_min_success": 3,
+}
+
+
+def age_days(ts: float, now: float | None = None) -> float:
+    now = time.time() if now is None else now
+    return (now - ts) / 86400.0
+
+
+def classify_path(rel: str) -> str | None:
+    rel = rel.replace("\\", "/")
+    if "/runtime/candle-cache/" in rel or rel.startswith("runtime/candle-cache/"):
+        return "candle_cache_block"
+    if "scan-history/" in rel and rel.endswith("revision-0001.json"):
+        return "full_snapshot"
+    if rel.endswith(".log"):
+        return "log"
+    return None
+
+
+def dry_run_candidates(root: Path, *, now: float | None = None) -> list[dict[str, Any]]:
+    """列出超期候选；不删除。正式根外的路径一律跳过。"""
+    root = Path(root).resolve()
+    now = time.time() if now is None else now
+    out = []
+    scan = root / "scan-history"
+    if scan.exists():
+        for p in scan.glob("scan-*/revision-*.json"):
+            age = age_days(p.stat().st_mtime, now)
+            if age > RETENTION_DEFAULTS["full_snapshot_days"]:
+                out.append({
+                    "path": str(p.relative_to(root)).replace("\\", "/"),
+                    "category": "full_snapshot",
+                    "age_days": round(age, 3),
+                    "action": "candidate",
+                    "protected_check": "required",
+                })
+    return out
+
+
+def write_dry_run_report(root: Path, report_path: Path | None = None) -> Path:
+    root = Path(root)
+    items = dry_run_candidates(root)
+    report = {
+        "schema": "cache-cleanup-dry-run-v1",
+        "generated_at": time.time(),
+        "defaults": RETENTION_DEFAULTS,
+        "candidates": items,
+        "note": "首批仅 dry-run；未执行删除。",
+    }
+    path = report_path or (root / "DOCS" / "design" / "strategies" / "v3.2-P1-cleanup-dry-run.json")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    return path
+'''
+
+
+def write_modules():
+    (ROOT / "market_candle_cache.py").write_text(CACHE_PY, encoding="utf-8", newline="\n")
+    (ROOT / "b_accumulation_rules.py").write_text(RULES_PY, encoding="utf-8", newline="\n")
+    (ROOT / "b_accumulation_store.py").write_text(STORE_PY, encoding="utf-8", newline="\n")
+    (ROOT / "cache_retention.py").write_text(RETENTION_PY, encoding="utf-8", newline="\n")
+    print("wrote modules")
+
+
+TEST_PY = r'''# -*- coding: utf-8 -*-
+"""v3.2 首批：A 基线 + B 规则边界 + 缓存/1h 步长。"""
+from __future__ import annotations
+
+import json
+import tempfile
+import unittest
+from pathlib import Path
+
+from b_accumulation_rules import (
+    BASELINE_BARS,
+    abs_return_ok,
+    dedupe_bars_by_open,
+    evaluate_h1_confirm,
+    evaluate_h_event,
+    volume_ratio,
+)
+from candle_ranges import STEPS
+from market_candle_cache import MarketCandleCache, read_json_maybe_gzip
+from scanner import ema
+
+
+ROOT = Path(__file__).resolve().parent
+
+
+def _bars(n, start=0, step=3_600_000, q=100.0, o=100.0, c=100.0):
+    out = []
+    for i in range(n):
+        ot = start + i * step
+        out.append({"open_time": ot, "q": q, "o": o, "c": c})
+    return out
+
+
+class ABaseline(unittest.TestCase):
+    def test_a01_ema_matches_fixture(self):
+        fix = json.loads((ROOT / "runtime" / "fixtures" / "a-ema-p0-baseline.json").read_text(encoding="utf-8"))
+        closes = fix["contract"]["closes"]
+        curr = [ema(closes, p) for p in (7, 25, 99)]
+        prior = [ema(closes[:-1], p) for p in (7, 25, 99)]
+        exp = fix["expected"]
+        for a, b in zip(curr, [exp["ema7"], exp["ema25"], exp["ema99"]]):
+            self.assertAlmostEqual(a, b, places=12)
+        for a, b in zip(prior, [exp["prev_ema7"], exp["prev_ema25"], exp["prev_ema99"]]):
+            self.assertAlmostEqual(a, b, places=12)
+
+
+class CandleRanges1h(unittest.TestCase):
+    def test_steps_has_1h(self):
+        self.assertEqual(STEPS["1h"], 3_600_000)
+        self.assertIn("4h", STEPS)
+        self.assertIn("1d", STEPS)
+
+
+class BRules(unittest.TestCase):
+    def test_b01_baseline_short_and_gap(self):
+        bars = _bars(167)
+        # inject event candidate at end without enough baseline
+        r = volume_ratio(bars, len(bars) - 1, BASELINE_BARS, include_prior_event_bar=False)
+        self.assertIsNone(r)
+        bars2 = _bars(169)
+        # break continuity
+        bars2[50]["open_time"] += 3_600_000  # gap/dup mess
+        bars2 = dedupe_bars_by_open(bars2)
+        # after dedupe may still be short or gapped
+        ok = volume_ratio(_bars(168 + 1), 168, BASELINE_BARS, include_prior_event_bar=False)
+        self.assertIsNotNone(ok)
+
+    def test_b02_return_threshold(self):
+        self.assertTrue(abs_return_ok({"o": 100, "c": 102.9}))  # 2.9%
+        self.assertFalse(abs_return_ok({"o": 100, "c": 103.0}))  # ==3%
+        self.assertFalse(abs_return_ok({"o": 100, "c": 97.0}))
+
+    def test_b03_confirm_includes_h(self):
+        bars = _bars(170, q=100.0)
+        # set h at index 168 q=100, h+1 at 169
+        bars[168]["q"] = 800.0  # h
+        bars[169]["q"] = 250.0  # h+1
+        # confirm ratio uses window including h
+        r_ok = volume_ratio(bars, 169, BASELINE_BARS, include_prior_event_bar=True)
+        self.assertIsNotNone(r_ok)
+        # wrong baseline excluding h would use bars[169-168:169] wait that's same end...
+        # Explicit: exclude h means end=index-1 for confirm would be wrong; we assert include path uses bars[1:169]
+        window = bars[169 - BASELINE_BARS : 169]
+        self.assertEqual(len(window), 168)
+        self.assertEqual(window[-1]["q"], 800.0)  # last of denominator is h
+
+    def test_b04_h2_cannot_confirm(self):
+        bars = _bars(171)
+        # h at 168
+        h_ot = bars[168]["open_time"]
+        # only h+2 present as closed-looking but evaluate waits for exact h+1 open
+        bars_no_h1 = [b for b in bars if b["open_time"] != h_ot + 3_600_000]
+        out = evaluate_h1_confirm(bars_no_h1, h_ot, bg4h_h1={"ema7": 2, "ema25": 1}, h1_closed=True)
+        self.assertEqual(out["technical_confirmation"], "unknown")
+        self.assertIn("h1_missing", out["reasons"])
+        pending = evaluate_h1_confirm(bars, h_ot, bg4h_h1={"ema7": 2, "ema25": 1}, h1_closed=False)
+        self.assertTrue(pending["pending"])
+
+    def test_b05_event_and_confirm_ids_separate_stable(self):
+        from b_accumulation_store import stable_event_id
+        a = stable_event_id(market="USDⓈ-M", symbol="AAAUSDT", trigger_open_time=1000)
+        b = stable_event_id(market="USDⓈ-M", symbol="AAAUSDT", trigger_open_time=1000)
+        c = stable_event_id(market="USDⓈ-M", symbol="AAAUSDT", trigger_open_time=1000 + 3600000)
+        self.assertEqual(a, b)
+        self.assertNotEqual(a, c)
+
+
+class Cache(unittest.TestCase):
+    def test_put_get_and_gzip_roundtrip(self):
+        with tempfile.TemporaryDirectory() as td:
+            cache = MarketCandleCache(Path(td))
+            meta = cache.put_bar(
+                market="USDⓈ-M",
+                symbol="AAAUSDT",
+                interval="1h",
+                open_time=1_700_000_000_000,
+                bar={"o": 1, "h": 2, "l": 0.5, "c": 1.5, "q": 10},
+                close_time=1_700_000_000_000 + 3_599_999,
+            )
+            rows = cache.get_bars(market="USDⓈ-M", symbol="AAAUSDT", interval="1h")
+            self.assertEqual(len(rows), 1)
+            self.assertEqual(rows[0]["payload_hash"], meta["payload_hash"])
+            # duplicate same payload
+            cache.put_bar(
+                market="USDⓈ-M",
+                symbol="AAAUSDT",
+                interval="1h",
+                open_time=1_700_000_000_000,
+                bar={"o": 1, "h": 2, "l": 0.5, "c": 1.5, "q": 10},
+            )
+            rows2 = cache.get_bars(market="USDⓈ-M", symbol="AAAUSDT", interval="1h")
+            self.assertEqual(len(rows2), 1)
+
+
+if __name__ == "__main__":
+    unittest.main()
+'''
+
+
+def write_tests_and_docs():
+    (ROOT / "test_v32_b_cache_first_batch.py").write_text(TEST_PY, encoding="utf-8", newline="\n")
+    note = ROOT / "DOCS" / "design" / "strategies" / "v3.2-P0P1-实施说明.md"
+    note.write_text(
+        """# v3.2 首批 P0/P1 实施说明（进行中）
+
+时间：2026-10-16（北京时间）
+
+范围冻结：按最终执行方案 v3.2 第12～16章；**首批只做缓存基础 + B 观察链相关骨架**；C / 辅助指标 / 模拟不宣称完成；小时计划保持关闭。
+
+## 已落盘
+
+| 项 | 路径 |
+|---|---|
+| P0 基线 manifest | `DOCS/design/strategies/v3.2-P0-baseline-manifest.json` |
+| A 固定 EMA 样本 | `runtime/fixtures/a-ema-p0-baseline.json` |
+| 1H 步长 | `candle_ranges.py` STEPS 增加 `1h` |
+| 共享K线缓存 | `market_candle_cache.py` |
+| B 纯规则 | `b_accumulation_rules.py` |
+| B 事件存储 | `b_accumulation_store.py` |
+| 清理 dry-run | `cache_retention.py` |
+| 离线测试 | `test_v32_b_cache_first_batch.py` |
+
+## 明确未完成
+
+- P2：scanner 1H 增量采集、task_service 小时边界调度接线（计划仍默认关）
+- P3：扫描循环写入 B 事件、同期 OI/LSR 证据、故障恢复 cursor
+- P4：独立 B 前端视图 / CSV
+- P5：真实运行验收
+- 正式数据清理：仅 dry-run，未删文件
+
+## 测试
+
+```
+python -m unittest test_v32_b_cache_first_batch.py -v
+```
+""",
+        encoding="utf-8",
+        newline="\n",
+    )
+    print("wrote tests+docs")
+
+
+if __name__ == "__main__":
+    write_a_baseline()
+    patch_candle_ranges()
+    write_modules()
+    write_tests_and_docs()
+    from cache_retention import write_dry_run_report
+    p = write_dry_run_report(ROOT)
+    print("dry-run", p)
+    print("OK")

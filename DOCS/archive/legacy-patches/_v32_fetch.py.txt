@@ -1,0 +1,304 @@
+# -*- coding: utf-8 -*-
+"""Wire real 1H fetch + OI/LSR helpers into B observe runner (still default-off)."""
+from __future__ import annotations
+
+from pathlib import Path
+
+ROOT = Path(r"D:\Axiangmu\异动观察工作台")
+
+FETCH = r'''# -*- coding: utf-8 -*-
+"""Binance 1H K线与同期 OI/LSR 拉取。仅在观察开启的任务里调用。"""
+from __future__ import annotations
+
+from typing import Any, Callable, Optional
+
+# hosts
+USDT_HOST = "https://fapi.binance.com"
+COIN_HOST = "https://dapi.binance.com"
+
+
+def _hosts(market: str) -> tuple[str, str]:
+    if market in ("COIN-M", "COIN_M"):
+        return COIN_HOST, "/dapi/v1/"
+    return USDT_HOST, "/fapi/v1/"
+
+
+def fetch_1h_klines(
+    market: str,
+    symbol: str,
+    *,
+    limit: int = 500,
+    requester: Optional[Callable] = None,
+) -> list:
+    """返回原始 kline 列表；requester(url, params)->(data, error) 与 scanner.safe 同形。"""
+    if requester is None:
+        from scanner import safe as requester
+    host, version = _hosts(market)
+    data, err = requester(host + version + "klines", {"symbol": symbol, "interval": "1h", "limit": int(limit)})
+    if err:
+        raise RuntimeError(f"1h klines: {err}")
+    if not isinstance(data, list):
+        raise RuntimeError("1h klines: unexpected payload")
+    return data
+
+
+def fetch_oi_lsr_1h(
+    market: str,
+    symbol: str,
+    *,
+    pair: str | None = None,
+    limit: int = 2,
+    requester: Optional[Callable] = None,
+) -> dict:
+    """同期 1h OI 历史 + 全体账户多空比。缺失则 quality=unknown。"""
+    if requester is None:
+        from scanner import safe as requester
+    host, version = _hosts(market)
+    inverse = host == COIN_HOST
+    out: dict[str, Any] = {
+        "oi_hist": None,
+        "lsr": None,
+        "oi_quality": "unknown",
+        "lsr_quality": "unknown",
+        "errors": {},
+    }
+    # openInterestHist period=1h
+    oi_params = {"symbol": symbol, "period": "1h", "limit": limit}
+    if inverse:
+        # COIN-M uses pair for some data endpoints
+        oi_params = {"pair": pair or symbol.replace("USD", ""), "period": "1h", "limit": limit}
+    # Binance futures data endpoints
+    oi_url = host + "/futures/data/openInterestHist"
+    oi, oi_err = requester(oi_url, oi_params)
+    if oi_err:
+        out["errors"]["oi_hist"] = oi_err
+        out["oi_quality"] = "unknown"
+    elif isinstance(oi, list) and oi:
+        out["oi_hist"] = oi[-1]
+        out["oi_quality"] = "pass"
+        try:
+            out["sumOpenInterestValue"] = float(oi[-1].get("sumOpenInterestValue"))
+        except (TypeError, ValueError):
+            out["oi_quality"] = "unknown"
+    else:
+        out["oi_quality"] = "unknown"
+
+    ratio_args = {"pair": pair or symbol, "period": "1h", "limit": limit} if inverse else {"symbol": symbol, "period": "1h", "limit": limit}
+    ratio, ratio_err = requester(host + "/futures/data/globalLongShortAccountRatio", ratio_args)
+    if ratio_err:
+        out["errors"]["lsr"] = ratio_err
+        out["lsr_quality"] = "unknown"
+    elif isinstance(ratio, list) and ratio:
+        out["lsr"] = ratio[-1]
+        try:
+            out["longShortRatio"] = float(ratio[-1].get("longShortRatio"))
+            out["lsr_quality"] = "pass"
+        except (TypeError, ValueError):
+            out["lsr_quality"] = "unknown"
+    else:
+        out["lsr_quality"] = "unknown"
+    return out
+
+
+def make_fetch_1h(requester: Optional[Callable] = None) -> Callable[[str, str], list]:
+    def _fetch(market: str, symbol: str) -> list:
+        return fetch_1h_klines(market, symbol, requester=requester)
+    return _fetch
+'''
+
+UNI = r'''# -*- coding: utf-8 -*-
+"""B 观察标的清单：显式文件优先；否则从 A 候选池只读摘 symbol（不入 A 池逻辑）。"""
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+
+def load_universe(root: Path) -> list[dict]:
+    root = Path(root)
+    explicit = root / "runtime" / "b-observe-universe.json"
+    if explicit.exists():
+        raw = json.loads(explicit.read_text(encoding="utf-8"))
+        if isinstance(raw, list):
+            return [x for x in raw if isinstance(x, dict) and x.get("symbol") and x.get("market")]
+        if isinstance(raw, dict) and isinstance(raw.get("symbols"), list):
+            return [x for x in raw["symbols"] if isinstance(x, dict) and x.get("symbol") and x.get("market")]
+    # fallback: ema candidates file — read-only borrow of symbols, not A filter
+    cand = root / "runtime" / "ema-squeeze-candidates.json"
+    if cand.exists():
+        data = json.loads(cand.read_text(encoding="utf-8"))
+        rows = data.get("candidates") or data.get("rows") or data.get("items") or []
+        out = []
+        seen = set()
+        for r in rows:
+            if not isinstance(r, dict):
+                continue
+            m, s = r.get("market"), r.get("symbol")
+            if not m or not s or (m, s) in seen:
+                continue
+            seen.add((m, s))
+            out.append({"market": m, "symbol": s})
+        return out
+    return []
+'''
+
+(ROOT / "b_1h_fetch.py").write_text(FETCH, encoding="utf-8", newline="\n")
+(ROOT / "b_observe_universe.py").write_text(UNI, encoding="utf-8", newline="\n")
+
+# patch evaluate to accept structure oi/lsr
+ev = ROOT / "b_observe_evaluate.py"
+et = ev.read_text(encoding="utf-8")
+if "structure_gate" not in et:
+    et = et.replace(
+        "from b_accumulation_rules import BAR_MS, BASELINE_BARS, evaluate_h_event, evaluate_h1_confirm\n",
+        "from b_accumulation_rules import BAR_MS, BASELINE_BARS, evaluate_h_event, evaluate_h1_confirm, structure_gate\n",
+        1,
+    )
+    # add kwargs oi_cap_pct, lsr to evaluate_symbol_from_cache
+    et = et.replace(
+        "    bg4h: dict | None = None,\n    bg4h_h1: dict | None = None,\n) -> dict:",
+        "    bg4h: dict | None = None,\n    bg4h_h1: dict | None = None,\n"
+        "    oi_cap_pct=None,\n    lsr=None,\n    oi_quality: str = \"unknown\",\n    lsr_quality: str = \"unknown\",\n"
+        "    cap_quality: str = \"unknown\",\n) -> dict:",
+        1,
+    )
+    et = et.replace(
+        '    payload = {\n        "technical_event": ev.get("technical_event"),\n        "technical_confirmation": conf.get("technical_confirmation"),',
+        '    struct = structure_gate(oi_cap_pct=oi_cap_pct, lsr=lsr, oi_quality=oi_quality, lsr_quality=lsr_quality, cap_quality=cap_quality)\n'
+        '    payload = {\n        "technical_event": ev.get("technical_event"),\n        "technical_confirmation": conf.get("technical_confirmation"),\n'
+        '        "structure_gate": struct,',
+        1,
+    )
+    ev.write_text(et, encoding="utf-8", newline="\n")
+    print("evaluate structure_gate wired")
+else:
+    print("evaluate already has structure")
+
+# patch task_service _run b_observe branch to use fetch + universe
+ts = ROOT / "task_service.py"
+tt = ts.read_text(encoding="utf-8")
+old = '''            elif task['kind'] == 'b_observe_1h':
+                from b_observe_runner import run_b_observe_round
+                settings = self.settings()
+                observe = settings['observe']
+                timing = settings['timing']
+                # 首批：无全市场拉取钩子时只跑空 universe，记录边界；真正采集等 P2 收尾接 scanner fetch
+                symbols = []
+                universe_path = self.root / 'runtime' / 'b-observe-universe.json'
+                if universe_path.exists():
+                    import json as _json
+                    raw_u = _json.loads(universe_path.read_text(encoding='utf-8'))
+                    if isinstance(raw_u, list):
+                        symbols = raw_u
+                now_ms = int(self.clock().timestamp() * 1000)
+                result = run_b_observe_round(
+                    self.root,
+                    symbols=symbols,
+                    observe=observe,
+                    timing=timing,
+                    now_ms=now_ms,
+                    fetch_1h=None,
+                )
+'''
+new = '''            elif task['kind'] == 'b_observe_1h':
+                from b_observe_runner import run_b_observe_round
+                from b_observe_universe import load_universe
+                from b_1h_fetch import make_fetch_1h
+                settings = self.settings()
+                observe = settings['observe']
+                timing = settings['timing']
+                symbols = load_universe(self.root)
+                now_ms = int(self.clock().timestamp() * 1000)
+                fetch_1h = make_fetch_1h() if observe.get('enabled') else None
+                result = run_b_observe_round(
+                    self.root,
+                    symbols=symbols,
+                    observe=observe,
+                    timing=timing,
+                    now_ms=now_ms,
+                    fetch_1h=fetch_1h,
+                )
+'''
+if old not in tt:
+    # maybe already changed - check
+    if "make_fetch_1h" in tt:
+        print("task_service already uses make_fetch_1h")
+    else:
+        raise SystemExit("b_observe_1h block not found exact")
+else:
+    tt = tt.replace(old, new, 1)
+    ts.write_text(tt, encoding="utf-8", newline="\n")
+    print("task_service fetch wired")
+
+# unit test with mock requester
+TEST = r'''# -*- coding: utf-8 -*-
+from __future__ import annotations
+
+import tempfile
+import unittest
+from pathlib import Path
+
+from b_1h_fetch import fetch_1h_klines, fetch_oi_lsr_1h, make_fetch_1h
+from b_observe_runner import run_b_observe_round
+from b_observe_universe import load_universe
+from observe_config import OBSERVE_DEFAULT, TIMING_DEFAULT
+
+
+class FetchMockTests(unittest.TestCase):
+    def test_fetch_1h_and_round(self):
+        open_t = 1_700_000_000_000
+        raw = []
+        for i in range(170):
+            q = 10 if i < 168 else 90
+            ot = open_t + i * 3_600_000
+            raw.append([ot, "100", "101", "99", "100.5", "1", ot + 3_599_999, str(q)])
+
+        def requester(url, params=None):
+            if "klines" in url:
+                return raw, None
+            if "openInterestHist" in url:
+                return [{"sumOpenInterestValue": "1e9", "timestamp": open_t}], None
+            if "globalLongShortAccountRatio" in url:
+                return [{"longShortRatio": "0.5", "timestamp": open_t}], None
+            return None, "unexpected"
+
+        data = fetch_1h_klines("USDⓈ-M", "DDDUSDT", requester=requester)
+        self.assertEqual(len(data), 170)
+        oi = fetch_oi_lsr_1h("USDⓈ-M", "DDDUSDT", requester=requester)
+        self.assertEqual(oi["lsr_quality"], "pass")
+        self.assertEqual(oi["longShortRatio"], 0.5)
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "runtime").mkdir()
+            (root / "runtime" / "b-observe-universe.json").write_text(
+                '[{"market":"USDⓈ-M","symbol":"DDDUSDT","bg4h":{"ema7":2,"ema25":1},"bg4h_h1":{"ema7":2,"ema25":1}}]',
+                encoding="utf-8",
+            )
+            observe = {**OBSERVE_DEFAULT, "enabled": True}
+            boundary = open_t + 168 * 3_600_000 + 3_600_000
+            # now_ms after boundary+offset
+            now_ms = boundary + 180_000
+            out = run_b_observe_round(
+                root,
+                symbols=load_universe(root),
+                observe=observe,
+                timing=TIMING_DEFAULT,
+                now_ms=now_ms,
+                fetch_1h=make_fetch_1h(requester),
+            )
+            self.assertFalse(out["skipped"])
+            self.assertGreaterEqual(out["written"], 1)
+
+
+if __name__ == "__main__":
+    unittest.main()
+'''
+(ROOT / "test_v32_b_1h_fetch.py").write_text(TEST, encoding="utf-8", newline="\n")
+
+# update deliverable note
+doc = ROOT / "DOCS" / "design" / "strategies" / "v3.2-首批交付说明.md"
+prev = doc.read_text(encoding="utf-8") if doc.exists() else ""
+if "b_1h_fetch" not in prev:
+    doc.write_text(prev + "\n\n## 续：1H 真拉取接线（默认仍关）\n\n- `b_1h_fetch.py` / `b_observe_universe.py`\n- `b_observe_1h` 任务在 observe.enabled 时用 `make_fetch_1h()`\n- 标的：`runtime/b-observe-universe.json` 优先，否则只读借用 EMA 候选池符号\n", encoding="utf-8", newline="\n")
+print("fetch modules ready")
